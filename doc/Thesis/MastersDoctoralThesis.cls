@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Masters/Doctoral Thesis 
+% Masters/Doctoral Thesis
 % Class File
 % Version 1.6 (27/8/17)
 %
@@ -55,7 +55,7 @@
 
 \LoadClass{\baseclass}
 
-%  Simple interface for the user  to customize the chapter titles 
+%  Simple interface for the user  to customize the chapter titles
 \ProvideDocumentCommand{\abovechapterskip}{}{\vspace*{20pt}}
 \ProvideDocumentCommand{\chapterbelowskip}{}{\vspace*{40pt}}
 \ProvideDocumentCommand{\chapterinbetweenskip}{}{\vspace*{20pt}}
@@ -131,7 +131,7 @@
 %	CLASS OPTIONS
 %----------------------------------------------------------------------------------------
 
-\ifbool{parskip}{\RequirePackage{parskip}} % If the parskip option is passed to the class, require the parskip package 
+\ifbool{parskip}{\RequirePackage{parskip}} % If the parskip option is passed to the class, require the parskip package
 
 
 \ifbool{listtoc}{% If the liststotoc option has been passed to the class, add the lists to the table of contents
@@ -188,8 +188,7 @@
 	}{%
 		\begingroup%
 		\singlespace\@starttoc{loa}\endgroup%
-	}{}{}%	
-	
+	}{}{}%
 }{}
 
 
@@ -250,7 +249,7 @@
 \NewDocumentCommand{\subject}{m}{\newcommand{\subjectname}{#1}}
 \NewDocumentCommand{\keywords}{m}{\newcommand{\keywordnames}{#1}}
 
-\newcommand{\checktoopen}{% New command to move content to the next page which prints to the next odd page if twosided mode is active  
+\newcommand{\checktoopen}{% New command to move content to the next page which prints to the next odd page if twosided mode is active
 	\if@openright\cleardoublepage\else\clearpage\fi
 	\ifdef{\phantomsection}{\phantomsection}{}% The \phantomsection command is necessary for hyperref to jump to the correct page
 }
@@ -321,8 +320,8 @@
 \pagestyle{thesis}
 \ifbool{headsepline}{\KOMAoption{headsepline}{true}}{}
 \PreventPackageFromLoading[\ClassError{\classname}{Package `fancyhdr' is
-incompatible\MessageBreak with this class}{The pagesyles are defined 
-	using package `scrlayer-scrpage', please consult the\MessageBreak 
+incompatible\MessageBreak with this class}{The pagesyles are defined
+	using package `scrlayer-scrpage', please consult the\MessageBreak
 KOMA-script documentation for details.}]{fancyhdr}
 
 
@@ -405,24 +404,24 @@ KOMA-script documentation for details.}]{fancyhdr}
 	}
 }
 
-\DeclareDocumentEnvironment{AbstractGreek}{ O{\null\vfill} }{
+\DeclareDocumentEnvironment{extraAbstract}{ O{\null\vfill} }{
 	\checktoopen
 	\tttypeout{\abstractname}
 	#1%added to be able to have abstract more than one page long
 	\thispagestyle{empty}
 	\begin{center}
-		{\normalsize \MakeUppercase{\href{http://www.tuc.gr}{Πολυτεχνείο Κρήτης}} \par}% University name in capitals
+		{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
 		\bigskip
-		{\huge\textit{Περίληψη} \par}
+		{\huge\textit{\abstractname} \par}
 		\bigskip
 		{\normalsize \facname \par}% Faculty name
-		{\normalsize \href{http://www.ece.tuc.gr/}{Σχολή Ηλεκτρολόγων Μηχανικών και Μηχανικών Υπολογιστών} \par}% Department name
+		{\normalsize \deptname \par}% Department name
 		\bigskip
-		{\normalsize Διπλωματική Εργασία \par}% Degree name
+		{\normalsize \degreename\par}% Degree name
 		\bigskip
-		{\normalsize\bfseries Σχεδίαση και Υλοποίηση Ενσωματωμένου Συστήματος Χαμηλού Κόστους για Εύρεση Θέσης μη Επανδρωμένων Αεροσκαφών που Πετούν σε Σχηματισμό \par}% Thesis title
+		{\normalsize\bfseries \@title \par}% Thesis title
 		\medskip
-		{\normalsize από το Χρήστο Σπυριδάκη \par}% Author name
+		{\normalsize \byname{} \authorname \par}% Author name
 		\bigskip
 	\end{center}
 }
