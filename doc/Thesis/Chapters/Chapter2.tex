@@ -1,0 +1,63 @@
+
+% \begin{figure} [h] \label{fig:neuron}
+%     \centering
+%     \includegraphics[width=\textwidth]{Images/something.png} 
+%     % \decoRule
+%     \caption[Example: \href{www.google.com}{URL}}
+% \end{figure}
+
+% \begin{equation} \label{eq:1}
+%     f(x) =\begin{cases}
+%          0, & x<0\\
+%          1, & x\geq 0\\
+%     \end{cases} 
+% \end{equation}
+
+\chapter{Theoretical Background} % Main chapter title
+\label{Chapter2} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+\epigraph{In deep learning, the algorithms we use now are versions of the algorithms we were developing in the 1980s, the 1990s. People were very optimistic about them, but it turns out they didn't work too well.” }{\textit{Geoffrey Hinton}}
+
+\par In this Chapter, we describe in detail the theoretical background of Machine Learning and especially for CNN.
+\par 
+
+%--------------------------
+\section{Machine Learning}
+\par
+%--------------------------
+\section{Convolutional Neural Network}
+\par 
+
+%--------------------------
+\section{Structure of Convolutional Neural Network}
+
+
+\subsection{Convolution Layer}
+
+There are some hyper-parameters that are used to configure a convolution layer:
+\begin{itemize}
+    \item \textbf{Kernel size}(K): Size of filter 
+    \item \textbf{Stride}(S): How many pixels the kernel window will slide (on each dimension). Normally 1, in conv layers, and 2 in pooling layers.
+    \item \textbf{Zero Padding}(pad): Convolution operation can be performed with or without zero padding in three different ways :
+    \begin{itemize}
+    
+    \item \textbf{valid} returns only those parts of the convolution that are computed without zero-padded edges.
+    \item \textbf{same} returns the same size of the input with appropriate zero padding.
+    \item \textbf{full} returns the full convolution with full zero-padded edges.
+    
+     \end{itemize}
+    \item \textbf{Number of filters}(F): Number of patterns and structures, known as "feature maps", that the conv layer will look for.
+ \end{itemize}
+ 
+\subsection{Pooling}
+
+
+
+\subsection{Activation Function}
+In artificial neural networks, the activation function of a node defines the output of that node given an input or set of inputs. A standard computer chip 
+\\
+\\
+\textbf{Perceptron}
+
+
+While  \ref{eq:1} is the original activation first developed when neural networks were invented, it is no longer used in neural network architectures 

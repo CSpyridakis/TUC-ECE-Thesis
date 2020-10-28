@@ -1,0 +1,501 @@
+\chapter{Results} % Main chapter title
+\label{Chapter6}
+%\epigraph{The key to artificial intelligence has always been the representation.” }{\textit{Jeff Hawkins}}
+
+In this chapter, we will present the results of our work. These results were obtained from the 2 different architectures we propose. These two architectures were tailored to the needs of each different ZCU-102 (released March 2015) and QFDB platforms (essentially 4 ZCUs in parallel) to make the most of our resources.
+
+
+\section{Specification of Compared Platforms}
+
+Comparisons were made with CPU and GPU platforms. The CPU used was the Intel i7 7700HQ (released January 2017) and the GPU was NVIDIA Quadro K2200 (released August 2014) and Nvidia Quadro P1000(released March 2017).
+Platforms of a similar generation were used. More specifically due to the need of the application, the most important factor was high performance with low power consumption as we aim to a satellite-based application.
+
+\subsection{Intel i7 7700HQ}
+
+Below we present tables with the specifications of both CPU \ref{tab:cpu} and GPU \ref{tab:gpu} platforms
+\begin{table}[h]
+\captionof{table}{Intel i7 7700HQ Specifications} \label{tab:cpu} 
+\centering
+\begin{tabular}{l l l l l l}
+\toprule
+\tabhead{Cores} &\tabhead{Threads}  & \tabhead{Max Turbo } & \tabhead{TDP} & \tabhead{Max Memory} & \tabhead{Lithography} \\
+\tabhead{} & \tabhead{} & \tabhead{Frequency} & \tabhead{} &\tabhead{Bandwidth} & \tabhead{}\\
+\midrule
+
+4 & 8 & 3800 MHz  & 45W & 37.5 GB/s & 14nm\\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+Thermal Design Power (TDP) represents the average power, in watts, the processor dissipates when operating at Base Frequency with all cores active under an Intel-defined, high-complexity workload. 
+\end{small}
+\end{table}
+
+\subsection{NVIDIA Quadro K2200}
+
+\begin{table}[h]
+\captionof{table}{NVIDIA Quadro K2200 Specifications} \label{tab:gpu} 
+\centering
+\begin{tabular}{l l l l l l l}
+\toprule
+\tabhead{CUDA} &\tabhead{GPU}  &\tabhead{Clock} & \tabhead{Memory} & \tabhead{Memory} & \tabhead{Power} \\ %\tabhead{Lithography}\\
+\tabhead{Cores} & \tabhead{Memory} &\tabhead{Frequency} & \tabhead{Interface} & \tabhead{Bandwidth} &\tabhead{Consumption} \\ % & \tabhead{}\\
+\midrule
+
+640 & 4GB GDDR5 & 1124 MHz  & 128-bit & 80 GB/s & 60W\\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ 
+\end{small}
+\end{table}
+
+
+\textbf{CUDA}
+
+Compute Unified Device Architecture is a technology developed by Nvidia that accelerates GPU computation processes. With CUDA, researchers and developers can send high-level code (C, C++, and Fortran)  directly to the GPU without using assembly code. This lets them take advantage of parallel computing in which thousands of threads, can execute simultaneously.
+
+
+\section{Power Consumption}
+Power consumption refers to the required energy per unit time, supplied to the current system to perform a task. Power consumption is usually measured in units of Watts (W) or kiloWatts (kW).
+To be exact, when we consider about power, we need to measure all the power that the machine on which the GPU the CPU and the FPGA runs. Therefore for the GPU, it runs on a machine that consumes 300 Watts, while the CPU  is at 100 Watts.
+
+\section{Energy Consumption}
+Energy consumption refers to the energy was required to perform a task in a specific time. To calculate energy:
+  \begin{equation}\label{eq:Energy}
+   Energy = Power * time,
+  \end{equation} \\
+ Power = required power , Time= required time to complete the task.  Energy consumption is usually measured in units of Joule (J) or kiloJoule (kJ).
+
+\section{Throughput and Latency Speedup}
+ In computer architecture, the notion speedup is the factor that measures the relative performance of two systems processing the same task. More specifically, it is the improvement in speed of execution of a problem executed on two different architectures. The notion of speedup was established by Amdahl's law \cite{Reference74}, which was particularly focused on parallel processing. However, speedup can be used more generally to show the effect on performance after any resource enhancement. \\
+ 
+
+ Latency is the time that a systems requires to perform a single task.
+     
+  \begin{equation}\label{eq:Latency}
+  Latency= \frac{1}{v} = \frac{T}{W},
+  \end{equation}
+  v is the execution speed of the task, \\
+  T is the execution time of the task, \\
+  W is the execution workload of the task\\
+  
+Throughput is the maximum rate of processing or production of a specific problem.
+  \begin{equation}\label{eq:Throughput}
+  Throughput= r*v*A = \frac{r*A*W}{T} = \frac{r*A}{L},
+  \end{equation} 
+  r is the execution density, \\
+  A is the execution capacity, \\
+ 
+
+Speedup can be defined for two different types of quantities: latency and throughput.
+\begin{equation}\label{eq:Latency}
+  S_{latency}= \frac{L_{1}}{L_{2}} = \frac{T_{1}*W_{2}}{T_{2}*W_{1}},
+  \end{equation} 
+  
+\begin{equation}\label{eq:Sp_Throughput}
+  S_{throughput}= \frac{Thr_{2}}{Thr_{1}} 
+   \end{equation} 
+
+
+\section{Architecture v1.0}
+
+In this section, we will present the results of the Architecture v1.0 ported to both platforms single-FPGA(ZCU-102) and Quad-FPGA (QFDB). These results report resource utilization, performance over latency, throughput, power, and energy matters. Finally, we compare results with GPU and CPU.
+
+\begin{table}[h]
+\captionof{table}{Architecture v1.0} \label{tab:ar1} 
+\centering
+\begin{tabular}{l l l l l l}
+\toprule
+\tabhead{Clock } &\tabhead{LUT}  &\tabhead{FF} & \tabhead{DSP} & \tabhead{BRAM} & \tabhead{BUFG} \\
+\tabhead{Frequency} & \tabhead{Usage (\%)} &\tabhead{Usage (\%)} & \tabhead{Usage (\%)} & \tabhead{Usage (\%)} &\tabhead{} \\
+\midrule
+
+300 & 39 & 39 & 19 & 18 & 1\\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ LUT = LookUp Table, FF= Flip Flop, DSP= Digital Signal Processor, BRAM=Block RAM,
+ BUFG resource is one of the most expensive resources in FPGA. It is used for sending the clock across the clock network in the design.
+\end{small}
+\end{table}
+
+
+
+
+\subsection{ZCU-102}
+
+In the following tables, we present results for the architecture v1.0, ported on the ZCU-102 comparing to CPU and GPU. 
+Comparing to CPU we get latency ( 2533x) and throughput (180x)  speedup. Furthermore, we are much more power and energy efficient (9.1x and 1636x respectively).
+On the other hand, compared to the GPU we grant speedup in latency (20x) while we are worse in throughput (0.31x) due to the GPU's big batching. In addition, we are more efficient on power and energy metrics (27.2x and 8.5x respectively).
+
+To extract the following results, we used the entire dataset that we had at our disposal, ie the 10000 images.
+
+
+\begin{table}[h]
+\captionof{table}{Architecture v1.0 comparison with CPU and GPU} \label{tab:ar1_zcu} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{} & \tabhead{ZCU-102} & \tabhead{CPU} & \tabhead{GPU} \\
+
+\midrule
+
+\tabhead{Clock Frequency}(MHz) & 300 & 3800  & 1124 \\
+\tabhead{Throughput}(Images/s) & 628 & 3.47 & 2000  \\
+\tabhead{Latency}(s) & 0.003  & 7.6  & 0.06  \\
+\tabhead{GFLOPS} & 38.3 & 0.21 & 122.55 \\
+\tabhead{Total On-chip Power}(Watt) & 11  & 100 & 300 \\
+\tabhead{Energy Consumption}(Joule) & 175 & 288K & 1.5K \\
+\tabhead{Images/Joule} & 56.8 & 0.035  & 6.66  \\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+\begin{table}[h]
+\captionof{table}{Speedup over GPU and CPU} \label{tab:ar1_speedup} 
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{ZCU102} &\tabhead{GPU} &\tabhead{CPU} \\
+
+\midrule
+
+\tabhead{Latency speedup} & 20x  & 2533x \\
+\tabhead{Throughput speedup} & 0.33x  & 180x \\
+ 
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+ 
+\end{small}
+\end{table}
+
+
+
+\begin{table}[h]
+\captionof{table}{Energy and Power Efficiency over GPU and CPU} \label{tab:ar1_eff} 
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{ZCU-102} &\tabhead{GPU} &\tabhead{CPU}   \\
+
+\midrule
+
+\tabhead{Power Efficiency} & 27.2x & 9.1x   \\
+
+\tabhead{Energy Efficiency} & 8.5x & 1636x  \\
+
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+
+\subsection{QFDB}
+
+To complete porting to QFDB we got 4 instances from the existing implementation on ZCU-102. 
+In the following tables, we perceive results for the architecture v1.0, ported on the QFDB comparing to CPU and GPU. 
+Compared to the CPU we get latency ( 2533x) and throughput (712x)  speedup. Furthermore, we are much more power and energy efficient (9.1x and 1618x respectively).
+Compared to the GPU we grant speedup in latency (20x) and throughput (1.24x) (now we use batch 4). In addition, we are more efficient on power and energy metrics (27.2x and 8.5x respectively).
+
+To extract the following results, we used the entire dataset that we had at our disposal, ie the 10000 images.
+
+
+\begin{table}[h]
+\captionof{table}{Architecture v1.0 comparison with CPU and GPU} \label{tab:ar1_qfdb} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{} &\tabhead{QFDB} &\tabhead{CPU} &\tabhead{GPU} \\
+\midrule
+
+\tabhead{Clock Frequency}(MHz) & 300  & 3800  & 1124 \\
+\tabhead{Throughput}(Images/s) & 2640 & 3.47 & 2000  \\
+\tabhead{Latency}(s) & 0.003 &  7.6 & 0.06 \\
+\tabhead{GFLOPS} & 163 & 0.21 & 122.55 \\
+\tabhead{Total On-chip Power}(Watt) & 44  & 100 & 300 \\
+\tabhead{Energy Consumption}(Joule) & 166 & 288 K  & 1.5 K \\
+\tabhead{Images/Joule} & 60 & 0.035   & 6.66  \\
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+\begin{table}[h]
+\captionof{table}{Speedup over GPU and CPU} \label{tab:ar1_sp_qfdb} 
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{QFDB} &\tabhead{GPU} &\tabhead{CPU} \\
+
+\midrule
+
+\tabhead{Latency speedup} & 20x  & 2533x \\
+\tabhead{Throughput speedup} & 1.32x  & 760x \\
+  
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+
+
+\begin{table}[h]
+\captionof{table}{Energy and Power Efficiency over GPU and CPU} \label{tab:ar1_eff_qfdb} 
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{QFDB} &\tabhead{GPU}  &\tabhead{CPU} \\
+
+\midrule
+
+\tabhead{Power Efficiency} & 6.8x & 2.27x  \\
+
+\tabhead{Energy Efficiency} & 8.4x & 1618x  \\
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+\section{Architecture v2.0}
+
+
+In this section, we will present you the results of the Architecture v2.0 ported to both platforms single-FPGA(ZCU-102) and Quad-FPGA (QFDB). These results report resource utilization, performance over latency, throughput, power, and energy matters. Finally, we compare results with GPU and CPU.
+
+\begin{table}[h]
+\captionof{table}{Architecture v2.0} \label{tab:ar2} 
+\centering
+\begin{tabular}{l l l l l l}
+\toprule
+\tabhead{Clock } &\tabhead{LUT}  &\tabhead{FF} & \tabhead{DSP} & \tabhead{BRAM} & \tabhead{BUFG} \\
+\tabhead{Frequency} & \tabhead{Usage (\%)} &\tabhead{Usage (\%)} & \tabhead{Usage (\%)} & \tabhead{Usage (\%)} &\tabhead{} \\
+\midrule
+
+240 & 64 & 58 & 38 & 16 & 5\\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ LUT = LookUp Table, FF= Flip Flop, DSP= Digital Signal Processor, BRAM=Block RAM,
+ BUFG resource is one of the most expensive resources in FPGA. It is used for sending the clock across the clock network in the design.
+\end{small}
+\end{table}
+
+\subsection{ZCU-102}
+
+In the following tables, we present results for the architecture v2.0, ported on the ZCU-102 comparing to CPU and GPU. 
+Comparing to CPU we get latency ( 2533x) and throughput (312x)  speedup. Furthermore, we are much more power and energy efficient (7.32x and 2286x respectively).
+On the other hand, compared to the GPU we grant speedup in latency (20x) while we are worse in throughput (0.55x) due to the GPU's big batching (we use batch-2). In addition, we are more efficient on power and energy metrics (22x and 11.9x respectively).
+
+\begin{table}[h]
+\captionof{table}{Architecture v2.0 comparison with CPU and GPU} \label{tab:ar2_zcu} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{} &\tabhead{ZCU-102} &\tabhead{CPU} &\tabhead{GPU} \\
+
+\midrule
+
+\tabhead{Clock Frequency}(MHz) & 240  & 3800  & 1124 \\
+\tabhead{Throughput}(Images/s) & 1084 & 3.47 & 2000  \\
+\tabhead{Latency}(s) & 0.003 & 7.6 & 0.06 \\
+\tabhead{GFLOPS} & 76.5 & 0.21 & 122.55 \\
+\tabhead{Total On-chip Power}(Watt) & 13.66  & 100 & 300 \\
+\tabhead{Energy Consumption}(Joule) & 126  & 288 K  & 1.5 K \\
+ \tabhead{Images/Joule} & 79.36 & 0.035  & 6.66  \\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+\begin{table}[h]
+\captionof{table}{Speedup over GPU and CPU} \label{tab:ar2_sp_zcu} 
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{ZCU102} &\tabhead{GPU} &\tabhead{CPU} \\
+
+\midrule
+
+\tabhead{Latency speedup} & 20x  & 2533x \\
+\tabhead{Throughput speedup} & 0.55x  & 312x \\
+ 
+ 
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+
+
+\begin{table}[h]
+\captionof{table}{Energy and Power Efficiency over GPU and CPU} \label{tab:ar2_eff_zcu} 
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{ZCU-102} &\tabhead{CPU} &\tabhead{GPU}  \\
+
+\midrule
+
+\tabhead{Power Efficiency} & 7.32x & 22x  \\
+
+\tabhead{Energy Efficiency} & 2286 & 11.9x  \\
+
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+\subsection{QFDB}
+
+In the following tables, we present results for the architecture v2.0, ported on the QFDB comparing to CPU and GPU. 
+Compared to the CPU we get latency ( 2533x) and throughput (1249x)  speedup. Furthermore, we are much more power and energy efficient (9.1x and 1618x respectively).
+Compared to the GPU we grant speedup in latency (20x) and throughput (2.17x) (now we use batch 4). In addition, we are more efficient on power and energy metrics (27.2x and 8.4x respectively).
+
+
+\begin{table}[h]
+\captionof{table}{Architecture v2.0 comparison with CPU and GPU} \label{tab:ar2_qfdb} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{} &\tabhead{QFDB} &\tabhead{CPU} &\tabhead{GPU} \\
+
+\midrule
+
+\tabhead{Clock Frequency}(MHz) & 240  & 3800  & 1124 \\
+\tabhead{Throughput}(Images/s) & 4334 & 3.47 & 2000  \\
+\tabhead{Latency}(s) & 0.003  & 7.6 & 0.06 \\
+\tabhead{GFLOPS} & 265 & 0.21 & 122.55 \\
+\tabhead{Total On-chip Power}(Watt) & 54.64  & 100 & 300 \\
+\tabhead{Energy Consumption}(Joule) & 126  & 288K  & 1.5K \\
+\tabhead{Images/Joule} & 79.36 & 0.035  & 6.66  \\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+\begin{table}[h]
+\captionof{table}{Speedup over GPU and CPU} \label{tab:ar2_sp_qfdb} 
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{QFDB} &\tabhead{GPU} &\tabhead{CPU} \\
+
+\midrule
+
+\tabhead{Latency speedup} & 20x  & 2533x \\
+\tabhead{Throughput speedup} & 2.17x  & 1249x \\
+  
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+
+
+\begin{table}[h]
+\captionof{table}{Energy and Power Efficiency over GPU and CPU} \label{tab:ar2_eff_qfdb} 
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{QFDB} &\tabhead{CPU} &\tabhead{GPU}  \\
+
+\midrule
+
+\tabhead{Power Efficiency} & 1.83x & 5.49x  \\
+
+\tabhead{Energy Efficiency} & 2286x & 11.9x  \\
+
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+We use the entire data-set 10K images. 
+\end{small}
+\end{table}
+
+\section{Final Performance}
+Below we present throughput and latency speedups over different batches \ref{fig:28} and different number of images in the given data-set. \ref{fig:29}.
+Furthermore in figure \ref{fig:30} we present power and energy efficiency over GPU.
+Figure \ref{fig:31} presents Architecture v1.0 ,v2.0 and optimized v2.0. 
+
+
+
+
+
+The first approach to be able to integrate the batch 2 is to instantiate the existing IPs. This, however, has led to a doubling of all resources. Hence it was decided to change the architecture of each IP to integrate the batch 2. After this step, we were able to implement resource optimizations in the HLS as presented and analyzed in the previous chapter. In figure \ref{fig:31} we present the results of the optimizations.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Speedup_thr.png} 
+\decoRule
+\caption[Throughput Speedup for different batches]{Throughput Speedup for different batches
+}
+\label{fig:28}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Speedup_Images.png} 
+\decoRule
+\caption[Throughput Speedup for different Number of Images]{Throughput Speedup for different Number of Images
+}
+\label{fig:29}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Efficiency.png} 
+\decoRule
+\caption[Power and Energy Efficiency over GPU]{Power and Energy Efficiency over GPU: Both architectures 
+}
+\label{fig:30}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Resource.png} 
+\decoRule
+\caption[Utilization after the use of Resource Optimizations]{Utilization after the use of  Resource Optimizations
+}
+\label{fig:31}
+\end{figure}
+
+
+
+

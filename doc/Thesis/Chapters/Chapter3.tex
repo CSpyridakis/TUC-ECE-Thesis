@@ -1,0 +1,121 @@
+
+\chapter{Related Work} % Main chapter title
+\label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+
+\section{Google Brain Project}
+TensorFlow is an open-source software library for data-flow programming across a range of tasks. It is an extended math library, developed specifically for machine learning applications such as Deep Neural Networks.\cite{Reference28} It is developed and used for both production and research at Google Labs, often extended its closed-source predecessor, DistBelief.
+TensorFlow was initially inspired and developed by the Google Brain team for internal Google use. It was released under the Apache 2.0 open source license on November 9, 2015, \cite{Reference29}. 
+
+\subsection{DistBelief}
+During 2011, Google Brain built DistBelief as a machine learning system based on Deep Learning neural networks. It has shown rapid growth across different Alphabet companies in both commercial and research applications. Google hired multiple computer scientists, including Jeff Dean, to simplify and reconstruct the base of DistBelief into a faster, more reliable and robust application library, which became TensorFlow. In 2009, Google Brain team, led by Geoffrey Hinton, had developed generalized back-propagation and other important improvements which allowed generation of neural networks to grow and achieve higher performance i.e. a significant 25\% reduction in the error rate in speech recognition.
+
+
+\subsection{TensorFlow}
+TensorFlow \cite{Link4} was originally a major project developed by researchers and engineers working on the Google Brain Team. They collaborate with Google’s Machine Intelligence research organization for the purpose of conducting machine learning and deep neural networks research. The results of this project was applicable to a number of other domains, as well, says Google.
+TensorFlow is Google Brain's second-generation system. Version 1.0.0 was released on 2017 \cite{Reference30}, while the reference implementation is able to run on single devices.   Moreover, TensorFlow can run on multiple CPUs and GPUs (with optional CUDA extensions for general-purpose computing on graphics processing units). Its flexible architecture allows deployment of computation across a variety of systems (CPUs, GPUs, TPUs).
+TensorFlow computations could be expressed as stateful data flow graphs. The name TensorFlow derives from the operations that such neural networks perform on multidimensional data arrays. These arrays are referred to as "tensors". In June 2016, Dean stated that 1,500 repositories on GitHub mentioned TensorFlow, of which only 5 were from Google.
+
+\subsection{Tensor Processing Unit (TPU)}
+In May 2016, Google announced its Tensor processing unit (TPU), an application-specific integrated circuit (ASIC) developed specifically for machine learning and optimized for the use of TensorFlow. TPU is a programmable AI accelerator designed to provide high throughput of low-precision arithmetic (e.g., 8-bit), and oriented toward inference or running models rather than training them. Google announced, that they had been running TPUs inside their data centers for more than a year  leading to 30x-80x higher TOPS/Watt compared to contemporary CPU and GPU \cite{Reference78}. Afterwards, it mentioned that they were able to deliver an order of magnitude better "optimized" performance per watt for machine learning.\cite{Reference31}
+
+In May 2017, Google announced the evolution of the first generation, as well as the availability of the TPUs in Google Compute Engine \cite{Reference32}. The second-generation TPUs deliver up to 180 teraflops of performance, and when organized into clusters of 64 TPUs, provide up to 11.5 petaflops.
+In February 2018, Google announced that they were developed TPUs to be available in beta on the Google Cloud Platform.
+
+
+
+\section{GPU approach}
+Deep learning frameworks allow researchers to develop and explore Convolutional Neural Networks (CNNs) and other Deep Neural Networks (DNNs), while delivering high throughput for both research and industrial deployment. The NVIDIA Deep Learning SDK accelerates deep learning frameworks such as Caffe, TensorFlow, Theano and Torch as well as many other machine learning applications. Neural Network applications run faster on GPUs and scale across multiple GPUs within a single node. To use the frameworks with GPUs for Convolutional Neural Network training and inference processes, NVIDIA provides toolbox and libraries such as, cuDNN and TensorRT respectively. cuDNN and TensorRT provide highly tuned implementations for standard operations in Deep Learning such as convolution, pooling, normalization, and activation functions.
+
+
+\section{The FPGA perspective}
+In recent years, modern Convolutional Neural Networks were being over-developed, but the biggest challenge was getting them to work efficiently. That meant that accuracy, speed during training and energy efficiency were the top priorities. Community mainly focuses on reducing the operands on training and inference. Orthogonal and complementary techniques for reducing redundancies like weight compression, pruning techniques \cite{Reference4} and compact architectures \cite{Reference5} are impressively efficient and they were proposed in the past years.
+
+
+Until recently, the use of low-precision networks from fixed-point, lower floating points format to binary, in the extreme case, was believed to be highly destructive to the network performance \cite{Reference6} during training and inference procedure. Contrary by showing that good accuracy performance could be achieved (in training) even if a network was binarized to +-1 \cite{Reference7}. This was implemented using Expectation Back Propagation (EBP), a variational Bayesian approach, which infers networks with bi-Binarized Neural Networks: Training Neural Networks with Weights and Activations. Constrained to +-1 binary weights and neurons by updating the posterior distributions over the weights.  These distributions are updated by differentiating their parameters (e.g., mean values, average values etc.) through the back propagation (BP) procedure. Implemented a fully binary network at runtime using a very similar approach to EBP, showing significant results in energy efficiency \cite{Reference8}. The drawback of EBP is that the binarized parameters were only used during the inference procedure.
+
+Both procedures are very important and they started hierarchical separated. The first is a prerequisite for the second to start operating. The trend in recent years is to run together.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Inference_training}
+\label{fig:20}
+\end{figure}
+
+
+\subsection{Training}
+Training as a process is computationally intensive and requires a lot of resources in hardware implementations. On the other hand, it is an one-time procedure (not always), but it requires a lot of time to get a high-performance behavior (accuracy).
+\subsection{Weight Reduction}
+
+During the past years methods were proposed  to train DNNs with binary weights (BC) and activations (BNN) successively \cite{Reference9} \cite{Reference5} . Initially they add noises to weights and activations as a input of regularization but gradients are calculated with real-valued variables, suggesting that high precision data-types formats accumulation is likely required for Stochastic Gradient Descent optimization. Many researchers  have  also  explored  training  neural  networks directly with fixed-point weights. In 1990 proposed a hardware architecture for on-chip learning with fixed-point operations.  More recently, in \cite{Reference5}, the authors train neural networks with 3 different data types ( floating-point, fixed-point and dynamic fixed- point  formats) demonstrating and compare its results. \cite{Reference22} demonstrate a Convolutional Neural Network training using 16-bit fixed-point weights rounded with stochastic scheme.  XNOR-Net \cite{Reference10} has proposed a filter-wise scaling factor for weights trying to improve the performance of fixed point.  XNOR-Net implements efficiently convolution operations using XNOR logical units and bit-count operations. However, these high-precision factors are calculated simultaneously during training, which generally aggravates the training effort. In TWN \cite{Reference11} and \cite{Reference12} were proposed two symmetric thresholds to retain the weights to be ternary-valued: {-1,0,+1}. They came up with a trade-off between model expressive ability and complexity of the network.
+
+
+
+
+\subsubsection{Computional Reduction}
+DoReFa-Net  \cite{Reference14} quantizes  gradients to low-bitwidth floating-point formats with static discrete states in the backward pass.  Another quantization of gradient updates to ternary values proposed in \cite{Reference13} to reduce the overhead of gradient synchronization in distributed training. Nevertheless, in DoReFa-Net and TernGrad  the weights were stored and updated with single-precision float during training like formal works. Besides, the quantization of batch normalization and its derivative were ignored. Thus, the overall computation graph for the training process is still presented with float(32 bit-width) and more complex with external quantization. Generally, it is impossible to apply DoReFa-Net training in an integer-based hardware directly. Therefore, it could lead to a potential opportunity to explore high-dimensional discrete spaces with discrete gradient descent.
+
+\subsection{Inference}
+As far as the part of the inference is concerned, which is a continuous procedure, while the training has been preceded. It is important to be able to achieve high performance (low error-rate), and throughput. Furthermore, an important factor in Hardware implementations is the energy efficiency.
+
+\subsubsection{Weight Reduction}
+The data type precision of weights and activations plays a major role in determining the speed accuracy and energy efficiency of any CNN implementations in hardware or software. Plethora of research focuses on how to efficiently replace the  32-bit floating-point data with reduced precision data for CNN inference. Several data-types have been proposed such as \cite{Reference15} representing both weights and activations using low-bit floating point, i.e., single or half. However, it is well known that the fixed-point arithmetic is much efficient than floating-point arithmetic. This state direct most research focuses on fixed-point quantization. Many papers present the impacts of different fixed-point rounding formats on the accuracy of various benchmark network \cite{Reference16}. Thereinafter researchers demonstrate that targeting the minimum required data precision not only varies across different networks but also across different layers of the same network \cite{Reference17}. \cite{Reference18} propose a fixed-point quantization technique to approaching the optimal data precision (range, resolution) for all layers of a network.   \cite{Reference19} present a framework Ristretto for fixed-point quantization and re-training of CNN based on \cite{Reference20}.
+
+
+\subsubsection{Re-training approaches}
+
+Many other approaches for memory compression of neural networks have been explored. \cite{Reference27} propose a combination of network pruning, weight quantization during training and compression based on Huffman coding to reduce the VGG-16 network size by 49X.
+In  \cite{Reference21}, store both 8-bit quantized floating-point weights and 32-bit full precision weights.  At runtime, compressed weights or floating point weights are randomly fetched in order to reduce memory bandwidth.  The continuous research effort to reduce the memory footprint has led to many interesting demonstrations reaching up to 2-bit  weights  \cite{Reference22}  and even binary weights/activations \cite{Reference6}. \cite{Reference14} demonstrate AlexNet training with 1-bit weights, 2-bit activations and 6-bit gradients. These techniques require additional re-training of the network and can result in sub-optimal accuracy. 
+
+
+
+\section{Convolutional Neural Networks for Spectroscopic Red-shift Estimation on Euclid Data} \label{Euclid}
+The Convolutional Neural Network was developed by FORTH researchers (Dr. Tsagatakis and his team). The following section has been taken from the paper of Dr. Tsagatakis (This is on submission stage) with his permission. \cite{Reference75}
+Modern astrophysical  cosmological researches seek answers to questions like “what is the distribution of dark energy and dark matter in the Universe?” \cite{Reference66}, \cite{Reference67}. In this paper, there was an extended study of performing accurate redshift estimation using realistic spectroscopic observations, modeled after Euclid. Redshift estimation is considered to be a regression task, given the fact that a galaxy redshift (z) can be measured as a non-negative real-valued number (with zero corresponding to the rest-frame). Given the specific characteristics of Euclid, we can focus our study on the redshift range of detectable galaxies. Subsequently, we can restrict the precision of our estimations to match the resolution of the spectroscopic instrument, meaning that split the chosen into evenly sized slots equal to Euclid ’s required resolution.  Hence, we can transform the problem at a regression task to a classification task using a set of ordinal classes,  with each class corresponding to a different slot, and accordingly, we can utilize a classification model (Convolutional Neural Networks in our case) instead of a regression algorithm.
+
+\subsubsection{Training and Evaluation}
+
+The simulated dataset that was used is modeled after the upcoming Euclid satellite galaxy survey \cite{Reference68}.
+The training of the network was implemented in the GPU using TensorFlow tools. As far as the Inference part is concerned, there is space for other dedicated hardware like FPGA because energy efficiency is much more important than throughput in aerospace applications.
+Below are the results of the training \ref{tab:6} and the performance \ref{fig:20} of the network.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Accuracy_Euclid.png}
+\decoRule
+\caption[Accuracy of Euclede]{Accuracy of Euclede: Validation performance of a 3-layered network, using larger and
+more  limited  in  size  datasets.  In  all  cases  the  training  accuracy  (not
+depicted here) can asymptotically reach near to 100\% accuracy, after enough epochs. Copyrights from \cite{} }
+\label{fig:20}
+\end{figure}
+
+\begin{table}[h]
+
+\captionof{table}{Comparison of CPU and GPU training running time} \label{tab:6} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Experiment \#} & \tabhead{CPU Time (per epoch)} & \tabhead{GPU Time (per epoch)} \\
+\midrule
+1  4 & 75 sec.  & 11 sec. \\
+2 4 & 735 sec. & 107 sec. \\
+3 & 158 sec. 4 & 20 sec. \\
+ 
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+Comparison of CPU and GPU training running time, in 3 different
+benchmark experiments. In the
+1st and the 2nd experiments, we utilize 40,000 and 400,000 training observations, of the idealistic case, in a CNN with 1 Convolutional Layer. In the 3rd case, we deploy 40,000 realistic training examples for the training of a CNN with 3 Convolutional Layers.
+\end{small}
+\end{table}
+
+
+
+
+\section{Thesis Approach}
+In contrast to  prior  works,\cite{Reference23},  \cite{Reference24}, \cite{Reference27} and \cite{Reference25} this thesis comes to develop and propose new ways of compressing information into a specific CNN \ref{Euclid} implementation. For the proper use and implementation of clustering algorithms, we highlighted the characteristic problems when implemented on CNN applications and propose techniques to limit them. We also propose new compression methods (Pair compression, Hierarchical Clustering)  combining it with existing ones, resulting in a large compression rate(36x) with high accuracy performance (0.7\%).
+
+
+ 

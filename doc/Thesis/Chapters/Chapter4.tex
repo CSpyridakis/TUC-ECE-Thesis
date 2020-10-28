@@ -1,0 +1,973 @@
+\chapter{Robustness analysis of CNN} % Main chapter title
+
+\epigraph{The key to artificial intelligence has always been the representation.” }{\textit{Jeff Hawkins}}
+\label{Chapter4} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+In this chapter, we intend to analyze the structure of the given Convolution Neural Network \cite{Reference75} \ref{Euclid}. Afterwards, we aim to model the network in MATLAB \cite{Link2} and evaluate the results with TensorFlow. The initial CNN has been built and pre-trained in TensorFlow. Therefore starts the inference procedure, where images are fed into the network and this predicts their (target) classes. We built our ToolBox in MATLAB, functions were created for each operation of the network, from importing and formatting image and the filters to the SoftMax layer for the final classification. Thereinafter, we are going to perform a Sensitivity Analysis to explore opportunities for hardware implementation. Finally, several compress and algorithmic optimizations have been studied and tested in order to reduce memory footprint and accelerate the network. Methods, relies on previous studies, such as pruning, different data-types( single floating point, half floating point, fixed point, dynamic-fixed point) and clustering algorithms have been implemented. Finally, we propose new techniques and methods that approach better the problems of already state-of-the-art optimizations.
+
+
+     
+%Next we built our Library in MATLAB to evaluate the model and search for opportunities on hardware implementation. Functions %were created for each operation of the network, from importing and formatting image and the filters to the SoftMax layer for %the final classification. Finally, several optimizations (pruning, data-types, clustering, etc) have been studied and tested %to accelerate the network. 
+
+
+
+%------------------------------------------------------------------------------------------
+
+\section{MATLAB vs TensorFlow}
+
+TensorFlow uses high-level of abstraction, hence we manage to transform to MATLAB code for lower-level understanding of the network. Next step was to extract and compare the results between MATLAB and TensorFlow. This procedure will show us whether a TensorFlow’s Convolutional Neural Network (CNN) can be implemented in MATLAB with our toolbox. In our experiments with TensorFlow, we used double-precision floating point (IEEE standard) and single-precision floating point (IEEE standard) for MATLAB implementation. After running inference procedure for both implemantations for 10000 images, the main dataset, and comparing the results we had fully matched top-1 classification.
+
+
+Below we present the main building blocks of a typical 1-D Convolution Neural Network.
+
+In Algorithm\ref{alg:conv1} we perform an 1-D Convolution with stride 1. This is the first layer of our network. As inputs, it gets a one-dimensional vector( image from the dataset), the kernel which are the pre-trained filters on which the operation of convolution will be based and bias. The output of the layer will be a 2-Dimension vector.
+
+\begin{algorithm}[H]
+\caption{Convolution (1-D) }\label{alg:conv1}
+\begin{algorithmic}[1]
+\Procedure{Convolution}{$image,kernel,bias$}  
+\State $ImageSize\gets size(image,1)$ \Comment{Size of $1^{st}$ Dimension}
+\State $NumOfKernels \gets size(kernel,2)$ \Comment{Number of kernels}
+\State $KernelDim1 \gets size(kernel,1)$ \Comment{Size of $1^{st}$ Dimension}
+\For{k:=1 \textbf{to} NumOfKernels }         
+\For{i:=1 \textbf{to} (ImageSize-KernelSize+1) }     
+\State $Conv(i,k)\gets 0$
+\EndFor 
+\EndFor 
+
+\For{k:=1 \textbf{to} NumOfKernels }         
+\For{i:=1 \textbf{to} (ImageSize-KernelSize+1) }         
+\For{j:=1 \textbf{to} KernelSize }           
+
+\State $Conv(i,k)\gets Conv(i,k) + image(i+j-1)*kernel(k,j)$
+\EndFor 
+\State $Conv(i,k)\gets Conv(i,k) + bias(k)$
+\EndFor 
+\EndFor 
+
+\State \textbf{return} $Conv$       
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+In \ref{alg:conv2} we perform an 2-D Convolution with stride 1. This is the second and third layer of our network. As inputs it gets a two-dimensional vector($image_{stage}$ from the previous layers), the kernel which are the pre-trained filters on which the operation of convolution will be based and bias. The output of the layer will be a 2-Dimension vector.
+
+\begin{algorithm}[H]
+\caption{Convolution (2-D) }\label{alg:conv2}
+\begin{algorithmic}[1]
+\Procedure{Convolution}{$image,kernel,bias$}   
+\State $ImageSize\gets size(image,1)$ \Comment{Size of $1^{st}$ Dimension}
+\State $NumOfKernels \gets size(kernel,3)$ \Comment{Number of kernels}
+\State $KernelDim1 \gets size(kernel,1)$ \Comment{Size of $1^{st}$ Dimension}
+\State $KernelDim2 \gets size(kernel,2)$ \Comment{Size of $2^{nd}$ Dimension}
+
+\For{k:=1 \textbf{to} NumOfKernels }         
+\For{i:=1 \textbf{to} (ImageSize-KernelSize+1)}  
+\State $Conv(i,k)\gets 0$
+\EndFor 
+
+\EndFor \For{k:=1 \textbf{to} NumOfKernels }     
+\For{i:=1 \textbf{to} (ImageSize-KernelDim2+1) }         
+\For{p:=1 \textbf{to} KernelDim2 }    
+\For{j:=1 \textbf{to} KernelDim1 } 
+
+\State $Conv(i,k)\gets Conv(i,k)+image(i+j-1,p)*kernel(k,p,j)$
+
+\EndFor 
+\EndFor 
+\State $Conv(i,k)\gets Conv(i,k) + bias(k)$
+\EndFor 
+\EndFor 
+\State \textbf{return} $Conv$       
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+In \ref{alg:fc} we perform a Matrix Multiplication. This is the final layer of the network. As inputs it gets a flatten vector (transforming from 2 to 1 Dimension), $dense_{kernel}$ which are the pre-trained filters and $dense_{bias}$. The output of the layer will be a 1-Dimension vector in the size of Number of Classes.
+
+
+
+\begin{algorithm}[H]
+\caption{Fully Connected}\label{alg:fc}
+\begin{algorithmic}[1]
+\Procedure{Fully Connected}{$conv,kernel_{dense},bias$}  
+\State $ConvSize\gets size(conv)$ \Comment{Size of Conv}
+\State $NoClasses \gets size(kernel_{dense},1)$ \Comment{Number of Classes}
+
+\For{k:=1 \textbf{to} $NoClasses$ }         
+\State $Classes(k)\gets 0$
+\EndFor 
+\ 
+
+\For{k:=1 \textbf{to} NoClasses }         
+\For{i:=1 \textbf{to} ConvSize }         
+       
+\State $Classes(k)\gets Classes(k) + conv(i)*kernel_{dense}(k,j)$
+\EndFor 
+\State $Classes(k)\gets Classes(k) + bias(k)$
+\EndFor 
+
+\State \textbf{return} $Conv$       
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+In \ref{alg:ReLU} we perform ReLU activation function. This layer performed in the output of Convolution Layers.
+
+\begin{algorithm}[H]
+\caption{ReLU}\label{alg:ReLU}
+\begin{algorithmic}[1]
+\Procedure{ReLU}{$conv$}  
+\State $ConvSize1\gets size(conv,1)$ \Comment{Size of $1^{st}$ Conv}
+\State $ConvSize2\gets size(conv,2)$ \Comment{Size of $2^{nd}$ Conv}
+
+
+\For{i:=1 \textbf{to} ConvSize1 }         
+\For{k:=1 \textbf{to} ConvSize2 }         
+ \If {$conv(i,k)<0$}       
+\State $conv(i,k)\gets 0$
+\EndIf
+\EndFor 
+\EndFor 
+
+\State \textbf{return} $conv$       
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+In \ref{alg:SoftMax} we perform SoftMax activation function. This layer performed in the output of Fully Connected Layer. It outputs the target class of the network with a probability distribution.
+
+\begin{algorithm}[H]
+\caption{SoftMax}\label{alg:SoftMax}
+\begin{algorithmic}[1]
+\Procedure{SoftMax}{$Classes$}  
+\State $NoOfClasses\gets size(Classes)$ \Comment{Number of Classes}
+
+\State $sumC\gets 0$
+\State $maxC\gets -\infinity$
+\State $posC\gets -1$
+
+\For{i:=1 \textbf{to} NoOfClasses }         
+\State $sumC\gets sumC + e^{Classes(i)}$
+\If {$e^{Classes(i)} > maxC$}       
+\State $maxC\gets e^{Classes(i)}$
+\State $posC\gets i$ \Comment{Find the position of the predicted class}
+\EndIf
+\EndFor 
+
+\State $P_{max} \gets maxC/sumC$ \Comment{Probality of the max Class}
+\State \textbf{return} $P_{max},posC$       
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Data types}
+
+In our experiments, we used 3 different data types: double, single, half precision floating point. All three formats are IEEE Floating Point, the first two are supported by MATLAB while for half Floating Point a mini-toolbox was used by MATH-WORKS. One first step is to understand what floating point datatype actually we need because Input/Output (I/O) has always played a crucial role in computer, industrial applications and especially in FPGAs which are main speed bottleneck. Below in table \ref{tab:1_1} is presented error rate in top-1 classification for 3 different floating point types.
+
+
+\begin{table}[H]
+\caption{Error rate}
+\label{tab:1_1}
+\centering
+\begin{tabular}{l l}
+\toprule
+\tabhead{Data type} & \tabhead{Error rate(\%)}  \\
+\midrule
+double & 0 \\
+single & 0.02 \\
+half & 0.04 \\
+ \bottomrule\\
+\end{tabular}
+\end{table}
+
+
+
+It is easily observed that there isn't significant error rate for lower floating point formats, thus creating space to exploit their use.
+
+\section{Memory Footprint}
+
+An important issue that has been reported several times is memory footprint. Especially for implementing FPGA applications, memory is a performance inhibitor. Most of the time, the application is to fit into internal B-RAMs or even to accommodate a lot. Of course in modern FPGA there is the solution of D-RAM but speed is the main disadvantage. It is important to perceive how weights are distributed in the network stages and find ways to reduce the overall memory footprint.
+Tables (\ref{tab:1},\ref{tab:2}) presents memory footprint of the weights and the stages of the image using double floating point.
+
+\begin{table}[h]
+\caption{Weights Memory Footprint}
+\label{tab:1}
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Layer} & \tabhead{\#Weights} & \tabhead{Footprint} & \tabhead{Memory(\%)} \\
+\midrule
+conv1 & 144 & 1.1KB & $6.33*10^{4}$\\
+conv2 & 2064 & 16.1KB &$9.2*10^{3}$\\
+conv3 & 2064 & 16.1KB & $9.2*10^{3}$\\
+dense & 22771200 & 173.7MB & 99.98\\
+\bottomrule\\
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\caption{Data Stages Memory Footprint}
+\label{tab:2}
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Stage} & \tabhead{\#Data} & \tabhead{Footprint} & \tabhead{Memory(\%)}\\
+\midrule
+image & 1800 & 14KB & 2\\
+conv1 & 28688 & 224KB& 32\\
+conv2 & 28576 & 223.2KB & 32\\
+conv3 & 28464 & 222.4KB & 32\\
+dense & 800 & 6.25KB & 0.9\\
+\bottomrule\\
+\end{tabular}
+\end{table}
+
+\section{Weight Distribution}
+
+In typical neural networks, there are millions of parameters which define the model and requires a large amount of data to store them. Neural networks are typically over-parameterized, and there is significant redundancy for deep learning models. This results in a waste of both computation and memory. There have been various proposals to remove the redundancy. In our network, we have 22.776.272 parameters, so it is essential to make a weight distribution and analyze its results.
+
+Weights can get values $(- \infty, 0) U (0, +\infty)$, but what we are interested in for our study is the absolute distribution of weights in the histogram chart. 
+In Figures (\ref{fig:9}, \ref{fig:10}, \ref{fig:11}) we present the weight distribution of 3 Convolutional Layers grouping them into bins with adjacent values. In Figure \ref{fig:12} we present the weight distribution of Fully Connected (Dense) Layer grouping them into bins with adjacent values.  
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{weight_distr_con1} 
+\decoRule
+\caption[Weight Distribution of conv1]{Weight Distribution of 1st Convolutional Layer
+}
+\label{fig:9}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{weight_distr_con2} 
+\decoRule
+\caption[Weight Distribution of conv2]{Weight Distribution of 2nd Convolutional Layer
+}
+\label{fig:10}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{weight_distr_con3} 
+\decoRule
+\caption[Weight Distribution of conv3]{Weight Distribution of 3rd Convolutional Layer
+}
+\label{fig:11}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{weight_distr_dense} 
+\decoRule
+\caption[Weight Distribution of dense]{Weight Distribution of Dense Layer
+}
+\label{fig:12}
+\end{figure}
+ 
+%----------------------------------------------------------------------------------------
+ \section{Pruning}
+
+After weight and data distribution studies a resulting optimization is the pruning. Pruning is a technique in machine learning that reduces the size of the network by removing weights that provide little power to classify instances. We chose a factor and values that are absolute-smaller than this are zeroing. The question is to what extent we could prune values while having the least possible cost in classifying. Afterwards, it is essential to consider pruning only in weights of Fully Connected Layer because contains 99\% of the network parameters. After implementation in MATLAB \ref{fig:13} for several pruning factors it was observed that there is a trade-off between network accuracy - prune factor.
+it is easy to perceive that selecting suitable prune factor (0.015) we can achieve high weights reduction (97.78\%) having the least possible loss of network accuracy (error rate=0.34\%). It is easily perceived that factor =0.015 were selected because it leads to low error rate with high weights reduction.
+ 
+In Fig \ref{fig:14} we present the Weight Distribution of Fully Connected Layer after Pruning. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{pruning} 
+\decoRule
+\caption[Pruning Comparison]{Pruning Comparison: 
+Weight reduction rate (\%): Percentage of weights that were pruned 
+,  Pruning Factor: The factor where values are absolute-smaller than this are pruned.
+, Error rate (\%): Percentage of misclassification in top-1 Class.
+}
+\label{fig:13}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{weight_distr_dense_prun} 
+\decoRule
+\caption[Weight Distribution after Pruning]{Weight Distribution of Dense Layer after Pruning:
+Pruning factor = 0.015 was selected because it leads to low error rate with high weights reduction.
+More specifically 97.78\% weight reduction and 0.34\% error rate. 
+}
+\label{fig:14}
+\end{figure}
+
+
+\subsection{Using Fixed Point}
+
+Using floating point was the safest way to guarantee high accuracy and performance on the results. Floating Point solutions in hardware are expensive computing and consume a lot of resources. They also have a big memory footprint. Hence an alternative solution that comes is the use of Fixed Point, where they are more FPGA-friendly computing (TPU uses 8-bit fxed-points). In FPGA designs, fixed-point formats are very efficient if we know beforehand the resolution and range of our data so that we can select the appropriate format. Compared to floating point, fixed point requires less resources in FPGAs (DSPs) and they are less computational complex. In addition, we can reduce the memory footprint to a percentage that the network allows.
+
+Below is the table using various fixed-point format and their impact on performance \ref{tab:fp}. As error we define top-1 miss-classification.
+
+\begin{table}[h]
+
+\captionof{table}{Fixed point formats} \label{tab:fp} 
+
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{Format} & \tabhead{Compression} & \tabhead{Error rate (\%)} \\
+\midrule
+32 bit & 2x & 0.8 \\
+24 bit & 2.66x & 3.8 \\
+16 bit & 4 & 20.01  \\
+\bottomrule\\
+
+\end{tabular}\par
+\begin{small}
+  
+\end{small}
+
+\end{table}
+
+
+
+ \subsection{Dynamic Fixed Point}
+Using Fixed Point, we observe that there is indeed a significant improvement in memory footprint. Another solution to be considered is the Dynamic Fixed Point, which was first introduced by Williamson in 1991 \cite{Reference72}. The difference is that instead of using a global scaling factor, more can be used depending on the application's needs.
+The way this idea was applied to the network was to group the layers separately and each to have a different fixed point format using scaling factors.
+
+We have noticed that the dense layer has the largest memory footprint compared to the others. So we tried to find the minimum number of representation bits having as a limit to the correct classification of the top classes. For the rest of the groups, the image is read by 32-bit for high precision, for weights and bias except dense 12-bit is the best lower limit and in addition for the final classification, 32-bit was used for large analysis.
+
+Below is the table of various Dynamic Fixed Point Formats.
+
+\begin{table}[H]
+
+\captionof{table}{Dynamic Fixed Point} \label{tab:fp} 
+
+\centering
+\begin{tabular}{l l l}
+\toprule
+\tabhead{Format} & \tabhead{Compression} & \tabhead{Error rate (\%)} \\
+\midrule
+18 bit$_{(1)}$ & 3.55x & 0.8 \\
+12 bit$_{(2)}$ & 5.33x & 2.8 \\
+10 bit$_{(3)}$ & 6.4x & 4.2 \\
+8 bit$_{(4)}$ & 8x & 8.01  \\
+7 bit$_{(5)}$ & 9.14 & 10.01  \\
+
+\bottomrule\\
+
+\end{tabular}\par
+
+
+\end{table}
+
+\begin{small}
+\begin{enumerate}
+\item  Dynamic 18-bit : image: 18-bit FP for weights and every image stage except the except output Classification (32bit FP) \\
+\item Dynamic 12-bit : image: 12-bit FP for weights and every image stage except the except output Classification (32bit FP) \\
+\item Dynamic 10-bit :image: 12-bit FP for weights except dense:10-bit FP and for every  image stage 12 bit FP except the output Classification (32-bit FP). \\
+\item Dynamic  8-bit : image: 12-bit FP for weights except dense:8-bit FP and for every image stage 12 bit FP except output Classification (32-bit FP). \\
+\item Dynamic 7-bit : image: 12-bit FP for weights except dense:7-bit FP  for every image stage 12 bit FP except output Classification (32-bit FP). \\
+\end{enumerate}
+\end{small}
+
+\section{Evaluating Results}
+In order to test the techniques and methods are followed we used a second stage training set of 2500 images. This data-set will provide us the opportunity to develop these methods and test
+their behavior. Then to evaluate compression methods and extract the error results we used an inference "unkown" dataset of 10000 images.
+
+
+ \section{Clustering}
+Clustering is the task of grouping a set of objects in such a way that objects in the same group (called a centroid) are more similar (in some sense) to each other than to those in other groups (clusters). In CNN clustering works well as a small error occurs while we have large compression of the weights.
+Network quantization and weight sharing compress the network by reducing the number of bits required to represent each weight. We limit the number of effective weights we need to store by having multiple connections share the same weight, and then fine-tune those shared weights.
+
+
+ 
+\subsection{Pre-Clustering Techniques}
+As the clustering process is computational intensive it is important to study and determine the number of different values in the network. This will allow us to really understand how close the values are and how far we are allowed to group together. Afterwards, a function (named Pre-Clustering) is implemented. It gets as arguments sorted weights and a variable named tolerance. Finally, it groups weights where the absolute differences of values are smaller than this tolerance. We sort the initial weights and then weights that have an absolute difference less than the tolerance are grouped.
+In figure \ref{fig:15} and table \ref{tab:3} it is presented the number of different weights using Pre-Clustering algorithm for various tolerances.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Preclustering.png} 
+\decoRule
+\caption[Pre-Clustering Compression]{Pre-Clustering : Number of different weights for several tolerances. 
+}
+\label{fig:15}
+\end{figure}
+
+
+
+\begin{table}[h]
+
+\captionof{table}{Pre-Clustering Compression Error} \label{tab:3} 
+
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Tolerance} & \tabhead{\#Weights} & \tabhead{Frequency (\%)} & \tabhead{Error rate (\%)} \\
+\midrule
+0 & 18615045 & 81.7 & 0 \\
+$10^{-4}$ & 482910 & 0.8 & 0 \\
+$10^{-2}$ & 24995 & 0.2& 0.01 \\
+$10^{-3}$ & 3047 & 0.01 & 0.02 \\
+$10^{-1}$ & 352 & 0.002 & 0.03 \\
+\bottomrule\\
+
+\end{tabular}\par
+\begin{small}
+ $\#Weights \leq 22771200$ ,  $Frequency = \frac{\#Weights}{22771200}*100 \%$ 
+\end{small}
+
+\end{table}
+
+
+ \subsection{Quantization with Codebook}
+Using Fixed Point (static or dynamic), we observe that there is indeed a significant improvement in memory footprint but as we reduce bit-width, the accuracy of the network decreases. So we are heading to a hybrid solution, which provides us floating point format for the kernels (using double or single ) with much less memory footprint. The idea is to group weights according to their values in k centroids and store their values in a codebook \ref{fig:clust_sample}. Thus, each weight instead of storing its value, it stores the index of the corresponding centroid in a shared code-book. Using this quantization, given k centroids, we only need $log_2 k$ bits to encode the index. There are several algorithms to cluster these centroids such as Lloyds, K-means. These optimizations in our network concern dense layer only because this is the main memory bottleneck.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/clust_sample.png} 
+\decoRule
+\caption[Clustering sample]{Clustering : A sample of Clustering 4. 
+}
+\label{fig:clust_sample}
+\end{figure}
+
+\subsection{Comparison of different Codebooks}
+In table \ref{tab:3} it is observed that with the pre-clustering algorithm we have a low error rate and at the same time high compression (few centroids). Thus we can start using the Lloyds algorithm from $\floor{\log_2 352}=8$ and below and see what is the clustering limit of our network. In the following table \ref{tab:4} it is presented Lloyds clustering for several centroids. To calculate the compression rate, given k centroids, we only need (\ref{eq:4}) $\log_2(k)$ bits to encode the index. In general, for a network with n connections (weights) to have the only k shared weights (centroids) will result in a compression rate of \ref{eq:5}: 
+
+Below in figure \ref{fig:clus16_ex} we present an example of the use of clustering algortihm with 16 centroids.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{codebook16_sample.png} 
+\decoRule
+\caption[Clustering-16 example]{Clustering-16 example
+}
+\label{fig:clus16_ex}
+\end{figure}
+
+\subsubsection{Stohasting Clustering}
+The time Complexity of Lloyd's algorithm (and other clustering algorithms) is $O(n*k*d*i)$ \cite{Reference69} \cite{Reference70},where d is the number of different dimensions,n the number of the input dataset, k the number of target centroids and i the number of iterations needed until convergence. The \cite{Reference71} dictates that Lloyd's algorithm is often considered to be of "linear" O(n) complexity in practice. In the worst case scenario is super-polynomial. Hence we realize that when we use large n it takes a long time to complete. Consequently, we assume that it is acceptable to go to an estimated solution. The way to perform this is to introduce the stochasticity into the original dataset. Accordingly, we capture a representative sample of the original data-set (10-30\%) stochastically. This can be theoretically supported for its correctness by the Pre-Clustering algorithm that we previously applied and showed us that values ​​are concentrated around specific values.
+
+
+\begin{equation}\label{eq:4}
+  Bit_{Width}= \log_2(k) \end{equation}
+  
+  \begin{equation}\label{eq:5}
+   Compression = \frac{nb}{nBit_{Width}+kb} \end{equation}
+   
+   
+ 
+\begin{table}[h]
+\captionof{table}{Lloyds Clustering} \label{tab:4} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{\#Centroids} & \tabhead{$Bit_{Width}$} & \tabhead{Error rate(\%)} & \tabhead{Compression} \\
+\midrule
+256 & 8 & 0.03 & 8x \\
+128 & 7 & 0.09 & 9.1x \\
+64 & 6 & 0.16 & 10.7x \\
+32 & 5 & 0.26 & 12.8x \\
+16 & 4 & 1.37 & 16x \\
+8 & 3 & 4.6 & 21.3x \\
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ $Bit_{Width}= \log_2(k) ,  Compression = \frac{nb}{nBit_{Width}+kb}$  
+\end{small}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Lloyds_several_bits} 
+\decoRule
+\caption[Lloyds Clustering]{Lloyds Clustering : Error rate for several bit-widths. 
+}
+\label{fig:16}
+\end{figure}
+
+ \subsection{Proposed methods for quantization with Codebook}
+An ideal case would be to use Lloyds with 16 centroids (ie, 4-bit). We will try to develop some techniques so that we can drop the error at smaller levels. A problem that seems to arise, is that Lloyds is trying to group weights without understanding their differential importance. For example, weight with value 0.69 is much more important for the network than weight with value 0.0023. Larger weights play a more important role than smaller weights (Han et al., 2015), but the density of them are inversely proportional. \newline
+
+
+
+\textbf{Inverse Density: } A very important factor is that we can give normalization to the algorithm by giving it the initial codebook. Knowing that density is inversely proportional to the importance of weights, it is necessary to give an initial code-book that takes this into account. So we propose a technique to initialize the code-book, starting from the minimum value and ending up to the maximum, trying to have a big resolution at the absolute big values and as we approach small values to reduce resolution linearly \ref{fig:inv_density}. \newline
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Inverse_Density.png} 
+\decoRule
+\caption[Inverse Density]{Inverse Density: Importance => more resolution
+}
+\label{fig:inv_density}
+\end{figure}
+
+\textbf{Hierarchical Clustering: } The second method we propose is trying to solve the same problem from another point of view. As long as we use a larger number of centroids, we increase the resolution across all values (large and small). Thus, we force the algorithm to pay more attention to high values. Then if we apply the clustering algorithm hierarchically we will come up with a better resolution at weights that are of greater importance to us.
+\newline
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Clustering} 
+\decoRule
+\caption[Clustering 16 ]{Clustering 16: Error rate for Clustering methods. 
+Clust. = Clustering , H. Clust. = Hierarchical Clustering
+}
+\label{fig:17}
+\end{figure}
+
+\section{Pair-Compression}
+Another technique we proposed for further compression is compression pairing \ref{fig:pair_sample}.The pair compression is a lossy compression method very similar to Vector Quantization method. Knowing that there is a spatial relationship between the weights and weights that are spatial close have similar values, we have the idea of joining two consecutive weights so that we keep the information a single weight. A problem that arises is when the two consecutive weights $w_{1},w_{2}$ have heteronymous values. The solution comes by storing at the unite weight $w_{1,2}$ their absolute average value keep the sign of $w_{1}$ and placing an extra bit for the decompression to understand whether we will keep or not sign for the $w_{2}$. Let b the number of bits required for a weight, the compression rate appears below in equation \ref{eq:6}.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/pair_sample.png} 
+\decoRule
+\caption[Pair Compression example]{Pair Compression : An example of Pair Compression. 
+}
+\label{fig:pair_sample}
+\end{figure}
+
+\begin{equation}\label{eq:6}
+   Compression_{rate} = \frac{2b}{b+1}  \end{equation}
+\subsection{Proposed Methods and Pair-Compression}
+The initial error that resulted using the Pair-Compression was 0.38\%. Below we propose some techniques that helps Pair-Compression have a better implementation on CNNs leading a further reduction of the error. \newline
+
+
+\textbf{Clustering and Pair-Compression: }An optimization was to apply the clustering algorithm first so that the weights are pooled into some centroids. In this way, we would help the Pair-Compression unite weights as the sparsity would have already decreased.\newline
+
+ \textbf{Normalization: }Another factor in improving the behavior of the algorithm is to normalize the calculation of the united weight. Instead of calculating the average of the absolute values of weights, we will compute the Euclidean norm:
+
+\begin{equation}\label{eq:7}
+   Weight_{12} = \sqrt{{Weight_{1}}^{2}+{Weight_{2}}^{2}}
+   \end{equation} \newline
+   
+Below in Figure \ref{fig:18} we present error rate for the previous techniques.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{PairComp} 
+\decoRule
+\caption[Pair Compression]{Pair Compression : Comparison of the above Techniques,
+P.C. = Pair Compression, Norm = Normalization
+}
+\label{fig:18}
+\end{figure}
+
+
+\section{Quad-Compression}
+The logic of combining consecutive weights can be extended to more than 2. So we suggest Quad Compression \ref{fig:quad_sample} union 4 consecutive weights $w_{1},w_{2},w_{3},w_{4}$ into a union weight $w_{union}$. The problem that contiguous weights might not have the same sign will be solved using 3-bits. In the same way as before the union weight $w_{union}$ will retain the sign of the $w_{1}$ and each of the following 3 bits will show us the sign for $w_{2},w_{3},w_{4}$ during the decompression. Let b the number of bits required for a weight, the compression rate appears below in equation \ref{eq:6}.
+Applying the techniques we mentioned before the error reached up to 0.6\%
+
+\begin{equation}\label{eq:7}
+   Compression_{rate} = \frac{4b}{b+3}  \end{equation}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/quad_sample.png} 
+\decoRule
+\caption[Quad Compression example]{Quad Compression : An example of Quad Compression. 
+}
+\label{fig:quad_sample}
+\end{figure}
+
+\section{Pair Compression and Hierarchical Clustering}
+In order to be able to use the two main compression methods mentioned above, we need to follow the procedure below. We will first implement a Clustering algorithm with 256 centroids and then Pair Compression. At this point, values from the original centroids have changed, so we will reapply hierarchical clustering to result in the final codebook with 16 centroids.
+
+Below table \ref{tab:5} presents final error rate and Compression rate using our proposed Compression methods.
+
+\begin{table}[h]
+\captionof{table}{Compression Methods} \label{tab:5} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Method} & \tabhead{Error rate(\%)} & \tabhead{Compression rate} \\
+\midrule
+
+Clust. 4 & 1.37  & 16x \\
+H.Clust. 4 & 0.65 & 16x \\
+P.C.\& H.Clust. 4 & 0.62 & 25.6x \\
+Q.C.\& H.Clust. 4 & 0.76 & 36.57x \\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ Clust. = Clustering , H. Clust. = Hierarchical Clustering , P.C. = Pair Compression, Q.C. = Quad Compression
+\end{small}
+\end{table}
+ 
+Below figure \ref{fig:20} presents the weight distribution in CDF format using our proposed Compression methods. We notice that techniques help us to spread the weight distribution to incrementally higher weights, giving them the better resolution.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/METHODS_CDF_Full.png}
+\decoRule
+\caption[Comparison of Weight Distribution CDF v.2 ]{Comparison of Weight Distribution CDF }
+\label{fig:20}
+\end{figure}
+
+
+Below on figures \ref{fig:pair_proc} \ref{fig:quad_proc} we present the procedure followed to extract the final compressed weights using methods Hierarchical Clustering, Pair or Quad Compression.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Compression_Flow_PAIR.png}
+\decoRule
+\caption[Hierarchical Clustering And Pair Compression Procedure]{Hierarchical Clustering And Pair Compression Procedure}
+\label{fig:pair_proc}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Compression_Flow_Quad.png}
+\decoRule
+\caption[Hierarchical Clustering And Quad Compression Procedure]{Hierarchical Clustering And Quad Compression Procedure }
+\label{fig:quad_proc}
+\end{figure}
+
+\section{Second Level Codebook (SLC)}
+Next, we propose and analyze a new lossless method (Second Level Codebook) that can be applied to clustering algorithms. This method will help us to further reduce the error rate by keeping the memory footprint constant.
+We will begin by considering that we have implemented clustering with 16 centroids in the original data-set. As we have analyzed above, we would need $\floor{\log_2 16}=4$ bits to represent this information. The difference, in this case, is that we will concatenate two compressed weights (4-bit) and create an 8-bit block. This 8-bit block will contain values from 0-256 and when decompression is applied will produce the 2 initial compressed weights. After an extensive study, we grouped all the weights in this way, and we concluded that the 8-bit block did not contain 256 different values ( there was not any possible weight combination). Instead, we came up with 165 different combinations. Initially, this study was aimed at compressing the 2 weights with a smaller number of 8 bits.
+In order to achieve this, 8-bit blocks would have to end up with less than 127 different values so we would be able to perform a second lossless compression ending at 7 bits.
+
+
+
+This could not be achieved, and hence we ended up applying another thought. We will try to exploit the fact that we do not use the whole range that 8-bits blocks can provide us. We came up with the following approach:
+
+\begin{itemize}
+    \item \textbf{Clustering with more centroids}:
+    Originally, we will operate the clustering algorithm with more centroids than the number of bits, we want to encode, would allow us. In this case, we want to reach a compressed weight ratio of 4-bit. Consequently, we will create more than 16 centroids, which  4-bit allow us, and we'll consult what is the maximum we can get.
+    
+    \item \textbf{Creation of 8-bit block}: To represent the 16+ centroids (eg 18 19) we would need at least 5 bits $\ceil{\log_2 18}=5$. Going one step further we will create an 8-bit weight-block concatenating 2 consecutive (loseless decompression) weights.
+    
+    \item \textbf{Creating Level Stage Codebook}(SLC): In order for this to be performed efficiently, we have to implement the following procedure. We assume that we will attempt to fit 18 centroids into the new block that will be built. The procedure is to concatenate the two compressed weights as follows: $Weight_{Block}=weight_{1}*18 + weight_{2}$ to be able to ensure that we have a unique decode. Consequently, the range of the resulting number is 0-323 (17*18 + 17). This number can be represented by $\ceil{\log_2 323} = 9 $bits instead of 10 if we were coded separately. Furthermore, we checked all the possible values, resulting in 245, that could occur. This information can be represented by 8 bits because $\ceil{log_2 245} = 8$. 
+    
+    \item \textbf{Decompression}: 
+    Hence we will create a second-level codebook consists of 245 indexes. This codebook contains the primary, uniquely decodable, 9-bit block. Finally, the optimized second-level codebook could be decompressed to the 2 primitive compressed weights.
+    
+ \end{itemize}
+  
+  Below in figure \ref{fig:slc_sample} is an example of SLC compression with weight block 2
+  
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/SLC_sample.png} 
+\decoRule
+\caption[SLC compression example]{SLC compression example : Weights Block 2
+}
+\label{fig:slc_sample}
+\end{figure}
+
+
+ To calculate the compression rate of the SLC, given k centroids, we only need (\ref{eq:5}) $\log_2(k)$ bits to encode the index. In general, for a network with n connections (weights) to have the only k shared weights (centroids) and a weights-block with p different indexes will result in a compression rate of \ref{eq:5}: 
+
+\begin{equation}\label{eq:10}
+  Bit_{Width}= \log_2(k) \end{equation}
+ 
+
+  
+ \begin{equation}\label{eq:12}
+ Compression = \frac{nb}{k*b+p*Bit_{Width}} \end{equation}
+ 
+ 
+
+ 
+ 
+ \subsection{SLC with higher weights-blocks }
+ This encoding can be expanded to a larger extent using larger weights-blocks. We can concatenate 4,8 or even 16 weights in larger blocks.
+ This can lead to 2 results. We can compress the information even more (in smaller bits/weight ratio) or lower the error by keeping the bits/weight ratio stable.
+ 
+  To calculate the compression rate of the SLC, given k centroids, we only need (\ref{eq:10}) $\log_2(k)$ bits to encode the 1st Level Codebook index. In general, for a network with n connections (weights) to have the only k shared weights (centroids) and a weights-block(concatenating l different weights) with p different indexes will result in a compression rate of \ref{eq:11}: 
+
+\begin{equation}\label{eq:10}
+  Bit_{Width}= \log_2(k) \end{equation}
+ 
+\begin{equation}\label{eq:SLC_footprint}
+  SLC_{Footprint}= p*l*Bit_{Width} \end{equation}
+  
+ \begin{equation}\label{eq:11}
+ Compression = \frac{nb}{k*b+SLC_{Footprint}+n*bits/weight} \end{equation}
+ 
+ 
+\subsubsection{Decreasing error rate}
+Originally we tried to reduce the error rate using large clusters and end up with a small error rate. In conjunction with SLC, we can exploit the extremely small error rate of a large clustering algorithm while compressing the information further. The following study has been done for the largest clustering we have studied of 256 centroids.
+
+
+\begin{table}[h]
+\captionof{table}{SLC compression on Codebook 256 for different Weights Block} \label{tab:9} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Method} & \tabhead{Bits/Weight} & \tabhead{Error rate(\%)} & \tabhead{Compression rate} \\
+\midrule
+
+Clust. 256 \& 8 & 0.03 & 8x \\
+Clust. 256 \& SLC 2-WB & 6.5 & 0.03 & 9.84x \\
+Clust. 256 \& SLC 4-WB & 5 & 0.03 & 10.79x \\
+Clust. 256 \& SLC 8-WB & 3.5 & 0.03 & 5.57x \\
+ 
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ Clust. = Clustering , WB =   Weights Block
+\end{small}
+\end{table}
+
+  \begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/CLS_256.png}
+\decoRule
+\caption[SLC in Clustering with 256 centroids ]{SLC in Clustering with 256 centroids}
+\label{fig:23}
+\end{figure}
+ 
+ \begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{Images/wb2_clustering256.png}
+\decoRule
+\caption[Weights-Block-2 on Clustering with 256 centroids]{Weights-Block-2 on Clustering with 256 centroids}
+\label{fig:24}
+\end{figure}
+
+
+\subsubsection{Lowering bits/weights ratio}
+
+ At this point, we used the Clustering with the 18 values and tried to compress it into as small as possible bits/weights by increasing the number of compressed weights-block.
+ 
+ \begin{table}[h]
+\captionof{table}{SLC compression on Codebook 18 for different Weights Block} \label{tab:10} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Method} &\tabhead{Bits/Weight} & \tabhead{Error rate(\%)} & \tabhead{Compression rate} \\
+\midrule
+
+H.Clust. 18 \& 5 & 0.43 & 12.8x \\
+H.Clust. 18 \& SLC 2-WB & 4 & 0.43 & 15.99x \\
+H.Clust. 18 \& SLC 4-WB & 2.75 & 0.43 & 20.5x \\
+H.Clust. 18 \& SLC 8-WB & 2 & 0.43 & 30.96x \\
+H.Clust. 18 \& SLC 10-WB & 1.5 & 0.43 & 30.82x \\
+H.Clust. 18 \& SLC 16-WB & 1.31 & 0.43 & 10.24x \\ 
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ Clust. = Clustering , WB =   Weights Block
+\end{small}
+\end{table}
+
+
+
+ \begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/CLS_18.png}
+\decoRule
+\caption[SLC in Clustering with 18 centroids]{SLC in Clustering with 18 centroids}
+\label{fig:25}
+\end{figure}
+
+ \begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/wb2_clustering18.png}
+\decoRule
+\caption[Weights-Block-2 on Clustering with 18 centroids]{Weights-Block-2 on Clustering with 18 centroids}
+\label{fig:26}
+\end{figure}
+
+
+
+
+We arranged the clustering codebook of 18 centroids and applied a pruning to the 2 closest to 0 centroids. After calculating their weighted average, we have joined them by storing this value. By implementing this we expected better compression rate because the centroids that are close to 0 have high frequency, so we will reduce the possible combinations for the SLC.
+
+ \begin{table}[h]
+\captionof{table}{SLC compression on Codebook 17 for different Weights Block} \label{tab:11} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Method} &\tabhead{Bits/Weight} & \tabhead{Error rate(\%)} & \tabhead{Compression rate} \\
+\midrule
+
+H.Clust. 17 & 5 & 0.39 & 12.8x \\
+H.Clust. 17 \& SLC 2-WB &3.5 & 0.39 & 18.29x \\
+H.Clust. 17 \& SLC 4-WB & 2.5 & 0.39 & 25.59x \\
+H.Clust. 17 \& SLC 8-WB & 1.625 & 0.39 & 39.1x \\
+H.Clust. 17 \& SLC 10-WB & 1.5 & 0.39 & 40.83x \\
+H.Clust. 17 \& SLC 12-WB & 1.33 & 0.39 & 43.78x \\
+H.Clust. 17 \& SLC 15-WB & 1.13 & 0.39 & 41.86x \\
+ \bottomrule\\
+\end{tabular}\par
+\begin{small}
+ Clust. = Clustering , WB =   Weights Block
+\end{small}
+\end{table}
+
+
+\subsubsection{Golden Ratio}
+
+By observing the tables and figures above, we realize that by using SLC we can notably reduce the bits/weight ratio. Attention must be drawn to the fact that as the weights-block (concatenate more weights) increases, linearity in compression is dropped. The golden ratio for the correct use of SLC is: for the 18 centroids using 8-weights blocks, for the 17 centroids using 12-weights blocks, while for the 256 centroids using 4-weights blocks \ref{fig:slc}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/SLC_comp.png} 
+\decoRule
+\caption[SLC Performance]{SLC Performance : For different codebooks an weights-blocks
+}
+\label{fig:slc}
+\end{figure}
+
+
+\subsubsection{Lossless Method}
+
+A fact that needs to be reinstated is that this method is lossless. There is no loss of data in compression and therefore, after its use, we end up with the same error rate.
+
+\section{SLC comparison with Huffman}
+In computer science, Huffman code is a commonly used lossless data compression algorithm. Huffman's coding algorithm is an prefix optimal code for a "symbol-by-symbol" coding with a known probability distribution of data. The algorithm developed by David A. Huffman while he was a PHD student at MIT, and published in the 1952 \cite{Reference73}.
+
+
+In this section and more specifically in table \ref{tab:huff} and figure \ref{fig:huff} we compare our lossless SLC algorithm with the optimal Huffman. 
+The SLC method we have implemented is more FPGA-friendly than Huffman. The problem with Huffman and other prefix-code encoding are that they do not have a fixed Bits/weight ratio. This varies by weight in weight and e.g. the most likely weight can be represented by 1 Bit, which is unlikely by 14bits. The above to be effective in Hardware is prohibitive because enormous if-conversions will have to be implemented. This will dramatically increase the critical path and the use of many resources. In contrast to Huffman, SLC creates a fixed Bits/weight ratio Compression, by reading a certain number of bits leading to a specific number of weights. 
+
+ \begin{table}[h]
+\captionof{table}{Comparison of SLC compression on Codebook 18 and 17 with Huffman Coding } \label{tab:huff} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Method} &\tabhead{Bits/Weight} & \tabhead{Error rate(\%)} & \tabhead{Compression rate} \\
+\midrule
+
+
+H.Clust. 18 \& SLC 8-WB & 2 & 0.43 & 30.96x \\
+H. Clust. 18 \& Huffman & 1.98 & 0.43 & 32.39x \\
+H.Clust. 17 \& SLC 12-WB & 1.33 & 0.39 & 43.78x \\
+H. Clust. 17 \& Huffman & 1.34 & 0.39 & 47.75x \\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ Clust. = Clustering , WB =   Weights Block
+\end{small}
+\end{table}
+
+In this table, we see that SLC achieves compression rates very close to those of Huffman. More specifically for the 17-codebook, it reaches 91.7\%, while for the 18-codebook 95.6\% of the optimal performance of Huffman.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Huffman_Comp.png} 
+\decoRule
+\caption[Comparison of SLC compression on Codebook 18 and 17 versus Huffman Coding]{Comparison of SLC compression on Codebook 18 and 17 versus Huffman Coding: for different number of weights-block
+}
+\label{fig:huff}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Compression_Flow_SLC_PAIR.png} 
+\decoRule
+\caption[Compression Flow using Pair Compression and SLC]{Compression Flow using Pair Compression and SLC: Weights-Block 12 
+}
+\label{fig:comp_slc_pair}
+\end{figure}
+
+
+\section{SLC, Hierarchical Clustering and Pair Compression }
+The next step is to try to combine the SLC method with the existing techniques we have implemented. It is obvious that there is no conflict between the simultaneous use of these methods and SLC is because they try to achieve data compression from a different perspective. \ref{fig:comp_slc_pair}
+
+Below in figures \ref{fig:comp_slc_pair} \ref{fig:comp_slc_quad} we present compression flow using the proposed methods and techniques.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Compression_Flow_SLC_PAIR.png} 
+\decoRule
+\caption[Compression Flow using Pair Compression and SLC]{Compression Flow using Pair Compression and SLC: Weights-Block 12 
+}
+\label{fig:comp_slc_pair}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Images/Compression_Flow_SLC_QUAD.png} 
+\decoRule
+\caption[Compression Flow using Quad Compression and SLC]{Compression Flow using Pair Compression and SLC: Weights-Block 8 
+}
+\label{fig:comp_slc_quad}
+\end{figure}
+  To calculate the compression rate of the SLC alongside the other methods, given k centroids, we only need (\ref{eq:10}) $\log_2(k)$ bits to encode the 1st Level Codebook index. In general, for a network with n connections (weights) to have the only k shared weights (centroids) and a weights-block(concatenating l different weights) with p different indexes will result in a compression rate of \ref{eq:14}, \ref{eq:15} applied Pair or Quad Compression: 
+\begin{equation}\label{eq:13}
+  Bit_{Width}= \log_2(k) \end{equation}
+ 
+ \begin{equation}\label{eq:SLC_footprint2}
+  SLC_{Footprint}= p*l*Bit_{Width} \end{equation}
+  
+ \begin{equation}\label{eq:14}
+ Compression = \frac{nb}{k*b+SLC_{Footprint}+\frac{n*((bits/weight)+1)}{2}} \end{equation}
+
+ \begin{equation}\label{eq:15}
+ Compression = \frac{nb}{k*b+SLC_{Footprint}+\frac{n*((bits/weight)+3)}{4}} \end{equation}
+ 
+In order to be able to unfify the proposed techniques, SLC Compression will be applied to the compressed weights (After Pair, Quad Compression). Hence in table we present our final compression and error results after every stage of our techniques and compression methods we propose.
+
+\begin{table}[h]
+\captionof{table}{Final Compression Methods} \label{tab:5} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Method} &\tabhead{Bits/Weight} & \tabhead{Error rate(\%)} & \tabhead{Compression rate} \\
+\midrule
+
+Clust. 16 &4 & 1.37  & 16x \\
+H.Clust. 16 &4 & 0.65 & 16x \\
+P.C.\& H.Clust. 16 & 2.5 &0.62 & 25.6x \\
+Q.C.\& H.Clust. 16 & 1.75 &0.76 & 36.57x \\
+P.C.\& H.Clust. 18 WB-12 & 1.3 & 0.5 & 49.24x \\
+Q.C.\& H.Clust. 18 WB-8 & 1.17 & 0.8 & 54.73x \\
+P.C.\& H.Clust. 256 & 3 &0.16 & 18.46x \\
+Q.C.\& H.Clust. 256 & 2 &0.2 & 28.65x \\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ Clust. = Clustering , H. Clust. = Hierarchical Clustering , P.C. = Pair Compression, Q.C. = Quad Compression
+\end{small}
+\end{table}
+
+In this case the maximum compression rate  we could get if we managed to have q-Compression, where $q\to\infty$ is:
+
+
+ \begin{equation} 
+ Compression = lim_{q\to\infty}\frac{nb}{k*b+SLC_{Footprint}+\frac{n*(bits/weight+q-1)}{q}} = lim_{q\to\infty}\frac{nb}{k*b+n} = 64
+ 
+ \end{equation}
+
+\section{Proposed methods comparison with Binarized Approach}
+We notice that after applying all the methods we proposed the compressing rate reaches the order of 54.73. This means that we need 1.17 bits to send a weight overall (calculating the stream of codebooks), or more specifically 13+3=16 bits to send 4*8=32 weights after send the 2 Codebooks for the decompression. This analogy is extremely close to a binarized approach. Hence we implemented a binarized approach for our network and compare the results with the previous methods.
+
+\begin{table}[h]
+\captionof{table}{Proposed methods comparison with Binarized Approach} \label{tab:5} 
+\centering
+\begin{tabular}{l l l l}
+\toprule
+\tabhead{Method} &\tabhead{Bits/Weight} & \tabhead{Error rate(\%)} & \tabhead{Compression rate} \\
+\midrule
+
+
+Q.C.\& H.Clust. 18 WB-8 & 1.17 &0.8 & 54.73x \\
+Binarized & 1 &40 & 64x \\
+
+\bottomrule\\
+\end{tabular}\par
+\begin{small}
+ Clust. = Clustering , H. Clust. = Hierarchical Clustering, Q.C. = Quad Compression
+\end{small}
+\end{table}
+
+We mention that a Binarized Network, having a 64x compression rate, reaches a 40\% error which is huge and prohibitive for a CNN. On the other hand, our own network having a 57.38x compression rate, leading to a very small error of 0.7 \%
+
+
+
+
+
