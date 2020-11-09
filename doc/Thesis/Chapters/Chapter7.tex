@@ -1,17 +1,3 @@
 \chapter{Conclusions and Future Work} % Main chapter title
-\label{Chapter7}
+\label{chap:Chapter7}
 %\epigraph{The key to artificial intelligence has always been the representation.” }{\textit{Jeff Hawkins}}
-
-This chapter will sum up and evaluate this Thesis’ work. Furthermore opportunities for future work will be rising and how this Thesis's Robustness Analysis creates scope for further optimizations (for CNN) in FPGA designs. 
-
-\section{Conclusions}
-In recent years Convolutional Neural Networks (CNNs) have been shown extremely growth due to their effectiveness at complex image recognition problems.
-The purpose of this Thesis was to accelerate a specific-CNN for aerospace subject using  Reconfigurable Logic(FPGA).
-After carrying out Robustness Analysis computational workloads and memory accesses are analyzed, as well as compression methods and algorithmic optimizations to exploit FPGA parallelism. At the level of neurons, optimizations of the convolutional and fully connected layers are explained and compared. At the network level, approximate computing optimization methods are examined limited by not reducing the accuracy of the network. The platforms were used are ZCU102 and QFDB(a custom 4-FPGA platform developed at FORTH). The implemented accelerator was managed to achieve 20x latency speedup, 2.17x throughput speedup and 11.9x energy efficient over GPU NVIDIA-Quadro-K2200.
-
-\section{Future Work}
-
-As a future work, the methods that have been proposed in Robustness Analysis, Pair, Quad Compression and SLC,  can be implemented in hardware to take full advantage of the huge compression rate they give us and further reduce I/O which is the main bottleneck of the most FPGAs' designs.
-Subsequently, it could work on algorithmic redundancies by exploiting the pruning that has been implemented.
-Furthermore, if we're concerned about High-Performance Computing, we could scale up to more FPGAs (eg Mezzanine 8-QFDB) and expect an 8x near speedup due to the parallelism of the application. On the other hand, if we moved to a larger FPGA we could increase the parallelism internally to the FPGA by adding larger Batch to the images by presenting an almost linear speedup.
-Finally, the use-case of the application is to travel into space with the Euclid satellite, therefore it would be important to study FPGAs where they have resistance to space radiation and porting to one of them. The FPGA's suitability for space is that it more energy efficient than GPU and we also managed to get throughput speedup over a Nvidia GPU  K2200.
