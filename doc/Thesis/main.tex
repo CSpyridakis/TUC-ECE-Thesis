@@ -38,7 +38,7 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage[utf8]{inputenc} % Required for inputting international characters
-\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[LGR, T1]{fontenc} % Output font encoding for international characters
 \usepackage{babel} % Use the Palatino font by default [default or mathpazo]
 \usepackage[backend=bibtex,style=numeric,natbib=true,sorting=none]{biblatex} % Use the bibtex back-end with the numeric citation style
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
@@ -50,6 +50,12 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{textcomp} %provide many text symbols (such as baht, bullet, copyright, musical note, one quarter, section, and yen)
+
+% Greek language support
+\usepackage{textgreek}
+\usepackage{lmodern} 
+\usepackage{alphabeta}
 
 % One different way for chapter styling
 % --------------------------------------------------
@@ -82,10 +88,6 @@
 
 % Maybe remove, that solves a warning
 \pgfplotsset{compat=1.15}
-
-%Both Greek and English language support
-% \usepackage[greek,english]{babel}
-% \usepackage{alphabeta}
 
 \makeatletter
 \makeatother
@@ -166,7 +168,7 @@
 				\href{https://www.linkedin.com/in/cspyridakis}{\authorname} % Author name - remove the \href bracket to remove the link
 			\end{flushleft}
 		\end{minipage}
-		\begin{minipage}[t]{0.58\textwidth}
+		\begin{minipage}[t]{0.59\textwidth}
 			\begin{flushright} \large
 				\emph{Thesis Committee:} \\
 				% TODO: fill correct link
@@ -197,14 +199,24 @@
 \end{titlepage}
 
 %----------------------------------------------------------------------------------------
-%	ABSTRACT PAGE
+%	ABSTRACT PAGE - ENGLISH
 %----------------------------------------------------------------------------------------
 
 \begin{abstract}
 	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-	TODO: Add Abstract
+	TODO: English
 	\ldots
 \end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE - GREEK
+%----------------------------------------------------------------------------------------
+
+\begin{extraAbstract}
+	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+	TODO: Ελληνικά
+	\ldots
+\end{extraAbstract}
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
