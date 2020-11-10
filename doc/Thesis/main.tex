@@ -51,6 +51,35 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
+% One different way for chapter styling
+% --------------------------------------------------
+% \usepackage{titlesec, blindtext, color}
+% \definecolor{gray75}{gray}{0.75}
+% \newcommand{\hsp}{\hspace{20pt}}
+% \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+% --------------------------------------------------
+
+% Second different chapter styling
+% --------------------------------------------------
+% \usepackage[explicit]{titlesec}
+% \usepackage{lmodern}
+% \newlength\chapnumb
+% \setlength\chapnumb{4cm}
+% \titleformat{\chapter}[block]
+% 	{\normalfont\sffamily}{}{0pt}
+% 	{\parbox[b]{\chapnumb}{\fontsize{40}{40}\selectfont\thechapter}
+%   	\parbox[b]{\dimexpr\textwidth-\chapnumb\relax}{
+% 		\raggedleft\hfill{\LARGE#1}\\
+% 		\rule{\dimexpr\textwidth-\chapnumb\relax}{0.4pt}}}
+
+% \titleformat{name=\chapter,numberless}[block]
+% 	{\normalfont\sffamily}{}{0pt}
+% 	{\parbox[b]{\chapnumb}{\mbox{}}
+%   	\parbox[b]{\dimexpr\textwidth-\chapnumb\relax}{%
+%     	\raggedleft\hfill{\LARGE#1}\\
+% 		\rule{\dimexpr\textwidth-\chapnumb\relax}{0.4pt}}}
+% --------------------------------------------------
+
 % Maybe remove, that solves a warning
 \pgfplotsset{compat=1.15}
 
@@ -68,7 +97,7 @@
 %----------------------------------------------------------------------------------------
 
 % Todo: comment out example.bib file when done reading the template instructions
-\addbibresource{example.bib} % The filename of the bibliography
+% \addbibresource{example.bib} % The filename of the bibliography
 \addbibresource{References.bib} % The filename of the bibliography
 
 %----------------------------------------------------------------------------------------
@@ -90,7 +119,7 @@
 %----------------------------------------------------------------------------------------
 
 % Todo: fill info below
-\thesistitle{Design and Implementation of an FPGA-Based Convolutional Neural Network Accelerator} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitle{Design and Implementation of a Low Cost Embedded System for Localization of Drones Flying in Swarms} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 \author{Christos \textsc{Spyridakis}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
 \supervisor{Prof. Apostolos \textsc{Dollas}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \degree{Electrical and Computer Engineer} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
@@ -122,13 +151,13 @@
 \begin{titlepage}
 	\begin{center}
 
-		\vspace*{.018\textheight}
-		{\scshape\LARGE \univname\par}\vspace{0.7cm} % University name
-		\textsc{\Large Diploma Thesis}\\[0.5cm] % Thesis type
+		\vspace*{.01\textheight}
+		{\scshape\LARGE \univname\par}\vspace{0.2cm} % University name
+		\textsc{\Large Diploma Thesis}\\[0.15cm] % Thesis type
 
-		\HRule \\[0.4cm] % Horizontal line
-		{\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
-		\HRule \\[0.1cm] % Horizontal line
+		\HRule \\[0.3cm] % Horizontal line
+		{\huge \bfseries \ttitle\par}\vspace{0.3cm} % Thesis title
+		\HRule \\[0.05cm] % Horizontal line
 
 		\begin{minipage}[t]{0.32\textwidth}
 			\begin{flushleft} \large
@@ -173,8 +202,8 @@
 
 \begin{abstract}
 	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-	% Todo: Add Abstract
-	The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
+	TODO: Add Abstract
+	\ldots
 \end{abstract}
 
 %----------------------------------------------------------------------------------------
@@ -183,8 +212,7 @@
 
 \begin{acknowledgements}
 	\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-	% Todo: Add Acknowledgements
-	The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+	TODO: Add Acknowledgements
 \end{acknowledgements}
 
 %----------------------------------------------------------------------------------------
@@ -203,9 +231,9 @@
 %----------------------------------------------------------------------------------------
 
 \begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
+	% Constant Name & $Symbol$ & $Constant Value$ with units\\
 	% The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
 	Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
-	Constant Name & $Symbol$ & $Constant Value$ with units\\
 \end{constants}
 
 %----------------------------------------------------------------------------------------
@@ -213,12 +241,15 @@
 %----------------------------------------------------------------------------------------
 
 \begin{symbols}{lll} % Include a list of Symbols (a three column table)
-	$a$ & distance & \si{\meter} \\
-	$P$ & power & \si{\watt} (\si{\joule\per\second}) \\
-	Symbol & Name & Unit \\
-\addlinespace % Gap to separate the Roman symbols from the Greek
+	%Symbol & Name & Unit \\
+	%E.g. $P$ & power & \si{\watt} (\si{\joule\per\second}) \\
 
-$\omega$ & angular frequency & \si{\radian} \\
+	$a$ & distance & \si{\meter} \\
+	
+	% Gap to separate the Roman symbols from the Greek
+	\addlinespace 
+
+	$\omega$ & angular frequency & \si{\radian} \\
 
 \end{symbols}
 
@@ -267,7 +298,7 @@ $\omega$ & angular frequency & \si{\radian} \\
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-% Todo: comment out if not needed
+% Todo: comment out if not needed	
 % \include{Appendices/AppendixA}
 % \include{Appendices/AppendixB}
 % \include{Appendices/AppendixC}
