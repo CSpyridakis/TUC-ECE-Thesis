@@ -1,0 +1,56 @@
+\chapter{Title} % Main chapter title
+\label{chap:ChapterX}  % For referencing this chapter elsewhere, use \ref{Chapter1}
+\epigraph{``” }{\textit{}}
+
+% 
+% Single Figure
+% 
+\begin{figure} [H]
+	\centering
+	\includegraphics[scale=0.3]{Images/TUC_logo.png}
+	\decoRule
+	\caption[UAV]{\hyperref[abbr:UAV Sample]{UAV Sample}: \href{google.com}{URL}}
+	\label{fig:UAV-sample}
+\end{figure}
+
+% 
+% Side by side two Figures
+% 
+\begin{figure} [H]
+    \centering
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=.4\linewidth]{Images/TUC_logo.png}
+      \decoRule
+      \caption[UAV]{\hyperref[abbr:UAV Sample]{UAV Sample}: \href{google.com}{URL}}
+      \label{fig:UAV-sample1}
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=.4\linewidth]{Images/TUC_logo.png}
+      \decoRule
+      \caption[UAV]{\hyperref[abbr:UAV Sample]{UAV Sample}: \href{google.com}{URL}}
+      \label{fig:UAV-sample2}
+    \end{minipage}
+    % -----------------
+\end{figure}
+
+% 
+% Table
+% 
+\begin{table}[H]
+    \caption{}
+    \label{tab:}
+    \centering
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Layer} & \textbf{\#Parameters} & \textbf{Footprint} & \textbf{Memory (\%)}  \\
+        \midrule
+            Conv1 & $64 * 3 * 11 * 11 = 23232$ & 92.92KB & 0.04 \\
+        \midrule
+            \textbf{Total} & 61090496 & 244.36MB & 100 \\
+        \bottomrule
+    \end{tabular}
+\end{table}

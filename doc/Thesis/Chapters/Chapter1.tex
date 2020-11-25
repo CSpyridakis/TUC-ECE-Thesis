@@ -1,34 +1,108 @@
 \chapter{Introduction} % Main chapter title
 \label{chap:Chapter1}  % For referencing this chapter elsewhere, use \ref{Chapter1}
+\epigraph{``Alone we can do so little, together we can do so much” }{\textit{Hellen Keller}}
 
+Τα τελευταία χρόνια η ανάπτυξη της επιστήμης έχει επιφέρει την απόκτηση των 
+τεχνολογικών επιτευγμάτων από το ευρύ κοινό με ένα πολύ οικονομικό αντίτιμο. Αυτό σημαίνει
+ότι ο καθένας πολύ εύκολα μπορεί να έχει στην κατοχή του ακόμα και προϊόντα τα οποία θεωρούνται 
+state-of-the-art χωρίς να χρειάζεται να δαπανήσει μεγάλα ποσά. 
+Το ίδιο φυσικά, συμβαίνει και με τον κλάδο των drone και την - κατά επέκταση - χρήση αυτών $\cdot$ ακόμα και 
+για ψυχαγωγικό χαρακτήρα.  
+\par
 Κατά το τέλος του έτους 2019 μόνο στις Ηνωμένες Πολιτείες της Αμερικής υπήρχαν πάνω από 
 990 χιλιάδες εγγεγραμμένοι χειριστές drone με πάνω από 1.32 εκατομμύρια drone ψυχαγωγικού 
 χαρακτήρα να χρησιμοποιούνται \cite{2019-drone-statistic}. Ενώ μέχρι το 2025 υπολογίζεται 
-ότι το μέγεθος αγοράς των υπηρεσιών drone θα κοστολογείται 63.6 εκατομμύρια δολάρια \cite{expected-drone-market}.
+ότι το μέγεθος αγοράς των υπηρεσιών drone θα κοστολογείται στα 63.6 εκατομμύρια δολάρια \cite{expected-drone-market}.
+\par
+Εταιρίες όπως η Amazon έχουν αποκτήσει ήδη τα απαραίτητα πιστοποιητικά και εγκρίσεις και σκοπεύουν να 
+χρησιμοποιήσουν drone για παράδοση των δεμάτων \cite{amazon-drones} αρκετά σύντομα, καθώς προς το παρόν
+η διαδικασία βρίσκεται σε στάδιο ελέγχων. 
+Συνεπώς είναι εύκολο να κατανοηθεί ότι ο συγκεκριμένος κλάδος πρόκειται να έχει ακόμα μεγαλύτερη 
+άνθιση, με αρκετά μεγάλο ερευνητικό ενδιαφέρον να του αναλογεί.   
+\par
+Με την αύξηση των drone και την αύξηση των εφαρμογών, υπάρχει η ανάγκη συνεργασίας και η δημιουργία drone swarms 
+για την επιτυχή ολοκλήρωση των στόχων που έχουν οριστεί.
+
+\newpage
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
-\section{UAVs and Swarm}
-\label{sec:Chapter1-1} 
+\section{UAVs and Swarm} \label{sec:Chapter1-1} 
+
+Αρχικά είναι σημαντικό πριν προχωρήσουμε να έχει γίνει κατανοητό με τον όρο drone σε τι 
+αναφερόμαστε όπως επίσης πότε θεωρείται ότι ένα σμήνος από drone πετάει σε σχηματισμό (drone swarm).
+
+%------------
+\subsection{UAVs}    \label{sec:Chapter1-1-1}
+Όταν αναφερόμαστε στον όρο Unmanned aerial vehicle (\hyperref[abbr:UAV]{UAV}) ή απλούστερα drone 
+κάνουμε αναφορά για ένα μη επανδρωμένο ιπτάμενο αεροσκάφος το οποίο ελέγχεται είτε απομακρυσμένα από
+έναν άνθρωπο, είτε είναι τελείως αυτόνομο. Τα \hyperref[abbr:UAV]{UAV} μαζί με ένα σταθμό βάσης και την
+από κοινού επικοινωνίας του σταθμού - drone, δημιουργούν αυτό που ονομάζουμε Unmanned aircraft system (\hyperref[abbr:UAS]{UAS}).
+Η πρώτη εμφάνιση των \hyperref[abbr:UAV]{UAV} έγινε κατά το 1849 στα πλαίσια μάχης, ενώ οι πρώτες 
+καινοτομίες πάνω σε αυτά ξεκίνησαν ήδη από τις αρχές του 20ου αιώνα. Το 2013 τουλάχιστον 50 χώρες 
+χρησιμοποιούσαν \hyperref[abbr:UAV]{UAVs} για κάποιον σκοπό, με μερικές από αυτές φυσικά να 
+σχεδιάζουν τα δικά τους \cite{what-is-UAV-and-history}.
+Αυτήν την στιγμή υπάρχουν πάνω από 1000 διαφορετικά μοντέλα \hyperref[abbr:UAV]{UAV} που χρησιμοποιούνται
+ανά τον κόσμο, με τα περισσότερα από αυτά να μην έχουν ψυχαγωγικό χαρακτήρα
+\cite{list-of-UAVs}. 
+\par
+Ανάλογα με τον μηχανολογικό σχεδιασμό του drone μπορούν να κατηγοριοποιηθούν σε διάφορες κατηγορίες
+
+\begin{table}[H]
+    \caption{Κατηγοριοποίηση των UAV βάση της δομή τους \cite{application-areas|swarm-types|uavs-classification|sensor's-used|swarms-problems|public-awareness}.}
+    \label{tab:drone-determined-by-their-structure}
+    \centering
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Drones} & \textbf{Main features}  \\
+        \midrule
+            Fixed-Wing & long endurance and fast flight speed \\
+            Fixed-Wing Hybrid & VTOL and long endurance flight \\
+            Single Rotor & VTOL, hove, and long endurance flight \\
+            Multirotor & VTOL, hover, and short endurance flight \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+%------------
+\subsection{Swarming} \label{sec:Chapter1-1-2}
+\cite{swarm-formation-translation-rotation-attack-demo}
+\cite{what-is-swarm-robotics}
+\cite{swarm-of-drones}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+
 
 %----------------------------------------------------------------------------------------
-%	SECTION 1
+%	SECTION 2
 %----------------------------------------------------------------------------------------
-\section{Motivation}
-\label{sec:Chapter1-2} 
+\section{Motivation} \label{sec:Chapter1-2} 
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
+\cite{}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
-\section{Scientific Goals and Contributions}
-\label{sec:Chapter1-3} 
+\section{Scientific Goals and Contributions} \label{sec:Chapter1-3} 
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
 %----------------------------------------------------------------------------------------
-\section{Thesis Outline}
-\label{sec:Chapter1-4} 
+\section{Thesis Outline} \label{sec:Chapter1-4} 
 
     \begin{itemize}
         \item \textbf{Chapter 2 - {\hypersetup{hidelinks}\nameref{chap:Chapter2}}:}
