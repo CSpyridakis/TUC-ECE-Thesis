@@ -11,6 +11,8 @@
 !Images
 !Images/**
 
+!References
+!References/*.bib
 
 !*.tex
 !*.cls
