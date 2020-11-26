@@ -10,6 +10,8 @@
 
 !Images
 !Images/**
+!Images/Introduction
+!Images/Introduction/**
 
 !References
 !References/*.bib

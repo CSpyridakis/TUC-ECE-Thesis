@@ -14,31 +14,35 @@ state-of-the-art χωρίς να χρειάζεται να δαπανήσει μ
 χαρακτήρα να χρησιμοποιούνται \cite{2019-drone-statistic}. Ενώ μέχρι το 2025 υπολογίζεται 
 ότι το μέγεθος αγοράς των υπηρεσιών drone θα κοστολογείται στα 63.6 εκατομμύρια δολάρια \cite{expected-drone-market}.
 \par
-Εταιρίες όπως η Amazon έχουν αποκτήσει ήδη τα απαραίτητα πιστοποιητικά και εγκρίσεις και σκοπεύουν να 
+Φυσικά η χρήση τους δεν περιορίζεται μόνο στην ψυχαγωγία, εταιρίες όπως η Amazon έχουν 
+αποκτήσει ήδη τα απαραίτητα πιστοποιητικά και εγκρίσεις και σκοπεύουν να 
 χρησιμοποιήσουν drone για παράδοση των δεμάτων \cite{amazon-drones} αρκετά σύντομα, καθώς προς το παρόν
-η διαδικασία βρίσκεται σε στάδιο ελέγχων. 
+η διαδικασία βρίσκεται σε στάδιο δοκιμών. 
 Συνεπώς είναι εύκολο να κατανοηθεί ότι ο συγκεκριμένος κλάδος πρόκειται να έχει ακόμα μεγαλύτερη 
 άνθιση, με αρκετά μεγάλο ερευνητικό ενδιαφέρον να του αναλογεί.   
 \par
 Με την αύξηση των drone και την αύξηση των εφαρμογών, υπάρχει η ανάγκη συνεργασίας και η δημιουργία drone swarms 
-για την επιτυχή ολοκλήρωση των στόχων που έχουν οριστεί.
+για την επιτυχή ολοκλήρωση των στόχων που έχουν οριστεί. Όμως για να καταφέρουν τα drone
+να συνεργαστούν χρειάζεται πρώτα να μπορούν να ξεπεράσουν τα προβλήματα τα οποία εμφανίζονται.
 
 \newpage
 
 %----------------------------------------------------------------------------------------
-%	SECTION 2
+%	SECTION 1
 %----------------------------------------------------------------------------------------
 \section{UAVs and Swarm} \label{sec:Chapter1-1} 
 
-Αρχικά είναι σημαντικό πριν προχωρήσουμε να έχει γίνει κατανοητό με τον όρο drone σε τι 
-αναφερόμαστε όπως επίσης πότε θεωρείται ότι ένα σμήνος από drone πετάει σε σχηματισμό (drone swarm).
+Είναι σημαντικό πριν προχωρήσουμε, να έχει γίνει κατανοητό με τον όρο drone σε τι 
+παραπέμπουμε - όπως επίσης πότε θεωρείται ότι ένα σμήνος από drone πετάει σε σχηματισμό (drone swarm).
 
-%------------
+%----------------------------------------------------------------------------------------
 \subsection{UAVs}    \label{sec:Chapter1-1-1}
 Όταν αναφερόμαστε στον όρο Unmanned aerial vehicle (\hyperref[abbr:UAV]{UAV}) ή απλούστερα drone 
 κάνουμε αναφορά για ένα μη επανδρωμένο ιπτάμενο αεροσκάφος το οποίο ελέγχεται είτε απομακρυσμένα από
 έναν άνθρωπο, είτε είναι τελείως αυτόνομο. Τα \hyperref[abbr:UAV]{UAV} μαζί με ένα σταθμό βάσης και την
-από κοινού επικοινωνίας του σταθμού - drone, δημιουργούν αυτό που ονομάζουμε Unmanned aircraft system (\hyperref[abbr:UAS]{UAS}).
+από κοινού επικοινωνίας του σταθμού - drone, δημιουργούν αυτό που ονομάζουμε Unmanned aircraft 
+system (\hyperref[abbr:UAS]{UAS}) \cite{what-is-UAV} \cite{what-is-UAV-and-history}.
+
 Η πρώτη εμφάνιση των \hyperref[abbr:UAV]{UAV} έγινε κατά το 1849 στα πλαίσια μάχης, ενώ οι πρώτες 
 καινοτομίες πάνω σε αυτά ξεκίνησαν ήδη από τις αρχές του 20ου αιώνα. Το 2013 τουλάχιστον 50 χώρες 
 χρησιμοποιούσαν \hyperref[abbr:UAV]{UAVs} για κάποιον σκοπό, με μερικές από αυτές φυσικά να 
@@ -47,7 +51,15 @@ state-of-the-art χωρίς να χρειάζεται να δαπανήσει μ
 ανά τον κόσμο, με τα περισσότερα από αυτά να μην έχουν ψυχαγωγικό χαρακτήρα
 \cite{list-of-UAVs}. 
 \par
-Ανάλογα με τον μηχανολογικό σχεδιασμό του drone μπορούν να κατηγοριοποιηθούν σε διάφορες κατηγορίες
+Είναι λοιπόν ξεκάθαρο ότι το πλήθος των drone είναι τόσο μεγάλο, λόγω των διαφορετικών αναγκών - και ότι κάποια έχουν καλύτερα
+αποτελέσματα από ότι άλλα σε συγκεκριμένες αποστολές. Για αυτό, έχουν γίνει 
+ήδη προσπάθειες για την κατηγοριοποίηση των \hyperref[abbr:UAV]{UAVs} σύμφωνα με τα διάφορα χαρακτηριστικά που μπορεί να έχουν.
+Ενδεικτικά με βάση το μέγεθος, την αυτονομία, το βάρος ή το μηχανολογικό σχεδιασμό των \hyperref[abbr:UAV]{UAV}
+είναι μερικά από αυτά \cite{what-is-UAV}
+\cite{drone-classification} \cite{application-areas|swarm-types|uavs-classification|sensor's-used|swarms-problems|public-awareness}.
+Στο Table \ref{tab:drone-determined-by-their-structure} υπάρχει η απλουστευμένη κατηγοριοποίηση η οποία προτάθηκε
+από τους συγγραφείς του \cite{application-areas|swarm-types|uavs-classification|sensor's-used|swarms-problems|public-awareness}
+σύμφωνα με τη βασική μηχανολογική δομή που μπορεί να έχει ένα drone καθώς και τα πλεονεκτήματα ή λόγους χρήσης της κάθε δομής. 
 
 \begin{table}[H]
     \caption{Κατηγοριοποίηση των UAV βάση της δομή τους \cite{application-areas|swarm-types|uavs-classification|sensor's-used|swarms-problems|public-awareness}.}
@@ -58,41 +70,75 @@ state-of-the-art χωρίς να χρειάζεται να δαπανήσει μ
         \textbf{Drones} & \textbf{Main features}  \\
         \midrule
             Fixed-Wing & long endurance and fast flight speed \\
-            Fixed-Wing Hybrid & VTOL and long endurance flight \\
-            Single Rotor & VTOL, hove, and long endurance flight \\
-            Multirotor & VTOL, hover, and short endurance flight \\
+            Fixed-Wing Hybrid & \hyperref[abbr:VTOL]{VTOL} and long endurance flight \\
+            Single Rotor & \hyperref[abbr:VTOL]{VTOL}, hover, and long endurance flight \\
+            Multirotor & \hyperref[abbr:VTOL]{VTOL}, hover, and short endurance flight \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-%------------
-\subsection{Swarming} \label{sec:Chapter1-1-2}
-\cite{swarm-formation-translation-rotation-attack-demo}
-\cite{what-is-swarm-robotics}
-\cite{swarm-of-drones}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
+\begin{figure} [H]
+    \centering
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Images/Introduction/uav-fixed-wing-example.jpg}
+      {(a) Fixed-Wing} (\href{https://delair.aero/portfolio/surveying-and-mapping/}{URL})
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Images/Introduction/uav-fixed-wing-hybrid-example.png}
+      {(b) Fixed-Wing Hybrid} (\href{https://www.quantum-systems.com/project/trinity-f90/}{URL})
+    \end{minipage}
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Images/Introduction/uav-single-rotor-example.jpg}
+        {(c) Single Rotor} (\href{https://www.prodrone.com/release-en/2874/}{URL})
+      \end{minipage}%
+      % -----------------
+      \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Images/Introduction/uav-multirotor-example.jpg}
+        {(d) Multirotor} (\href{https://metatronus.com/heliplane/}{URL})
+      \end{minipage}
+      % -----------------
+    \hfill \break
+    \decoRule
+    \caption[UAV Examples]{}
+    \label{fig:UAV-samples}
+\end{figure}
+
+Στο Figure \ref{fig:UAV-samples} δίνονται κάποια ενδεικτικά παραδείγματα \hyperref[abbr:UAV]{UAVs} με βάση την κατηγοριοποίηση
+του Table \ref{tab:drone-determined-by-their-structure}.
+Φυσικά αυτή η κατηγοριοποίηση δεν περιλαμβάνει όλα τα είδη drone, είναι όμως ικανοποιητική για να γίνουν
+ξεκάθαρα δύο βασικές ιδέες. Αρχικά ανάλογα με την εφαρμογή που μας ενδιαφέρει, θα πρέπει να επιλέξουμε
+την χρήση του πλέον κατάλληλου τύπου drone. Όπως επίσης με βάση την επιλογή του συγκεκριμένου τύπου
+αυτόματα έχουμε να διαχειριστούμε τα πλεονεκτήματα ή τα μειονεκτήματα που έχει.
+
+Τυπικά τα Fixed-Wing τύπου drones 
+Fixed-Wing Hybrid
+Single Rotor
+Multirotor
+
+Σε περίπτωση που μας ενδιαφέρει, οι συγγραφείς του \cite{drone-classification} παρουσιάζουν 
+με εκτενέστερο τρόπο διάφορες κατηγοριοποιήσεις
+και είδη drone τα οποία δεν εμπίπτουν στα πλαίσια αυτής της διπλωματικής και κυμαίνονται 
+από smart dust, bio-drones, hybrid drones και άλλα πολλά.
+
+Όπως και να έχει σε όποια από τις κατηγορίες και αν αντιστοιχεί ένα \hyperref[abbr:UAV]{UAV}
+από την στιγμή που είναι ένα ιπτάμενο αντικείμενο, θα πρέπει να έχει την δυνατότητα να κινείται
+στον αέρα.
+
+%----------------------------------------------------------------------------------------
+\subsection{Swarms} \label{sec:Chapter1-1-2}
 
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 \section{Motivation} \label{sec:Chapter1-2} 
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
-\cite{}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
