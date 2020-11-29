@@ -30,13 +30,12 @@ state-of-the-art χωρίς να χρειάζεται να δαπανήσει μ
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-\section{UAVs and Swarms} \label{sec:Chapter1-1} 
+\section{Unmanned aerial vehicles} \label{sec:Chapter1-1} 
 
 Είναι σημαντικό από τα πρώτα βήματα, να έχει γίνει κατανοητό με τον όρο drone σε τι 
 παραπέμπουμε - όπως επίσης πότε θεωρείται ότι ένα σμήνος από drone πετάει σε σχηματισμό (drone swarm).
 
 %----------------------------------------------------------------------------------------
-\subsection{UAVs}    \label{sec:Chapter1-1-1}
 Όταν αναφερόμαστε στον όρο Unmanned aerial vehicle (\hyperref[abbr:UAV]{UAV}) ή απλούστερα drone 
 κάνουμε αναφορά για ένα μη επανδρωμένο ιπτάμενο αεροσκάφος το οποίο ελέγχεται είτε απομακρυσμένα από
 έναν άνθρωπο, είτε είναι τελείως αυτόνομο.
@@ -51,7 +50,7 @@ system (\hyperref[abbr:UAS]{UAS}) \cite{what-is-UAV} \cite{what-is-UAV-and-histo
 Αυτήν την στιγμή υπάρχουν πάνω από 1000 διαφορετικά μοντέλα \hyperref[abbr:UAV]{UAV} που χρησιμοποιούνται
 ανά τον κόσμο, με τα περισσότερα από αυτά να μην έχουν ψυχαγωγικό χαρακτήρα
 \cite{list-of-UAVs}. 
-\par
+
 Είναι λοιπόν ξεκάθαρο ότι το πλήθος των drone είναι τόσο μεγάλο, λόγω των διαφορετικών αναγκών - και ότι κάποια έχουν καλύτερα
 αποτελέσματα από ότι άλλα σε συγκεκριμένες αποστολές. Για αυτό, έχουν γίνει 
 ήδη προσπάθειες για την κατηγοριοποίηση των \hyperref[abbr:UAV]{UAVs} σύμφωνα με τα διάφορα χαρακτηριστικά που μπορεί να έχουν.
@@ -177,21 +176,58 @@ Micro Controller Units (\hyperref[abbr:MCU]{MCU}) \cite{mcu} ή Micro Processor 
 
 
 %----------------------------------------------------------------------------------------
-\subsection{Swarms} \label{sec:Chapter1-1-2}
-
-
-%----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 \section{Motivation} \label{sec:Chapter1-2} 
+Ξεκινώντας από τα individual drones, αξίζει να σημειωθεί ότι το Πολυτεχνείο Κρήτης έχει ένα ενεργό
+ερευνητικό ιστορικό στον τομέα των αεροχημάτων. Το SenseLab στο οποίο υπεύθυνος καθηγητής είναι ο κύριος
+Παρτσινέβελος της Σχολής Μηχανικών Ορυκτών Πόρων να είναι ένα από αυτά -
+και μάλιστα με πολλαπλές διακρίσεις  σε διεθνείς διαγωνισμούς \cite{senselab-site} \cite{senselab-demo}. 
 
-TODO: χρήση των drone
+Στην φύση 
+
+
+Papers
+
+\cite{localization-importance-for-3d-scene-reconstruction}
+\cite{application-senarios|related-work|the-platform-they-used|communication-infrastructure-and-problems}
+\cite{some-applications}
+\cite{graph-theory-for-formations|formation-need-from-2001|scalable-solution|complexity-exponentialy-increase|decentralized-way-to-maintain-a-desired-formation}
+
+Links
+
+\cite{swarm-formation-translation-rotation-attack-demo}
+\cite{swarm-friendly-communications|brain-sensor-drones|different-swarm-applications|}
+\cite{moving-models-for-robotic-swarms}
+\cite{lab-demo-of-formations-in-3d-movement-with-obstacles}
+\cite{lab-demo-control-drone-swarm-with-brain-interface}
+\cite{reason-for-working-together|related-swarm-research}
+\cite{visual-example-why-swarms-are-important-and-triangulating-for-Unknown-environments-mapping}
+\cite{intel's-shows-around-the-world-and-2018-drones-record}
+\cite{ford's-100-drone-show}
+\cite{collaborative-operations-in-denied-environment}
+\cite{applications|some-research-examples|why-swarm-and-not-single-drone}
+\cite{what-is-swarm-robotics}
+\cite{military-robots-samples-and-photos}
+\cite{UCAVs}
+\cite{list-of-uav-applications}
+\cite{research-on-drone-swarms-move-like-animals}
+\cite{research-on-drone-swarms-move-like-animals-like-documentary}
+\cite{swarm-of-drones}
+\cite{era-of-drone-swarms}
+\cite{drone-swarm-technology}
+\cite{drones-mass-destruction}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
 \section{Scientific Goals and Contributions} \label{sec:Chapter1-3} 
-TODO: Σκοπός αυτής της διπλωματικής
+Όπως μπορεί να γίνει εύκολα αντιληπτό η γνώση της σχετικής θέσης ενός {\hyperref[abbr:UAV]{UAV} σε σχέση με τα υπόλοιπα του σμήνους, 
+είναι αρκετά σημαντικό για ένα πολύ μεγάλο πλήθος εφαρμογών.
+Σκοπός της συγκεκριμένης διπλωματικής εργασίας είναι να γίνει η απαραίτητη ερευνητική
+αναζήτηση, ώστε να επιτευχθεί ο σχεδιασμός καθώς και η υλοποίηση ενός ενσωματωμένου συστήματος - το 
+οποίο να είναι σε θέση με όσο το δυνατόν πιο οικονομικό τρόπο να υπολογίζει την θέση των μεμονωμένων
+αεροχημάτων όταν αυτά πετούν σε σχηματισμό.  
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
@@ -199,10 +235,17 @@ TODO: Σκοπός αυτής της διπλωματικής
 \section{Thesis Outline} \label{sec:Chapter1-4} 
 
     \begin{itemize}
-        \item \textbf{Chapter 2 - {\hypersetup{hidelinks}\nameref{chap:Chapter2}}:}
+        \item \textbf{Chapter 2 - {\hypersetup{hidelinks}\nameref{chap:Chapter2}}:} 
+          Σε αυτό το κεφάλαιο παρουσιάζεται το απαραίτητο μαθηματικό υπόβαθρο, καθώς και βασικές μεθοδολογίες εύρεσης τοποθεσία, 
+          που προέρχονται από τον τομέα των  Wireless Sensor Networks (\hyperref[abbr:WSN]{WSN}).
         \item \textbf{Chapter 3 - {\hypersetup{hidelinks}\nameref{chap:Chapter3}}:}
-        \item \textbf{Chapter 4 - {\hypersetup{hidelinks}\nameref{chap:Chapter4}}:}                %Maybe rename chapter's name
+        Στην συγκεκριμένη ενότητα γίνεται μία συνοπτική αναφορά σε τεχνικές που χρησιμοποιούν ήδη τα drones για την εύρεσης θέσης μέσα στα swarms.
+        \item \textbf{Chapter 4 - {\hypersetup{hidelinks}\nameref{chap:Chapter4}}:}
+        Σε αυτό το σημείο παρουσιάζεται η διαδικασία σχεδιασμού του ενσωματωμένου συστήματος.
         \item \textbf{Chapter 5 - {\hypersetup{hidelinks}\nameref{chap:Chapter5}}:}       %Maybe rename chapter's name
         \item \textbf{Chapter 6 - {\hypersetup{hidelinks}\nameref{chap:Chapter6}}:}
-        \item \textbf{Chapter 7 - {\hypersetup{hidelinks}\nameref{chap:Chapter7}}:}
+        Στο παρόν κεφάλαιο παρουσιάζονται οι απαραίτητοι έλεγχοι που έγιναν για την επαλήθευση της ορθής λειτουργίας του συστήματος.
+        \item \textbf{Chapter 7 - {\hypersetup{hidelinks}\nameref{chap:Chapter7}}:} 
+        Στο συγκεκριμένο κεφάλαιο παρουσιάζονται τα τελικά συμπεράσματα τα οποία βγήκαν από το σύνολο της διπλωματικής - 
+        καθώς και κάποιες από τις πιθανές μελλοντικές εξελίξεις της.
     \end{itemize}
