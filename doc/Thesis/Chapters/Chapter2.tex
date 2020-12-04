@@ -2,10 +2,24 @@
 \label{chap:Chapter2} % For referencing the chapter elsewhere, use \ref{Chapter1} 
 \epigraph{''Let no one ignorant of geometry enter” }{\textit{Plato}}
 
-O χώρος των Wire
+O χώρος των \hyperref[abbr:WSN]{WSN} έχει και αυτός τα τελευταία χρόνια υψηλό ερευνητικό ενδιαφέρον.
+Θα μπορούσε να πει κανείς - λόγο το ότι αποτελεί ένα πιο γενικό κλάδο - περισσότερο από ότι αυτό των 
+drones. Συνεπώς θα μεταφερθούμε σε πρώτο επίπεδο στο πιο γενικό φάσμα, αυτό των \hyperref[abbr:WSN]{WSN} 
+για να προσεγγίσουμε το localization problem. 
+
+Όταν μιλάμε για \hyperref[abbr:WSN]{WSN}, αναφερόμαστε σε αυτόνομα ηλεκτρονικά συστήματα, χωρικά διασκορπισμένα σε ένα πεδίο - τα οποία συχνά περιλαμβάνουν
+αισθητήρες και επικοινωνούν με τα γειτονικά τους ή σταθμούς βάσης για να μεταφέρουν πληροφορία \cite{wsn-wikipedia}.
+
+Το καθένα από αυτά τα μεμονωμένα συστήματα ονομάζεται \textbf{Node}. Ενώ για το κάθε μεμονωμένο node 
+μπορεί να έχουμε στην διάθεση μας localization information ή όχι. 
+Μία πρώτη σκέψη θα ήταν κάθε Node ενός συστήματος αισθητήρων να περιλαμβάνει \hyperref[abbr:GPS]{GPS} ώστε να γνωρίζουμε 
+την θέση του. Αυτό μπορεί γρήγορα να καταρριφθεί σαν σκέψη, αν αναλογιστούμε ότι αρχικά το \hyperref[abbr:GPS]{GPS}
+δεν είναι διαθέσιμο σε κάθε περιβάλλον λειτουργίας (π.χ. εσωτερικούς χώρους), όπως επίσης μπορεί να μην είναι δυνατή η χρήση του σε όλους τους κόμβους
+ενός συστήματος, λόγο περιορισμών όπως το κόστος, μέγεθος του Node και energy consumption.   
+
 \begin{table}[H]
     \caption{Nodes' names definitions}
-    \label{tab:drone-determined-by-their-structure}
+    \label{tab:nodes-names-definition}
     \centering
     \begin{tabular}{ll}
         \toprule
@@ -18,30 +32,55 @@ O χώρος των Wire
     \end{tabular}
 \end{table}
 
+Στην υπάρχουσα βιβλιογραφία \cite{wsn-Localization-systems} \cite{wsn-Localization-techniques} βρίσκουμε ότι
+Nodes των οποίων η θέση είναι γνωστή ή άμεσα υπολογίσιμη, συχνά ονομάζονται \textbf{Beacons}. Πληροφορία σχετικά με την θέση αυτών
+των Nodes είναι γνωστή, είτε γιατί έχουν τοποθετηθεί από εμάς σε προκαθορισμένες θέσεις είτε μέσου ενός εξωτερικού συστήματος
+όπως το \hyperref[abbr:GPS]{GPS}.
+Αντίθετα κόμβοι για τους οποίους δεν έχουμε αρχικά πληροφορία της θέσης τους, ονομάζονται \textbf{Non-anchors}.
+Άλλος ένας σημαντικός ορισμός, που θα πρέπει να αναφερθεί είναι ότι συχνά ονομάζουμε \textbf{Settle} Nodes, 
+αυτά τα οποία αρχικά δεν γνωρίζαμε την θέση τους αλλά στην συνέχεια την εκτιμήσαμε.
+Στο table \ref{tab:nodes-names-definition} παρουσιάζονται συνοπτικά τα διάφορα ονόματα που έχουν δοθεί ανά 
+καιρούς για το κάθε τύπο node.
+
+Σκοπός ενός localization system είναι, με χρήση της γνώσης που έχουμε για τα beacon nodes να εκτιμήσουμε
+την θέση όσο περισσότερων unknown nodes ώστε να τα μετατρέψουμε σε settled nodes και η εκτίμηση της κάθε
+θέσης να είναι με όσο το δυνατόν μικρότερο error απόκλισης. 
+
 \begin{figure} [H]
 	\centering
-	\includegraphics[scale=0.5]{Images/Theoretical-Background/localication-systems-components.png}
+	\includegraphics[scale=0.5]{Images/Theoretical-Background/localization-systems-components.png}
 	\decoRule
-	\caption[Localization Systems components]{Localization Systems components: \href{https://ieeexplore.ieee.org/document/4407221}{URL}}
-	\label{fig:UAV-principal-axes}
+	\caption[Localization Systems components ]{Localization Systems components based on \cite{wsn-Localization-systems}: \href{https://ieeexplore.ieee.org/document/4407221}{URL}}
+	\label{fig:Localization-Systems-components}
 \end{figure}
 
-\tikzset{
-  basic/.style  = {draw, text width=2cm, font=\sffamily},
-  root/.style   = {basic, thin, align=center, fill=white, text width=5cm},
-  level 1/.style = {sibling distance=16em, level distance=5em},
-  level-2/.style = {basic, thin, align=center, fill=white, text width=5.5cm},
-  level-31/.style = {basic, thin, align=center, fill=white, text width=2cm},
-  level-32/.style = {basic, thin, align=center, fill=white, text width=2.8cm},
-  level-33/.style = {basic, thin, align=center, fill=white, text width=5cm},
-  level-4/.style = {basic, thin, align=center, fill=white, text width=4.5cm},
-  level-42/.style = {basic, thin, align=center, fill=white, text width=4.8cm},
-  edge from parent/.style={->,solid,black,thick,draw}, 
-  edge from parent path={(\tikzparentnode.south) -- (\tikzchildnode.north)},
-  >=latex, node distance=1.5cm, edge from parent fork down
-}
+Οι συγγραφείς του \cite{wsn-Localization-systems} επιχειρούν να χωρίσουν ένα localization systems, ώστε 
+αυτό να αποτελείται από τρία διακριτά components. Πρώτο μπορεί να θεωρηθεί αυτό του \textbf{Distance/Angle Estimation}, 
+που σκοπό έχει να υπολογίσει την απόσταση ή γωνία που έχουν δύο nodes του συστήματος μεταξύ τους.
+Η πληροφορία που θα παραχθεί από αυτό το component θα χρησιμοποιηθεί στα άλλα μέρη του συστήματος.
+Στην συνέχεια υπάρχει το \textbf{Position Computation}, δουλειά του οποίου είναι να υπολογίσει την θέση ενός
+node με βάση την γνώση που έχουμε για τα beacons και την πληροφορία που λάβαμε από το πρώτο component.
+Ενώ τέλος είναι το κύριο μέρος του συστήματος, με όνομα \textbf{Localization Algorithm} και ουσιαστικά είναι
+ο προκαθορισμένος τρόπος που θα ακολουθηθεί για να υπολογιστεί η θέση των Unknown nodes με βάση όλες τις 
+πληροφορίες που έχουμε.
+Στο figure \ref{fig:Localization-Systems-components} δίνεται η απεικόνιση που έδωσαν οι συγγραφείς του 
+\cite{wsn-Localization-systems} για να εξηγήσουν το παραπάνω.
 
 \begin{figure} [H]
+	\tikzset{
+		basic/.style  = {draw, text width=2cm, font=\sffamily},
+		root/.style   = {basic, thin, align=center, fill=white, text width=5cm},
+		level 1/.style = {sibling distance=16em, level distance=5em},
+		level-2/.style = {basic, thin, align=center, fill=white, text width=5.5cm},
+		level-31/.style = {basic, thin, align=center, fill=white, text width=2cm},
+		level-32/.style = {basic, thin, align=center, fill=white, text width=2.8cm},
+		level-33/.style = {basic, thin, align=center, fill=white, text width=5cm},
+		level-4/.style = {basic, thin, align=center, fill=white, text width=4.5cm},
+		level-42/.style = {basic, thin, align=center, fill=white, text width=4.8cm},
+		edge from parent/.style={->,solid,black,thick,draw}, 
+		edge from parent path={(\tikzparentnode.south) -- (\tikzchildnode.north)},
+		>=latex, node distance=1.5cm, edge from parent fork down
+	}
 	\centering
 	\resizebox{1\textwidth}{!}{
 		\begin{tikzpicture}[]
@@ -54,7 +93,7 @@ O χώρος των Wire
 			% Distance/Angle
 			\node [level-31, below of = c1, xshift=-25pt] (c11) {Distance};
 				\node [level-4, below of = c11, xshift=50pt] (c111) {Received Signal Strength};
-				\node [level-4, below of = c111] (c112) {Lighthouse};
+				\node [level-4, below of = c111] (c112) {Lighthouse approach};
 				\node [level-4, below of = c112] (c113) {Propagation time based measurements};
 					\node [level-42, below of = c113, xshift=30pt] (c1131) {One-way propagation time};
 					\node [level-42, below of = c1131] (c1132) {Roundtrip propagation time};
