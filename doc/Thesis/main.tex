@@ -58,6 +58,10 @@
 \usepackage{lmodern} 
 \usepackage{alphabeta}
 
+% Diagrams
+\usepackage{tikz}
+\usetikzlibrary{arrows, shapes, positioning, shadows, trees}
+
 % One different way for chapter styling
 % --------------------------------------------------
 % \usepackage{titlesec, blindtext, color}
@@ -256,7 +260,7 @@
 \begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
 	% Constant Name & $Symbol$ & $Constant Value$ with units\\
 	% The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
-	Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
+	Speed of Light in vacuum & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
 \end{constants}
 
 %----------------------------------------------------------------------------------------
@@ -299,8 +303,19 @@
 	\textbf{UAS}	& \textbf{U}nmanned \textbf{A}ircraft \textbf{S}ystem \label{abbr:UAS} \\ % USED
 	\textbf{ISR}	& \textbf{I}ntelligence, \textbf{S}urveillance, and \textbf{R}econnaissance \label{abbr:ISR} \\
 	\textbf{UCAV}	& \textbf{U}nmanned \textbf{C}ombat \textbf{A}erial \textbf{V}ehicle \label{abbr:UCAV} \\
-	% \textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
-	% \textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{RSSI}	& \textbf{R}eceived \textbf{S}ignal \textbf{S}trength \textbf{I}ndicator \label{abbr:RSSI} \\
+	\textbf{ToA}	& \textbf{T}ime \textbf{o}f \textbf{A}rrival \label{abbr:ToA} \\
+	\textbf{TDoA}	& \textbf{T}ime \textbf{D}ifference \textbf{o}f \textbf{A}rrival \label{abbr:TDoA} \\
+	\textbf{AoA}	& \textbf{A}ngle \textbf{o}f \textbf{A}rrival \label{abbr:AoA} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
+	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
 
 \end{abbreviations}
 % spell-checker: enable
