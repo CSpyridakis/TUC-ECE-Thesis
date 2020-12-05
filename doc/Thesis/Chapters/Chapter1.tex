@@ -16,7 +16,7 @@ state-of-the-art χωρίς να χρειάζεται να δαπανήσει μ
 
 Φυσικά η χρήση τους δεν περιορίζεται μόνο στην ψυχαγωγία, εταιρίες όπως η Amazon έχουν 
 αποκτήσει ήδη τα απαραίτητα πιστοποιητικά και εγκρίσεις, με σκοπό να 
-χρησιμοποιήσουν drone για παράδοση των δεμάτων \cite{amazon-drones} αρκετά σύντομα, καθώς προς το παρόν
+χρησιμοποιήσουν drone για παράδοση των δεμάτων αρκετά σύντομα \cite{amazon-drones}, καθώς προς το παρόν
 η διαδικασία βρίσκεται σε στάδιο δοκιμών. 
 Συνεπώς είναι εύκολο να κατανοηθεί ότι ο συγκεκριμένος κλάδος πρόκειται να έχει ακόμα μεγαλύτερη 
 άνθιση, με αρκετά μεγάλο ερευνητικό ενδιαφέρον να του αναλογεί.   
@@ -153,7 +153,7 @@ system (\hyperref[abbr:UAS]{UAS}) \cite{what-is-UAV} \cite{what-is-UAV-and-histo
 	\centering
 	\includegraphics[scale=0.6]{Images/Introduction/aircraft-principal-axes.png}
 	\decoRule
-	\caption[UAV principal axe]{\hyperref[abbr:UAV]{UAV} principal axes: \href{http://www.chrobotics.com/library/understanding-euler-angles}{URL}}
+	\caption[UAV principal axes]{\hyperref[abbr:UAV]{UAV} principal axes (\href{http://www.chrobotics.com/library/understanding-euler-angles}{URL})}
 	\label{fig:UAV-principal-axes}
 \end{figure}
 
@@ -173,7 +173,7 @@ Micro Controller Units (\hyperref[abbr:MCU]{MCU}) \cite{mcu} ή Micro Processor 
 % η οποία κινείται στον χώρο, και χρησιμοποιεί τους on-board αισθητήρες που διαθέτει ώστε να φέρει εις πέρας
 % τις λειτουργίες για τις οποίες έχει σχεδιαστεί. 
 Σε αυτό το section πραγματοποιήθηκε μία πρώτη οριοθέτηση του όρου drone, παρόλα αυτά
-δεν αναφέρθηκαν λόγοι ύπαρξης τους καθώς και εφαρμογές τους.  Η ύπαρξης των swarms είναι ουσιαστικά η 
+δεν αναφέρθηκαν λόγοι ύπαρξης τους, καθώς και εφαρμογές τους.  Η ύπαρξης των swarms είναι ουσιαστικά η 
 κάλυψη των αναγκών από των individual drones σε μεγαλύτερη κλίμακα, για αυτό μερικές από τις εφαρμογές των drone βρίσκονται
 στο Section \ref{sec:Chapter1-2}.
 
@@ -187,31 +187,52 @@ Micro Controller Units (\hyperref[abbr:MCU]{MCU}) \cite{mcu} ή Micro Processor 
 Παρτσινέβελος της Σχολής Μηχανικών Ορυκτών Πόρων να είναι ένα από αυτά -
 και μάλιστα με πολλαπλές διακρίσεις  σε διεθνείς διαγωνισμούς \cite{senselab-site} \cite{senselab-demo}. 
 
+%-----------------------------------------------------------------------------------
 \subsection{Nature} \label{section:Chapter1-2-1}
 Στην φύση είναι αρκετά συχνή η ύπαρξη έμβιων οργανισμός που κινούνται σε ομάδες, με μερικά από αυτά ως παράδειγμα, τα σμήνη από πουλιά και
 έντομα, κοπάδια ψαριών ή και αγέλες ζώων. Σκοπός της συνεργασίας τους είναι κυρίως η προστασία από θηρευτές ή άλλοι σχετικοί με την επιβίωση.
 Αρκετές έρευνες έχουν γίνει εμπνευσμένες σε αυτό, ακόμα και στον τομέα των fleet of drones
 \cite{research-on-drone-swarms-move-like-animals} \cite{research-on-drone-swarms-move-like-animals-like-documentary} \cite{swarm-of-drones}.
+  
 
+%-----------------------------------------------------------------------------------
 \subsection{Swarms and Applications} \label{section:Chapter1-2-2}
-Papers
+Ένα μεμονωμένο {\hyperref[abbr:UAV]{UAV} σε πολλές περιπτώσεις θα μπορέσει να φέρει εις πέραν την αποστολή 
+που του έχει ανατεθεί. 
 
-\cite{localization-importance-for-3d-scene-reconstruction}
+Ζητήματα αξιοπιστίας όμως μπορούν να δημιουργηθούν πολύ γρήγορα όταν ένα μεμονωμένο drone
+χρειάζεται ως παράδειγμα να χαρτογραφήσει σε μικρό χρονικό διάστημα ένα άγνωστο και μεγάλης έκτασης περιβάλλον. Όπως επίσης, εάν θα θέλαμε να
+διαθέτει πολλαπλούς αισθητήρες για να έχουμε πιο λεπτομέρειες δεδομένα σε μία αποστολή, όμως αυτό να είναι αδύνατον διότι 
+υπερβαίνουν το δυνατόν βάρος που μπορεί να μεταφέρει
+το drone. Η ακόμα και την αποτυχία της αποστολής σε κάποιο malfunction που θα πραγματοποιηθεί στο ιπτάμενου όχημα.
+Μπορούμε να πούμε λοιπόν σε μία abstract σύγκριση με αυτή των ζώων, ότι ωθούμαστε για ανάλογους σκοπούς στην χρήση των swarms.  
+
+
+Για ψυχαγωγικούς σκοπούς, όπως την διεκπεραίωση shows \cite{intel's-shows-around-the-world-and-2018-drones-record}
+\cite{ford's-100-drone-show}, 
+
+Για στρατιωτικές επιχειρήσεις,
+Unmanned Combat Aerial Vehicle (\hyperref[abbr:UCAV]{UCAV}) \cite{swarm-formation-translation-rotation-attack-demo}
+
+Swarms
+\cite{swarm-friendly-communications|brain-sensor-drones|different-swarm-applications|}
+
+Για περισσότερες εφαρμογές ή λεπτομέρειες αυτών, μπορούμε να ανατρέξουμε στην υφιστάμενη βιβλιογραφία 
 \cite{application-senarios|related-work|the-platform-they-used|communication-infrastructure-and-problems}
-\cite{some-applications}
+\cite{some-applications}.
+
+Papers
+\cite{localization-importance-for-3d-scene-reconstruction}
 \cite{graph-theory-for-formations|formation-need-from-2001|scalable-solution|complexity-exponentialy-increase|decentralized-way-to-maintain-a-desired-formation}
 
 Links
-
-\cite{swarm-formation-translation-rotation-attack-demo}
-\cite{swarm-friendly-communications|brain-sensor-drones|different-swarm-applications|}
 \cite{moving-models-for-robotic-swarms}
 \cite{lab-demo-of-formations-in-3d-movement-with-obstacles}
 \cite{lab-demo-control-drone-swarm-with-brain-interface}
 \cite{reason-for-working-together|related-swarm-research}
 \cite{visual-example-why-swarms-are-important-and-triangulating-for-Unknown-environments-mapping}
-\cite{intel's-shows-around-the-world-and-2018-drones-record}
-\cite{ford's-100-drone-show}
+
+
 \cite{collaborative-operations-in-denied-environment}
 \cite{applications|some-research-examples|why-swarm-and-not-single-drone}
 \cite{what-is-swarm-robotics}
@@ -228,7 +249,7 @@ Links
 %----------------------------------------------------------------------------------------
 \section{Scientific Goals and Contributions} \label{sec:Chapter1-3} 
 Όπως μπορεί να γίνει εύκολα αντιληπτό η γνώση της σχετικής θέσης ενός {\hyperref[abbr:UAV]{UAV} σε σχέση με τα υπόλοιπα του σμήνους, 
-είναι αρκετά σημαντικό για ένα πολύ μεγάλο πλήθος εφαρμογών.
+είναι αρκετά σημαντική για ένα πολύ μεγάλο πλήθος εφαρμογών.
 Σκοπός της συγκεκριμένης διπλωματικής εργασίας είναι να γίνει η απαραίτητη ερευνητική
 αναζήτηση, ώστε να επιτευχθεί ο σχεδιασμός καθώς και η υλοποίηση ενός ενσωματωμένου συστήματος - το 
 οποίο να είναι σε θέση με όσο το δυνατόν πιο οικονομικό τρόπο να υπολογίζει την θέση των μεμονωμένων
