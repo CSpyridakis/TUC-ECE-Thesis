@@ -35,7 +35,7 @@ state-of-the-art χωρίς να χρειάζεται να δαπανήσει μ
 Είναι σημαντικό από τα πρώτα βήματα, να έχει γίνει κατανοητό με τον όρο drone σε τι 
 παραπέμπουμε - όπως επίσης πότε θεωρείται ότι ένα σμήνος από drone πετάει σε σχηματισμό (drone swarm).
 
-\subsection{History and drone types} \label{section:Chapter1-1-1}
+\subsection{History and drone types} \label{sec:Chapter1-1-1}
 %----------------------------------------------------------------------------------------
 Όταν αναφερόμαστε στον όρο Unmanned aerial vehicle (\hyperref[abbr:UAV]{UAV}) ή απλούστερα drone 
 κάνουμε αναφορά για ένα μη επανδρωμένο ιπτάμενο αεροσκάφος το οποίο ελέγχεται είτε απομακρυσμένα από
@@ -141,7 +141,7 @@ system (\hyperref[abbr:UAS]{UAS}) \cite{what-is-UAV} \cite{what-is-UAV-and-histo
 και είδη drone τα οποία δεν εμπίπτουν στα πλαίσια αυτής της διπλωματικής και κυμαίνονται 
 από smart dust, bio-drones, hybrid drones και άλλα πολλά.
 
-\subsection{Characteristics} \label{section:Chapter1-1-2}
+\subsection{Characteristics} \label{sec:Chapter1-1-2}
 
 Σε όποια από τις κατηγορίες και αν αντιστοιχεί ένα drone
 από την στιγμή που είναι ένα ιπτάμενο αντικείμενο, θα πρέπει να έχει την δυνατότητα να κινείται -
@@ -175,7 +175,7 @@ Micro Controller Units (\hyperref[abbr:MCU]{MCU}) \cite{mcu} ή Micro Processor 
 Σε αυτό το section πραγματοποιήθηκε μία πρώτη οριοθέτηση του όρου drone, παρόλα αυτά
 δεν αναφέρθηκαν λόγοι ύπαρξης τους, καθώς και εφαρμογές τους.  Η ύπαρξης των swarms είναι ουσιαστικά η 
 κάλυψη των αναγκών από των individual drones σε μεγαλύτερη κλίμακα, για αυτό μερικές από τις εφαρμογές των drone βρίσκονται
-στο Section \ref{sec:Chapter1-2}.
+στο Section \ref{sec:Chapter1-2-2}.
 
 
 %----------------------------------------------------------------------------------------
@@ -188,61 +188,69 @@ Micro Controller Units (\hyperref[abbr:MCU]{MCU}) \cite{mcu} ή Micro Processor 
 και μάλιστα με πολλαπλές διακρίσεις  σε διεθνείς διαγωνισμούς \cite{senselab-site} \cite{senselab-demo}. 
 
 %-----------------------------------------------------------------------------------
-\subsection{Nature} \label{section:Chapter1-2-1}
+\subsection{Nature} \label{sec:Chapter1-2-1}
 Στην φύση είναι αρκετά συχνή η ύπαρξη έμβιων οργανισμός που κινούνται σε ομάδες, με μερικά από αυτά ως παράδειγμα, τα σμήνη από πουλιά και
 έντομα, κοπάδια ψαριών ή και αγέλες ζώων. Σκοπός της συνεργασίας τους είναι κυρίως η προστασία από θηρευτές ή άλλοι σχετικοί με την επιβίωση.
 Αρκετές έρευνες έχουν γίνει εμπνευσμένες σε αυτό, ακόμα και στον τομέα των fleet of drones
 \cite{research-on-drone-swarms-move-like-animals} \cite{research-on-drone-swarms-move-like-animals-like-documentary} \cite{swarm-of-drones}.
   
-
 %-----------------------------------------------------------------------------------
-\subsection{Swarms and Applications} \label{section:Chapter1-2-2}
-Ένα μεμονωμένο {\hyperref[abbr:UAV]{UAV} σε πολλές περιπτώσεις θα μπορέσει να φέρει εις πέραν την αποστολή 
-που του έχει ανατεθεί. 
-
-Ζητήματα αξιοπιστίας όμως μπορούν να δημιουργηθούν πολύ γρήγορα όταν ένα μεμονωμένο drone
+\subsection{Swarms and Applications} \label{sec:Chapter1-2-2}
+Ένα διακριτό {\hyperref[abbr:UAV]{UAV} σε πολλές περιπτώσεις θα μπορέσει να φέρει εις πέραν την αποστολή 
+που του έχει ανατεθεί. Ζητήματα αξιοπιστίας όμως μπορούν να δημιουργηθούν πολύ εύκολα όταν ένα μεμονωμένο drone
 χρειάζεται ως παράδειγμα να χαρτογραφήσει σε μικρό χρονικό διάστημα ένα άγνωστο και μεγάλης έκτασης περιβάλλον. Όπως επίσης, εάν θα θέλαμε να
-διαθέτει πολλαπλούς αισθητήρες για να έχουμε πιο λεπτομέρειες δεδομένα σε μία αποστολή, όμως αυτό να είναι αδύνατον διότι 
-υπερβαίνουν το δυνατόν βάρος που μπορεί να μεταφέρει
-το drone. Η ακόμα και την αποτυχία της αποστολής σε κάποιο malfunction που θα πραγματοποιηθεί στο ιπτάμενου όχημα.
-Μπορούμε να πούμε λοιπόν σε μία abstract σύγκριση με αυτή των ζώων, ότι ωθούμαστε για ανάλογους σκοπούς στην χρήση των swarms.  
+διαθέτει πολλαπλούς αισθητήρες για να έχουμε πιο λεπτομερείς δεδομένα σε μία αποστολή, όμως αυτό να είναι αδύνατον διότι 
+υπερβαίνουν το δυνατόν payload που μπορεί να μεταφέρει
+το drone. Η ακόμα, και για το ενδεχόμενο αποτυχίας της αποστολής σε κάποιο malfunction που θα πραγματοποιηθεί στο ιπτάμενου όχημα.
+Μπορούμε να πούμε λοιπόν σε μία abstract σύγκριση με αυτή των ζώων, ότι ωθούμαστε για ανάλογους σκοπούς στην χρήση των swarms ώστε
+να ξεπεράσουμε αυτά τα προβλήματα \cite{reason-for-working-together|related-swarm-research}.  
 
+Με τον όρο swarm συχνά αναφερόμαστε στην μεθοδολογία που ακολουθούμε ώστε να συντονίζουμε πολλαπλά 
+ανεξάρτητα ρομποτικά συστήματα να συμπεριφέρονται συνεργατικά ως ένα ενιαίο σύστημα \cite{what-is-swarm-robotics}.
+Με τον όρο συνεργατικά αυτό σημαίνει είτε να μπορούν να κινηθούν ως ομάδα \cite{moving-models-for-robotic-swarms}
+\cite{swarm-formation-translation-rotation-attack-demo} \cite{lab-demo-of-formations-in-3d-movement-with-obstacles},
+είτε να επικοινωνούν ώστε γνώση πληροφορίας την οποία έχει συλλέξει ένα από αυτά να μεταδίδεται
+και στα υπόλοιπα (π.χ. σε περίπτωση που θέλουμε να κάνουμε 3D reconstruction μίας περιοχής ή γνώση της θέσης από 
+την οποία λαμβάνεται - με χρήση της κάμερας - υλικό είναι σημαντική για την δημιουργία του μοντέλου 
+\cite{localization-importance-for-3d-scene-reconstruction}). 
+
+--
 
 Για ψυχαγωγικούς σκοπούς, όπως την διεκπεραίωση shows \cite{intel's-shows-around-the-world-and-2018-drones-record}
 \cite{ford's-100-drone-show}, 
 
-Για στρατιωτικές επιχειρήσεις,
-Unmanned Combat Aerial Vehicle (\hyperref[abbr:UCAV]{UCAV}) \cite{swarm-formation-translation-rotation-attack-demo}
+--
+
+Για στρατιωτικές επιχειρήσεις συνήθως αναφερόμαστε στην χρήση Unmanned Combat Aerial Vehicle (\hyperref[abbr:UCAV]{UCAV}) 
+\cite{UCAVs} \cite{military-robots-samples-and-photos}
+
+-------
 
 Swarms
 \cite{swarm-friendly-communications|brain-sensor-drones|different-swarm-applications|}
 
-Για περισσότερες εφαρμογές ή λεπτομέρειες αυτών, μπορούμε να ανατρέξουμε στην υφιστάμενη βιβλιογραφία 
+
+-----
+
+Για περισσότερες εφαρμογές \cite{list-of-uav-applications} ή λεπτομέρειες σχετικά με τα swarms, μπορούμε να ανατρέξουμε στην υφιστάμενη βιβλιογραφία 
 \cite{application-senarios|related-work|the-platform-they-used|communication-infrastructure-and-problems}
 \cite{some-applications}.
 
+
+----
+
 Papers
-\cite{localization-importance-for-3d-scene-reconstruction}
 \cite{graph-theory-for-formations|formation-need-from-2001|scalable-solution|complexity-exponentialy-increase|decentralized-way-to-maintain-a-desired-formation}
 
 Links
-\cite{moving-models-for-robotic-swarms}
-\cite{lab-demo-of-formations-in-3d-movement-with-obstacles}
-\cite{lab-demo-control-drone-swarm-with-brain-interface}
-\cite{reason-for-working-together|related-swarm-research}
-\cite{visual-example-why-swarms-are-important-and-triangulating-for-Unknown-environments-mapping}
-
-
-\cite{collaborative-operations-in-denied-environment}
-\cite{applications|some-research-examples|why-swarm-and-not-single-drone}
-\cite{what-is-swarm-robotics}
-\cite{military-robots-samples-and-photos}
-\cite{UCAVs}
-\cite{list-of-uav-applications}
-
 \cite{era-of-drone-swarms}
 \cite{drone-swarm-technology}
 \cite{drones-mass-destruction}
+\cite{lab-demo-control-drone-swarm-with-brain-interface}
+\cite{visual-example-why-swarms-are-important-and-triangulating-for-Unknown-environments-mapping}
+\cite{collaborative-operations-in-denied-environment}
+\cite{applications|some-research-examples|why-swarm-and-not-single-drone}
+
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
