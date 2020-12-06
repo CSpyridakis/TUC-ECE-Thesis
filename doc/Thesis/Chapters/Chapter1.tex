@@ -132,7 +132,7 @@ system (\hyperref[abbr:UAS]{UAS}) \cite{what-is-UAV} \cite{what-is-UAV-and-histo
 Στο Figure \ref{fig:UAV-samples} δίνονται κάποια ενδεικτικά παραδείγματα \hyperref[abbr:UAV]{UAVs} με βάση την κατηγοριοποίηση
 του Table \ref{tab:drone-determined-by-their-structure}.
 Φυσικά αυτή η κατηγοριοποίηση δεν περιλαμβάνει όλα τα είδη drone, είναι όμως ικανοποιητική για να γίνουν
-ξεκάθαρα δύο βασικές ιδέες. Αρχικά ανάλογα με την εφαρμογή που μας ενδιαφέρει, θα πρέπει να επιλέξουμε
+ξεκάθαρες δύο βασικές ιδέες. Αρχικά ανάλογα με την εφαρμογή που μας ενδιαφέρει, θα πρέπει να επιλέξουμε
 την χρήση του πλέον κατάλληλου τύπου drone. Όπως επίσης με βάση την επιλογή του συγκεκριμένου τύπου -
 αυτόματα έχουμε να διαχειριστούμε τα πλεονεκτήματα ή τα μειονεκτήματα που έχει.
 
@@ -196,61 +196,40 @@ Micro Controller Units (\hyperref[abbr:MCU]{MCU}) \cite{mcu} ή Micro Processor 
   
 %-----------------------------------------------------------------------------------
 \subsection{Swarms and Applications} \label{sec:Chapter1-2-2}
-Ένα διακριτό {\hyperref[abbr:UAV]{UAV} σε πολλές περιπτώσεις θα μπορέσει να φέρει εις πέραν την αποστολή 
-που του έχει ανατεθεί. Ζητήματα αξιοπιστίας όμως μπορούν να δημιουργηθούν πολύ εύκολα όταν ένα μεμονωμένο drone
+Από μόνο του ένα {\hyperref[abbr:UAV]{UAV} σε πολλές περιπτώσεις θα μπορέσει να φέρει εις πέραν την αποστολή 
+που του έχει ανατεθεί. Πολύ εύκολα όμως μπορούν να δημιουργηθούν ζητήματα αξιοπιστίας, όταν ένα μεμονωμένο drone
 χρειάζεται ως παράδειγμα να χαρτογραφήσει σε μικρό χρονικό διάστημα ένα άγνωστο και μεγάλης έκτασης περιβάλλον. Όπως επίσης, εάν θα θέλαμε να
 διαθέτει πολλαπλούς αισθητήρες για να έχουμε πιο λεπτομερείς δεδομένα σε μία αποστολή, όμως αυτό να είναι αδύνατον διότι 
 υπερβαίνουν το δυνατόν payload που μπορεί να μεταφέρει
-το drone. Η ακόμα, και για το ενδεχόμενο αποτυχίας της αποστολής σε κάποιο malfunction που θα πραγματοποιηθεί στο ιπτάμενου όχημα.
+το drone. Η ακόμα, και για το ενδεχόμενο αποτυχίας της αποστολής, σε κάποιο πιθανό malfunction που θα πραγματοποιηθεί στο ιπτάμενου όχημα.
 Μπορούμε να πούμε λοιπόν σε μία abstract σύγκριση με αυτή των ζώων, ότι ωθούμαστε για ανάλογους σκοπούς στην χρήση των swarms ώστε
 να ξεπεράσουμε αυτά τα προβλήματα \cite{reason-for-working-together|related-swarm-research}.  
 
-Με τον όρο swarm συχνά αναφερόμαστε στην μεθοδολογία που ακολουθούμε ώστε να συντονίζουμε πολλαπλά 
-ανεξάρτητα ρομποτικά συστήματα να συμπεριφέρονται συνεργατικά ως ένα ενιαίο σύστημα \cite{what-is-swarm-robotics}.
-Με τον όρο συνεργατικά αυτό σημαίνει είτε να μπορούν να κινηθούν ως ομάδα \cite{moving-models-for-robotic-swarms}
+Με τον όρο swarm συχνά αναφερόμαστε στην μεθοδολογία που ακολουθούμε ώστε να συντονίζουμε πολλαπλές 
+ανεξάρτητες ρομποτικές οντότητες να συμπεριφέρονται συνεργατικά ως ένα ενιαίο σύστημα \cite{what-is-swarm-robotics}.
+Με τον όρο συνεργατικά, αυτό σημαίνει είτε να μπορούν να κινηθούν ως ομάδα \cite{moving-models-for-robotic-swarms}
 \cite{swarm-formation-translation-rotation-attack-demo} \cite{lab-demo-of-formations-in-3d-movement-with-obstacles},
 είτε να επικοινωνούν ώστε γνώση πληροφορίας την οποία έχει συλλέξει ένα από αυτά να μεταδίδεται
 και στα υπόλοιπα (π.χ. σε περίπτωση που θέλουμε να κάνουμε 3D reconstruction μίας περιοχής ή γνώση της θέσης από 
-την οποία λαμβάνεται - με χρήση της κάμερας - υλικό είναι σημαντική για την δημιουργία του μοντέλου 
+την οποία λαμβάνεται - με χρήση της κάμερας - υλικό είναι σημαντική για την δημιουργία του ψηφιακού μοντέλου 
 \cite{localization-importance-for-3d-scene-reconstruction}). 
 
---
+Σήμερα τα drones καθώς και τα fleet of drones χρησιμοποιούνται σε ένα μεγάλος εύρος εφαρμογών.
+Έχει γίνει αναφορά είδη από την αρχή του chapter ότι χρησιμοποιούνται για λόγους αναψυχής,
+με μερικά παραδείγματα, την διεκπεραίωση shows \cite{intel's-shows-around-the-world-and-2018-drones-record}
+\cite{ford's-100-drone-show} \cite{swarm-magic-show} και την καταγραφή οπτικού υλικού για δημιουργία 
+ταινιών \cite{drones-for-filmmaking}. Άλλες πιο ζωτικής σημασίας χρήσεις τους, είναι σχετικές με 
+environment mapping \cite{drones-enviroment-mapping}, police surveillance \cite{drones-police}, natural disaster inspection 
+\cite{drones-natural-disaster},  Search \& Rescue (\hyperref[abbr:SR]{S\&R}) \cite{drones-for-search-and-rescue}, 
+light cargo transportation \cite{drones-delivery} και πολλές άλλες. Ακόμα και στρατιωτικές επιχειρήσεις 
+χρησιμοποιούν drones. Συνήθως σε αυτές τις περιπτώσεις αναφερόμαστε στην χρήση Unmanned Combat Aerial Vehicle (\hyperref[abbr:UCAV]{UCAV}) 
+\cite{UCAVs} \cite{military-robots-samples-and-photos} και πολλές από τις εφαρμογές στο συγκεκριμένο
+τομέα έχουν να κάνουν με Intelligence Surveillance, and Reconnaissance (\hyperref[abbr:ISR]{ISR})
+\cite{drones-isr}.
 
-Για ψυχαγωγικούς σκοπούς, όπως την διεκπεραίωση shows \cite{intel's-shows-around-the-world-and-2018-drones-record}
-\cite{ford's-100-drone-show}, 
-
---
-
-Για στρατιωτικές επιχειρήσεις συνήθως αναφερόμαστε στην χρήση Unmanned Combat Aerial Vehicle (\hyperref[abbr:UCAV]{UCAV}) 
-\cite{UCAVs} \cite{military-robots-samples-and-photos}
-
--------
-
-Swarms
-\cite{swarm-friendly-communications|brain-sensor-drones|different-swarm-applications|}
-
-
------
-
-Για περισσότερες εφαρμογές \cite{list-of-uav-applications} ή λεπτομέρειες σχετικά με τα swarms, μπορούμε να ανατρέξουμε στην υφιστάμενη βιβλιογραφία 
+Για περισσότερες εφαρμογές των drones/swarms \cite{list-of-uav-applications} ή λεπτομέρειες σχετικά με αυτές, μπορούμε να ανατρέξουμε στην υφιστάμενη βιβλιογραφία 
 \cite{application-senarios|related-work|the-platform-they-used|communication-infrastructure-and-problems}
-\cite{some-applications}.
-
-
-----
-
-Papers
-\cite{graph-theory-for-formations|formation-need-from-2001|scalable-solution|complexity-exponentialy-increase|decentralized-way-to-maintain-a-desired-formation}
-
-Links
-\cite{era-of-drone-swarms}
-\cite{drone-swarm-technology}
-\cite{drones-mass-destruction}
-\cite{lab-demo-control-drone-swarm-with-brain-interface}
-\cite{visual-example-why-swarms-are-important-and-triangulating-for-Unknown-environments-mapping}
-\cite{collaborative-operations-in-denied-environment}
-\cite{applications|some-research-examples|why-swarm-and-not-single-drone}
-
+\cite{some-applications} \cite{swarm-friendly-communications|brain-sensor-drones|different-swarm-applications|}.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
