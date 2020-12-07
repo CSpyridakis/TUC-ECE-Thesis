@@ -54,3 +54,12 @@
         \bottomrule
     \end{tabular}
 \end{table}
+
+
+\begin{align}
+	\mathcal{E}[Y(t+\tau)Y(t)] = R_{yy}(t+\tau,t) =& \mathcal{E} [X( t + \tau) \cos(2 \pi f_0 (t + \tau) + \Theta) X(t) \cos(2 \pi f_0 t + \Theta)] \nonumber \\
+	\overset{indep.}{=}& \mathcal{E}[X(t+\tau)X(t)] \mathcal{E}[\cos(2\pi f_0(t+\tau) +\Theta)\cos(2\pi f_0t + \Theta)] \nonumber \\
+	\overset{(\ref{cosa-cosb})}{=}& \mathcal{E}[X(t+\tau)X(t)]\frac{1}{2}\mathcal{E}[\cancelto{0}{\cos(4\pi f_0t+2\pi f_0\tau+2\Theta)} + \cos(2\pi f_0\tau)] \nonumber \\
+	=& \frac{1}{2} \mathcal{E}[X(t+\tau)X(t)] \cos(2\pi f_0\tau) \nonumber \\ 
+	=& \boxed{ \frac{1}{2} R_{xx}(t+\tau,t)\cos(2\pi f_0\tau)}
+\end{align}
