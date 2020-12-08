@@ -13,23 +13,25 @@ drones. Συνεπώς θα μεταφερθούμε σε πρώτο επίπε�
 Το καθένα από αυτά τα μεμονωμένα συστήματα ονομάζεται \textbf{Node}. Ενώ για το κάθε μεμονωμένο node 
 μπορεί να έχουμε στην διάθεση μας location information ή όχι. 
 Μία πρώτη σκέψη θα ήταν κάθε Node ενός συστήματος αισθητήρων να περιλαμβάνει \hyperref[abbr:GPS]{GPS} ώστε να γνωρίζουμε 
-την θέση του. Αυτό μπορεί γρήγορα να καταρριφθεί σαν σκέψη, αν αναλογιστούμε ότι αρχικά το \hyperref[abbr:GPS]{GPS}
+την θέση του. Αυτό μπορεί γρήγορα να καταρριφθεί σαν σκέψη, αν αναλογιστούμε αρχικά ότι το Global Navigation Satellite System (\hyperref[abbr:GNSS]{GNSS})
 δεν είναι διαθέσιμο σε κάθε περιβάλλον λειτουργίας (π.χ. εσωτερικούς χώρους), όπως επίσης μπορεί να μην είναι δυνατή η χρήση του σε όλους τους κόμβους
 ενός συστήματος, λόγο περιορισμών όπως το κόστος, μέγεθος του Node και energy consumption.   
 
 \begin{table}[H]
     \caption{Nodes' names definitions}
     \label{tab:nodes-names-definition}
-    \centering
-    \begin{tabular}{ll}
-        \toprule
-        \textbf{Node name} & \textbf{Definition}  \\
-        \midrule
-            Unknown/Free/Dumb/Non-anchors & Their position is unknown \\
-			Beacons/Anchors/Landmarks & Nodes with known location information \\
-			Settled & Initial unknown nodes with estimated position \\
-        \bottomrule
-    \end{tabular}
+	\centering
+	\resizebox{1\textwidth}{!}{
+		\begin{tabular}{ll}
+			\toprule
+			\textbf{Node name} & \textbf{Definition}  \\
+			\midrule
+				Unknown/Free/Dumb/Non-anchors & Their position is unknown \\
+				Beacons/Anchors/Landmarks & Nodes with known location information \\
+				Settled & Initial unknown nodes with estimated position \\
+			\bottomrule
+		\end{tabular}
+	}
 \end{table}
 
 Στην υπάρχουσα βιβλιογραφία \cite{wsn-Localization-systems} \cite{wsn-Localization-techniques} βρίσκουμε ότι
@@ -168,7 +170,7 @@ $P_r(d)$ μπορεί να περιγραφεί από την σχέση (\ref{e
 \end{align}
 
 Αυτό που μπορούμε να δούμε από την παραπάνω σχέση είναι ότι, ιδανικά στον ελεύθερο 
-χώρο σε Line Of Sight (\hyperref[abbr:LOS]{LOS}) μετάδοση -
+χώρο σε Line of Sight (\hyperref[abbr:LoS]{LoS}) μετάδοση -
 η ισχύς του σήματος που λαμβάνει ο πομπός εξαρτάται από το αντίστροφο τετράγωνο της
 απόστασης των δύο nodes. Το figure \ref{fig:Ideal-RSSI-over-distance} περιγράφει 
 σχηματικά αυτήν την εξάρτηση. 
@@ -194,6 +196,36 @@ $P_r(d)$ μπορεί να περιγραφεί από την σχέση (\ref{e
 
 %----------------------------------------------------------------------
 \subsubsection{Propagation Time}
+Σε αυτήν την κατηγορία εκτίμησης απόστασης μεταξύ nodes - η οποία βασίζεται σε χρονικές μετρήσεις της διάδοσης του σήματος
+- κατά κύριο λόγο χρησιμοποιούνται δύο βασικές τεχνικές, η Time of Arrival (\hyperref[abbr:ToA]{ToA}) και η Time 
+Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-systems}. 
+
+Θα ξεκινήσουμε με μία σύντομη περιγραφή της \hyperref[abbr:ToA]{ToA}.
+
+\begin{figure} [H]
+    \centering
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../Photos/toa-oneway.png}
+      {(a) One-way}
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../Photos/toa-roundtrip.png}
+      {(b) Roundtrip}
+    \end{minipage}
+    \hfill \break
+    \decoRule
+    \caption[Time of Arrival cases]{Time of Arrival cases}
+    \label{fig:Time-of-Arrival-cases}
+\end{figure}
+
+\begin{align}
+	s=&\frac{d}{t} \label{eq:jy} \\
+	d=&s(t_a-t_b) \label{eq:hy}
+\end{align}
 
 %----------------------------------------------------------------------
 \subsubsection{Lighthouse}
