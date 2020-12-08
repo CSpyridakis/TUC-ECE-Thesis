@@ -141,84 +141,64 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 
 \subsection{Distance}\label{sec:Chapter2-1-1}
 
-Θα ξεκινήσουμε με μία σύντομη ανάλυση των τεχνικών που χρησιμοποιούνται ήδη 
+Θα ξεκινήσουμε με μία σύντομη ανάλυση των τεχνικών εκτίμησης της απόστασης μεταξύ δύο nodes
+που χρησιμοποιούνται ήδη. 
 
+%----------------------------------------------------------------------
 \subsubsection{Received Signal Strength}
 Η πρώτη τεχνική η οποία έχει χρησιμοποιηθεί για τον υπολογισμό απόστασης στα 
 \hyperref[abbr:WSN]{WSN} είναι αυτή με όνομα Received Signal Strength Indicator
-(\hyperref[abbr:RSSI]{RSSI}) και έχει ως αρχή την χρήση της έντασης ενός 
+(\hyperref[abbr:RSSI]{RSSI}) και έχει ως αρχή, την χρήση της έντασης ενός 
 σήματος που λαμβάνουμε στον δέκτη, ως τρόπο υπολογισμού της απόστασης
-του πομπό από αυτόν.
+του πομπό από αυτόν. Στον ελεύθερο χώρο η λαμβανόμενη ισχύς που ανιχνεύει ο πομπός
+$P_r(d)$ μπορεί να περιγραφεί από την σχέση (\ref{eq:signal-strength}) \cite{wsn-Localization-techniques}.
 
+\begin{align}
+	P_r(d)=\frac{P_tG_tG_r\lambda^2}{(4\pi)^2d^2} \label{eq:signal-strength}
+\end{align}
 
-%-------------------------------------------
-\cite{ideal-rssi-model}
-Nowadays, this method is very popular
-thanks to its simplicity and low implementation price be-
-cause no additional hardware is required.
+Όπου $P_t$ είναι η ισχύς που στέλνει ο πομπός, $G_t$ είναι το gain της κεραίας του
+πομπού, $G_r$ το gain της κεραίας του δέκτη, λ είναι το μήκος κύματος του σήματος
+το οποίο μεταδίδουμε και d η απόσταση του πομπού από τον δέκτη. Αν θεωρήσουμε ότι 
+τα $G_t$, $G_r$ και λ είναι μη μεταβλητές τιμές τότε μπορούμε να καταλήξουμε
+στην (\ref{eq:signal-strength-simple}) \cite{rssi-simple-formula}
 
+\begin{align}
+	P_r(d)=C_f\frac{P_t}{d^2} \label{eq:signal-strength-simple}
+\end{align}
 
-Also [4] and [5] discuss the
-application of RSSI for distance measurements. They
-conclude that it is not an appropriate metric for localization
-systems because it lacks reliability between RSSI within
-increasing distance in different directions from a trans-
-mitter.
-
-Path loss exponent η expresses how much
-radio signal strength decreases with distance.
-
-Received signal strength is measured from each
-received frame as average value measured during the first
-eight symbols (preamble) and converted to the RSS indi-
-cator. This conversion is variable for every type of radio
-chip [10].
-
-
-With properly modeled path loss in a given envi-
-ronment, it should be possible to formulate a relation
-between distance and RSSI value.
-
-
-Problems arise with
-dynamical changes in environment because of radio signal
-unstable properties.
-
-Measurement accuracy of RSSI of the most today’s
-radio chips used in sensor nodes is about ±4 dBm [11] and
-RSSI is also rounded to integer values. This means that
-notable uncertainty is brought to the estimation of distance.
-
-Another uncertainty is caused by the signal propaga-
-tion environment, like reflection, diffraction, scattering or
-penetration of the radio signal through the objects.
-
-
-Errors caused by hardware, signal propaga-
-tion environment and errors caused by method for ap-
-proximation of the RSSI value.
-
-WSN devices used for RSS based method are not
-suitable for distance estimation with high precision
-%-------------------------------------------
-
-
-%-------------------------------------------
+Αυτό που μπορούμε να δούμε από την παραπάνω σχέση είναι ότι, ιδανικά στον ελεύθερο 
+χώρο σε Line Of Sight (\hyperref[abbr:LOS]{LOS}) μετάδοση -
+η ισχύς του σήματος που λαμβάνει ο πομπός εξαρτάται από το αντίστροφο τετράγωνο της
+απόστασης των δύο nodes. Το figure \ref{fig:Ideal-RSSI-over-distance} περιγράφει 
+σχηματικά αυτήν την εξάρτηση. 
 
 %-------------------------------------------
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[scale=0.5]{Images/Theoretical-Background/Ideal-RSSI-over-distance.png}
+	\includegraphics[scale=0.32]{Images/Theoretical-Background/Ideal-RSSI-over-distance.png}
 	\decoRule
 	\caption[Ideal RSSI over distance]{Ideal RSSI over distance based on \cite{ideal-rssi-model}}
 	\label{fig:Ideal-RSSI-over-distance}
 \end{figure}
 
+Αυτή η μέθοδος παρόλο που είναι αρκετά δημοφιλής και οικονομική για τον υπολογισμό της απόστασης
+- λόγω του ότι δεν απαιτεί επιπλέον αισθητήρες - σε πραγματικές 
+συνθήκες αντιμετωπίζει αρκετά προβλήματα, καθώς οι μετρήσεις μπορούν να επηρεαστούν από θόρυβο,
+ανακλάσεις του σήματος, διαθλάσεις, δυναμικά περιβάλλοντα ή εμπόδια σε αυτά, ή ακόμα και errors στο hardware 
+\cite{wsn-Localization-systems} \cite{ideal-rssi-model}.
+Σε ένα βαθμό μπορεί να βελτιωθεί η απόδοση με στατικό ή δυναμικό calibration του συστήματος 
+όμως μέχρι τώρα δεν χρησιμοποιείται για εκτίμηση απόστασης σε εφαρμογές όπου nodes έχουν μεγάλη
+απόσταση μεταξύ τους ή μας ενδιαφέρει να έχουμε μεγάλη ακρίβεια προσέγγισης της απόστασης \cite{ideal-rssi-model}.
 
+%----------------------------------------------------------------------
 \subsubsection{Propagation Time}
+
+%----------------------------------------------------------------------
 \subsubsection{Lighthouse}
 
+%----------------------------------------------------------------------
 \subsection{Angle}\label{sec:Chapter2-1-1}
 
 %----------------------------------------------------------------------------------------
