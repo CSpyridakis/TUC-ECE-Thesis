@@ -10,12 +10,12 @@ drones. Συνεπώς θα μεταφερθούμε σε πρώτο επίπε�
 Όταν μιλάμε για \hyperref[abbr:WSN]{WSN}, αναφερόμαστε σε αυτόνομα ηλεκτρονικά συστήματα, χωρικά διασκορπισμένα σε ένα πεδίο - τα οποία συχνά περιλαμβάνουν
 αισθητήρες και επικοινωνούν με τα γειτονικά τους ή σταθμούς βάσης για να μεταφέρουν πληροφορία \cite{wsn-wikipedia}.
 
-Το καθένα από αυτά τα μεμονωμένα συστήματα ονομάζεται \textbf{Node}. Ενώ για το κάθε μεμονωμένο node 
+Το καθένα από αυτά τα ανεξάρτητα συστήματα ονομάζεται \textbf{Node}. Ενώ για το κάθε μεμονωμένο node 
 μπορεί να έχουμε στην διάθεση μας location information ή όχι. 
-Μία πρώτη σκέψη θα ήταν κάθε Node ενός συστήματος αισθητήρων να περιλαμβάνει \hyperref[abbr:GPS]{GPS} ώστε να γνωρίζουμε 
+Μία πρώτη σκέψη θα ήταν κάθε node ενός συστήματος αισθητήρων να περιλαμβάνει \hyperref[abbr:GPS]{GPS} ώστε να γνωρίζουμε 
 την θέση του. Αυτό μπορεί γρήγορα να καταρριφθεί σαν σκέψη, αν αναλογιστούμε αρχικά ότι το Global Navigation Satellite System (\hyperref[abbr:GNSS]{GNSS})
 δεν είναι διαθέσιμο σε κάθε περιβάλλον λειτουργίας (π.χ. εσωτερικούς χώρους), όπως επίσης μπορεί να μην είναι δυνατή η χρήση του σε όλους τους κόμβους
-ενός συστήματος, λόγο περιορισμών όπως το κόστος, μέγεθος του Node και energy consumption.   
+ενός συστήματος, λόγο περιορισμών όπως το κόστος, μέγεθος του node και energy consumption.   
 
 \begin{table}[H]
     \caption{Nodes' names definitions}
@@ -34,14 +34,14 @@ drones. Συνεπώς θα μεταφερθούμε σε πρώτο επίπε�
 	}
 \end{table}
 
-Στην υπάρχουσα βιβλιογραφία \cite{wsn-Localization-systems} \cite{wsn-Localization-techniques} βρίσκουμε ότι
-Nodes των οποίων η θέση είναι γνωστή ή άμεσα υπολογίσιμη, συχνά ονομάζονται \textbf{Beacons}. Πληροφορία σχετικά με την θέση αυτών
-των Nodes είναι γνωστή, είτε γιατί έχουν τοποθετηθεί από εμάς σε προκαθορισμένες θέσεις, είτε μέσου ενός εξωτερικού συστήματος
+Στην υπάρχουσα βιβλιογραφία \cite{wsn-Localization-systems} \cite{wsn-Localization-techniques} \cite{farooqiazam2016location} βρίσκουμε ότι
+nodes των οποίων η θέση είναι γνωστή ή άμεσα υπολογίσιμη, συχνά ονομάζονται \textbf{Beacons}. Πληροφορία σχετικά με την θέση αυτών
+των nodes είναι γνωστή, είτε γιατί έχουν τοποθετηθεί από εμάς σε προκαθορισμένες θέσεις, είτε μέσου ενός εξωτερικού συστήματος
 όπως το \hyperref[abbr:GPS]{GPS}.
 Αντίθετα κόμβοι για τους οποίους δεν έχουμε αρχικά πληροφορία της θέσης τους, ονομάζονται \textbf{Non-anchors}.
 Άλλος ένας σημαντικός ορισμός, που θα πρέπει να αναφερθεί είναι ότι συχνά ονομάζουμε \textbf{Settle} nodes, 
 αυτά τα οποία αρχικά δεν γνωρίζαμε την θέση τους αλλά στην συνέχεια την εκτιμήσαμε.
-Στο table \ref{tab:nodes-names-definition} παρουσιάζονται συνοπτικά τα διάφορα ονόματα που έχουν δοθεί ανά 
+Στο Table \ref{tab:nodes-names-definition} παρουσιάζονται συνοπτικά τα διάφορα ονόματα που έχουν δοθεί ανά 
 καιρούς για το κάθε τύπο node.
 
 Σκοπός ενός localization system είναι, με χρήση της γνώσης που έχουμε για τα beacon nodes να εκτιμήσουμε
@@ -65,8 +65,8 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 Ενώ τέλος είναι το κύριο μέρος του συστήματος, με όνομα \textbf{Localization Algorithm} και ουσιαστικά είναι
 ο προκαθορισμένος τρόπος που θα ακολουθηθεί για να υπολογιστεί η θέση των unknown nodes με βάση όλες τις 
 πληροφορίες που έχουμε.
-Στο figure \ref{fig:Localization-Systems-components} δίνεται η απεικόνιση που έδωσαν οι συγγραφείς του 
-\cite{wsn-Localization-systems} για να εξηγήσουν το παραπάνω. Ενώ στο figure \ref{fig:Localization-system}
+Στο Figure \ref{fig:Localization-Systems-components} δίνεται η απεικόνιση που έδωσαν οι συγγραφείς του 
+\cite{wsn-Localization-systems} για να εξηγήσουν το παραπάνω. Ενώ στο Figure \ref{fig:Localization-system}
 έχει γίνει μία προσπάθεια να κατηγοριοποιηθούν τα κομμάτια καθώς και τεχνικές των Localization Systems,
 με βάση τα \cite{wsn-Localization-systems} \cite{wsn-Localization-techniques} και αναλύονται στην συνέχεια
 του κεφαλαίου.
@@ -108,7 +108,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 
 			\node [level-31, below of = c1133, xshift=-80pt] (c12) {Angle};
 				\node [level-4, below of = c12, xshift=70pt] (c121) {Receiver Antenna Amplitude response};
-				\node [level-4, below of = c121] (c122) {Receiver antenna Phase response};
+				\node [level-4, below of = c121] (c122) {Receiver Antenna Phase response};
 				\foreach \value in {1,2} \draw[->] (c12.210) |- (c12\value.west);
 			\foreach \value in {1,2}   \draw[->] (c1.188) |- (c1\value.west);
 			
@@ -172,7 +172,7 @@ $P_r(d)$ μπορεί να περιγραφεί από την σχέση (\ref{e
 Αυτό που μπορούμε να δούμε από την παραπάνω σχέση είναι ότι, ιδανικά στον ελεύθερο 
 χώρο σε Line of Sight (\hyperref[abbr:LoS]{LoS}) μετάδοση -
 η ισχύς του σήματος που λαμβάνει ο πομπός εξαρτάται από το αντίστροφο τετράγωνο της
-απόστασης των δύο nodes. Το figure \ref{fig:Ideal-RSSI-over-distance} περιγράφει 
+απόστασης των δύο nodes. Το Figure \ref{fig:Ideal-RSSI-over-distance} περιγράφει 
 σχηματικά αυτήν την εξάρτηση. 
 
 %-------------------------------------------
@@ -226,20 +226,22 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 
 \begin{align}
 	V=&\frac{\mathrm{d}s}{\mathrm{d}t} \label{eq:speed} \\
-	d=&s(t_b-t_a) \label{eq:distance}
+	d=&s(t_b-t_a) \label{eq:tod-distance}
 \end{align}
 
-Αξιοποιώντας την (\ref{eq:speed}) ως αρχή, μπορούμε να καταλήξουμε στην (\ref{eq:distance}) για να εκτιμήσουμε
+Αξιοποιώντας την (\ref{eq:speed}) ως αρχή, μπορούμε να καταλήξουμε στην (\ref{eq:tod-distance}) για να εκτιμήσουμε
 την απόσταση d που βρίσκονται δύο nodes μεταξύ τους, αν ένα κύμα κινείται με ταχύτητα $s$ και χρειάστηκε 
-χρόνο $t$ για να μεταδοθεί από το ένα node στο άλλο. Στο figure \ref{fig:Time-of-Arrival-cases} (a) απεικονίζεται
+χρόνο $t$ για να μεταδοθεί από το ένα node στο άλλο. Στο Figure \ref{fig:Time-of-Arrival-cases} (a) απεικονίζεται
 σχηματικά αυτό, όπου $t=t_b-t_a$ με $t_b$ η χρονική στιγμή που φτάνει το κύμα στο receiver και $t_a$
 η χρονική στιγμή η οποία ξεκινάει από τον transmitter. Σε περίπτωση που μιλάμε για Radio Frequency 
-(\hyperref[abbr:RF]{RF}) η ταχύτητα μετάδοσης του κύματος είναι ίση με την ταχύτητα μετάδοσης του φωτός $c_o$.
+(\hyperref[abbr:RF]{RF}) η ταχύτητα μετάδοσης του κύματος είναι ίση με την ταχύτητα μετάδοσης του φωτός $c_o$, το οποίο 
+σε $1μs$ διανύει περίπου 300m.
 Με βάση αυτό, μπορούμε εύκολα να καταλάβουμε ότι για να έχουμε ακριβή αποτελέσματα είναι αρκετά σημαντικό
-τα clocks των δύο nodes να είναι απόλυτα συγχρονισμένα, πράγμα που
-απαιτεί να κάνουμε το συνολικό σύστημα αρκετά πιο πολύπλοκο σχεδιαστικά \cite{wsn-Localization-systems} \cite{wsn-Localization-techniques}.
+τα clocks των δύο nodes να είναι απόλυτα συγχρονισμένα για να μην έχουμε error απόκλισης, πράγμα που
+απαιτεί να κάνουμε το συνολικό σύστημα αρκετά πιο πολύπλοκο σχεδιαστικά 
+ώστε η απόκλιση μας να είναι σε ανεκτά σημεία για την εφαρμογή \cite{wsn-Localization-systems} \cite{wsn-Localization-techniques}.
 
-Μπορούμε να το παρακάμψουμε αυτό, με το να γίνει η μέτρηση σε roundtrip μετάδοση, figure \ref{fig:Time-of-Arrival-cases} (b).
+Μπορούμε να το παρακάμψουμε αυτό, με το να γίνει η μέτρηση σε roundtrip μετάδοση, Figure \ref{fig:Time-of-Arrival-cases} (b).
 Σε αυτήν την περίπτωση το ένα node στέλνει ένα σήμα, και μόλις το λάβει ένα γειτονικό node, απαντάει πίσω στο πρώτο. 
 Με αυτόν τον τρόπο η μέτρηση του χρόνου εκκίνησης και άφιξης του σήματος γίνονται στο ίδιο node - 
 άρα δεν χρειάζεται συγχρονισμός, και η πραγματική απόσταση είναι η μισή από αυτή που θα υπολογιστεί. Ο κύριος παράγοντας
@@ -248,8 +250,62 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 ένα a priori calibration, είτε μπορεί να μετριέται και να στέλνεται μαζί με το σήμα απάντησης - ώστε να αφαιρείται
 από τον χρόνο μετάδοσης του κύματος \cite{wsn-Localization-techniques}.
 
-Όσον αφορά την τεχνική \hyperref[abbr:TDoA]{TDoA}
+\begin{figure} [H]
+    \centering
+	% -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../Photos/tdoa-multiple.png}
+      {(a) Single signal - multiple receivers}
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../Photos/tdoa-timing.png}
+      {(b) Multiple signals - single receiver}
+    \end{minipage}
+    \hfill \break
+    \decoRule
+    \caption[Time Difference of Arrival cases]{Time Difference of Arrival cases}
+    \label{fig:Time-Difference-of-Arrival-cases}
+\end{figure}
 
+Όσον αφορά την τεχνική \hyperref[abbr:TDoA]{TDoA}, και σε αυτήν την περίπτωση υπάρχουν δύο παραλλαγές της \cite{wsn-Localization-systems} - όπου και οι 
+δύο είναι βασισμένες στην αρχή το ότι δεν μας ενδιαφέρει η χρονική στιγμή που ξεκίνησε η αποστολή ενός σήματος, αλλά μόνο
+οι χρονική στιγμή που το λάβαμε. Η πρώτη περίπτωση απαιτεί single signal και multiple receivers και παρουσιάζεται στο 
+figure \ref{fig:Time-Difference-of-Arrival-cases} (a), 
+η οποία χρησιμοποιείται συνήθως στα cellular network - απαιτεί την ύπαρξη 
+τουλάχιστον 4 beacons για τον υπολογισμό της θέσης ενός free node στον τρισδιάστατο χώρο, και υπολογίζει την χρονική διαφορά
+που έφτασε σε καθένα από τα beacons το σήμα που έστειλε το free node για τον υπολογισμό της απόστασης του free node από
+το καθένα από αυτά. Σημαντικό σε αυτήν την περίπτωση είναι και εδώ, να είναι απόλυτα συγχρονισμένα τα beacons. 
+Η γενική ιδέα σε αυτήν την περίπτωση περιγράφεται στην εξίσωση (\ref{eq:tdoa-multiple}) \cite{wsn-Localization-techniques} \cite{simple-tdoa} και αυτό που 
+θέλουμε είναι να υπολογίσουμε την θέση του $r_t$ (free node) γνωρίζοντας για κάθε δύο διαφορετικά $r_i$ και $r_j$ beacon nodes
+την χρονική στιγμή $t_i$ και $t_j$ που έφτασε το σήμα στο καθένα εάν αυτό κινούταν με ταχύτητα s. 
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\begin{align}
+	\Delta t_{ij} \triangleq & t_i - t_j = \frac{1}{s} (\norm{r_i - r_t} - \norm{r_j - r_t}), \quad i \neq j\label{eq:tdoa-multiple}
+\end{align}
+
+Η δεύτερη εκδοχή της χρήσης \hyperref[abbr:TDoA]{TDoA} - η οποία είναι πιο συχνή στα \hyperref[abbr:WSN]{WSN} και αναλύεται παρακάτω, 
+χρησιμοποιεί multiple signals με single receiver και παρουσιάζεται στο figure \ref{fig:Time-Difference-of-Arrival-cases} (b). 
+Αρχή λειτουργίας έχει ότι ο transmitter θα στείλει πολλαπλά διαφορετικού είδους σήματα και ο δέκτης θα μετρήσει την χρονική διαφορά 
+που τα έλαβε. Ως παράδειγμα μπορεί το ένα σήμα να είναι σε \hyperref[abbr:RF]{RF} και να κινείται με ταχύτητα $s_r=c_o$ και το άλλο 
+ηχητικό με ταχύτητα $s_s \approx 340m/s$. Με $t_1$ τη χρονική στιγμή που λαμβάνει το \hyperref[abbr:RF]{RF} σήμα, ενώ $t_2$ το ηχητικό.
+Με γνώση αυτών των πληροφοριών, μπορούμε να υπολογίσουμε την απόσταση μεταξύ των κόμβων από την εξίσωση (\ref{eq:tdoa-distance})
+\cite{wsn-Localization-systems}.
+
+\begin{align}
+	d=&(s_r-s_s)(t_2-t_1) \label{eq:tdoa-distance}
+\end{align}
+
+Θετικό σε αυτήν την μέθοδο είναι ότι το error μπορεί να είναι της τάξης των μερικών cm, όμως αρχικά απαιτεί επιπλέον εξοπλισμό στο node -
+ώστε να μπορεί να στείλει και να λάβει πολλαπλά είδη σήματος - πράγμα που μπορεί να το κάνει αντιοικονομικό η αρκετά μεγαλύτερο από 
+το επιθυμητό. Όπως επίσης και μάλιστα  
+σημαντικότερο, είναι ότι η απόσταση η οποία μπορεί να 
+χρησιμοποιηθεί, επηρεάζεται σε μεγάλο βαθμό από τα χαρακτηριστικά του δεύτερου σήματος. Ως παράδειγμα τα ηχητικά σήματα 
+δεν μπορούν να μεταφερθούν σε μεγάλες αποστάσεις ή το ότι η ταχύτητα τους μπορεί να επηρεαστεί σημαντικά από περιβαλλοντολογικούς παράγοντες
+\cite{farooqiazam2016location}.
 
 
 %----------------------------------------------------------------------
