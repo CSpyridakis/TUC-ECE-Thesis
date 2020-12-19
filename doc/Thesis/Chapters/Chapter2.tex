@@ -312,6 +312,7 @@ figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 \cite{farooqiazam2016location}.
 
 
+
 %----------------------------------------------------------------------
 % \subsubsection{Lighthouse}
 
@@ -332,37 +333,99 @@ TODO:
 συνεπώς ενδιαφέρον βρίσκεται στην ύπαρξη τριών ή παραπάνω nodes σε ένα σύστημα. Με βάση τις πληροφορίες που έχουμε συλλέξει - μέσω των τεχνικών που 
 περιγράφτηκαν στο προηγούμενο κεφάλαιο - θα προσπαθήσουμε πλέον να εκτιμήσουμε την θέση ενός node. Στην συνέχεια αυτού του section περιγράφονται μέθοδοι οι οποίοι μπορούν να χρησιμοποιηθούν για να το επιτύχουν
 αυτό. Κύρια διαφορά τους είναι η απόδοση που μπορεί να έχουν, η οποία όμως σχετίζεται με την αύξηση της πολυπλοκότητας στους υπολογισμούς που θα
-χρειαστούν. 
+χρειαστούν καθώς επίσης και ποιες από τις παραπάνω πληροφορίες θα εκμεταλλευτούν. 
+
 Για την εύρεση της θέσης ενός unknown node στο τρισδιάστατο χώρο ως ελάχιστο χρειαζόμαστε τέσσερα επιπλέον nodes.
-Στις παρακάτω περιγραφές όμως, και χωρίς βλάβη της γενικότητας θα χρησιμοποιηθούν τρία για την απλούστευση της περιγραφή, με την παραδοχή ότι μας
+Στις παρακάτω περιγραφές όμως, και χωρίς βλάβη της γενικότητας θα χρησιμοποιηθούν τρία για την απλούστευση της περιγραφής , με την παραδοχή ότι μας
 ενδιαφέρει η δισδιάστατη ανάλυση.
 
 \begin{figure} [H]
 	\centering
 	
     % -----------------
-		\begin{minipage}{.5\textwidth}
+		\begin{minipage}{.33\textwidth}
 			\centering
-			\includegraphics[width=\linewidth]{../Photos/toa-oneway.png}
-			{(a) One-way}
+			\includegraphics[width=\linewidth]{../Photos/Trilateration-ideal.png}
+			{(a) Ideal Trilateration}
 		\end{minipage}%
 		% -----------------
-		\begin{minipage}{.5\textwidth}
+		\begin{minipage}{.33\textwidth}
 			\centering
-			\includegraphics[width=\linewidth]{../Photos/toa-oneway.png}
-			{(b) One-way}
+			\includegraphics[width=\linewidth]{../Photos/Trilateration-actual.png}
+			{(b) Realistic Trilateration}
+		\end{minipage}
+		% -----------------
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../Photos/Bounding-box.png}\\
+			{(c) Bounding Box}
 		\end{minipage}
 	% -----------------
     \hfill \break
     \decoRule
-    \caption[Trilateration]{Trilateration}
-    \label{fig:Trilateration}
+    \caption[Position Computation Methods]{Position Computation Methods}
+    \label{fig:Position-Computation-Methods}
 \end{figure}
 
 %----------------------------------------------------------------------
 \subsubsection{Trilateration}
-Η συγκεκριμένη μέθοδος είναι η πιο απλή, αυτή που χρησιμοποιούμε διαισθητικά για τον υπολογισμό θέσης, ενώ βασίζεται στην γεωμετρία κύκλων.
+Η συγκεκριμένη μέθοδος είναι ίσως η πιο απλή διαισθητικά, βασίζεται στην γεωμετρία κύκλων, είναι αυτή που χρησιμοποιείται από τα \hyperref[abbr:GPS]{GPS}
+για τον υπολογισμό θέσης, ενώ αξιοποιεί μόνο πληροφορία απόστασης και όχι γωνίας \cite{Trilateration-vs-Triangulation}.
+Η εξίσωση ενός κύκλου από την γεωμετρία γνωρίζουμε ότι περιγράφεται από την εξίσωση (\ref{eq:trilateration-circles}) όπου $(x_i,y_i)$ οι συντεταγμένες
+του κέντρο του κύκλου με ακτίνα $d_i$.
 
+\begin{align}
+	(x-x_i)^2 + (y-y_i)^2 &= d_i^2 \label{eq:trilateration-circles}
+\end{align}
+
+Εάν χρησιμοποιούμε μη κατευθυντήριες κεραίες και υπολογίσουμε την απόσταση ενός beacon από το node στο οποίο θέλουμε να υπολογίσουμε την θέση του -
+τότε μπορούμε να συμπεράνουμε ότι το free node είναι κάπου πάνω στην περιφέρεια ενός 
+κύκλου, με κέντρο το beacon και ακτίνα την απόσταση μεταξύ του beacon και του free node. 
+Επαναλαμβάνοντας αυτό για ακόμα δύο beacons, τελικά το free node στο δισδιάστατο επίπεδο θα πρέπει να βρίσκεται στην τομή των τριών κύκλων, πράγμα που γραφικά 
+απεικονίζεται στο figure \ref{fig:Position-Computation-Methods} (a).
+
+\begin{align}
+	x^2-2 x_1 x + x_1^2 + y^2-2 y_1 y + y_1^2 &= d_1^2 \label{eq:trilateration-b1} \\ 
+	x^2-2 x_2 x + x_2^2 + y^2-2 y_2 y + y_2^2 &= d_2^2 \label{eq:trilateration-b2} \\
+	x^2-2 x_3 x + x_3^2 + y^2-2 y_3 y + y_3^2 &= d_3^2 \label{eq:trilateration-b3} 
+\end{align}
+
+Οι εξισώσεις (\ref{eq:trilateration-b1}), (\ref{eq:trilateration-b2}) και (\ref{eq:trilateration-b3}) περιγράφουν πλήρως τους κύκλους του κάθε node από το παράδειγμα 
+του figure \ref{fig:Position-Computation-Methods} (a),
+όπου $(x_i,y_i)$ το κέντρο του κύκλου, $d_i$ η ακτίνα του - για κάθε beacon $i=1,2,3$ και τελικά $(x,y)$ οι συντεταγμένες του free nodes τις οποίες και ψάχνουμε. 
+Ένας τρόπος να υπολογίσουμε τις συντεταγμένες αυτές είναι να αφαιρέσουμε από την (\ref{eq:trilateration-b2}) την (\ref{eq:trilateration-b1}) και όμοια από την 
+(\ref{eq:trilateration-b3}) την (\ref{eq:trilateration-b2}) ώστε να καταλήξουμε στις παρακάτω δύο εξισώσεις \cite{trilateration-equations}.
+
+\begin{align}
+	(-2x_1+2x_2)x + (-2y_1+2y_2)y = r_1^2 - r_2^2 - x_1^2 + x_2^2 - y_1^2 + y_2^2  \nonumber \\
+	(-2x_2+2x_3)x + (-2y_2+2y_3)y = r_2^2 - r_3^2 - x_2^2 + x_3^2 - y_2^2 + y_3^2  \nonumber
+\end{align}
+
+Ο λόγος που κάναμε το παραπάνω βήμα είναι διότι πλέον μπορούμε εύκολα να θεωρήσουμε τους παρακάτω πίνακες.
+
+\begin{align}
+	A = \begin{bmatrix} -2x_1+2x_2 & -2y_1+2y_2 \\ -2x_2+2x_3 & -2y_2+2y_3 \end{bmatrix} \nonumber \quad
+	X = \begin{bmatrix} x \\ y \end{bmatrix} \nonumber \quad
+	B = \begin{bmatrix} r_1^2 - r_2^2 - x_1^2 + x_2^2 - y_1^2 + y_2^2 \\ r_2^2 - r_3^2 - x_2^2 + x_3^2 - y_2^2 + y_3^2 \end{bmatrix} \nonumber
+\end{align}
+
+Με την χρήση των οποίων καταλήγουμε ότι έχουμε να λύσουμε το γραμμικό σύστημα πινάκων που περιγράφεται από την εξίσωση (\ref{eq:trilateration-linear-system}) για τον
+υπολογισμό των συντεταγμένων $(x,y)$ του free node οι οποίες μας ενδιαφέρουν.
+
+\begin{align}
+	AX = B \label{eq:trilateration-linear-system}
+\end{align}
+
+Όπως αναφέρθηκε και στις προηγούμενες ενότητες, ο υπολογισμός της απόστασης πολύ πιθανόν να περιλαμβάνει μια μικρή απόκλιση $d_i' = d_i - ε$, 
+με το ε συχνά να θεωρείται μία ανεξάρτητη κανονική τυχαία μεταβλητή με μηδενικό μέσο. Αυτό σημαίνει ότι
+τότε οι κύκλοι δεν έχουν ένα κοινό σημείο τομής, αλλά το free node βρίσκεται κάπου μέσα στο χωρίο επικάλυψης
+των τριών κύκλων, σχηματικά αυτό παρουσιάζεται στο figure \ref{fig:Position-Computation-Methods} (b) και σε αυτήν την περίπτωση καταλήγουμε σε ένα
+μη πεπερασμένο πλήθος λύσεων, με τη συνάρτηση του κάθε κύκλου να περιγράφεται από την εξίσωση
+(\ref{eq:trilateration-circles-error}) \cite{wsn-Localization-systems}.
+
+\begin{align}
+	(x-x_i)^2 + (y-y_i)^2 &= d_i^2-e \label{eq:trilateration-circles-error}
+\end{align}
 
 %----------------------------------------------------------------------
 \subsubsection{Bounding Box}
