@@ -107,8 +107,8 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 				\foreach \value in {1,3} \draw[->] (c11.195) |- (c11\value.west);
 
 			\node [level-31, below of = c1133, xshift=-80pt] (c12) {Angle};
-				\node [level-4, below of = c12, xshift=70pt] (c121) {Receiver Antenna Amplitude response};
-				\node [level-4, below of = c121] (c122) {Receiver Antenna Phase response};
+				\node [level-4, below of = c12, xshift=70pt] (c121) {Directional Antenna};
+				\node [level-4, below of = c121] (c122) {Omnidirectional Antenna};
 				\foreach \value in {1,2} \draw[->] (c12.210) |- (c12\value.west);
 			\foreach \value in {1,2}   \draw[->] (c1.188) |- (c1\value.west);
 			
@@ -273,6 +273,8 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
     \label{fig:Time-Difference-of-Arrival-cases}
 \end{figure}
 
+
+
 Όσον αφορά την τεχνική \hyperref[abbr:TDoA]{TDoA}, και σε αυτήν την περίπτωση υπάρχουν δύο παραλλαγές της \cite{wsn-Localization-systems} - όπου και οι 
 δύο είναι βασισμένες στην αρχή το ότι δεν μας ενδιαφέρει η χρονική στιγμή που ξεκίνησε η αποστολή ενός σήματος, αλλά μόνο
 οι χρονική στιγμή που το λάβαμε.
@@ -284,9 +286,9 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 το καθένα από αυτά. Σημαντικό σε αυτήν την περίπτωση είναι και εδώ, να είναι απόλυτα συγχρονισμένα τα beacons. 
 Η γενική ιδέα σε αυτήν την περίπτωση περιγράφεται στην εξίσωση (\ref{eq:tdoa-multiple}) \cite{wsn-Localization-techniques} \cite{simple-tdoa} - και αυτό που 
 θέλουμε, είναι να υπολογίσουμε την θέση του $r_t$ (free node) γνωρίζοντας για κάθε δύο διαφορετικά $r_i$ και $r_j$ beacon nodes
-την χρονική στιγμή $t_i$ και $t_j$ που έφτασε το σήμα στο καθένα - εάν αυτό κινούταν με ταχύτητα s. 
+την χρονική στιγμή $t_i$ και $t_j$ που έφτασε το σήμα στο καθένα - εάν αυτό κινούταν με ταχύτητα s και το $\norm{\cdot}$ αναπαριστά την ευκλείδεια
+απόσταση μεταξύ τους.
 
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \begin{align}
 	\Delta t_{ij} \triangleq & t_i - t_j = \frac{1}{s} (\norm{r_i - r_t} - \norm{r_j - r_t}), \quad i \neq j\label{eq:tdoa-multiple}
 \end{align}
@@ -303,7 +305,7 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 	d=&(s_r-s_s)(t_2-t_1) \label{eq:tdoa-distance}
 \end{align}
 
-Θετικό σε αυτήν την μέθοδο είναι ότι το error μπορεί να είναι της τάξης των μερικών cm, όμως αρχικά απαιτεί επιπλέον εξοπλισμό στο node -
+Θετικό σε αυτήν την μέθοδο είναι ότι το error μπορεί να είναι της τάξης των μερικών εκατοστών, όμως αρχικά απαιτεί επιπλέον εξοπλισμό στο node -
 ώστε να μπορεί να στείλει και να λάβει πολλαπλά είδη σήματος - πράγμα που μπορεί να το κάνει αντιοικονομικό ή αρκετά μεγαλύτερο σε διαστάσεις από 
 το επιθυμητό. Όπως επίσης - και μάλιστα  
 σημαντικότερο - η απόσταση η οποία μπορεί να 
@@ -321,7 +323,8 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 Άλλη μία χρήσιμη μέτρηση η οποία μας ενδιαφέρει, είναι η εκτίμηση της γωνίας από την οποία λαμβάνουμε το σήμα ενός γειτονικού
 node σε σχέση με έναν άξονας αναφοράς. Ο άξονας αυτός μπορεί να είναι είτε κοινώς για όλα τα nodes (π.χ. ως προς το βόρειο γεωγραφικό πόλο),
 είτε μπορεί να είναι για το κάθε node ξεχωριστός, ως παράδειγμα με βάση τον προσανατολισμό του ίδιου του node ή με βάση την γωνία λήψης ενός 
-επιπλέον σήματος \cite{wsn-Localization-systems}. 
+επιπλέον σήματος \cite{wsn-Localization-systems}. Την πληροφορία αυτή την βρίσκουμε στην βιβλιογραφία να ονομάζεται Angle of Arrival 
+(\hyperref[abbr:AoA]{AoA}) ή Direction of Arrival (\hyperref[abbr:DoA]{DoA}).
 
 TODO: 
 
@@ -401,7 +404,7 @@ TODO:
 	(-2x_2+2x_3)x + (-2y_2+2y_3)y = d_2^2 - d_3^2 - x_2^2 + x_3^2 - y_2^2 + y_3^2  \nonumber
 \end{align}
 
-Ο λόγος που κάναμε το παραπάνω βήμα είναι διότι πλέον μπορούμε εύκολα να θεωρήσουμε τους παρακάτω πίνακες.
+Ο λόγος που κάναμε το παραπάνω βήμα είναι διότι πλέον έχουμε δύο εξισώσεις με δύο αγνώστους, οπότε μπορούμε εύκολα να θεωρήσουμε τους παρακάτω πίνακες.
 
 \begin{align}
 	A = \begin{bmatrix} -2x_1+2x_2 & -2y_1+2y_2 \\ -2x_2+2x_3 & -2y_2+2y_3 \end{bmatrix} \nonumber \quad
@@ -427,8 +430,19 @@ TODO:
 	(x-x_i)^2 + (y-y_i)^2 &= d_i^2-e \label{eq:trilateration-circles-error}
 \end{align}
 
+Το αρνητικό με αυτήν την μέθοδο είναι η ανάγκη πραγματοποίησης floating point operations για τον υπολογισμό των συντεταγμένων $(x,y)$ σε πραγματικές συνθήκες - όπου το πλήθος
+των οποίων εξαρτάται από τον τρόπο που θα επιλέξουμε να επιλύσουμε το σύστημα \cite{wsn-Localization-systems}. 
+
 %----------------------------------------------------------------------
 \subsubsection{Bounding Box}
+Σε αυτήν την μέθοδο χρησιμοποιούνται τετράγωνα αντί για κύκλους του Trilateration, ενώ και εδώ θεωρούμε $(x_i,y_i)$
+τις συντεταγμένες των beacon και $d_i$ η απόσταση που έχουμε υπολογίσει από το free node - για κάθε beacon $i$. Δημιουργούμε
+τετράγωνα μήκος πλευράς $2d_i$ με κέντρο το κέντρο του beacon και συντεταγμένες $(x_i - d_i, y_i - d_i)$ \& $(x_i + d_i, y_i + d_i)$. 
+Θετικό πλέον είναι ότι δεν χρειάζεται να κάνουμε floating point operations για τον υπολογισμό του χωρίου τομής - αλλά μπορούμε να το υπολογίσουμε
+με απλή γεωμετρία. Αφού έχουμε υπολογίσει το χωρίο τομής των τετραγώνων μπορούμε να θεωρήσουμε ότι στο κέντρο του βρίσκεται το free node.
+Παράδειγμα αυτής της μεθόδου βρίσκεται στο Figure \ref{fig:Position-Computation-using-distance} (c).
+Η συγκεκριμένη μέθοδος μπορεί να είναι ευκολότερη υπολογιστικά και να απαιτεί λιγότερα processor resources από το Trilateration, όμως ταυτόχρονα 
+προκύπτει και μεγαλύτερο σφάλμα απόκλισης \cite{wsn-Localization-systems}.   
 
 %----------------------------------------------------------------------
 \subsubsection{Triangulation}

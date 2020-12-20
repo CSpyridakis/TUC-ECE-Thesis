@@ -53,7 +53,7 @@
 \usepackage{amssymb} % Mathematical Symbols
 \usepackage{float}
 \usepackage{cancel}	% For cancel in equations 
-\usepackage{svg} % Maybe not used
+\usepackage{svg} 	% Maybe not used
 
 % Greek language support
 \usepackage{textgreek}
@@ -63,6 +63,13 @@
 % Diagrams
 \usepackage{tikz}
 \usetikzlibrary{arrows, shapes, positioning, shadows, trees}
+
+% The following two lines handle too long URLs on bibliography
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+% Euclidean Norm symbol
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 % One different way for chapter styling
 % --------------------------------------------------
@@ -300,8 +307,9 @@
 % TODO: edit to your requirements
 % spell-checker: disable
 \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)]
-	\textbf{AoA}	& \textbf{A}ngle \textbf{o}f \textbf{A}rrival \label{abbr:AoA} \\
+	\textbf{AoA}	& \textbf{A}ngle \textbf{o}f \textbf{A}rrival \label{abbr:AoA} \\ % USED
 	\textbf{BS}		& \textbf{B}ase \textbf{S}tation \label{abbr:BS} \\ % USED
+	\textbf{DoA}	& \textbf{D}irection \textbf{o}f \textbf{A}rrival \label{abbr:DoA} \\ % USED
 	\textbf{ESC}	& \textbf{E}lectronic \textbf{S}peed \textbf{C}ontrol \label{abbr:ESC} \\ % USED
 	\textbf{FPV}	& \textbf{F}irst \textbf{P}erson \textbf{V}iew \label{abbr:FPV} \\	% USED
 	\textbf{GNSS}	& \textbf{G}lobal \textbf{N}avigation \textbf{S}atellite \textbf{S}ystem \label{abbr:GNSS} \\ % USED
@@ -380,6 +388,13 @@
 \printbibliography[keyword={References}, title={References}]
 \printbibliography[keyword={Link}, title={External Links}]
 
+% Personal last page
+\cleardoublepage
+\thispagestyle{plain}
+\thispagestyle{empty} 
+\null\vfil
+\begin{center}{\Large\slshape Last Page}\end{center}
+\vfil\null
 %----------------------------------------------------------------------------------------
 
 \end{document}
