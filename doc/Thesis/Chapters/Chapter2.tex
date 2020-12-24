@@ -57,7 +57,7 @@ nodes των οποίων η θέση είναι γνωστή ή άμεσα υπ
 \end{figure}
 
 Οι συγγραφείς του \cite{wsn-Localization-systems} επιχειρούν να χωρίσουν ένα localization system, ώστε 
-αυτό να αποτελείται από τρία διακριτά components. Πρώτο μπορεί να θεωρηθεί αυτό του \textbf{Distance/Angle Estimation}, 
+αυτό να αποτελείται από τρία διακριτά components, αυτή τη κατηγοριοποίηση την υιοθετούν κατά την έρευνα τους και \cite{localization-systems-components}. Πρώτο μπορεί να θεωρηθεί αυτό του \textbf{Distance/Angle Estimation}, 
 που σκοπό έχει να υπολογίσει την απόσταση ή γωνία που έχουν δύο nodes του συστήματος μεταξύ τους.
 Η πληροφορία που θα παραχθεί από αυτό το component θα χρησιμοποιηθεί στα άλλα μέρη του συστήματος.
 Στην συνέχεια υπάρχει το \textbf{Position Computation}, δουλειά του οποίου είναι να υπολογίσει την θέση ενός
@@ -107,8 +107,8 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 				\foreach \value in {1,3} \draw[->] (c11.195) |- (c11\value.west);
 
 			\node [level-31, below of = c1133, xshift=-80pt] (c12) {Angle};
-				\node [level-4, below of = c12, xshift=70pt] (c121) {Directional Antenna};
-				\node [level-4, below of = c121] (c122) {Omnidirectional Antenna};
+				\node [level-4, below of = c12, xshift=70pt] (c121) {Receiver Antenna Amplitude response};
+				\node [level-4, below of = c121] (c122) {Receiver Antenna Phase response};
 				\foreach \value in {1,2} \draw[->] (c12.210) |- (c12\value.west);
 			\foreach \value in {1,2}   \draw[->] (c1.188) |- (c1\value.west);
 			
@@ -122,12 +122,12 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 			\foreach \value in {1,...,6} \draw[->] (c2.196) |- (c2\value.west);
 
 			% Localization Algorithm
-			\node [level-33, below of = c3, xshift=10pt] (c31) {Distributed/Centralized \\ Position Computation};
-			\node [level-33, below of = c31] (c32) {With/Without Infrastructure};
+			\node [level-33, below of = c3, xshift=10pt] (c31) {Range-based/Range-free};
+			\node [level-33, below of = c31] (c32) {Distributed/Centralized \\ Position Computation};
 			\node [level-33, below of = c32] (c33) {Relative/Absolute Positioning};
 			\node [level-33, below of = c33] (c34) {Indoor/Outdoor scenarios};
 			\node [level-33, below of = c34] (c35) {One-hop/Multihop};
-			\node [level-33, below of = c35] (c36) {Range-based/Range-free};
+			\node [level-33, below of = c35] (c36) {With/Without Infrastructure};
 			\foreach \value in {1,...,6} \draw[->] (c3.187) |- (c3\value.west);
 		\end{tikzpicture}
 	}
@@ -156,7 +156,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 (\hyperref[abbr:RSSI]{RSSI}) και έχει ως αρχή, την χρήση της έντασης ενός 
 σήματος που λαμβάνουμε στον δέκτη, ως τρόπο υπολογισμού της απόστασης
 του πομπό από αυτόν. Στον ελεύθερο χώρο η λαμβανόμενη ισχύς $P_r(d)$ που ανιχνεύει ο πομπός
-μπορεί να περιγραφεί από την σχέση (\ref{eq:signal-strength}) \cite{wsn-Localization-techniques}.
+μπορεί να περιγραφεί από την σχέση (\ref{eq:signal-strength}) η οποία ονομάζεται Friis transmission equation \cite{wsn-Localization-techniques} \cite{rssi-wlan} \cite{wikipedia-friis-equation}.
 
 \begin{align}
 	P_r(d)=\frac{P_tG_tG_r\lambda^2}{(4\pi)^2d^2} \label{eq:signal-strength}
@@ -188,6 +188,10 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 	\label{fig:Ideal-RSSI-over-distance}
 \end{figure}
 
+TODO: Πιο Εξίσωση RSSI
+
+Αν λοιπόν, μετράμε την ισχύ με την οποία λαμβάνουμε ένα σήμα, μπορούμε να είμαστε σε θέση να υπολογίσουμε την απόσταση που βρίσκεται
+ο πομπός από εμάς.
 Αυτή η μέθοδος παρόλο που είναι αρκετά δημοφιλής και οικονομική για τον υπολογισμό της απόστασης
 - λόγω του ότι δεν απαιτεί επιπλέον αισθητήρες - σε πραγματικές 
 συνθήκες αντιμετωπίζει αρκετά προβλήματα, καθώς οι μετρήσεις μπορούν να επηρεαστούν από θόρυβο,
@@ -199,7 +203,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 
 %----------------------------------------------------------------------
 \subsubsection{Propagation Time}
-Σε αυτήν την κατηγορία εκτίμησης απόστασης μεταξύ nodes - η οποία βασίζεται σε χρονικές μετρήσεις της διάδοσης του σήματος
+Σε αυτήν την κατηγορία εκτίμησης απόστασης μεταξύ nodes - η οποία βασίζεται σε χρονικές μετρήσεις της διάδοσης του σήματος Time of Flight (\hyperref[abbr:ToF]{ToF})
 - κατά κύριο λόγο χρησιμοποιούνται δύο βασικές τεχνικές, η Time of Arrival (\hyperref[abbr:ToA]{ToA}) και η Time 
 Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-systems}. 
 
@@ -318,6 +322,7 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 %----------------------------------------------------------------------
 % \subsubsection{Lighthouse}
 
+
 %----------------------------------------------------------------------
 \subsection{Angle}\label{sec:Chapter2-1-1}
 Άλλη μία χρήσιμη μέτρηση η οποία μας ενδιαφέρει, είναι η εκτίμηση της γωνίας από την οποία λαμβάνουμε το σήμα ενός γειτονικού
@@ -326,7 +331,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 επιπλέον σήματος \cite{wsn-Localization-systems}. Την πληροφορία αυτή την βρίσκουμε στην βιβλιογραφία να ονομάζεται Angle of Arrival 
 (\hyperref[abbr:AoA]{AoA}) ή Direction of Arrival (\hyperref[abbr:DoA]{DoA}).
 
-TODO: 
+TODO: Angle of Arrival
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
@@ -373,7 +378,7 @@ TODO:
 %----------------------------------------------------------------------
 \subsubsection{Trilateration}
 Η συγκεκριμένη μέθοδος είναι ίσως η πιο απλή διαισθητικά, βασίζεται στην γεωμετρία κύκλων, είναι αυτή που χρησιμοποιείται από τα \hyperref[abbr:GPS]{GPS}
-για τον υπολογισμό θέσης, ενώ αξιοποιεί μόνο πληροφορία απόστασης και όχι γωνίας \cite{Trilateration-vs-Triangulation}.
+για τον υπολογισμό θέσης \cite{trilateration-vs-triangulation-video}, ενώ αξιοποιεί μόνο πληροφορία απόστασης και όχι γωνίας \cite{Trilateration-vs-Triangulation}.
 Η εξίσωση ενός κύκλου από την γεωμετρία γνωρίζουμε ότι περιγράφεται από την εξίσωση (\ref{eq:trilateration-circles}) όπου $(x_i,y_i)$ οι συντεταγμένες
 του κέντρο του κύκλου με ακτίνα $d_i$.
 
@@ -381,11 +386,11 @@ TODO:
 	(x-x_i)^2 + (y-y_i)^2 &= d_i^2 \label{eq:trilateration-circles}
 \end{align}
 
-Εάν χρησιμοποιούμε omnidirectional κεραίες \cite{Omnidirectional-antenna} και υπολογίσουμε την απόσταση ενός beacon από το node στο οποίο θέλουμε να υπολογίσουμε την θέση του -
+Εάν χρησιμοποιούμε omnidirectional κεραίες \cite{Omnidirectional-antenna} ή στην γενικότερη περίπτωση το μοντέλο της isotropic antenna \cite{Isotropic-radiator} και υπολογίσουμε την απόσταση ενός beacon από το node στο οποίο θέλουμε να υπολογίσουμε την θέση του -
 τότε μπορούμε να συμπεράνουμε ότι το free node είναι κάπου πάνω στην περιφέρεια ενός 
 κύκλου, με κέντρο το beacon και ακτίνα την απόσταση μεταξύ του beacon και του free node. 
 Επαναλαμβάνοντας αυτό για ακόμα δύο beacons, τελικά το free node στο δισδιάστατο επίπεδο $(\mathfrak{R}^2)$ θα πρέπει να βρίσκεται στην τομή των τριών κύκλων, πράγμα που γραφικά 
-απεικονίζεται στο Figure \ref{fig:Position-Computation-using-distance} (a).
+απεικονίζεται στο Figure \ref{fig:Position-Computation-using-distance} (a) \cite{RSSI-trilateration-Range_based}.
 
 \begin{align}
 	x^2-2 x_1 x + x_1^2 + y^2-2 y_1 y + y_1^2 &= d_1^2 \label{eq:trilateration-b1} \\ 
@@ -397,14 +402,14 @@ TODO:
 του Figure \ref{fig:Position-Computation-using-distance} (a),
 όπου $(x_i,y_i)$ το κέντρο του κύκλου, $d_i$ η ακτίνα του - για κάθε beacon $i=1,2,3$ και τελικά $(x,y)$ οι συντεταγμένες του free nodes τις οποίες και ψάχνουμε. 
 Ένας τρόπος να υπολογίσουμε τις συντεταγμένες αυτές είναι να αφαιρέσουμε από την (\ref{eq:trilateration-b2}) την (\ref{eq:trilateration-b1}) και όμοια από την 
-(\ref{eq:trilateration-b3}) την (\ref{eq:trilateration-b2}) ώστε να καταλήξουμε στις παρακάτω δύο εξισώσεις \cite{trilateration-equations}.
+(\ref{eq:trilateration-b3}) την (\ref{eq:trilateration-b2}) ώστε να καταλήξουμε στις παρακάτω δύο εξισώσεις \cite{trilateration-equations} \cite{localization-algorithms-for-wsn}.
 
 \begin{align}
 	(-2x_1+2x_2)x + (-2y_1+2y_2)y = d_1^2 - d_2^2 - x_1^2 + x_2^2 - y_1^2 + y_2^2  \nonumber \\
 	(-2x_2+2x_3)x + (-2y_2+2y_3)y = d_2^2 - d_3^2 - x_2^2 + x_3^2 - y_2^2 + y_3^2  \nonumber
 \end{align}
 
-Ο λόγος που κάναμε το παραπάνω βήμα είναι διότι πλέον έχουμε δύο εξισώσεις με δύο αγνώστους, οπότε μπορούμε εύκολα να θεωρήσουμε τους παρακάτω πίνακες.
+Ο λόγος που κάναμε το παραπάνω βήμα είναι διότι πλέον έχουμε ένα σύστημα με δύο εξισώσεις και δύο αγνώστους, οπότε μπορούμε εύκολα να θεωρήσουμε τους παρακάτω πίνακες.
 
 \begin{align}
 	A = \begin{bmatrix} -2x_1+2x_2 & -2y_1+2y_2 \\ -2x_2+2x_3 & -2y_2+2y_3 \end{bmatrix} \nonumber \quad
@@ -430,8 +435,10 @@ TODO:
 	(x-x_i)^2 + (y-y_i)^2 &= d_i^2-e \label{eq:trilateration-circles-error}
 \end{align}
 
-Το αρνητικό με αυτήν την μέθοδο είναι η ανάγκη πραγματοποίησης floating point operations για τον υπολογισμό των συντεταγμένων $(x,y)$ σε πραγματικές συνθήκες - όπου το πλήθος
-των οποίων εξαρτάται από τον τρόπο που θα επιλέξουμε να επιλύσουμε το σύστημα \cite{wsn-Localization-systems}. 
+Το αρνητικό με αυτήν την μέθοδο, είναι η ανάγκη πραγματοποίησης floating point operations για τον υπολογισμό των συντεταγμένων $(x,y)$ σε πραγματικές συνθήκες - όπου το πλήθος
+των οποίων εξαρτάται από τον τρόπο που θα επιλέξουμε να επιλύσουμε το σύστημα. 
+Ένας από της μεθόδους επίλυσης της γραμμικής εξίσωσης είναι μέσω του least square method, όπου τότε το πλήθος των floating point operations
+που απαιτούνται είναι $(m+n/3)n^2$ με $m$ τον αριθμό των αγνώστων και $n$ τον αριθμό των δοθέντων εξισώσεων \cite{wsn-Localization-systems}.
 
 %----------------------------------------------------------------------
 \subsubsection{Bounding Box}
@@ -446,6 +453,7 @@ TODO:
 
 %----------------------------------------------------------------------
 \subsubsection{Triangulation}
+Σε αντίθεση με τις παραπάνω μεθόδους, η τεχνική Triangulation εκτιμάει την θέση του node που μας ενδιαφέρει, χρησιμοποιώντας   
 
 %----------------------------------------------------------------------
 \subsubsection{Multilateration}
@@ -459,3 +467,20 @@ TODO:
 %----------------------------------------------------------------------------------------
 \section{Localization Algorithm} \label{sec:Chapter2-3} 
 
+%----------------------------------------------------------------------
+\subsubsection{Range-based vs Range-free}
+
+%----------------------------------------------------------------------
+\subsubsection{Distributed vs Centralized Position Computation}
+
+%----------------------------------------------------------------------
+\subsubsection{Relative vs Absolute Positioning}
+
+%----------------------------------------------------------------------
+\subsubsection{Indoor vs Outdoor}
+
+%----------------------------------------------------------------------
+\subsubsection{One-hop vs Multihop}
+
+%----------------------------------------------------------------------
+\subsubsection{With vs Without Infrastructure}
