@@ -57,7 +57,7 @@ nodes των οποίων η θέση είναι γνωστή ή άμεσα υπ
 \end{figure}
 
 Οι συγγραφείς του \cite{wsn-Localization-systems} επιχειρούν να χωρίσουν ένα localization system, ώστε 
-αυτό να αποτελείται από τρία διακριτά components, αυτή τη κατηγοριοποίηση την υιοθετούν κατά την έρευνα τους και \cite{localization-systems-components}. Πρώτο μπορεί να θεωρηθεί αυτό του \textbf{Distance/Angle Estimation}, 
+αυτό να αποτελείται από τρία διακριτά components, αυτή τη κατηγοριοποίηση την υιοθετούν κατά την έρευνα τους και οι ερευνητές του \cite{localization-systems-components}. Πρώτο μπορεί να θεωρηθεί αυτό του \textbf{Distance/Angle Estimation}, 
 που σκοπό έχει να υπολογίσει την απόσταση ή γωνία που έχουν δύο nodes του συστήματος μεταξύ τους.
 Η πληροφορία που θα παραχθεί από αυτό το component θα χρησιμοποιηθεί στα άλλα μέρη του συστήματος.
 Στην συνέχεια υπάρχει το \textbf{Position Computation}, δουλειά του οποίου είναι να υπολογίσει την θέση ενός
@@ -152,11 +152,14 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 %----------------------------------------------------------------------
 \subsubsection{Received Signal Strength}
 Η πρώτη τεχνική η οποία έχει χρησιμοποιηθεί για τον υπολογισμό απόστασης στα 
-\hyperref[abbr:WSN]{WSN} είναι αυτή με όνομα Received Signal Strength Indicator
-(\hyperref[abbr:RSSI]{RSSI}) και έχει ως αρχή, την χρήση της έντασης ενός 
+\hyperref[abbr:WSN]{WSN}, είναι αυτή με όνομα Received Signal Strength Indicator
+(\hyperref[abbr:RSSI]{RSSI}) και έχει ως αρχή την χρήση της έντασης της ισχύς ενός 
 σήματος που λαμβάνουμε στον δέκτη, ως τρόπο υπολογισμού της απόστασης
-του πομπό από αυτόν. Στον ελεύθερο χώρο η λαμβανόμενη ισχύς $P_r(d)$ που ανιχνεύει ο πομπός
-μπορεί να περιγραφεί από την σχέση (\ref{eq:signal-strength}) η οποία ονομάζεται Friis transmission equation \cite{wsn-Localization-techniques} \cite{rssi-wlan} \cite{wikipedia-friis-equation}.
+του πομπό από αυτόν. Path loss ή path attenuation \cite{wikipedia-Path_loss} ονομάζεται η μείωση της ισχύς
+ενός σήματος καθώς αυτό διαδίδεται.
+Στον ελεύθερο χώρο η λαμβανόμενη ισχύς $P_r(d)$ που ανιχνεύει ο πομπός
+μπορεί να περιγράφεται από το μοντέλο του Free Space Path Loss (\hyperref[abbr:FSPL]{FSPL}) \cite{wikipedia-fspl} και να υπολογιστεί
+μέσω της Friis transmission equation \cite{wsn-Localization-techniques} \cite{rssi-wlan} \cite{wikipedia-friis-equation} - σχέση (\ref{eq:signal-strength}).
 
 \begin{align}
 	P_r(d)=\frac{P_tG_tG_r\lambda^2}{(4\pi)^2d^2} \label{eq:signal-strength}
@@ -166,7 +169,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 πομπού, $G_r$ το gain της κεραίας του δέκτη, λ είναι το μήκος κύματος του σήματος
 το οποίο μεταδίδουμε και d η απόσταση του πομπού από τον δέκτη. Αν θεωρήσουμε ότι 
 τα $G_t$, $G_r$ και λ είναι μη μεταβλητές τιμές - με $C_f = \frac{G_tG_r\lambda^2}{(4\pi)^2}$ - τότε μπορούμε να καταλήξουμε
-στην (\ref{eq:signal-strength-simple}) \cite{rssi-simple-formula}
+στην (\ref{eq:signal-strength-simple}) \cite{rssi-simple-formula}.
 
 \begin{align}
 	P_r(d)=C_f\frac{P_t}{d^2} \label{eq:signal-strength-simple}
@@ -175,8 +178,22 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 Αυτό που μπορούμε να δούμε από την παραπάνω σχέση είναι ότι, ιδανικά στον ελεύθερο 
 χώρο σε Line of Sight (\hyperref[abbr:LoS]{LoS}) μετάδοση -
 η ισχύς του σήματος που λαμβάνει ο πομπός εξαρτάται από το αντίστροφο τετράγωνο της
-απόστασης των δύο nodes. Το Figure \ref{fig:Ideal-RSSI-over-distance} περιγράφει 
-σχηματικά αυτήν την εξάρτηση. 
+απόστασης των δύο nodes. Η σχέση (\ref{eq:signal-strength-simple}) συχνά αναφέρεται σε watt, 
+όμως όταν μιλάμε για transmitting power αντί για την χρήση των watt, είναι αρκετά βολική
+η χρήση του dBm \cite{wikipedia-dBm}. Για αυτό τον λόγω παρακάτω παραπείθονται τα conversion
+equations, από το ένα στο άλλο \cite{rssi-wlan} \cite{wikipedia-dBm}. 
+
+\begin{align}
+	\left\{
+		\begin{array}{ll}
+			P[dBm]= 10\cdot log_{10}\left(\frac{P[mW]}{1[mW]}\right) \\[10pt]
+			\quad \quad P[mW] = 10^\frac{(P[dBm])}{10}
+		\end{array}
+	\right.
+\end{align}
+
+Ενώ το Figure \ref{fig:Ideal-RSSI-over-distance} περιγράφει σχηματικά το ιδανικό μοντέλο της εξάρτηση της ισχύς με την αύξηση
+της απόστασης όταν χρησιμοποιούμε στον δέκτη μέτρηση σε dΒm. 
 
 %-------------------------------------------
 
@@ -188,14 +205,13 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 	\label{fig:Ideal-RSSI-over-distance}
 \end{figure}
 
-TODO: Πιο Εξίσωση RSSI
-
 Αν λοιπόν, μετράμε την ισχύ με την οποία λαμβάνουμε ένα σήμα, μπορούμε να είμαστε σε θέση να υπολογίσουμε την απόσταση που βρίσκεται
 ο πομπός από εμάς.
 Αυτή η μέθοδος παρόλο που είναι αρκετά δημοφιλής και οικονομική για τον υπολογισμό της απόστασης
 - λόγω του ότι δεν απαιτεί επιπλέον αισθητήρες - σε πραγματικές 
 συνθήκες αντιμετωπίζει αρκετά προβλήματα, καθώς οι μετρήσεις μπορούν να επηρεαστούν από θόρυβο,
-ανακλάσεις του σήματος, διαθλάσεις, δυναμικά περιβάλλοντα ή εμπόδια σε αυτά, ή ακόμα και errors στο hardware 
+ανακλάσεις του σήματος, διαθλάσεις, δυναμικά περιβάλλοντα ή εμπόδια σε αυτά, Non-Line of Sight (\hyperref[abbr:NLoS]{NLoS}) μετάδοση, 
+ή ακόμα και errors στο hardware 
 \cite{wsn-Localization-systems} \cite{ideal-rssi-model}.
 Σε ένα βαθμό μπορεί να βελτιωθεί η απόδοση με στατικό ή δυναμικό calibration του συστήματος 
 όμως μέχρι τώρα δεν χρησιμοποιείται για εκτίμηση απόστασης σε εφαρμογές όπου nodes έχουν μεγάλη
@@ -250,12 +266,23 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 
 Μπορούμε να το παρακάμψουμε αυτό, με το να γίνει η μέτρηση σε roundtrip μετάδοση, Figure \ref{fig:Time-of-Arrival-cases} (b).
 Σε αυτήν την περίπτωση το ένα node στέλνει ένα σήμα, και μόλις το λάβει ένα γειτονικό node, απαντάει πίσω στο πρώτο. 
-Με αυτόν τον τρόπο η μέτρηση του χρόνου εκκίνησης και άφιξης του σήματος γίνονται στο ίδιο node - 
+Με αυτόν τον τρόπο η μέτρηση του χρόνου εκκίνησης $t_a$ και άφιξης $t_b$ του σήματος γίνονται στο ίδιο node - 
 άρα δεν χρειάζεται συγχρονισμός, και η πραγματική απόσταση είναι η μισή από αυτή που θα υπολογιστεί. Ο κύριος παράγοντας
 σφάλματος σε αυτή την μέθοδο, είναι ο υπολογισμός του χρόνου που χρειάστηκε το δεύτερο node για να διαχειριστεί
-το σήμα που έλαβε και να απαντήσει. Αυτό το internal delay μπορεί να είναι είτε γνωστό από 
+το σήμα που έλαβε και να απαντήσει. Αυτό το internal delay $t_{in}$ μπορεί να είναι είτε γνωστό από 
 ένα a priori calibration, είτε μπορεί να μετριέται και να στέλνεται μαζί με το σήμα απάντησης - ώστε να αφαιρείται
 από τον χρόνο μετάδοσης του κύματος \cite{wsn-Localization-techniques}.
+Με αυτά τα δεδομένα η σχέση (\ref{eq:toa-roundtrip}) περιγράφει τον τρόπο υπολογισμού της
+απόστασης d μεταξύ των δύο nodes.
+
+\begin{align}
+	d=\frac{s(t_b-t_a-t_{in})}{2} \label{eq:toa-roundtrip}
+\end{align}
+
+
+Όσον αφορά την τεχνική \hyperref[abbr:TDoA]{TDoA}, και σε αυτήν την περίπτωση υπάρχουν δύο παραλλαγές της \cite{wsn-Localization-systems} - όπου και οι 
+δύο είναι βασισμένες στην αρχή το ότι δεν μας ενδιαφέρει η χρονική στιγμή που ξεκίνησε η αποστολή ενός σήματος, αλλά μόνο
+οι χρονική στιγμή που το λάβαμε.
 
 \begin{figure} [H]
     \centering
@@ -278,10 +305,6 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 \end{figure}
 
 
-
-Όσον αφορά την τεχνική \hyperref[abbr:TDoA]{TDoA}, και σε αυτήν την περίπτωση υπάρχουν δύο παραλλαγές της \cite{wsn-Localization-systems} - όπου και οι 
-δύο είναι βασισμένες στην αρχή το ότι δεν μας ενδιαφέρει η χρονική στιγμή που ξεκίνησε η αποστολή ενός σήματος, αλλά μόνο
-οι χρονική στιγμή που το λάβαμε.
 Η πρώτη περίπτωση σχετίζεται με single signal και multiple receivers και παρουσιάζεται στο 
 Figure \ref{fig:Time-Difference-of-Arrival-cases} (a), 
 η οποία χρησιμοποιείται συνήθως στα cellular network και απαιτεί την ύπαρξη 
@@ -297,7 +320,7 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 	\Delta t_{ij} \triangleq & t_i - t_j = \frac{1}{s} (\norm{r_i - r_t} - \norm{r_j - r_t}), \quad i \neq j\label{eq:tdoa-multiple}
 \end{align}
 
-Η δεύτερη εκδοχή της χρήσης \hyperref[abbr:TDoA]{TDoA} - η οποία είναι πιο συχνή στα \hyperref[abbr:WSN]{WSN} και αναλύεται παρακάτω, 
+Η δεύτερη εκδοχή της χρήσης \hyperref[abbr:TDoA]{TDoA} - η οποία είναι πιο συχνή στα \hyperref[abbr:WSN]{WSN} και μας ενδιαφέρει περισσότερο, 
 χρησιμοποιεί multiple signals με single receiver και παρουσιάζεται στο Figure \ref{fig:Time-Difference-of-Arrival-cases} (b). 
 Αρχή λειτουργίας έχει ότι ο transmitter θα στείλει πολλαπλά διαφορετικού είδους σήματα και ο δέκτης θα μετρήσει την χρονική διαφορά 
 που τα έλαβε. Ως παράδειγμα μπορεί το ένα σήμα να είναι σε \hyperref[abbr:RF]{RF} και να κινείται με ταχύτητα $s_r=c_o$ και το άλλο 
