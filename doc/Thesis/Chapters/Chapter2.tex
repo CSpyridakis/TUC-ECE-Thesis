@@ -158,7 +158,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 του πομπό από αυτόν. Path loss ή path attenuation \cite{wikipedia-Path_loss} ονομάζεται η μείωση της ισχύς
 ενός σήματος καθώς αυτό διαδίδεται.
 Στον ελεύθερο χώρο η λαμβανόμενη ισχύς $P_r(d)$ που ανιχνεύει ο πομπός
-μπορεί να περιγράφεται από το μοντέλο του Free Space Path Loss (\hyperref[abbr:FSPL]{FSPL}) \cite{wikipedia-fspl} και να υπολογιστεί
+μπορεί να περιγραφτεί από το μοντέλο του Free Space Path Loss (\hyperref[abbr:FSPL]{FSPL}) \cite{wikipedia-fspl}, το οποίο προκύπτει
 μέσω της Friis transmission equation \cite{wsn-Localization-techniques} \cite{rssi-wlan} \cite{wikipedia-friis-equation} - σχέση (\ref{eq:signal-strength}).
 
 \begin{align}
@@ -311,6 +311,37 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 τουλάχιστον 4 beacons για τον υπολογισμό της θέσης ενός free node στον τρισδιάστατο χώρο. Υπολογίζει την χρονική διαφορά
 που έφτασε σε καθένα από τα beacons το σήμα που έστειλε το free node, για τον υπολογισμό της απόστασης του free node από
 το καθένα από αυτά. Σημαντικό σε αυτήν την περίπτωση είναι και εδώ, να είναι απόλυτα συγχρονισμένα τα beacons. 
+Βασίζεται στις ιδιότητες των υπερβολικών καμπύλων και στο ότι με δεδομένη μία συγκεκριμένη χρονική διαφορά του σήματος, 
+το free node θα πρέπει να βρίσκεται κάπου πάνω σε μία υπερβολική καμπύλη όπως παρουσιάζεται από το Figure \ref{fig:TDoA-hyberbolas}
+\cite{youtube-angle-of-arrival-tdoa-hyberbolas}. 
+
+\begin{figure} [H]
+	\centering
+	% -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=0.5\linewidth]{../Photos/tdoa-dt-0.png}\\
+      {(a) $Δt = 0$}
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=0.5\linewidth]{../Photos/tdoa-dt-not-0.png}\\
+      {(b) $Δt \neq 0$}
+	\end{minipage}
+	% -----------------
+    \hfill \break
+    \decoRule
+    \caption[TDoA hyberbolas based on $\Delta t$]{TDoA hyberbolas based on $\Delta t$}
+    \label{fig:TDoA-hyberbolas}
+\end{figure}
+\begin{align}
+	\Delta t = a-a = 0 \quad \quad & \quad \quad\Delta t = x-a \nonumber \\
+	\Delta t = b-b = 0 \quad \quad & \quad \quad\Delta t = y-b \nonumber \\
+	\Delta t = c-c = 0 \quad \quad & \quad \quad\Delta t = z-c \nonumber
+\end{align}
+
+
 Η γενική ιδέα σε αυτήν την περίπτωση περιγράφεται στην εξίσωση (\ref{eq:tdoa-multiple}) \cite{wsn-Localization-techniques} \cite{simple-tdoa} - και αυτό που 
 θέλουμε, είναι να υπολογίσουμε την θέση του $r_t$ (free node) γνωρίζοντας για κάθε δύο διαφορετικά $r_i$ και $r_j$ beacon nodes
 την χρονική στιγμή $t_i$ και $t_j$ που έφτασε το σήμα στο καθένα - εάν αυτό κινούταν με ταχύτητα s και το $\norm{\cdot}$ αναπαριστά την ευκλείδεια
@@ -352,7 +383,32 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 node σε σχέση με έναν άξονας αναφοράς. Ο άξονας αυτός μπορεί να είναι είτε κοινώς για όλα τα nodes (π.χ. ως προς το βόρειο γεωγραφικό πόλο),
 είτε μπορεί να είναι για το κάθε node ξεχωριστός, ως παράδειγμα με βάση τον προσανατολισμό του ίδιου του node ή με βάση την γωνία λήψης ενός 
 επιπλέον σήματος \cite{wsn-Localization-systems}. Την πληροφορία αυτή την βρίσκουμε στην βιβλιογραφία να ονομάζεται Angle of Arrival 
-(\hyperref[abbr:AoA]{AoA}) ή Direction of Arrival (\hyperref[abbr:DoA]{DoA}).
+(\hyperref[abbr:AoA]{AoA}) ή Direction of Arrival (\hyperref[abbr:DoA]{DoA}). 
+Γνωρίζουμε ότι ένα σήμα καθορίζεται πλήρως από τρεις παραμέτρους, το πλάτος, την συχνότητα και την φάση του. Για τον υπολογισμό 
+της γωνίας (\hyperref[abbr:AoA]{AoA}) μπορούν να χρησιμοποιηθούν τεχνικές με γνώμονα το καθένα από αυτά ξεχωριστά.
+
+
+\begin{figure} [H]
+	\centering
+	
+    % -----------------
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.6\linewidth]{../Photos/aoa-2antennas.png}\\
+			{(a) }
+		\end{minipage}%
+		% -----------------
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=0.6\linewidth]{../Photos/aoa-2antennas.png}\\
+			{(b) }
+		\end{minipage}
+	% -----------------
+    \hfill \break
+    \decoRule
+    \caption[]{}
+    \label{}
+\end{figure}
 
 TODO: Angle of Arrival
 
