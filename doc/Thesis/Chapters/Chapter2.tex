@@ -8,7 +8,7 @@ drones. Συνεπώς θα μεταφερθούμε σε πρώτο επίπε�
 για να προσεγγίσουμε το localization problem. 
 
 Όταν μιλάμε για \hyperref[abbr:WSN]{WSN}, αναφερόμαστε σε αυτόνομα ηλεκτρονικά συστήματα, χωρικά διασκορπισμένα σε ένα πεδίο - τα οποία συχνά περιλαμβάνουν
-αισθητήρες και επικοινωνούν με τα γειτονικά τους ή σταθμούς βάσης για να μεταφέρουν πληροφορία \cite{wsn-wikipedia} \cite{farooqiazam2016location}.
+αισθητήρες και επικοινωνούν με τα γειτονικά τους ή \hyperref[abbr:BS]{BS} για να μεταφέρουν πληροφορία \cite{wsn-wikipedia} \cite{farooqiazam2016location}.
 
 Το καθένα από αυτά τα ανεξάρτητα συστήματα ονομάζεται \textbf{Node}. Ενώ για το κάθε μεμονωμένο node 
 μπορεί να έχουμε στην διάθεση μας location information ή όχι. 
@@ -247,10 +247,10 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 σχέση (\ref{eq:speed}), η οποία συσχετίζει την ταχύτητα κίνησης ενός σώματος V ως το πηλίκο της μεταβολής
 της θέσης $\mathrm{d}s$ - που έκανε το σώμα, προς τον χρόνο $\mathrm{d}t$ που χρειάστηκε για να πραγματοποιηθεί η μεταβολή \cite{Kinematics}.
 
-\begin{align}
-	V=&\frac{\mathrm{d}s}{\mathrm{d}t} \label{eq:speed} \\
-	d=&s(t_b-t_a) \label{eq:tod-distance}
-\end{align}
+\begin{gather}
+	V=\frac{\mathrm{d}s}{\mathrm{d}t} \label{eq:speed} \\
+	d=s(t_b-t_a) \label{eq:tod-distance}
+\end{gather}
 
 Αξιοποιώντας την (\ref{eq:speed}) ως αρχή, μπορούμε να καταλήξουμε στην (\ref{eq:tod-distance}) για να εκτιμήσουμε
 την απόσταση d που βρίσκονται δύο nodes μεταξύ τους, αν ένα κύμα κινείται με ταχύτητα $s$ και χρειάστηκε 
@@ -258,7 +258,7 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 σχηματικά αυτό, όπου $t=t_b-t_a$ με $t_b$ η χρονική στιγμή που φτάνει το κύμα στο receiver και $t_a$
 η χρονική στιγμή η οποία ξεκινάει από τον transmitter. Σε περίπτωση που μιλάμε για Radio Frequency 
 (\hyperref[abbr:RF]{RF}) η ταχύτητα μετάδοσης του κύματος είναι ίση με την ταχύτητα μετάδοσης του φωτός $c_o$, το οποίο 
-σε $1μs$ διανύει περίπου 300m.
+σε $0.1μs$ διανύει περίπου $30m$.   
 Με βάση αυτό, μπορούμε εύκολα να καταλάβουμε ότι για να έχουμε ακριβή αποτελέσματα είναι αρκετά σημαντικό
 τα clocks των δύο nodes να είναι απόλυτα συγχρονισμένα για να μην έχουμε error απόκλισης, πράγμα που
 απαιτεί να κάνουμε το συνολικό σύστημα αρκετά πιο πολύπλοκο σχεδιαστικά 
@@ -272,7 +272,7 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 το σήμα που έλαβε και να απαντήσει. Αυτό το internal delay $t_{in}$ μπορεί να είναι είτε γνωστό από 
 ένα a priori calibration, είτε μπορεί να μετριέται και να στέλνεται μαζί με το σήμα απάντησης - ώστε να αφαιρείται
 από τον χρόνο μετάδοσης του κύματος \cite{wsn-Localization-techniques}.
-Με αυτά τα δεδομένα η σχέση (\ref{eq:toa-roundtrip}) περιγράφει τον τρόπο υπολογισμού της
+Με αυτά τα δεδομένα, η σχέση (\ref{eq:toa-roundtrip}) περιγράφει τον τρόπο υπολογισμού της
 απόστασης d μεταξύ των δύο nodes.
 
 \begin{align}
@@ -320,7 +320,7 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 	% -----------------
     \begin{minipage}{.5\textwidth}
       \centering
-      \includegraphics[width=0.5\linewidth]{../Photos/tdoa-dt-0.png}\\
+      \includegraphics[width=0.7\linewidth]{../Photos/tdoa-dt-0.png}\\
       {(a) $Δt = 0$}
     \end{minipage}%
     % -----------------
@@ -335,10 +335,11 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
     \caption[TDoA hyberbolas based on $\Delta t$]{TDoA hyberbolas based on $\Delta t$}
     \label{fig:TDoA-hyberbolas}
 \end{figure}
+
 \begin{align}
-	\Delta t = a-a = 0 \quad \quad & \quad \quad\Delta t = x-a \nonumber \\
-	\Delta t = b-b = 0 \quad \quad & \quad \quad\Delta t = y-b \nonumber \\
-	\Delta t = c-c = 0 \quad \quad & \quad \quad\Delta t = z-c \nonumber
+	\Delta t = a-a = 0 \quad \quad \quad & \quad \quad \quad\Delta t = x-a \nonumber \\
+	\Delta t = b-b = 0 \quad \quad \quad & \quad \quad \quad\Delta t = y-b \nonumber \\
+	\Delta t = c-c = 0 \quad \quad \quad & \quad \quad \quad\Delta t = z-c \nonumber
 \end{align}
 
 
@@ -355,7 +356,8 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 χρησιμοποιεί multiple signals με single receiver και παρουσιάζεται στο Figure \ref{fig:Time-Difference-of-Arrival-cases} (b). 
 Αρχή λειτουργίας έχει ότι ο transmitter θα στείλει πολλαπλά διαφορετικού είδους σήματα και ο δέκτης θα μετρήσει την χρονική διαφορά 
 που τα έλαβε. Ως παράδειγμα μπορεί το ένα σήμα να είναι σε \hyperref[abbr:RF]{RF} και να κινείται με ταχύτητα $s_r=c_o$ και το άλλο 
-ηχητικό με ταχύτητα $s_s \approx 340m/s$. Αν $t_1$ τη χρονική στιγμή που λαμβάνει το \hyperref[abbr:RF]{RF} σήμα ενώ $t_2$ το ηχητικό,
+ηχητικό με ταχύτητα $s_s \approx 343m/s$ \footnote{Για μετάδοση σε ξηρό αέρα υπό θερμοκρασία \SI{20}{\celsius} \cite{wikipedia-speed-of-sound}}. 
+Αν $t_1$ τη χρονική στιγμή που λαμβάνει το \hyperref[abbr:RF]{RF} σήμα ενώ $t_2$ το ηχητικό,
 μπορούμε να υπολογίσουμε την απόσταση μεταξύ των κόμβων από την εξίσωση (\ref{eq:tdoa-distance})
 \cite{wsn-Localization-systems}.
 
@@ -371,46 +373,94 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 δεν μπορούν να μεταφερθούν σε μεγάλες αποστάσεις ή το ότι η ταχύτητα τους μπορεί να επηρεαστεί σημαντικά από περιβαλλοντολογικούς παράγοντες
 \cite{farooqiazam2016location}.
 
-
-
 %----------------------------------------------------------------------
-% \subsubsection{Lighthouse}
-
-
-%----------------------------------------------------------------------
-\subsection{Angle}\label{sec:Chapter2-1-1}
+\subsection{Angle}\label{sec:Chapter2-1-2}
 Άλλη μία χρήσιμη μέτρηση η οποία μας ενδιαφέρει, είναι η εκτίμηση της γωνίας από την οποία λαμβάνουμε το σήμα ενός γειτονικού
 node σε σχέση με έναν άξονας αναφοράς. Ο άξονας αυτός μπορεί να είναι είτε κοινώς για όλα τα nodes (π.χ. ως προς το βόρειο γεωγραφικό πόλο),
 είτε μπορεί να είναι για το κάθε node ξεχωριστός, ως παράδειγμα με βάση τον προσανατολισμό του ίδιου του node ή με βάση την γωνία λήψης ενός 
 επιπλέον σήματος \cite{wsn-Localization-systems}. Την πληροφορία αυτή την βρίσκουμε στην βιβλιογραφία να ονομάζεται Angle of Arrival 
 (\hyperref[abbr:AoA]{AoA}) ή Direction of Arrival (\hyperref[abbr:DoA]{DoA}). 
-Γνωρίζουμε ότι ένα σήμα καθορίζεται πλήρως από τρεις παραμέτρους, το πλάτος, την συχνότητα και την φάση του. Για τον υπολογισμό 
-της γωνίας (\hyperref[abbr:AoA]{AoA}) μπορούν να χρησιμοποιηθούν τεχνικές με γνώμονα το καθένα από αυτά ξεχωριστά.
 
+\begin{align}
+	s(t)=A\sin(2\pi ft + \phi) \label{signal-equation}
+\end{align}
+
+Γνωρίζουμε ότι ένα σήμα καθορίζεται πλήρως από τρεις παραμέτρους, το πλάτος του A, την συχνότητα του $f$ καθώς 
+επίσης και από την φάση του $\phi$ - σχέση (\ref{signal-equation}). Για τον υπολογισμό της γωνίας \hyperref[abbr:AoA]{AoA} μπορούν 
+να χρησιμοποιηθούν τεχνικές με γνώμονα τα παραπάνω. 
+
+\subsubsection{Amplitude response}
+Ο όρος Beamforming \cite{wikipedia-beamforming} χρησιμοποιείται για να περιγράψει το pattern 
+της ευαισθησίας του σήματος που στέλνει/λαμβάνει μία directional antenna \cite{wikipedia-directionl-antenna} ή γενικά στην χρήση του μοντέλο 
+της anisotropy antenna. Το pattern αυτού του τύπου κεραίας, παρουσιάζεται στο Figure \ref{fig:Typical-anisotropic-antenna-pattern}
+\cite{wsn-Localization-techniques} και μπορούμε να χρησιμοποιήσουμε αυτό το χαρακτηριστικό για τον υπολογισμό της \hyperref[abbr:AoA]{AoA}. 
+Εάν χρησιμοποιούμε directional antenna στον receiver και μπορούμε είτε με μηχανικό είτε με ηλεκτρονικό τρόπο να στρέψουμε
+την κεραία σε διάφορες κατευθύνσεις, τότε μπορούμε μετρώντας το πλάτος του σήματος που λαμβάνουμε, να εκτιμήσουμε και την κατεύθυνση του - όπου ιδανικά
+βρίσκεται εκεί από όπου έχουμε την μέγιστη τιμή του amplitude του κύματος. Σημαντικές παράμετροι για την εκτίμηση της γωνίας σε αυτήν την περίπτωση, 
+είναι επίσης η ευαισθησία του δέκτη καθώς και το width του beam της. 
+Λανθασμένη εκτίμηση μπορεί να προκύψει, αν για κάποιο λόγο το πλάτος του σήματος που λαμβάνουμε δεν είναι σταθερό. Σε αυτή την περίπτωση, μία λύση
+είναι να χρησιμοποιήσουμε μία δεύτερη - μη κινούμενη - omnidirectional κεραία και να κανονικοποιήσουμε τις μετρήσεις της directional με βάση τις   
+μετρήσεις της δεύτερης \cite{wsn-Localization-techniques}.
 
 \begin{figure} [H]
 	\centering
-	
+	\includegraphics[scale=0.5]{Images/Theoretical-Background/A-typical-radiation-pattern-of-the-directive-antenna.jpeg}
+	\decoRule
+	\caption[Typical anisotropic antenna pattern]{Typical anisotropic antenna pattern based on \cite{wsn-Localization-techniques} (\href{https://www.sciencedirect.com/science/article/abs/pii/S1389128606003227}{URL})}
+	\label{fig:Typical-anisotropic-antenna-pattern}
+\end{figure}
+
+\subsubsection{Phase response}
+Άλλος τρόπος υπολογισμού του \hyperref[abbr:AoA]{AoA} είναι με την αξιοποίηση της πληροφορία για την φάση που έχουμε για ένα σήμα. Σε αυτήν την περίπτωση
+χρειαζόμαστε ή κεραίες αρκετά μεγαλύτερες από το μήκος κύματος του σήματος που στέλνουμε, ή antenna arrays \cite{wsn-Localization-techniques}. 
+
+Για τα κύματα γνωρίζουμε ότι η διαφορά φάσης $\Delta \phi$ δύο σημείων που απέχουν  
+μεταξύ τους $\Delta \chi$ μπορεί να υπολογιστεί από την σχέση (\ref{eq:phase-different-general}) \cite{phase-difference}.
+
+\begin{align}
+	\Delta \phi = 2\pi\frac{\Delta \chi}{\lambda} = 2\pi\frac{\Delta t}{T} \label{eq:phase-different-general}
+\end{align}
+
+Συνεπώς αν σχεδιάσουμε ένα antenna array, όπου η κάθε κεραία απέχει από την γειτονική της σε συγκεκριμένη απόσταση d και μετρώντας 
+το phase difference του σήματος που λαμβάνουμε στην κάθε μία, μπορούμε να υπολογίσουμε την γωνία πρόσληψης της ακτινοβολίας μέσω της 
+σχέσης (\ref{eq:aoa-equation}) \cite{wsn-Localization-techniques} \cite{youtube-phase-difference-equation}. Παράδειγμα αυτού βρίσκεται στο Figure \ref{fig:Antenna-Arrays} (a).
+Σε αυτήν την περίπτωση χρησιμοποιούμε omnidirectional κεραίες και τον υπολογισμό της διαφοράς φάσης μπορεί να γίνει
+μέσω μετρήσεων \hyperref[abbr:TDoA]{TDoA}.
+
+\begin{gather} 
+	\phi = \frac{2\pi}{\lambda}d\sin(\theta) \Rightarrow \nonumber \\[2pt]
+	\theta = \sin^{-1}\left(\frac{\lambda \phi}{2\pi d}\right) \label{eq:aoa-equation}
+\end{gather}
+
+Δεν υπάρχουν όμως μόνο τα linear antenna arrays, μπορούμε να σχεδιάσουμε σε διάφορες διατάξεις, 
+παράδειγμα μίας εξ' αυτών βρίσκεται στο Figure \ref{fig:Antenna-Arrays} (b).
+
+\begin{figure} [H]
+	\centering
+	% -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\linewidth]{../Photos/aoa-2antennas.png}\\
+      {(a) Linear Two Antenna Array}
+    \end{minipage}%
     % -----------------
-		\begin{minipage}{.5\textwidth}
-			\centering
-			\includegraphics[width=0.6\linewidth]{../Photos/aoa-2antennas.png}\\
-			{(a) }
-		\end{minipage}%
-		% -----------------
-		\begin{minipage}{.5\textwidth}
-			\centering
-			\includegraphics[width=0.6\linewidth]{../Photos/aoa-2antennas.png}\\
-			{(b) }
-		\end{minipage}
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Images/Theoretical-Background/The-antenna-array-geometry-a-linear-and-b-circular_W640.jpeg}\\
+      {(b) Circular Antenna Array (\href{https://www.researchgate.net/publication/298331796_Adaptive_Array_Beamforming_Using_a_Chaotic_Beamforming_Algorithm/figures}{URL})}
+	\end{minipage}
 	% -----------------
     \hfill \break
     \decoRule
-    \caption[]{}
-    \label{}
+    \caption[Antenna Arrays]{Antenna Arrays}
+    \label{fig:Antenna-Arrays}
 \end{figure}
 
-TODO: Angle of Arrival
+Η μέθοδος με την αξιοποίηση της σχέσης (\ref{eq:aoa-equation}) λειτουργεί αρκετά καλά όταν έχουμε υψηλό Signal to Noise Ratio (\hyperref[abbr:SNR]{SNR}),
+αλλά μπορεί να έχει λανθασμένα αποτελέσματα όταν έχουμε διασυμβολικές παρεμβολές ή multipath signals. 
+Επειδή στην πράξη εμφανίζονται και τα δύο, υπάρχει αρκετά μεγάλο επιστημονικό ενδιαφέρον να αντιμετωπιστεί αυτός ο περιορισμός.
+Αρκετές τεχνικές έχουν προταθεί οι οποίες στρέφονται γύρω από την λογική του Maximum Likelihood (\hyperref[abbr:ML]{ML})
+για τον υπολογισμό τελικά της γωνίας \cite{wsn-Localization-techniques}.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
@@ -426,36 +476,8 @@ TODO: Angle of Arrival
 Στις παρακάτω περιγραφές όμως, και χωρίς βλάβη της γενικότητας θα χρησιμοποιηθούν τρία για την απλούστευση της περιγραφής, με την παραδοχή ότι μας
 ενδιαφέρει η δισδιάστατη ανάλυση $(\mathfrak{R}^2)$.
 
-\begin{figure} [H]
-	\centering
-	
-    % -----------------
-		\begin{minipage}{.33\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../Photos/Trilateration-ideal.png}
-			{(a) Ideal Trilateration}
-		\end{minipage}%
-		% -----------------
-		\begin{minipage}{.33\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../Photos/Trilateration-actual.png}
-			{(b) Realistic Trilateration}
-		\end{minipage}
-		% -----------------
-		\begin{minipage}{.33\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{../Photos/Bounding-box.png}\\
-			{(c) Bounding Box}
-		\end{minipage}
-	% -----------------
-    \hfill \break
-    \decoRule
-    \caption[Position Computation using distance]{Position Computation using distance}
-    \label{fig:Position-Computation-using-distance}
-\end{figure}
-
 %----------------------------------------------------------------------
-\subsubsection{Trilateration}
+\subsection{Trilateration}
 Η συγκεκριμένη μέθοδος είναι ίσως η πιο απλή διαισθητικά, βασίζεται στην γεωμετρία κύκλων, είναι αυτή που χρησιμοποιείται από τα \hyperref[abbr:GPS]{GPS}
 για τον υπολογισμό θέσης \cite{trilateration-vs-triangulation-video}, ενώ αξιοποιεί μόνο πληροφορία απόστασης και όχι γωνίας \cite{Trilateration-vs-Triangulation}.
 Η εξίσωση ενός κύκλου από την γεωμετρία γνωρίζουμε ότι περιγράφεται από την εξίσωση (\ref{eq:trilateration-circles}) όπου $(x_i,y_i)$ οι συντεταγμένες
@@ -469,7 +491,28 @@ TODO: Angle of Arrival
 τότε μπορούμε να συμπεράνουμε ότι το free node είναι κάπου πάνω στην περιφέρεια ενός 
 κύκλου, με κέντρο το beacon και ακτίνα την απόσταση μεταξύ του beacon και του free node. 
 Επαναλαμβάνοντας αυτό για ακόμα δύο beacons, τελικά το free node στο δισδιάστατο επίπεδο $(\mathfrak{R}^2)$ θα πρέπει να βρίσκεται στην τομή των τριών κύκλων, πράγμα που γραφικά 
-απεικονίζεται στο Figure \ref{fig:Position-Computation-using-distance} (a) \cite{RSSI-trilateration-Range_based}.
+απεικονίζεται στο Figure \ref{fig:Trilateration-examples} (a) \cite{RSSI-trilateration-Range_based}.
+
+\begin{figure} [H]
+	\centering
+    % -----------------
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../Photos/Trilateration-ideal.png}
+			{(a) Ideal Trilateration}
+		\end{minipage}%
+		% -----------------
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../Photos/Trilateration-actual.png}
+			{(b) Realistic Trilateration}
+		\end{minipage}
+	% -----------------
+    \hfill \break
+    \decoRule
+    \caption[Trilateration examples]{Trilateration examples}
+    \label{fig:Trilateration-examples}
+\end{figure}
 
 \begin{align}
 	x^2-2 x_1 x + x_1^2 + y^2-2 y_1 y + y_1^2 &= d_1^2 \label{eq:trilateration-b1} \\ 
@@ -478,7 +521,7 @@ TODO: Angle of Arrival
 \end{align}
 
 Οι εξισώσεις (\ref{eq:trilateration-b1}), (\ref{eq:trilateration-b2}) και (\ref{eq:trilateration-b3}) περιγράφουν πλήρως τους κύκλους του κάθε node από το παράδειγμα 
-του Figure \ref{fig:Position-Computation-using-distance} (a),
+του Figure \ref{fig:Trilateration-examples} (a),
 όπου $(x_i,y_i)$ το κέντρο του κύκλου, $d_i$ η ακτίνα του - για κάθε beacon $i=1,2,3$ και τελικά $(x,y)$ οι συντεταγμένες του free nodes τις οποίες και ψάχνουμε. 
 Ένας τρόπος να υπολογίσουμε τις συντεταγμένες αυτές είναι να αφαιρέσουμε από την (\ref{eq:trilateration-b2}) την (\ref{eq:trilateration-b1}) και όμοια από την 
 (\ref{eq:trilateration-b3}) την (\ref{eq:trilateration-b2}) ώστε να καταλήξουμε στις παρακάτω δύο εξισώσεις \cite{trilateration-equations} \cite{localization-algorithms-for-wsn}.
@@ -506,7 +549,7 @@ TODO: Angle of Arrival
 Όπως αναφέρθηκε και στις προηγούμενες ενότητες, ο υπολογισμός της απόστασης πολύ πιθανόν να περιλαμβάνει μια μικρή απόκλιση $\widehat{d_i} = d_i - ε$, 
 με το ε συχνά να θεωρείται μία ανεξάρτητη κανονική τυχαία μεταβλητή με μηδενικό μέσο. Αυτό σημαίνει ότι
 τότε οι κύκλοι δεν έχουν ένα κοινό σημείο τομής, αλλά το free node βρίσκεται κάπου μέσα στο χωρίο επικάλυψης
-των τριών κύκλων, σχηματικά αυτό παρουσιάζεται στο Figure \ref{fig:Position-Computation-using-distance} (b) και σε αυτήν την περίπτωση καταλήγουμε σε ένα
+των τριών κύκλων, σχηματικά αυτό παρουσιάζεται στο Figure \ref{fig:Trilateration-examples} (b) και σε αυτήν την περίπτωση καταλήγουμε σε ένα
 μη πεπερασμένο πλήθος λύσεων, με τη συνάρτηση του κάθε κύκλου να περιγράφεται από την εξίσωση
 (\ref{eq:trilateration-circles-error}) \cite{wsn-Localization-systems}.
 
@@ -520,25 +563,61 @@ TODO: Angle of Arrival
 που απαιτούνται είναι $(m+n/3)n^2$ με $m$ τον αριθμό των αγνώστων και $n$ τον αριθμό των δοθέντων εξισώσεων \cite{wsn-Localization-systems}.
 
 %----------------------------------------------------------------------
-\subsubsection{Bounding Box}
+\subsection{Bounding Box}
 Σε αυτήν την μέθοδο χρησιμοποιούνται τετράγωνα αντί για κύκλους του Trilateration, ενώ και εδώ θεωρούμε $(x_i,y_i)$
 τις συντεταγμένες των beacon και $d_i$ η απόσταση που έχουμε υπολογίσει από το free node - για κάθε beacon $i$. Δημιουργούμε
 τετράγωνα μήκος πλευράς $2d_i$ με κέντρο το κέντρο του beacon και συντεταγμένες $(x_i - d_i, y_i - d_i)$ \& $(x_i + d_i, y_i + d_i)$. 
 Θετικό πλέον είναι ότι δεν χρειάζεται να κάνουμε floating point operations για τον υπολογισμό του χωρίου τομής - αλλά μπορούμε να το υπολογίσουμε
 με απλή γεωμετρία. Αφού έχουμε υπολογίσει το χωρίο τομής των τετραγώνων μπορούμε να θεωρήσουμε ότι στο κέντρο του βρίσκεται το free node.
-Παράδειγμα αυτής της μεθόδου βρίσκεται στο Figure \ref{fig:Position-Computation-using-distance} (c).
+Παράδειγμα αυτής της μεθόδου βρίσκεται στο Figure \ref{fig:Bounding-Box-example}.
 Η συγκεκριμένη μέθοδος μπορεί να είναι ευκολότερη υπολογιστικά και να απαιτεί λιγότερα processor resources από το Trilateration, όμως ταυτόχρονα 
 προκύπτει και μεγαλύτερο σφάλμα απόκλισης \cite{wsn-Localization-systems}.   
 
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{../Photos/Bounding-box.png}
+	\decoRule
+	\caption[Bounding Box example]{Bounding Box example}
+	\label{fig:Bounding-Box-example}
+\end{figure}
+
 %----------------------------------------------------------------------
-\subsubsection{Triangulation}
+\subsection{Triangulation}
 Σε αντίθεση με τις παραπάνω μεθόδους, η τεχνική Triangulation εκτιμάει την θέση του node που μας ενδιαφέρει, χρησιμοποιώντας   
+γνώση που έχουμε για γωνίες και όχι εκτίμηση της απόστασης. Μπορεί να γίνει είτε από τοπικές μετρήσεις του ίδιου του node
+Figure \ref{fig:Triangulation-examples} (a) είτε από μετρήσεις γωνιών που κάνουν τα anchors, Figure \ref{fig:Triangulation-examples} (b)
+\cite{wsn-Localization-systems} και αξιοποιεί την τριγωνομετρία για τον υπολογισμό της θέσης του free node.
+
+\begin{figure} [H]
+	\centering
+	\hspace*{+2cm}\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../Photos/Tringulation-local.png}
+		{(a) Local}
+	\end{minipage}
+	\newline
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../Photos/Tringulation-remote.png}
+		{(b) Remote Ideal}
+	\end{minipage}%
+	% -----------------
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{../Photos/Tringulation-remote-actual.png}
+		{(c) Realistic}
+	\end{minipage}
+	\hfill \break
+	\decoRule
+	\caption[Triangulation examples]{Triangulation examples}
+	\label{fig:Triangulation-examples}
+\end{figure}
 
 %----------------------------------------------------------------------
-\subsubsection{Multilateration}
+\subsection{Multilateration}
 
 %----------------------------------------------------------------------
-\subsubsection{Probabilistic approaches}
+\subsection{Probabilistic approaches}
 
 
 %----------------------------------------------------------------------------------------
@@ -547,19 +626,19 @@ TODO: Angle of Arrival
 \section{Localization Algorithm} \label{sec:Chapter2-3} 
 
 %----------------------------------------------------------------------
-\subsubsection{Range-based vs Range-free}
+\subsection{Range-based vs Range-free}
 
 %----------------------------------------------------------------------
-\subsubsection{Distributed vs Centralized Position Computation}
+\subsection{Distributed vs Centralized Position Computation}
 
 %----------------------------------------------------------------------
-\subsubsection{Relative vs Absolute Positioning}
+\subsection{Relative vs Absolute Positioning}
 
 %----------------------------------------------------------------------
-\subsubsection{Indoor vs Outdoor}
+\subsection{Indoor vs Outdoor}
 
 %----------------------------------------------------------------------
-\subsubsection{One-hop vs Multihop}
+\subsection{One-hop vs Multihop}
 
 %----------------------------------------------------------------------
-\subsubsection{With vs Without Infrastructure}
+\subsection{With vs Without Infrastructure}
