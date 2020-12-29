@@ -305,11 +305,11 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 \end{figure}
 
 
-Η πρώτη περίπτωση σχετίζεται με single signal και multiple receivers και παρουσιάζεται στο 
+Η πρώτη περίπτωση σχετίζεται με single signal και multiple receivers, παρουσιάζεται στο 
 Figure \ref{fig:Time-Difference-of-Arrival-cases} (a), 
-η οποία χρησιμοποιείται συνήθως στα cellular network και απαιτεί την ύπαρξη 
-τουλάχιστον 4 beacons για τον υπολογισμό της θέσης ενός free node στον τρισδιάστατο χώρο. Υπολογίζει την χρονική διαφορά
-που έφτασε σε καθένα από τα beacons το σήμα που έστειλε το free node, για τον υπολογισμό της απόστασης του free node από
+χρησιμοποιείται συνήθως στα cellular network και απαιτεί την ύπαρξη 
+τουλάχιστον 4 beacons για την απόκτηση location πληροφορίας ενός free node στον τρισδιάστατο χώρο. Υπολογίζει την χρονική διαφορά
+που έφτασε σε καθένα από τα beacons το σήμα που έστειλε το free node, για την εκτίμηση της θέσης του free node από
 το καθένα από αυτά. Σημαντικό σε αυτήν την περίπτωση είναι και εδώ, να είναι απόλυτα συγχρονισμένα τα beacons. 
 Βασίζεται στις ιδιότητες των υπερβολικών καμπύλων και στο ότι με δεδομένη μία συγκεκριμένη χρονική διαφορά του σήματος, 
 το free node θα πρέπει να βρίσκεται κάπου πάνω σε μία υπερβολική καμπύλη όπως παρουσιάζεται από το Figure \ref{fig:TDoA-hyberbolas}
@@ -342,15 +342,9 @@ Figure \ref{fig:Time-Difference-of-Arrival-cases} (a),
 	\Delta t = c-c = 0 \quad \quad \quad & \quad \quad \quad\Delta t = z-c \nonumber
 \end{align}
 
-
-Η γενική ιδέα σε αυτήν την περίπτωση περιγράφεται στην εξίσωση (\ref{eq:tdoa-multiple}) \cite{wsn-Localization-techniques} \cite{simple-tdoa} - και αυτό που 
-θέλουμε, είναι να υπολογίσουμε την θέση του $r_t$ (free node) γνωρίζοντας για κάθε δύο διαφορετικά $r_i$ και $r_j$ beacon nodes
-την χρονική στιγμή $t_i$ και $t_j$ που έφτασε το σήμα στο καθένα - εάν αυτό κινούταν με ταχύτητα s και το $\norm{\cdot}$ αναπαριστά την ευκλείδεια
-απόσταση μεταξύ τους.
-
-\begin{align}
-	\Delta t_{ij} \triangleq & t_i - t_j = \frac{1}{s} (\norm{r_i - r_t} - \norm{r_j - r_t}), \quad i \neq j\label{eq:tdoa-multiple}
-\end{align}
+Μόνο από αυτόν τον υπολογισμό δεν δύναται να κάνουμε ακριβή εκτίμηση απόστασης, 
+μπορούμε να συμπεράνουμε όμως τον γεωμετρικό τόπο στον οποίο βρίσκεται το free node. Στο Section \ref{sec:Multilateration} - και σε επέκταση αυτού -
+παρουσιάζεται όμως, ο τρόπος με τον οποίο μπορούμε να συνδυάσουμε τέτοια πληροφορία από πολλαπλά beacon για να εκτιμήσουμε την ακριβή θέση του free node.
 
 Η δεύτερη εκδοχή της χρήσης \hyperref[abbr:TDoA]{TDoA} - η οποία είναι πιο συχνή στα \hyperref[abbr:WSN]{WSN} και μας ενδιαφέρει περισσότερο, 
 χρησιμοποιεί multiple signals με single receiver και παρουσιάζεται στο Figure \ref{fig:Time-Difference-of-Arrival-cases} (b). 
@@ -614,7 +608,31 @@ Figure \ref{fig:Triangulation-examples} (a) είτε από μετρήσεις �
 \end{figure}
 
 %----------------------------------------------------------------------
-\subsection{Multilateration}
+\subsection{Multilateration} \label{sec:Multilateration}
+Η μέθοδος του Multilateration, έχει ως βάση την γεωμετρία των υπερβολικών καμπύλων και συχνά μπορεί να βρεθεί επίσης και ως hyperbolic positioning 
+στην βιβλιογραφία \cite{multilateration-def} \cite{triangulation-trilateration-multilateration} \cite{wikipedia-multilateration}. Στο Section \ref{sec:Chapter2-1-1} 
+έγινε αναφορά ότι η χρήση του \hyperref[abbr:TDoA]{TDoA} βασίζεται στις υπερβολικές καμπύλες, συνεπώς μπορούμε εύκολα να χρησιμοποιήσουμε
+της μετρήσεις αυτές για τον υπολογισμό της θέσης του free node.
+
+Η γενική ιδέα σε αυτήν την περίπτωση περιγράφεται στην εξίσωση (\ref{eq:tdoa-multiple}) \cite{wsn-Localization-techniques} \cite{simple-tdoa} - και αυτό που 
+θέλουμε, είναι να υπολογίσουμε την θέση του $r_t$ (free node) γνωρίζοντας για κάθε δύο διαφορετικά $r_i$ και $r_j$ beacon nodes
+την χρονική στιγμή $t_i$ και $t_j$ που έφτασε το σήμα στο καθένα - εάν αυτό κινούταν με ταχύτητα s και το $\norm{\cdot}$ συμβολίζει την ευκλείδεια
+απόσταση μεταξύ τους.
+
+\begin{align}
+	\Delta t_{ij} \triangleq & t_i - t_j = \frac{1}{s} (\norm{r_i - r_t} - \norm{r_j - r_t}), \quad i \neq j\label{eq:tdoa-multiple}
+\end{align}
+
+Αυτό που αναπαριστά ουσιαστικά η σχέση (\ref{eq:tdoa-multiple}) δεν είναι τίποτα άλλο από την προσπάθεια εύρεσης του σημείου τομής των καμπύλων.
+Παράδειγμα αυτής της μεθόδου βρίσκεται στο Figure \ref{fig:Multilateration}.
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{../Photos/multilateration.png}
+	\decoRule
+	\caption[Multilateration example]{Multilateration example}
+	\label{fig:Multilateration}
+\end{figure}
 
 %----------------------------------------------------------------------
 \subsection{Probabilistic approaches}
