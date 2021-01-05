@@ -73,6 +73,12 @@
 % Euclidean Norm symbol
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
+% To use upper dot in Greek (equivalent of English semicolon)
+\newcommand{\udot}{$^{\mbox{$\cdot$}}$ }
+
+% To use comments in your text 
+\def\*#1*\ {} %E.g. Text \* comment *\ text
+
 % One different way for chapter styling
 % --------------------------------------------------
 % \usepackage{titlesec, blindtext, color}
@@ -324,15 +330,17 @@
 	\textbf{IMU}	& \textbf{I}ntertial \textbf{M}easurement \textbf{U}nit \label{abbr:IMU} \\ % USED
 	\textbf{ISR}	& \textbf{I}ntelligence, \textbf{S}urveillance, and \textbf{R}econnaissance \label{abbr:ISR} \\ % USED
 	\textbf{LoS}	& \textbf{L}ine   \textbf{o}f \textbf{S}ight \label{abbr:LoS} \\ % USED
-	\textbf{LPWAN}	& \textbf{L}ow \textbf{P}ower \textbf{W}ide \textbf{A}rea \textbf{N}etwork \label{abbr:LPWAN} \\
-	\textbf{MAV}	& \textbf{M}icro \textbf{A}erial \textbf{V}ehicle \label{abbr:MAV} \\
+	% \textbf{LPWAN}	& \textbf{L}ow \textbf{P}ower \textbf{W}ide \textbf{A}rea \textbf{N}etwork \label{abbr:LPWAN} \\
+	% \textbf{MAV}	& \textbf{M}icro \textbf{A}erial \textbf{V}ehicle \label{abbr:MAV} \\
 	\textbf{MCU}	& \textbf{M}icro \textbf{C}ontroller \textbf{U}nit \label{abbr:MCU} \\ % USED
+	\textbf{MLAT}	& \textbf{M}ulti\textbf{lat}eration \label{abbr:MLAT} \\ % USED
 	\textbf{ML}		& \textbf{M}aximum \textbf{L}ikelihood \label{abbr:ML} \\ % USED
 	\textbf{MPU}	& \textbf{M}icro \textbf{P}rocessor \textbf{U}nit \label{abbr:MPU} \\  % USED
+	\textbf{MRS}	& \textbf{M}inimal \textbf{R}equired number of \textbf{S}ensors\label{abbr:MRS} \\  % USED
 	\textbf{NLoS}	& \textbf{N}on-\textbf{L}ine \textbf{o}f \textbf{S}ight \label{abbr:NLoS} \\ % USED
 	\textbf{RF}	    & \textbf{R}adio \textbf{F}requency \label{abbr:RF} \\ % USED
 	\textbf{RSSI}	& \textbf{R}eceived \textbf{S}ignal \textbf{S}trength \textbf{I}ndicator \label{abbr:RSSI} \\ % USED
-	\textbf{RTLS}	& \textbf{R}eal \textbf{T}ime \textbf{L}ocation \textbf{S}ystem \label{abbr:RTLS} \\
+	% \textbf{RTLS}	& \textbf{R}eal \textbf{T}ime \textbf{L}ocation \textbf{S}ystem \label{abbr:RTLS} \\
 	\textbf{S\&R}	& \textbf{S}earch \textbf{\&} \textbf{R}escue \label{abbr:SR} \\ % USED
 	\textbf{SNR}	& \textbf{S}ignal to \textbf{N}oise \textbf{R}atio \label{abbr:SNR} \\ % USED
 	\textbf{TDoA}	& \textbf{T}ime \textbf{D}ifference \textbf{o}f \textbf{A}rrival \label{abbr:TDoA} \\ % USED
@@ -341,14 +349,10 @@
 	\textbf{UAS}	& \textbf{U}nmanned \textbf{A}ircraft \textbf{S}ystem \label{abbr:UAS} \\ % USED
 	\textbf{UAV}	& \textbf{U}nmanned \textbf{A}erial \textbf{V}ehicle \label{abbr:UAV} \\ % USED
 	\textbf{UCAV}	& \textbf{U}nmanned \textbf{C}ombat \textbf{A}erial \textbf{V}ehicle \label{abbr:UCAV} \\ % USED
-	\textbf{UGV}	& \textbf{U}nmanned \textbf{G}round \textbf{V}ehicle \label{abbr:UGV} \\
-	\textbf{USV}	& \textbf{U}nmanned \textbf{S}urface \textbf{V}ehicle \label{abbr:USV} \\
+	% \textbf{UGV}	& \textbf{U}nmanned \textbf{G}round \textbf{V}ehicle \label{abbr:UGV} \\
+	% \textbf{USV}	& \textbf{U}nmanned \textbf{S}urface \textbf{V}ehicle \label{abbr:USV} \\
 	\textbf{VTOL}	& \textbf{V}ertically \textbf{H}over, \textbf{T}ake-off, and \textbf{L}and \label{abbr:VTOL} \\ % USED
 	\textbf{WSN}	& \textbf{W}ireless \textbf{S}ensor \textbf{N}etworks \label{abbr:WSN} \\ % USED
-	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
-	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
-	\textbf{}	& \textbf{} \textbf{} \textbf{} \label{abbr:} \\
-
 \end{abbreviations}
 % spell-checker: enable
 

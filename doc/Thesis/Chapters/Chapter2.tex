@@ -466,7 +466,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 αυτό. Κύρια διαφορά τους είναι η απόδοση που μπορεί να έχουν, η οποία όμως σχετίζεται με την αύξηση της πολυπλοκότητας στους υπολογισμούς που θα
 χρειαστούν καθώς επίσης και ποιες από τις παραπάνω πληροφορίες θα εκμεταλλευτούν. 
 
-Για την εύρεση της θέσης ενός unknown node στο τρισδιάστατο χώρο $(\mathfrak{R}^3)$ ως ελάχιστο χρειαζόμαστε τέσσερα επιπλέον nodes.
+Για την εύρεση της θέσης ενός unknown node στο τρισδιάστατο χώρο $(\mathfrak{R}^3)$ το Minimal Required number of Sensors (\hyperref[abbr:MRS]{MRS}) είναι τέσσερα nodes.
 Στις παρακάτω περιγραφές όμως, και χωρίς βλάβη της γενικότητας θα χρησιμοποιηθούν τρία για την απλούστευση της περιγραφής, με την παραδοχή ότι μας
 ενδιαφέρει η δισδιάστατη ανάλυση $(\mathfrak{R}^2)$.
 
@@ -554,7 +554,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Το αρνητικό με αυτήν την μέθοδο, είναι η ανάγκη πραγματοποίησης floating point operations για τον υπολογισμό των συντεταγμένων $(x,y)$ σε πραγματικές συνθήκες - όπου το πλήθος
 των οποίων εξαρτάται από τον τρόπο που θα επιλέξουμε να επιλύσουμε το σύστημα. 
 Ένας από της μεθόδους επίλυσης της γραμμικής εξίσωσης είναι μέσω του least square method, όπου τότε το πλήθος των floating point operations
-που απαιτούνται είναι $(m+n/3)n^2$ με $m$ τον αριθμό των αγνώστων και $n$ τον αριθμό των δοθέντων εξισώσεων \cite{wsn-Localization-systems}.
+που απαιτούνται είναι $(m+\frac{n}{3})\cdot n^2$ με $m$ τον αριθμό των αγνώστων και $n$ τον αριθμό των δοθέντων εξισώσεων \cite{wsn-Localization-systems}.
 
 %----------------------------------------------------------------------
 \subsection{Bounding Box}
@@ -596,12 +596,12 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \end{align}
 
 Από τις σχέσεις (\ref{eq:angle-equations-triangulation}) μπορούμε να καταλήξουμε στις σχέσεις (\ref{eq:triangilation-principle}) \cite{triangulation-simple-equation}, μέσω 
-των οποίων τελικά για δεδομένες θέσεις των beacon - γνωστά δηλαδή τα $(x_i,y_i)$ για κάθε beacon i - και με βάση την μέτρηση των γωνιών
+των οποίων τελικά για δεδομένες θέσεις των beacon - γνωστά δηλαδή τα $(x_i,y_i)$ για κάθε beacon i - και με βάση την μέτρηση των γωνιών $\phi_1$ και $\phi_2$,
 να υπολογίσουμε την θέση του free node $(x,y)$.
 
 \begin{equation}
 	\begin{gathered}
-		x = \frac{y_2 - y_1-  x_2\tan \phi_2 + x_1\tan \phi_1}{\tan \phi_1 - \tan \phi_2} \\[2pt]
+		x = \frac{y_2 - y_1-  x_2\tan \phi_2 + x_1\tan \phi_1}{\tan \phi_1 - \tan \phi_2} \\[4pt]
 		y = x\tan \phi_1 + y_1 - x_1\tan \phi_1 \quad = \quad x\tan \phi_2 + y_2 - x_2\tan \phi_2    
 	\end{gathered}
 	\label{eq:triangilation-principle}
@@ -636,12 +636,12 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Figure \ref{fig:Triangulation-examples} (a) - είτε από μετρήσεις γωνιών που κάνουν τα anchors - Figure \ref{fig:Triangulation-examples} (b)
 \cite{wsn-Localization-systems}. Φυσικά σε μία πραγματική εφαρμογή, όπως έχει αναφερθεί παραπάνω, οι μετρήσεις παρουσιάζουν αποκλίσεις 
 από τα ιδανικά μοντέλα. Συνεπώς το Figure \ref{fig:Triangulation-examples} (c) παρουσιάζει σε πιο ρεαλιστικά επίπεδα - συνυπολογίζοντας την ύπαρξη 
-των τις αποκλίσεων - 
+των αποκλίσεων - 
 το χωρίο στο οποίο με μεγαλύτερη πιθανότητα βρίσκεται το node.
 
 %----------------------------------------------------------------------
 \subsection{Multilateration} \label{sec:Multilateration}
-Η μέθοδος του Multilateration\footnote{Κάποιες φορές ο όρος αυτός χρησιμοποιείται επίσης σε αναφορά της χρήσης του Trilateration με πάνω από 3 beacons \cite{wsn-Localization-systems}.}, 
+Η μέθοδος του Multilateration\footnote{Κάποιες φορές ο όρος αυτός χρησιμοποιείται επίσης σε αναφορά της χρήσης του Trilateration ή του Triangulation με πάνω από 3 beacons \cite{wsn-Localization-systems} \cite{triangulation-simple-equation}.} (\hyperref[abbr:MLAT]{MLAT}), 
 έχει ως βάση την γεωμετρία των υπερβολικών καμπύλων και συχνά μπορεί να βρεθεί επίσης και ως hyperbolic positioning 
 στην βιβλιογραφία \cite{multilateration-def} \cite{triangulation-trilateration-multilateration} \cite{wikipedia-multilateration}. Στο Section \ref{sec:Chapter2-1-1} 
 έγινε αναφορά ότι η χρήση του \hyperref[abbr:TDoA]{TDoA} βασίζεται στις υπερβολικές καμπύλες, συνεπώς μπορούμε εύκολα να χρησιμοποιήσουμε
@@ -670,21 +670,48 @@ Figure \ref{fig:Triangulation-examples} (a) - είτε από μετρήσεις
 
 %----------------------------------------------------------------------
 \subsection{Probabilistic approaches}
+Το γεγονός ότι οι μετρήσεις απόστασης και γωνίας σε πραγματικές συνθήκες εμπεριέχουν σφάλματα, έχει ωθείσαι στην έρευνα 
+probabilistic μεθόδων εκτίμησης τοποθεσίας των free nodes. Αυτού του τύπου οι προσεγγίσεις λαμβάνουν υπόψιν τα μετρικά σφάλματα και συχνά τα μοντελοποιούν ως κανονικές
+τυχαίες μεταβλητές. Το μεγάλο μειονέκτημα σε αυτήν την μέθοδο είναι τα μεγάλα υπολογιστικά και χωρικά για αποθήκευση των δεδομένων κόστη \cite{wsn-Localization-systems}. 
 
+\vspace{0.7\baselineskip}
+\begin{center}
+	\line(1,0){400}
+\end{center}
+\vspace{0.7\baselineskip}
 
+Στο Table \ref{tab:Distance/angle-estimation-techniques-and-position-Computation-summary} γίνεται σύνοψη των μεθόδων εκτίμησης απόστασης
+που αναλύθηκαν παραπάνω, μαζί με τις μεθόδους εκτίμησης θέσης που συχνά συνδυάζονται, καθώς και θετικά/αρνητικά όπως και συχνές τους εφαρμογές. 
+ 
 \begin{table}[H]
-    \caption{Distance/angle estimation techniques and position Computation overview}
-    \label{tab:Distance/angle-estimation-techniques-and-position-Computation-overview}
+    \caption{Distance/angle estimation techniques and position Computation summary \cite{advantages-disadvantages-toa-tdoa-aoa}}
+    \label{tab:Distance/angle-estimation-techniques-and-position-Computation-summary}
 	\centering
 	\resizebox{1\textwidth}{!}{
 		\begin{tabular}{ccccc}
 			\toprule
 			\textbf{Method} & \textbf{Position Computetion}  & \textbf{Advantages} & \textbf{Disadvantages} & \textbf{Applications} \\
 			\midrule
-				\hyperref[abbr:RSSI]{RSSI} & \Centerstack{Trila/Multilteration \\ Bounding box} & \Centerstack{Simple \\ No need for extra hardware} & \Centerstack{a} & \Centerstack{a} \\ \hline 
-				\hyperref[abbr:ToA]{ToA} & \Centerstack{Trila/Multilteration \\ Bounding box} & \Centerstack{a} & \Centerstack{a} & \Centerstack{a} \\ \hline
-				\hyperref[abbr:TDoA]{TDoA} & Multilateration & \Centerstack{a} & Need for extra hardware & \Centerstack{a} \\ \hline
-				\hyperref[abbr:AoA]{AoA} & Triangulation & \Centerstack{a} & \Centerstack{a} & \Centerstack{a} \\ \hline
+				\hyperref[abbr:RSSI]{RSSI} & 
+					\*Pos*\ \Centerstack{Trila/Multilteration, \\ Bounding box} & 
+					\*Adv*\ \Centerstack{Simple, inexpensive, \\no need for extra hardware, \\synchronization not needed} & 
+					\*Dis*\ \Centerstack{Multipath interference, \\\hyperref[abbr:NLoS]{NLoS} and enviroment \\can affect readings} & 
+					\*App*\ \Centerstack{In sort-distance with \hyperref[abbr:LoS]{LoS} \\applications and low \\accuracy needed (e.g. indoor)} \\ \hline 
+				\hyperref[abbr:ToA]{ToA} & 
+					\*Pos*\ \Centerstack{Trila/Multilteration, \\Bounding box} & 
+					\*Adv*\ \Centerstack{High accuracy} & 
+					\*Dis*\ \Centerstack{Need to precisely measure time, \\\hyperref[abbr:LoS]{LoS} is normally assumed, \\more sophisticated design} & 
+					\*App*\ \Centerstack{Common in cellular networks\\ or systems assisted by \hyperref[abbr:GPS]{GPS}} \\ \hline
+				\hyperref[abbr:TDoA]{TDoA} & 
+					\*Pos*\ \Centerstack{Multilateration} & 
+					\*Adv*\ \Centerstack{High accuracy} & 
+					\*Dis*\ \Centerstack{Need for extra hardware \\or precisely synchronized nodes} & 
+					\*App*\ \Centerstack{Common in \hyperref[abbr:WSN]{WSN}\\ or systems assisted by \hyperref[abbr:GPS]{GPS}} \\ \hline
+				\hyperref[abbr:AoA]{AoA} & 
+					\*Pos*\ \Centerstack{Triangulation} & 
+					\*Adv*\ \Centerstack{\hyperref[abbr:MRS]{MRS} is two nodes (Ideal $\mathfrak{R}^2$), \\synchronization not needed} & 
+					\*Dis*\ \Centerstack{\hyperref[abbr:LoS]{LoS} is normally assumed, \\smart antenna design, \\multipath can affect readings} & 
+					\*App*\ \Centerstack{Common in radar scenarios} \\ \hline
 			\bottomrule
 		\end{tabular}
 	}
