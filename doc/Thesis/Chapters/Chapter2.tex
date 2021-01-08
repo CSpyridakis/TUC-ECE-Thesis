@@ -416,8 +416,8 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \end{align}
 
 Συνεπώς αν σχεδιάσουμε ένα antenna array, όπου η κάθε κεραία απέχει από την γειτονική της σε συγκεκριμένη απόσταση d και μετρώντας 
-το phase difference του σήματος που λαμβάνουμε στην κάθε μία, μπορούμε να υπολογίσουμε την γωνία πρόσληψης της ακτινοβολίας μέσω της 
-σχέσης (\ref{eq:aoa-equation}) \cite{wsn-Localization-techniques} \cite{youtube-phase-difference-equation}. Παράδειγμα αυτού βρίσκεται στο Figure \ref{fig:Antenna-Arrays} (a).
+το phase difference του σήματος που λαμβάνουμε μεταξύ τους, τότε μπορούμε να υπολογίσουμε την γωνία πρόσληψης της ακτινοβολίας μέσω της 
+σχέσης (\ref{eq:aoa-equation}) \cite{wsn-Localization-techniques} \cite{youtube-phase-difference-equation}. Παράδειγμα αυτού\udot βρίσκεται στο Figure \ref{fig:Antenna-Arrays} (a).
 Σε αυτήν την περίπτωση χρησιμοποιούμε omnidirectional κεραίες και τον υπολογισμό της διαφοράς φάσης μπορεί να γίνει
 μέσω μετρήσεων \hyperref[abbr:TDoA]{TDoA}.
 
@@ -475,10 +475,10 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Η συγκεκριμένη μέθοδος είναι ίσως η πιο απλή διαισθητικά, βασίζεται στην γεωμετρία κύκλων, είναι αυτή που χρησιμοποιείται από τα \hyperref[abbr:GPS]{GPS}
 για τον υπολογισμό θέσης \cite{trilateration-vs-triangulation-video}, ενώ αξιοποιεί μόνο πληροφορία απόστασης και όχι γωνίας \cite{Trilateration-vs-Triangulation}.
 Η εξίσωση ενός κύκλου από την γεωμετρία γνωρίζουμε ότι περιγράφεται από την εξίσωση (\ref{eq:trilateration-circles}) όπου $(x_i,y_i)$ οι συντεταγμένες
-του κέντρο του κύκλου με ακτίνα $d_i$.
+του κέντρο του κύκλου με ακτίνα $r_i$.
 
 \begin{align}
-	(x-x_i)^2 + (y-y_i)^2 &= d_i^2 \label{eq:trilateration-circles}
+	(x-x_i)^2 + (y-y_i)^2 &= r_i^2 \label{eq:trilateration-circles}
 \end{align}
 
 Εάν χρησιμοποιούμε omnidirectional κεραίες \cite{Omnidirectional-antenna} ή στην γενικότερη περίπτωση το μοντέλο της isotropic antenna \cite{Isotropic-radiator} και υπολογίσουμε την απόσταση ενός beacon από το node στο οποίο θέλουμε να υπολογίσουμε την θέση του -
@@ -509,20 +509,20 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \end{figure}
 
 \begin{align}
-	x^2-2 x_1 x + x_1^2 + y^2-2 y_1 y + y_1^2 &= d_1^2 \label{eq:trilateration-b1} \\ 
-	x^2-2 x_2 x + x_2^2 + y^2-2 y_2 y + y_2^2 &= d_2^2 \label{eq:trilateration-b2} \\
-	x^2-2 x_3 x + x_3^2 + y^2-2 y_3 y + y_3^2 &= d_3^2 \label{eq:trilateration-b3} 
+	x^2-2 x_1 x + x_1^2 + y^2-2 y_1 y + y_1^2 &= r_1^2 \label{eq:trilateration-b1} \\ 
+	x^2-2 x_2 x + x_2^2 + y^2-2 y_2 y + y_2^2 &= r_2^2 \label{eq:trilateration-b2} \\
+	x^2-2 x_3 x + x_3^2 + y^2-2 y_3 y + y_3^2 &= r_3^2 \label{eq:trilateration-b3} 
 \end{align}
 
 Οι εξισώσεις (\ref{eq:trilateration-b1}), (\ref{eq:trilateration-b2}) και (\ref{eq:trilateration-b3}) περιγράφουν πλήρως τους κύκλους του κάθε node από το παράδειγμα 
 του Figure \ref{fig:Trilateration-examples} (a),
-όπου $(x_i,y_i)$ το κέντρο του κύκλου, $d_i$ η ακτίνα του - για κάθε beacon $i=1,2,3$ και τελικά $(x,y)$ οι συντεταγμένες του free nodes τις οποίες και ψάχνουμε. 
+όπου $(x_i,y_i)$ το κέντρο του κύκλου, $r_i$ η ακτίνα του - για κάθε beacon $i=1,2,3$ και τελικά $(x,y)$ οι συντεταγμένες του free nodes τις οποίες και ψάχνουμε. 
 Ένας τρόπος να υπολογίσουμε τις συντεταγμένες αυτές είναι να αφαιρέσουμε από την (\ref{eq:trilateration-b2}) την (\ref{eq:trilateration-b1}) και όμοια από την 
 (\ref{eq:trilateration-b3}) την (\ref{eq:trilateration-b2}) ώστε να καταλήξουμε στις παρακάτω δύο εξισώσεις \cite{trilateration-equations} \cite{localization-algorithms-for-wsn}.
 
 \begin{align}
-	(-2x_1+2x_2)x + (-2y_1+2y_2)y = d_1^2 - d_2^2 - x_1^2 + x_2^2 - y_1^2 + y_2^2  \nonumber \\
-	(-2x_2+2x_3)x + (-2y_2+2y_3)y = d_2^2 - d_3^2 - x_2^2 + x_3^2 - y_2^2 + y_3^2  \nonumber
+	(-2x_1+2x_2)x + (-2y_1+2y_2)y = r_1^2 - r_2^2 - x_1^2 + x_2^2 - y_1^2 + y_2^2  \nonumber \\
+	(-2x_2+2x_3)x + (-2y_2+2y_3)y = r_2^2 - r_3^2 - x_2^2 + x_3^2 - y_2^2 + y_3^2  \nonumber
 \end{align}
 
 Ο λόγος που κάναμε το παραπάνω βήμα είναι διότι πλέον έχουμε ένα σύστημα με δύο εξισώσεις και δύο αγνώστους, οπότε μπορούμε εύκολα να θεωρήσουμε τους παρακάτω πίνακες.
@@ -530,7 +530,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \begin{align}
 	A = \begin{bmatrix} -2x_1+2x_2 & -2y_1+2y_2 \\ -2x_2+2x_3 & -2y_2+2y_3 \end{bmatrix} \nonumber \quad
 	X = \begin{bmatrix} x \\ y \end{bmatrix} \nonumber \quad
-	B = \begin{bmatrix} d_1^2 - d_2^2 - x_1^2 + x_2^2 - y_1^2 + y_2^2 \\ d_2^2 - d_3^2 - x_2^2 + x_3^2 - y_2^2 + y_3^2 \end{bmatrix} \nonumber
+	B = \begin{bmatrix} r_1^2 - r_2^2 - x_1^2 + x_2^2 - y_1^2 + y_2^2 \\ r_2^2 - r_3^2 - x_2^2 + x_3^2 - y_2^2 + y_3^2 \end{bmatrix} \nonumber
 \end{align}
 
 Με την χρήση των οποίων καταλήγουμε ότι έχουμε να λύσουμε το γραμμικό σύστημα πινάκων που περιγράφεται από την εξίσωση (\ref{eq:trilateration-linear-system}) για τον
@@ -540,7 +540,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 	AX = B \label{eq:trilateration-linear-system}
 \end{align}
 
-Όπως αναφέρθηκε και στις προηγούμενες ενότητες, ο υπολογισμός της απόστασης πολύ πιθανόν να περιλαμβάνει μια μικρή απόκλιση $\widehat{d_i} = d_i - ε$, 
+Όπως αναφέρθηκε και στις προηγούμενες ενότητες, ο υπολογισμός της απόστασης πολύ πιθανόν να περιλαμβάνει μια μικρή απόκλιση $\widehat{r_i} = r_i - ε$, 
 με το ε συχνά να θεωρείται μία ανεξάρτητη κανονική τυχαία μεταβλητή με μηδενικό μέσο. Αυτό σημαίνει ότι
 τότε οι κύκλοι δεν έχουν ένα κοινό σημείο τομής, αλλά το free node βρίσκεται κάπου μέσα στο χωρίο επικάλυψης
 των τριών κύκλων, σχηματικά αυτό παρουσιάζεται στο Figure \ref{fig:Trilateration-examples} (b) και σε αυτήν την περίπτωση καταλήγουμε σε ένα
@@ -548,7 +548,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 (\ref{eq:trilateration-circles-error}) \cite{wsn-Localization-systems}.
 
 \begin{align}
-	(x-x_i)^2 + (y-y_i)^2 &= d_i^2-e \label{eq:trilateration-circles-error}
+	(x-x_i)^2 + (y-y_i)^2 &= r_i^2-e \label{eq:trilateration-circles-error}
 \end{align}
 
 Το αρνητικό με αυτήν την μέθοδο, είναι η ανάγκη πραγματοποίησης floating point operations για τον υπολογισμό των συντεταγμένων $(x,y)$ σε πραγματικές συνθήκες - όπου το πλήθος
@@ -580,7 +580,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Σε αντίθεση με τις παραπάνω μεθόδους, η τεχνική Triangulation εκτιμάει την θέση του node που μας ενδιαφέρει, χρησιμοποιώντας   
 γνώση που έχουμε για γωνίες και όχι εκτίμηση της απόστασης. Ένα απλούστερο παράδειγμα παρουσιάζεται στο Figure 
 \ref{fig:Principles-of-Triangulation}, όπου σε αυτό το παράδειγμα από την τριγωνομετρία,
-μπορούμε εύκολα να συμπεράνουμε ότι για τις γωνίες $\phi_1$ και $\phi_2$ ισχύουν οι σχέσεις (\ref{eq:angle-equations-triangulation}).
+μπορούμε εύκολα να συμπεράνουμε ότι για τις γωνίες $\theta_1$ και $\theta_2$ ισχύουν οι σχέσεις (\ref{eq:angle-equations-triangulation}).
 
 \begin{figure} [H]
 	\centering
@@ -591,18 +591,18 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \end{figure}
 
 \begin{align}
-	\phi_1 = \frac{d}{d_1} = tan^{-1}\left(\frac{y_1-y}{x_1-x}\right) \quad \quad \quad
-	\phi_2 = \frac{d}{d_2} = tan^{-1}\left(\frac{y_2-y}{x_2-x}\right) \label{eq:angle-equations-triangulation}
+	\theta_1 = \frac{d}{d_1} = tan^{-1}\left(\frac{y_1-y}{x_1-x}\right) \quad \quad \quad
+	\theta_2 = \frac{d}{d_2} = tan^{-1}\left(\frac{y_2-y}{x_2-x}\right) \label{eq:angle-equations-triangulation}
 \end{align}
 
 Από τις σχέσεις (\ref{eq:angle-equations-triangulation}) μπορούμε να καταλήξουμε στις σχέσεις (\ref{eq:triangilation-principle}) \cite{triangulation-simple-equation}, μέσω 
-των οποίων τελικά για δεδομένες θέσεις των beacon - γνωστά δηλαδή τα $(x_i,y_i)$ για κάθε beacon i - και με βάση την μέτρηση των γωνιών $\phi_1$ και $\phi_2$,
+των οποίων τελικά για δεδομένες θέσεις των beacon - γνωστά δηλαδή τα $(x_i,y_i)$ για κάθε beacon i - και με βάση την μέτρηση των γωνιών $\theta_1$ και $\theta_2$,
 να υπολογίσουμε την θέση του free node $(x,y)$.
 
 \begin{equation}
 	\begin{gathered}
-		x = \frac{y_2 - y_1-  x_2\tan \phi_2 + x_1\tan \phi_1}{\tan \phi_1 - \tan \phi_2} \\[4pt]
-		y = x\tan \phi_1 + y_1 - x_1\tan \phi_1 \quad = \quad x\tan \phi_2 + y_2 - x_2\tan \phi_2    
+		x = \frac{y_2 - y_1-  x_2\tan \theta_2 + x_1\tan \theta_1}{\tan \theta_1 - \tan \theta_2} \\[4pt]
+		y = x\tan \theta_1 + y_1 - x_1\tan \theta_1 \quad = \quad x\tan \theta_2 + y_2 - x_2\tan \theta_2    
 	\end{gathered}
 	\label{eq:triangilation-principle}
 \end{equation}
@@ -648,12 +648,12 @@ Figure \ref{fig:Triangulation-examples} (a) - είτε από μετρήσεις
 της μετρήσεις αυτές για τον υπολογισμό της θέσης του free node.
 
 Η γενική ιδέα σε αυτήν την περίπτωση περιγράφεται στην εξίσωση (\ref{eq:tdoa-multiple}) \cite{wsn-Localization-techniques} \cite{simple-tdoa} - και αυτό που 
-θέλουμε, είναι να υπολογίσουμε την θέση του $r_t$ (free node) γνωρίζοντας για κάθε δύο διαφορετικά $r_i$ και $r_j$ beacon nodes
+θέλουμε, είναι να υπολογίσουμε την θέση του $k_t$ (free node) γνωρίζοντας για κάθε δύο διαφορετικά $k_i$ και $k_j$ beacon nodes
 την χρονική στιγμή $t_i$ και $t_j$ που έφτασε το σήμα στο καθένα - εάν αυτό κινούταν με ταχύτητα s και το $\norm{\cdot}$ συμβολίζει την ευκλείδεια
 απόσταση μεταξύ τους.
 
 \begin{align}
-	\Delta t_{ij} \triangleq & t_i - t_j = \frac{1}{s} (\norm{r_i - r_t} - \norm{r_j - r_t}), \quad i \neq j\label{eq:tdoa-multiple}
+	\Delta t_{ij} \triangleq & t_i - t_j = \frac{1}{s} (\norm{k_i - k_t} - \norm{k_j - k_t}), \quad i \neq j\label{eq:tdoa-multiple}
 \end{align}
 
 Αυτό που αναπαριστά ουσιαστικά η σχέση (\ref{eq:tdoa-multiple}) δεν είναι τίποτα άλλο από την προσπάθεια εύρεσης του σημείου τομής των καμπύλων.
@@ -724,25 +724,52 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 \section{Localization Algorithm} \label{sec:Chapter2-3} 
 Στις προηγούμενες ενότητες αναφέρθηκαν κάποιες από τις βασικές τεχνικές που χρησιμοποιούνται, 
 προκειμένου να εκτιμηθεί η θέση ενός node στον χώρο. Σε ένα πραγματικό σύστημα όμως, πρέπει να συνυπολογιστούν 
-και άλλοι παράγοντες πέρα από απλά τον υπολογισμό απόστασης/γωνίας για να καταλήξουμε να αποκτήσουμε location information. 
-Για αυτό το λόγο, σε αυτό το Section παρουσιάζονται επιπλέον πτυχές του συστήματος που πρέπει να λάβουμε 
-υπόψιν\udot καθώς και αναφορά αλγόριθμων που έχουν δοθεί στην βιβλιογραφία ήδη, με τους οποίους μπορούμε να καλύψουμε αυτές τις
+και άλλοι παράγοντες πέρα από - απλά - τον υπολογισμό απόστασης/γωνίας για να καταλήξουμε να αποκτήσουμε location information. 
+Για αυτό το λόγο, στο παρόν Section παρουσιάζονται επιπλέον πτυχές - του συστήματος - που πρέπει να λάβουμε 
+υπόψιν\udot καθώς και αναφορά αλγόριθμων από την υπάρχουσα βιβλιογραφία, με τους οποίους μπορούμε να καλύψουμε αυτές τις
 ανάγκες. 
 
 
 %----------------------------------------------------------------------
 \subsection{Distributed vs Centralized Position Computation}
-Ξεκινώντας, πρέπει να αναφερθεί ότι είναι πολύ σημαντικό να είναι ξεκάθαρο το σημείο στο οποίο
-θα γίνεται η επεξεργασία της πληροφορίας. Υπάρχουν δύο ενδεχόμενα, το πρώτο
-είναι ένα \hyperref[abbr:BS]{BS} να αντιλαμβάνεται και να υπολογίζει την θέση των nodes, τα οποία
-έπειτα θα ενημερώνονται μέσω αυτού για την θέση τους - οπότε αναφερόμαστε για \textbf{Centralized} τεχνικές - αντίθετα το άλλο
-είναι να γίνει τοπικά, όπου κάθε node θα επικοινωνεί με τα γειτονικά του και έπειτα θα επεξεργάζεται αυτό την πληροφορία 
-οπότε αναφερόμαστε για \textbf{Distributed} αλγορίθμους. Το μεγάλο πλεονέκτημα των 
-Centralized αλγορίθμων είναι ότι απομακρύνουμε το πρόβλημα του computation από το κάθε node, όμως την ίδια στιγμή
+Ξεκινώντας, πρέπει να αναφερθεί ότι είναι πολύ σημαντικό να είναι ξεκάθαρο το σημείο\udot στο οποίο
+θα γίνεται η επεξεργασία της πληροφορίας. Υπάρχουν δύο ενδεχόμενα. Το πρώτο
+είναι, ένα \hyperref[abbr:BS]{BS} να αντιλαμβάνεται και να υπολογίζει την θέση των nodes, τα οποία
+έπειτα θα ενημερώνονται μέσω αυτού για την θέση τους - οπότε αναφερόμαστε για \textbf{Centralized} τεχνικές. Αντίθετα άλλη εναλλακτική 
+είναι να γίνει τοπικά η επεξεργασία. Σε αυτή την περίπτωση, αναφερόμαστε για \textbf{Distributed} αλγορίθμους\udot όπου κάθε node θα 
+επικοινωνεί από μόνο του με τα γειτονικά του για την απόκτηση πληροφορίας\udot και έπειτα υπολογίζει μεμονωμένα την θέση του. 
+Το μεγάλο πλεονέκτημα των Centralized αλγορίθμων είναι ότι απομακρύνουμε το πρόβλημα του computation από το κάθε node, όμως την ίδια στιγμή
 προκύπτουν δυσκολίες όπως καθυστερήσεις στις επικοινωνίες, μεγαλύτερο power consumption \& bandwidth, ενώ τέλος
 και προβλήματα με το scalability του συστήματος - καθώς προτείνεται για μικρότερα networks. 
 Γνωστοί Centralized αλγόριθμοι είναι o Multi Dimensional Scaling-Mobile Assisted Programming (\hyperref[abbr:MDS-MAP]{MDS-MAP}), 
 Semi Definite Programming (\hyperref[abbr:SDP]{SDP}) και Localization Based on Simulated Annealing (\hyperref[abbr:LBSA]{LBSA}) \cite{range-distributed}.
+
+\begin{algorithm}[H]
+	\caption{Multi Dimensional Scaling-Mobile Assisted Programming}\label{alg:MDS-MAP}
+	\begin{algorithmic}[1]
+		\Procedure{MDS-MAP}{}
+
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\caption{Semi Definite Programming}\label{alg:SDP}
+	\begin{algorithmic}[1]
+		\Procedure{SDP}{}
+
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\caption{Localization Based on Simulated Annealing}\label{alg:LBSA}
+	\begin{algorithmic}[1]
+		\Procedure{LBSA}{}
+
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
 
 %----------------------------------------------------------------------
 \subsection{One-hop vs Multihop}
@@ -751,17 +778,53 @@ Semi Definite Programming (\hyperref[abbr:SDP]{SDP}) και Localization Based o
 \subsection{Range-based vs Range-free}
 Στο Section \ref{sec:Chapter2-1} αναλύθηκαν τεχνικές εκτίμησης απόστασης ή γωνίας μεταξύ των nodes - συγκεκριμένα οι
 \hyperref[abbr:RSSI]{RSSI}, \hyperref[abbr:ToA]{ToA}, \hyperref[abbr:TDoA]{TDoA} και \hyperref[abbr:AoA]{AoA}.
-Σε αυτήν την περίπτωση - όταν χρησιμοποιούμε δηλαδή έξτρα hardware ή γενικά εκτεταμένες ranging τεχνικές 
-για να καταλήξουμε στις θέσεις των free nodes στον χώρο - αναφερόμαστε σε \textbf{Range-based} μεθόδους.
+Σε αυτήν την περίπτωση, όταν χρησιμοποιούμε δηλαδή έξτρα hardware ή γενικά\udot εκτεταμένες ranging τεχνικές 
+για να καταλήξουμε στις θέσεις των free nodes στον χώρο, αναφερόμαστε σε \textbf{Range-based} μεθόδους.
 Θετικό σε αυτήν την περίπτωση είναι ότι έχουμε μεγαλύτερη ακρίβεια της θέσης, όμως ταυτόχρονα 
 πιθανόν να χρειαστούμε ακριβότερα nodes - λόγο των έξτρα components ή του πιο sophisticated hardware.  
 
 Για να το αποφύγουμε αυτό, μπορούμε να χρησιμοποιήσουμε τεχνικές οι οποίες ονομάζονται \textbf{Range-free}. 
-Αυτές οι τεχνικές δεν απαιτούν κανένα επιπρόσθετο hardware για προσπάθεια εκτίμησης απόστασης/γωνίας - συνεπώς μικρότερο κόστος ανά node, 
-ενώ έχουν αρκετό ενδιαφέρον λόγω της απλότητας τους παρά την μικρότερη ακρίβεια. Κάποιοι γνωστοί Range-free αλγόριθμοι είναι 
+Αυτές οι τεχνικές δεν απαιτούν κανένα επιπρόσθετο hardware, διότι δεν χρησιμοποιούν εκτιμήσεις απόστασης/γωνίας, συνεπώς έχουμε μικρότερο κόστος ανά node. 
+Έχουν αρκετό ενδιαφέρον λόγω της απλότητας τους\udot παρά την μικρότερη ακρίβεια που παρέχουν. Γνωστοί Range-free αλγόριθμοι είναι 
 ο Approximate Point in Triangle (\hyperref[abbr:APIT]{APIT}), 
 Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \cite{range-distributed}.
 
+
+\begin{algorithm}[H]
+	\caption{Approximate Point in Triangle}\label{alg:APIT}
+	\begin{algorithmic}[1]
+		\Procedure{APIT}{}
+
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\caption{Distance Vector-Hop}\label{alg:DV-Hop}
+	\begin{algorithmic}[1]
+		\Procedure{DV-Hop}{}
+
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\caption{Centroid}\label{alg:Centroid}
+	\begin{algorithmic}[1]
+		\Procedure{Centroid}{}
+
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\caption{Gradient}\label{alg:Gradient}
+	\begin{algorithmic}[1]
+		\Procedure{Gradient}{}
+
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
 
 %----------------------------------------------------------------------
 \subsection{Relative vs Absolute Positioning}
