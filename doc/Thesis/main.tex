@@ -155,7 +155,7 @@
 \degree{Electrical and Computer Engineer} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
 \degreeex{Ηλεκτρολόγος Μηχανικός και Μηχανικός Υπολογιστών}
 \subject{Electrical and Computer Engineering} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
-\keywords{Drones, Swarm, Swarm of Drones, WSN, Wireless Sensor Networks, Fleet of Drones, Angle of Arrival, AOA, Direction of Arrival, DOA, Multilateration, Receibed Signal Strength Indicator, RSSI, Time Difference of Arrival, TDOA, Time of Arrival, TOA, Unmanned Aircraft System, UAS, Unmanned Aerial Vehicle, UAV} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\keywords{Drones, Swarm, Swarm of Drones, WSN, Wireless Sensor Networks, Fleet of Drones, Angle of Arrival, AOA, Direction of Arrival, DOA, Multilateration, Trilateration, Triangulation, Bounding Box, Received Signal Strength Indicator, RSSI, Time Difference of Arrival, TDOA, Time of Arrival, TOA, Unmanned Aircraft System, UAS, Unmanned Aerial Vehicle, UAV} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
 \university{\href{https://www.tuc.gr/}{Technical University of Crete}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
 \universityex{\href{https://www.tuc.gr/}{Πολυτεχνείο Κρήτης}}
 \department{\href{https://www.ece.tuc.gr/}{School of Electrical and Computer Engineering}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
@@ -169,6 +169,8 @@
 	\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
 	\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
 	\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+	\hypersetup{pdfsubject={Embedded Systems}} % Set the PDF's subject to your subject
+	% \hypersetup{baseurl={https://TODO.com}} % Need to validate if works
 }
 
 %----------------------------------------------------------------------------------------
@@ -323,12 +325,14 @@
 	\textbf{APIT}	& \textbf{A}pproximate \textbf{P}oint \textbf{I}n \textbf{T}riangle \label{abbr:APIT} \\ % USED
 	\textbf{BS}		& \textbf{B}ase \textbf{S}tation \label{abbr:BS} \\ % USED
 	\textbf{DoA}	& \textbf{D}irection \textbf{o}f \textbf{A}rrival \label{abbr:DoA} \\ % USED
+	\textbf{DoF}	& \textbf{D}egrees \textbf{o}f \textbf{F}reedom \label{abbr:DoF} \\ % USED
 	\textbf{DV-Hop}	& \textbf{D}istance \textbf{V}ector \textbf{H}op \label{abbr:DV-Hop} \\ % USED
 	\textbf{ESC}	& \textbf{E}lectronic \textbf{S}peed \textbf{C}ontrol \label{abbr:ESC} \\ % USED
 	\textbf{FPV}	& \textbf{F}irst \textbf{P}erson \textbf{V}iew \label{abbr:FPV} \\	% USED
 	\textbf{FSPL}	& \textbf{F}ree \textbf{S}pace \textbf{P}ath \textbf{L}oss \label{abbr:FSPL} \\ % USED
 	\textbf{GNSS}	& \textbf{G}lobal \textbf{N}avigation \textbf{S}atellite \textbf{S}ystem \label{abbr:GNSS} \\ % USED
 	\textbf{GPS}	& \textbf{G}lobal \textbf{P}ositioning \textbf{S}ystem \label{abbr:GPS} \\ % USED
+	\textbf{IC}		& \textbf{I}ntegrated  \textbf{C}ircuit  \label{abbr:IC} \\ % USED
 	\textbf{IMU}	& \textbf{I}ntertial \textbf{M}easurement \textbf{U}nit \label{abbr:IMU} \\ % USED
 	\textbf{ISR}	& \textbf{I}ntelligence, \textbf{S}urveillance, and \textbf{R}econnaissance \label{abbr:ISR} \\ % USED
 	\textbf{LBSA}	& \textbf{L}ocalization \textbf{B}ased on \textbf{S}imulated \textbf{A}nnealing \label{abbr:LBSA} \\ % USED
