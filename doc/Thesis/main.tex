@@ -44,8 +44,10 @@
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 \usepackage[section]{placeins}
 \usepackage{comment}
-\usepackage{algorithm}
+\usepackage{algorithm} % \usepackage{algorithm}  vs	 \usepackage[linesnumbered, ruled, vlined]{algorithm2e} 
 \usepackage[noend]{algpseudocode}
+\def\NoNumber#1{{\def\alglinenumber##1{}\State #1}\addtocounter{ALG@line}{-1}}
+
 \usepackage[hyperfootnotes=false]{hyperref}
 \usepackage{graphicx}
 \usepackage{textcomp} %provide many text symbols (such as baht, bullet, copyright, musical note, one quarter, section, and yen)
