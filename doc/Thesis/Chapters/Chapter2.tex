@@ -8,7 +8,7 @@ drones. Συνεπώς θα μεταφερθούμε σε πρώτο επίπε�
 για να προσεγγίσουμε το localization problem. 
 
 Όταν μιλάμε για \hyperref[abbr:WSN]{WSN}, αναφερόμαστε σε αυτόνομα ηλεκτρονικά συστήματα, χωρικά διασκορπισμένα σε ένα πεδίο - τα οποία συχνά περιλαμβάνουν
-αισθητήρες και επικοινωνούν με τα γειτονικά τους ή \hyperref[abbr:BS]{BS} για να μεταφέρουν πληροφορία \cite{wsn-wikipedia} \cite{farooqiazam2016location}.
+αισθητήρες και επικοι\-νωνούν με τα γειτονικά τους ή \hyperref[abbr:BS]{BS} για να μεταφέρουν πληροφορία \cite{wsn-wikipedia} \cite{farooqiazam2016location}.
 
 Το καθένα από αυτά τα ανεξάρτητα συστήματα ονομάζεται \textbf{Node}. Ενώ για το κάθε μεμονωμένο node 
 μπορεί να έχουμε στην διάθεση μας location information ή όχι. 
@@ -58,7 +58,7 @@ nodes των οποίων η θέση είναι γνωστή ή άμεσα υπ
 
 Οι συγγραφείς του \cite{wsn-Localization-systems} επιχειρούν να χωρίσουν ένα localization system, ώστε 
 αυτό να αποτελείται από τρία διακριτά components, αυτή τη κατηγοριοποίηση την υιοθετούν κατά την έρευνα τους και οι ερευνητές του \cite{localization-systems-components}. Πρώτο μπορεί να θεωρηθεί αυτό του \textbf{Distance/Angle Estimation}, 
-που σκοπό έχει να υπολογίσει την απόσταση ή γωνία που έχουν δύο nodes του συστήματος μεταξύ τους.
+που σκοπό έχει να υπολογίσει την γωνία ή απόσταση που έχουν δύο nodes του συστήματος μεταξύ τους.
 Η πληροφορία που θα παραχθεί από αυτό το component θα χρησιμοποιηθεί στα άλλα μέρη του συστήματος.
 Στην συνέχεια υπάρχει το \textbf{Position Computation}, δουλειά του οποίου είναι να υπολογίσει την θέση ενός
 node με βάση την γνώση που έχουμε για τα beacons και την πληροφορία που λάβαμε από το πρώτο component.
@@ -208,13 +208,13 @@ equations, από το ένα στο άλλο \cite{rssi-wlan} \cite{wikipedia-d
 
 Αν λοιπόν, μετράμε την ισχύ με την οποία λαμβάνουμε ένα σήμα, μπορούμε να είμαστε σε θέση να υπολογίσουμε την απόσταση που βρίσκεται
 ο πομπός από εμάς.
-Αυτή η μέθοδος παρόλο που είναι αρκετά δημοφιλής και οικονομική για τον υπολογισμό της απόστασης
-- λόγω του ότι δεν απαιτεί επιπλέον αισθητήρες - σε πραγματικές 
+Αυτή η μέθοδος παρόλο που είναι αρκετά δημοφιλής και οικονομική για τον υπολο\-γισμό της απόστασης
+- λόγω του ότι δεν απαιτεί επιπλέον αισθητήρες - σε πρα\-γματικές 
 συνθήκες αντιμετωπίζει αρκετά προβλήματα, καθώς οι μετρήσεις μπορούν να επηρεαστούν από θόρυβο,
 ανακλάσεις του σήματος, διαθλάσεις, δυναμικά περιβάλλοντα ή εμπόδια σε αυτά, Non-Line of Sight (\hyperref[abbr:NLoS]{NLoS}) μετάδοση, 
 ή ακόμα και errors στο hardware 
 \cite{wsn-Localization-systems} \cite{ideal-rssi-model}.
-Σε ένα βαθμό μπορεί να βελτιωθεί η απόδοση με στατικό ή δυναμικό calibration του συστήματος 
+Σε ένα βαθμό μπορεί να βελτιωθεί η απόδοση με στατικό ή δυναμικό calibration του συστήματος ,
 όμως μέχρι τώρα δεν χρησιμοποιείται για εκτίμηση απόστασης σε εφαρμογές όπου nodes έχουν μεγάλη
 απόσταση μεταξύ τους ή μας ενδιαφέρει να έχουμε μεγάλη ακρίβεια προσέγγισης της απόστασης \cite{ideal-rssi-model}.
 
@@ -343,11 +343,12 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 	\Delta t = c-c = 0 \quad \quad \quad & \quad \quad \quad\Delta t = z-c \nonumber
 \end{align}
 
-Μόνο από αυτόν τον υπολογισμό δεν δύναται να κάνουμε ακριβή εκτίμηση απόστασης, 
+Μόνο από αυτόν τον υπολογισμό δεν δύναται να κάνουμε ακριβή εκτίμηση από\-στασης, 
 μπορούμε να συμπεράνουμε όμως τον γεωμετρικό τόπο στον οποίο βρίσκεται το free node. Στο \emph{Section} \ref{sec:Multilateration} - και σε επέκταση αυτού -
 παρουσιάζεται όμως, ο τρόπος με τον οποίο μπορούμε να συνδυάσουμε τέτοια πληροφορία από πολλαπλά beacon για να εκτιμήσουμε την ακριβή θέση του free node.
 
-Η δεύτερη εκδοχή της χρήσης \hyperref[abbr:TDoA]{TDoA} - η οποία είναι πιο συχνή στα \hyperref[abbr:WSN]{WSN} και μας ενδιαφέρει περισσότερο, 
+Η δεύτερη εκδοχή της χρήσης \hyperref[abbr:TDoA]{TDoA} - η οποία είναι πιο συχνή στα \hyperref[abbr:WSN]{WSN} και 
+μας ε\-νδια\-φέ\-ρει περισσότερο, 
 χρησιμοποιεί multiple signals με single receiver και παρουσιάζεται στο \emph{Figure} \ref{fig:Time-Difference-of-Arrival-cases} (b). 
 Αρχή λειτουργίας έχει ότι ο transmitter θα στείλει πολλαπλά διαφορετικού είδους σήματα και ο δέκτης θα μετρήσει την χρονική διαφορά 
 που τα έλαβε. Ως παράδειγμα μπορεί το ένα σήμα να είναι σε \hyperref[abbr:RF]{RF} και να κινείται με ταχύτητα $s_r=c_o$ και το άλλο 
@@ -361,7 +362,7 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 \end{align}
 
 Θετικό σε αυτήν την μέθοδο είναι ότι το error μπορεί να είναι της τάξης των μερικών εκατοστών, όμως αρχικά απαιτεί επιπλέον εξοπλισμό στο node -
-ώστε να μπορεί να στείλει και να λάβει πολλαπλά είδη σήματος - πράγμα που μπορεί να το κάνει αντιοικονομικό ή αρκετά μεγαλύτερο σε διαστάσεις από 
+ώστε να μπορεί να στείλει και να λάβει πολλαπλά είδη σήματος - πράγμα που μπορεί να το κάνει αντι\-οι\-κο\-νο\-μι\-κό ή αρκετά μεγαλύτερο σε διαστάσεις από 
 το επιθυμητό. Όπως επίσης - και μάλιστα  
 σημαντικότερο - η απόσταση η οποία μπορεί να 
 χρησιμοποιηθεί, επηρεάζεται σε μεγάλο βαθμό από τα χαρακτηριστικά του δεύτερου σήματος. Ως παράδειγμα τα ηχητικά σήματα 
@@ -388,9 +389,9 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \subsubsection{Amplitude response}
 Ο όρος \emph{Beamforming} \cite{wikipedia-beamforming} χρησιμοποιείται για να περιγράψει το pattern 
 της ευαισθησίας του σήματος που στέλνει/λαμβάνει μία \emph{directional antenna} \cite{wikipedia-directionl-antenna} ή γενικά στην χρήση του μοντέλου 
-της \emph{anisotropy antenna}. Το pattern αυτού του τύπου κεραίας, παρουσιάζεται στο \emph{Figure} \ref{fig:Typical-anisotropic-antenna-pattern}
+της \emph{anisotropy antenna}. Το pattern αυτού του τύπου κε\-ραί\-ας, παρουσιάζεται στο \emph{Figure} \ref{fig:Typical-anisotropic-antenna-pattern}
 \cite{wsn-Localization-techniques} και μπορούμε να χρησιμοποιήσουμε αυτό το χαρακτηριστικό για τον υπολογισμό της \hyperref[abbr:AoA]{AoA}. 
-Εάν χρησιμοποιούμε \emph{directional antenna} στον receiver και μπορούμε είτε με μηχανικό είτε με ηλεκτρονικό τρόπο να στρέψουμε
+Εάν χρησιμοποιούμε \emph{directional ante\-nna} στον receiver και μπορούμε είτε με μηχανικό είτε με ηλεκτρονικό τρόπο να στρέψουμε
 την κεραία σε διάφορες κατευθύνσεις, τότε μπορούμε μετρώντας το πλάτος του σήματος που λαμβάνουμε, να εκτιμήσουμε και την κατεύθυνση του - όπου ιδανικά
 βρίσκεται εκεί από όπου έχουμε την μέγιστη τιμή του amplitude του κύματος. Σημαντικές παράμετροι για την εκτίμηση της γωνίας σε αυτήν την περίπτωση, 
 είναι επίσης η ευαισθησία του δέκτη καθώς και το width του beam της. 
@@ -417,10 +418,10 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 	\Delta \phi = 2\pi\frac{\Delta \chi}{\lambda} = 2\pi\frac{\Delta t}{T} \label{eq:phase-different-general}
 \end{align}
 
-Συνεπώς αν σχεδιάσουμε ένα antenna array, όπου η κάθε κεραία απέχει από την γειτονική της σε συγκεκριμένη απόσταση \emph{d} και μετρώντας 
+Συνεπώς, αν σχεδιάσουμε ένα antenna array, όπου η κάθε κεραία απέχει από την γειτονική της σε συγκεκριμένη απόσταση \emph{d} και μετρώντας 
 το phase difference του σήματος που λαμβάνουμε μεταξύ τους, τότε μπορούμε να υπολογίσουμε την γωνία πρόσληψης της ακτινοβολίας μέσω της 
 σχέσης (\ref{eq:aoa-equation}) \cite{wsn-Localization-techniques} \cite{youtube-phase-difference-equation}. Παράδειγμα αυτού\udot βρίσκεται στο \emph{Figure} \ref{fig:Antenna-Arrays} (a).
-Σε αυτήν την περίπτωση χρησιμοποιούμε \emph{omnidirectional} κεραίες και τον υπολογισμό της διαφοράς φάσης μπορεί να γίνει
+Σε αυτήν την περίπτωση χρησιμοποιούμε \emph{omnidirectional} κεραίες και o υπολογισμός της διαφοράς φάσης μπορεί να γίνει
 μέσω μετρήσεων \hyperref[abbr:TDoA]{TDoA}.
 
 \begin{gather} 
@@ -428,7 +429,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 	\theta = \sin^{-1}\left(\frac{\lambda \phi}{2\pi d}\right) \label{eq:aoa-equation}
 \end{gather}
 
-Δεν υπάρχουν όμως μόνο τα linear antenna arrays, μπορούμε να σχεδιάσουμε σε διάφορες διατάξεις, 
+Δεν υπάρχουν όμως μόνο τα linear antenna arrays, μπορούμε να τα σχεδιάσουμε σε διάφορες διατάξεις, 
 παράδειγμα μίας εξ' αυτών βρίσκεται στο \emph{Figure} \ref{fig:Antenna-Arrays} (b).
 
 \begin{figure} [H]
@@ -454,7 +455,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 
 Η μέθοδος με την αξιοποίηση της σχέσης (\ref{eq:aoa-equation}) λειτουργεί αρκετά καλά όταν έχουμε υψηλό Signal to Noise Ratio (\hyperref[abbr:SNR]{SNR}),
 αλλά μπορεί να έχει λανθασμένα αποτελέσματα όταν έχουμε διασυμβολικές παρεμβολές ή multipath signals. 
-Επειδή στην πράξη εμφανίζονται και τα δύο, υπάρχει αρκετά μεγάλο επιστημονικό ενδιαφέρον να αντιμετωπιστεί αυτός ο περιορισμός.
+Επειδή στην πράξη εμφα\-νί\-ζονται και τα δύο, υπάρχει αρκετά μεγάλο επιστημονικό ενδιαφέρον να αντι\-με\-τω\-πι\-στεί αυτός ο περιορισμός.
 Αρκετές τεχνικές έχουν προταθεί οι οποίες στρέφονται γύρω από την λογική του Maximum Likelihood (\hyperref[abbr:ML]{ML})
 για τον υπολογισμό τελικά της γωνίας \cite{wsn-Localization-techniques}.
 
@@ -555,13 +556,13 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 
 Το αρνητικό με αυτήν την μέθοδο, είναι η ανάγκη πραγματοποίησης floating point operations για τον υπολογισμό των συντεταγμένων $(x,y)$ σε πραγματικές συνθήκες - όπου το πλήθος
 των οποίων εξαρτάται από τον τρόπο που θα επιλέξουμε να επιλύσουμε το σύστημα. 
-Ένας από της μεθόδους επίλυσης της γραμμικής εξίσωσης είναι μέσω του least square method, όπου τότε το πλήθος των floating point operations
-που απαιτούνται είναι $(m+\frac{n}{3})\cdot n^2$ με $m$ τον αριθμό των αγνώστων και $n$ τον αριθμό των δοθέντων εξισώσεων \cite{wsn-Localization-systems}.
+Μία από τις μεθόδους επίλυσης της γραμμικής εξίσωσης είναι μέσω του least square method, όπου τότε το πλήθος των floating point operations
+που απαιτούνται είναι $(m+\frac{n}{3})\cdot n^2$, με $m$ τον αριθμό των αγνώστων και $n$ τον αριθμό των δοθέντων εξισώσεων \cite{wsn-Localization-systems}.
 
 %----------------------------------------------------------------------
 \subsection{Bounding Box}
-Σε αυτήν την μέθοδο χρησιμοποιούνται τετράγωνα αντί για κύκλους του Trilateration, ενώ και εδώ θεωρούμε $(x_i,y_i)$
-τις συντεταγμένες των beacon και $d_i$ η απόσταση που έχουμε υπολογίσει από το free node - για κάθε beacon $i$. Δημιουργούμε
+Σε αυτήν την μέθοδο χρησιμοποιούνται τετράγωνα αντί για κύκλους του Tri\-la\-te\-ra\-tion, ενώ και εδώ θεωρούμε $(x_i,y_i)$
+τις συντεταγμένες των beacon και $d_i$ η από\-στα\-ση που έχουμε υπολογίσει από το free node - για κάθε beacon $i$. Δημιουργούμε
 τετράγωνα μήκος πλευράς $2d_i$ με κέντρο το κέντρο του beacon και συντεταγμένες $(x_i - d_i, y_i - d_i)$ \& $(x_i + d_i, y_i + d_i)$. 
 Θετικό πλέον είναι ότι δεν χρειάζεται να κάνουμε floating point operations για τον υπολογισμό του χωρίου τομής - αλλά μπορούμε να το υπολογίσουμε
 με απλή γεωμετρία. Αφού έχουμε υπολογίσει το χωρίο τομής των τετραγώνων μπορούμε να θεωρήσουμε ότι στο κέντρο του βρίσκεται το free node.
@@ -672,7 +673,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 
 %----------------------------------------------------------------------
 \subsection{Probabilistic approaches}
-Το γεγονός ότι οι μετρήσεις απόστασης και γωνίας σε πραγματικές συνθήκες εμπεριέχουν σφάλματα, έχει ωθείσαι στην έρευνα 
+Το γεγονός ότι οι μετρήσεις απόστασης και γωνίας σε πραγματικές συνθήκες εμπε\-ριέ\-χουν σφάλματα, έχει ωθείσαι στην έρευνα 
 probabilistic μεθόδων εκτίμησης τοποθεσίας των free nodes. Αυτού του τύπου οι προσεγγίσεις λαμβάνουν υπόψιν τα μετρικά σφάλματα και συχνά τα μοντελοποιούν ως κανονικές
 τυχαίες μεταβλητές. Το μεγάλο μειονέκτημα σε αυτήν την μέθοδο είναι τα μεγάλα υπολογιστικά και χωρικά - για την αποθήκευση των δεδομένων - κόστη \cite{wsn-Localization-systems}. 
 
@@ -728,13 +729,13 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 προκειμένου να εκτιμηθεί η θέση ενός node στον χώρο. Σε ένα πραγματικό σύστημα όμως, πρέπει να συνυπολογιστούν 
 και άλλοι παράγοντες πέρα από - απλά - τον υπολογισμό απόστασης/γωνίας για να καταλήξουμε να αποκτήσουμε location information. 
 Για αυτό το λόγο, στο παρόν \emph{Section} παρουσιάζονται επιπλέον πτυχές - του συστήματος - που πρέπει να λάβουμε 
-υπόψιν\udot καθώς και αναφορά αλγόριθμων από την υπάρχουσα βιβλιογραφία, με τους οποίους μπορούμε να καλύψουμε αυτές τις
+υπόψιν\udot καθώς και αναφορά αλγό\-ρι\-θμων από την υπάρχουσα βιβλιογραφία, με τους οποίους μπορούμε να καλύψουμε αυτές τις
 ανάγκες. 
 
 Αφού έχουμε δει τα παραπάνω, αρχικά ας ορίσουμε το localization problem με ένα πιο αυστηρό μαθηματικό φορμαλισμό.
 Έστω ότι έχουμε στην διάθεση μας \emph{n} αριθμό από nodes, και για λόγους απλότητας\udot συμμετρικά και όμοια δίκτυα
 επικοινωνίας - με εμβέλεια \emph{r} - για κάθε node. Συνεπώς, ένα node \emph{u} επικοινωνεί με το \emph{v} αν και μόνο αν, και το
-\emph{v} μπορεί να επικοινωνήσει πίσω στο \emph{u}, τα οποία είναι διασκορπισμένα σε ένα δισδιάστατο τετραγωνικό
+\emph{v} μπορεί να επικοινωνήσει πίσω στο \emph{u}, τα οποία είναι δια\-σκο\-ρπι\-σμένα σε ένα δισδιάστατο τετραγωνικό
 πεδίο \emph{$Q=[0,s]\times[0,s]$}. Τότε μπορούμε να μοντελοποιήσουμε το δίκτυο από nodes, ως ένα γράφο $G = (V, E)$ με τα 
 παρακάτω χαρακτηριστικά \cite{wsn-Localization-systems}.  
 
@@ -756,8 +757,8 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 
 %----------------------------------------------------------------------
 \subsection{One-hop vs Multi-hop}
-Η πρώτη κατηγοριοποίηση στην οποία θα αναφερθούμε είναι - για αυτό το δίκτυο γράφου - προκειμένου να εκτιμήσουμε την θέση των nodes\udot 
-από ποιους κόμβους τελικά θα αξιοποιήσουμε πληροφορία. Στους αλγόριθμους \textbf{One-hop} αξιοποιείται πληροφορία,
+Η πρώτη κατηγοριοποίηση στην οποία θα αναφερθούμε - για αυτό το δίκτυο γράφου - προκειμένου να εκτιμήσουμε την θέση των nodes, 
+είναι από ποιους κόμβους τελικά θα αξιοποιήσουμε πληροφορία. Στους αλγόριθμους \textbf{One-hop} αξιοποιείται πληροφορία,
 μόνο από άμεσους γείτονες των nodes\udot προκειμένου να υπολογίσουμε την θέση του κόμβου στο χώρο. Αντίθετα 
 στις τεχνικές \textbf{Multi-hop}, χρησιμοποιούμε και πληροφορία που λαμβάνουμε με έμμεσο τρόπο\udot
 από τους γείτονες των γειτόνων μας - προκειμένου να αποφανθούμε για την θέση ενός node.
@@ -775,7 +776,7 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 Υπάρχουν εφαρμογές, όπως για παράδειγμα - εκτίμηση θέσεις των nodes ενός κινούμενου swarm\udot για χαρτογράφηση σε άγνωστο terrain. Σε αυτού, 
 του τύπου τις εφαρμογές μας ενδιαφέρει η απόλυτη θέση στον χώρο\udot οπότε θέλουμε μεθοδολογίες για \textbf{Absolute Positioning}, ενώ 
 υπάρχουν άλλες εφαρμογές στις οποίες μας ενδιαφέρει μόνο πληροφορία θέσεις σε σχέση με τα υπόλοιπα στοιχεία του περιβάλλοντος της
-εφαρμογής οπότε χρειαζόμαστε \textbf{Relative Positioning}.
+εφαρμογής, οπότε χρειαζόμαστε \textbf{Relative Positioning}.
 
 %----------------------------------------------------------------------
 \subsection{Indoor vs Outdoor Scenarios}
@@ -788,8 +789,8 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 Πρέπει να αναφερθεί επίσης, ότι είναι πολύ σημαντικό να είναι ξεκάθαρο το σημείο\udot στο οποίο
 θα γίνεται η επεξεργασία της πληροφορίας. Υπάρχουν δύο ενδεχόμενα. Το πρώτο
 είναι, ένα \hyperref[abbr:BS]{BS} να αντιλαμβάνεται και να υπολογίζει την θέση των nodes, τα οποία
-έπειτα θα ενημερώνονται μέσω αυτού για την θέση τους - οπότε αναφερόμαστε για \textbf{Centralized} τεχνικές. Αντίθετα άλλη εναλλακτική 
-είναι να γίνει τοπικά η επεξεργασία. Σε αυτή την περίπτωση, αναφερόμαστε για \textbf{Decentralized} ή \textbf{Distributed} αλγορίθμους\udot όπου κάθε node θα 
+έπειτα θα ενημερώνονται μέσω αυτού\udot για την θέση τους - οπότε αναφερόμαστε για \textbf{Centralized} τεχνικές. Αντίθετα άλλη εναλλακτική 
+είναι να γίνει τοπικά η επεξεργασία. Σε αυτή την περίπτωση, αναφερόμαστε για \textbf{Decentralized} ή \textbf{Distri\-bu\-ted} αλγορίθμους\udot όπου κάθε node θα 
 επικοινωνεί από μόνο του με τα γειτονικά του για την απόκτηση πληροφορίας\udot και έπειτα υπολογίζει μεμονωμένα την θέση του. 
 Το μεγάλο πλεονέκτημα των Centralized αλγορίθμων είναι ότι απομακρύνουμε το πρόβλημα του computation από το κάθε node, όμως την ίδια στιγμή
 προκύπτουν δυσκολίες όπως καθυστερήσεις στις επικοινωνίες, μεγαλύτερο power consumption \& bandwidth, ενώ τέλος
@@ -797,6 +798,8 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 με το να χρησιμοποιηθούν πολλαπλά \hyperref[abbr:BS]{BS}s, συνεπώς να έχουμε ένα multi-tier network.
 Γνωστοί Centralized αλγόριθμοι είναι o Multi Dimensional Scaling-Mobile Assisted Programming (\hyperref[abbr:MDS-MAP]{MDS-MAP}), 
 Semi Definite Programming (\hyperref[abbr:SDP]{SDP}) και Localization Based on Simulated Annealing (\hyperref[abbr:LBSA]{LBSA}) \cite{range-distributed}.
+Παρακάτω στον \emph{Algorithm} \ref{alg:MDS-MAP} - ως παράδειγμα
+χρήσης των \emph{Centralized} αλγορίθμων - παρουσιάζεται ο pseudo-code του \hyperref[abbr:MDS-MAP]{MDS-MAP}.
 
 \begin{table}[H]
     \caption{Comparison of Centralized vs Distributed \cite{localization-algorithms-comparizon-tables}}
@@ -827,23 +830,14 @@ Semi Definite Programming (\hyperref[abbr:SDP]{SDP}) και Localization Based o
 	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-	\caption{Semi Definite Programming}\label{alg:SDP}
-	\begin{algorithmic}[1]
-		\Procedure{SDP}{}
-			\\TODO: 
-		\EndProcedure
-	\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]
-	\caption{Localization Based on Simulated Annealing}\label{alg:LBSA}
-	\begin{algorithmic}[1]
-		\Procedure{LBSA}{}
-			\\TODO: 
-		\EndProcedure
-	\end{algorithmic}
-\end{algorithm}
+% \begin{algorithm}[H]
+% 	\caption{Localization Based on Simulated Annealing \cite{simulated-annealing} \cite{sal-localization}}\label{alg:LBSA}
+% 	\begin{algorithmic}[1]
+% 		\Statex{{\bf procedure} LBSA}($r_{i,j} = w(e) \quad \forall \quad e \in E$)
+% 			\State Establishing an appropriate objective function $f(x)$
+% 			\State Randomly and uniformly place nodes in a square region of side length L
+% 	\end{algorithmic}
+% \end{algorithm}
 
 %----------------------------------------------------------------------
 \subsection{Range-based vs Range-free}
@@ -859,6 +853,8 @@ Semi Definite Programming (\hyperref[abbr:SDP]{SDP}) και Localization Based o
 Έχουν αρκετό ενδιαφέρον λόγω της απλότητας τους\udot παρά την μικρότερη ακρίβεια που παρέχουν. Γνωστοί Range-free αλγόριθμοι είναι 
 ο Approximate Point in Triangle (\hyperref[abbr:APIT]{APIT}), 
 Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \cite{range-distributed}.
+Όμοια με παραπάνω, στους \emph{Algorithms} \ref{alg:APIT} και \ref{alg:DV-Hop} παρουσιάζονται οι pseudo-codes 
+των \hyperref[abbr:APIT]{APIT} και \hyperref[abbr:DV-Hop]{DV-Hop} αντίστοιχα.
 
 \begin{table}[H]
     \caption{Comparison of Range-based vs Range-free \cite{localization-algorithms-comparizon-tables}}
@@ -867,7 +863,7 @@ Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \
 	\resizebox{0.8\textwidth}{!}{
 		\begin{tabular}{lll}
 			\toprule
-			 & \textbf{Range-based} & \textbf{ Range-free}\\
+			 & \textbf{Range-based} & \textbf{Range-free}\\
 			\midrule
 				Accuracy & Ranging algorithm & Geometric algorithm \\ 
 				Energy consumption & Signal transition & Instruction execution \\ 
@@ -905,35 +901,53 @@ Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \
 				\State Broadcast a message with it's ID, location and hop count initialized to 0
       		\EndFor 
 			
-			\For{all free nodes received all messages from neighbors}
+			\For{all nodes received all messages from neighbors}
 				\State Neighbor nodes record the node ID, the coordinate values, and  the smallest  
-				\newline\hspace*{1.5em}hop. Then forward packet after incrementing hop by plus 1.
+				\newline\hspace*{1.5em}hop. Then forward packet after incrementing hop by one
       		\EndFor
 
-			\For{all  nodes}
-			\State Estimate average hop distance $HopSize_i = \frac{\sum{\sqrt{(x_i-x_j)^2+(y_i-y_j)^2}}}{\sum{hop_{i,j}}}, i\neq j$
+			\For{each anchor i to each anchor j}
+				\State Estimate Average Hop Distance (\hyperref[abbr:AHD]{AHD}) \par
+				\hspace*{7em}$HopSize_i = \frac{\sum{\sqrt{(x_i-x_j)^2+(y_i-y_j)^2}}}{\sum{hop_{i,j}}}, i\neq j$
+
+				\State Broadcast \hyperref[abbr:AHD]{AHD} to network
 			\EndFor
-			\State
+			
+			\For{each free node u}
+				\State Save the first \hyperref[abbr:AHD]{AHD} you hear, then broadcast it to your neighbors 
+				\State Calculate your distance from your closest anchor \emph{k},
+				$d_{uk} = HopSize_i \times hop_{uk}$
+			\EndFor
+
 			\State Based on known beacons' coordinates and estimated distances, use one of the methods described in 
 			section \ref{sec:Chapter2-2} to compute free nodes locations
 	\end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-	\caption{Centroid}\label{alg:Centroid}
-	\begin{algorithmic}[1]
-		\Procedure{Centroid}{}
-			\\TODO: 
-		\EndProcedure
-	\end{algorithmic}
-\end{algorithm}
+% \begin{algorithm}[H]
+% 	\caption{Centroid}\label{alg:Centroid}
+% 	\begin{algorithmic}[1]
+% 		\Procedure{Centroid}{}
+% 			\\TODO: 
+% 		\EndProcedure
+% 	\end{algorithmic}
+% \end{algorithm}
 
-\begin{algorithm}[H]
-	\caption{Gradient}\label{alg:Gradient}
-	\begin{algorithmic}[1]
-		\Procedure{Gradient}{}
-			\\TODO: 
-		\EndProcedure
-	\end{algorithmic}
-\end{algorithm}
+% \begin{algorithm}[H]
+% 	\caption{Gradient}\label{alg:Gradient}
+% 	\begin{algorithmic}[1]
+% 		\Procedure{Gradient}{}
+% 			\\TODO: 
+% 		\EndProcedure
+% 	\end{algorithmic}
+% \end{algorithm}
 
+\vspace{3\baselineskip}
+\begin{center}
+	\line(1,0){400}
+\end{center}
+\vspace{3\baselineskip}
+Σε ευρύτερη κλίμακα, στην βιβλιογραφία υπάρχουν επιπλέον αλγόριθμοι ή παραλλαγές χρήσης αυτών που αναφέρθηκαν, για την εύρεση τοποθεσίας
+nodes σε ένα \hyperref[abbr:WSN]{WSN}. Παρόλα αυτά, σε αυτό το σημείο έγινε μία συνοπτική αναφορά τους,  και μία πρώτη
+ανάλυση γύρω από το localization problem. Στην συνέχεια,
+με βάση αυτές τις αρχές\udot θα γίνει η μοντελοποίηση του συστήματος που συσχετίζεται αυτή η διπλωματική. 
