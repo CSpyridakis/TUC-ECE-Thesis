@@ -367,8 +367,8 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 σημαντικότερο - η απόσταση η οποία μπορεί να 
 χρησιμοποιηθεί, επηρεάζεται σε μεγάλο βαθμό από τα χαρακτηριστικά του δεύτερου σήματος. Ως παράδειγμα τα ηχητικά σήματα 
 δεν μπορούν να μεταφερθούν σε μεγάλες αποστάσεις ή το ότι η ταχύτητα τους μπορεί να επηρεαστεί σημαντικά από περιβαλλοντολογικούς παράγοντες
-\cite{farooqiazam2016location}. Η συγκεκριμένη μέθοδος είναι διαισθητικά παρόμοια, με αυτό που θα κάναμε για να εκτιμήσουμε 
-την απόσταση μίας αστραπής από εμάς, μετρώντας το χρονικό διάστημα μέχρι να ακούσουμε την βροντή. 
+\cite{farooqiazam2016location}.\footnote{Η συγκεκριμένη μέθοδος είναι διαισθητικά παρόμοια, με αυτό που θα κάναμε για να εκτιμήσουμε 
+την απόσταση μίας αστραπής από εμάς, μετρώντας το χρονικό διάστημα μέχρι να ακούσουμε την βροντή.} 
 
 %----------------------------------------------------------------------
 \subsection{Angle}\label{sec:Chapter2-1-2}
@@ -388,8 +388,9 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 
 \subsubsection{Amplitude response}
 Ο όρος \emph{Beamforming} \cite{wikipedia-beamforming} χρησιμοποιείται για να περιγράψει το pattern 
-της ευαισθησίας του σήματος που στέλνει/λαμβάνει μία \emph{directional antenna} \cite{wikipedia-directionl-antenna} ή γενικά στην χρήση του μοντέλου 
-της \emph{anisotropy antenna}. Το pattern αυτού του τύπου κε\-ραί\-ας, παρουσιάζεται στο \emph{Figure} \ref{fig:Typical-anisotropic-antenna-pattern}
+της ευαισθησίας του σήματος που στέλνει/λαμβάνει μία \emph{directional antenna} \cite{wikipedia-directionl-antenna}. 
+% ή γενικά στην χρήση του μοντέλου της \emph{anisotropy antenna}. 
+Το pattern αυτού του τύπου κε\-ραί\-ας, παρουσιάζεται στο \emph{Figure} \ref{fig:Typical-anisotropic-antenna-pattern}
 \cite{wsn-Localization-techniques} και μπορούμε να χρησιμοποιήσουμε αυτό το χαρακτηριστικό για τον υπολογισμό της \hyperref[abbr:AoA]{AoA}. 
 Εάν χρησιμοποιούμε \emph{directional ante\-nna} στον receiver και μπορούμε είτε με μηχανικό είτε με ηλεκτρονικό τρόπο να στρέψουμε
 την κεραία σε διάφορες κατευθύνσεις, τότε μπορούμε μετρώντας το πλάτος του σήματος που λαμβάνουμε, να εκτιμήσουμε και την κατεύθυνση του - όπου ιδανικά
@@ -920,7 +921,7 @@ Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \
 			\EndFor
 
 			\State Based on known beacons' coordinates and estimated distances, use one of the methods described in 
-			section \ref{sec:Chapter2-2} to compute free nodes locations
+			\emph{Section} \ref{sec:Chapter2-2} to compute free nodes locations
 	\end{algorithmic}
 \end{algorithm}
 
