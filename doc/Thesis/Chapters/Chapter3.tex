@@ -7,43 +7,59 @@
 Ενώ, σε αρκετές από αυτές τις εφαρμογές χρησιμοποιούνται - 
 και για αυτό γίνεται αναφορά - τεχνικές που αναφέ\-ρθηκαν στο \emph{Chapter} \ref{chap:Chapter2}.
 
-Πρώτο πράγμα που πρέπει να σκεφτούμε είναι ότι 
+Κυρίως, αυτά που θα μελετήσουμε θα αφορούν Cooperative Localization (\hyperref[abbr:CL]{CL}) των \hyperref[abbr:UAV]{UAV}s, ενώ επίσης
+μας ενδιαφέρουν τα Distributed Computation - Real Time Location System (\hyperref[abbr:RTLS]{RTLS}) \cite{rtls}. Το πρόβλημα του Local Positioning System 
+(\hyperref[abbr:LPS]{LPS}) \cite{lps} έχει ερευνηθεί από διάφορες οπτικές\udot οι οποίες μπορεί να βασίζονται σε 
+\hyperref[abbr:RF]{RF}, sound waves ή ακόμα και να είναι image oriented.
 
-Πριν αναφερθούν 
-Local Positioning System (LPS)
-flying ad-hoc network (FANET)
+Σχεδόν βέβαιο είναι επίσης, ότι από όποια κατεύθυνση και αν προσεγγίσουμε το \hyperref[abbr:LPS]{LPS} να έχουμε την ανάγκη να 
+χρησιμοποιήσουμε κάποια τεχνική για να συνενώσουμε όλες τις πληροφορίες που έχουμε από τους διάφορους αισθητήρες για κάθε μεμονωμένο 
+time-frame. Την ανάγκη αυτού έρχεται να καλύψει η έννοια του \emph{sensor fusion} \cite{sensor-fusion}, με μερικούς γνωστούς 
+αλγόριθμους που να το επιτυγχάνουν - να είναι το  
+Extended Kalman Filter (\hyperref[abbr:EKF]{EKF}), Unscented Kalman Filter (\hyperref[abbr:UKF]{UKF}), Covariance Intersection  
+Filter (\hyperref[abbr:CIF]{CIF}),  Split  Covariance  Intersection  Filter (\hyperref[abbr:SCIF]{SCIF}) και  Belief  Propagation 
+(\hyperref[abbr:BP]{BP}) \cite{fusion-filters}. 
 
-Λίγα λόγια πριν για φίλτρα κλπ
+Τέλος, είναι επίσης σημαντικό να αναφερθούν τα βασικά \emph{coordinate frames} τα οποία χρησιμοποιούνται. 
+Αισθητήρες όπως το \hyperref[abbr:IMU]{IMU} και το compass κάνουνε μετρήσεις με γνώμονα το ίδιο το σώμα 
+του αντικειμένου για αυτό - σε αυτήν την περίπτωση το σύστημα αξόνων ονομάζεται body frame (B frame) \cite{uwb-imu-gps1}.
+Συχνά είναι όμως βολικό να μετατρέψουμε αυτές τις μετρήσεις σε ένα κοινό North East Down (\hyperref[abbr:NED]{NED}) 
+σύστημα, οπότε τότε αναφερόμαστε σε N frame \cite{uwb-imu-gps1} \cite{body-frames}. Παράδειγμα μεταξύ των δύο 
+συστημάτων βρίσκεται στο \emph{Figure} \ref{fig:Important-coordinate-frames}.
 
-important cordinate frames
-LPS-coordinate frame and
-the UAV body frame is obtained
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{Images/Related-Work/b-frame-n-frame-and-Euler-angles.png}
+	\decoRule
+	\caption[Important coordinate frames]{Important coordinate frames \cite{body-frames}}
+	\label{fig:Important-coordinate-frames}
+\end{figure}
 
-- ραδιο 
-	μικρη αναφορά στα παπερς και μετά ένα ένα λίγα πράγματα
-
-- ήχος
-
-- εικόνα
-
-Extended Kalman Filter
 
 % ------------------------------------------------------------------------------------
-\section{Radio}
+\section{Radio Frequency}
+Το πιο εύκολο που μπορούμε να φανταστούμε είναι να χρησιμοποιήσουμε \hyperref[abbr:RF]{RF} τε\-χνο\-λο\-γίες
+όπως WiFi, Zigbee και Ultra-Wideband (\hyperref[abbr:UWB]{UWB}) για την επικοινωνία και την υλοποίηση του \hyperref[abbr:LPS]{LPS}.   
+Το WiFi είναι εύκολα προσβάσιμο\udot με μικρό κόστος ενώ το Zigbee προτιμάται για
+low power consumption εφαρμογές. Όμως προβλήματα αυτών των δύο είναι, ότι το 
+WiFi έχει μικρή εμβέλεια\footnote{Αυτό είναι κυρίως πρόβλημα για outdoor scenarios} όπως επίσης είναι πολύ εύκολο 
+να υπάρχουν παρεμβολές από τις υπόλοιπες γειτονικές συσκευές\footnote{Αυτό είναι κυρίως πρόβλημα για indoor scenarios} 
+άρα δεν το καθιστά καλή λύση για swarms. Το Zigbee επιλύει κάποια από αυτά τα 
+προβλήματα\footnote{Σε indoor σενάρια παραμένει η δυσκολία για collision-free formation}. Συχνότερη εφαρμογή έχουν 
+τα \hyperref[abbr:UWB]{UWB} καθώς επιλύει θέματα σχετικά με την ακρίβεια των μετρήσεων, το κόστος καθώς και την 
+εμβέλεια\udot ταυτόχρονα \cite{uwb-imu-gps3}. Τέλος, με την χρήση του \hyperref[abbr:UWB]{UWB} επίσης, μπορούμε εύκολα να δημιουργήσουμε
+ένα Flying Ad-hoc Network (\hyperref[abbr:FANET]{FANET}) το οποίο βοηθάει στην ευελιξία του συστήματος.
 
 
-Πρώτη αναφορά \cite{uwb-imu-gps1} \cite{uwb-imu-gps2} \cite{uwb-imu-gps3}
-Ultra-Wideband Based Pose Estimation for SmallUnmanned Aerial Vehicles
+% ---------------------
 
-Cooperative 3-D relative localization for UAV swarm by fusing UWB withIMU and GPS
-
-Accurate  3D  Localization  for  MAV  Swarms  by  UWB  and  IMU  Fusion
 
 \subsection{UWB, IMU and GPS}
-Στο \cite{uwb-imu-gps1}, υπάρχουν Ν αριθμημένα drones, θεωρώντας την λογική του γράφου - για την αναπαράσταση των nodes - οπως 
-περιγράφτηκε στο προηγούμενο κεφάλαιο. Ενώ κάθε node περιλαμβάνει IMU/Compass/GPS και Αltitude and Heading Reference 
-System(AHRS) που αξιοποιείται από ένα flight control unit, με την χρήση των οποίων μπορούν σε NED coordinate frame (N frame) να συλλέξουν πληροφορίες όπως παρουσιάζονται 
-στους παρακάτω πίνακες για κάθε timeframe Κ.
+Στο \cite{uwb-imu-gps1} θεωρείται ότι υπάρχουν Ν αριθμημένα \hyperref[abbr:UAV]{UAV}, τα οποία επικοινωνούν σε \hyperref[abbr:UWB]{UWB}, 
+αξιοποιώντας την λογική του γράφου - για την αναπαράσταση τους - όπως 
+περιγράφτηκε στο \emph{Section} \ref{sec:Chapter2-3}. Ενώ κάθε node περιλαμβάνει \hyperref[abbr:IMU]{IMU}/Compass/\hyperref[abbr:GPS]{GPS} και A\-lti\-tu\-de and Heading Re\-fe\-re\-nce 
+System (\hyperref[abbr:AHRS]{AHRS})\footnote{Αξιοποιείται από ένα flight control unit} με την χρήση των οποίων μπορούν σε N frame να συλλέξουν 
+πληροφορίες όπως παρουσιάζονται στους πα\-ρα\-κά\-τω πίνακες για κάθε time-frame k.
 
 \begin{gather*}
 	\textbf{GPS Position:}\quad r^k_{i, GPS} = \left[x^k_{i, GPS} \quad y^k_{i, GPS} \quad z^k_{i, GPS}\right]^T \\
@@ -51,23 +67,25 @@ System(AHRS) που αξιοποιείται από ένα flight control unit, 
 	\textbf{Acceleration estimation:}\quad\hat{a}^k_i = \left[\hat{a}^k_{xi} \quad \hat{a}^k_{yi} \quad \hat{a}^k_{zi}\right]^T
 \end{gather*}
 
+Σε αυτό το \hyperref[abbr:UWB]{UWB} δίκτυο είναι εύκολο το κάθε drone να μετρήσει την απόσταση του από ένα γειτονικό
+μέσω \hyperref[abbr:ToA]{ToA}-based \hyperref[abbr:RTT]{RTT} μεθόδου, με όνομα Single-sided Two-way Ranging (\hyperref[abbr:SS-TWR]{SS-TWR}),
+όπως περιγράφει η εξίσωση (\ref{eq:ss-twr}). Τα $T_{round}$ και $T_{reply}$ είναι
+οι χρόνοι που μετρήθηκαν για την εκτίμηση απόστασης - η οποία όμως περιλαμβάνει σφάλμα ως εξής, $\norm{r_i - r_j}$ η πραγματική απόσταση και $n_{UWB}$ τυχαία μεταβλητή με τυπική απόκλιση ίση με 
+$0.1m$\footnote{Βάση θεώρησης των συγγραφών της έρευνας} και στο \emph{Figure} \ref{fig:SS-TWR} υπάρχει παράδειγμα αυτής.
 
-
-Ενώ επίσης το κάθε drone μπορεί να μετρήσει την απόσταση του από ένα γειτονικό
-μέσω roundtrip toa-based Single-sided Two-way Ranging (SS-TWR)
+\begin{gather}
+    d_{ij} = \frac{1}{2}(T_{round} - T_{reply}) \times c = \norm{r_i - r_j} + n_{UWB}, \quad with \quad n_{UWB} \sim N(0, \sigma^2_{UWB}) \label{eq:ss-twr}
+\end{gather}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Images/Related-Work/Single-Sided-Two-Way-Ranging-SS-TWR-5.png}
+	\includegraphics[width=0.69
+	\linewidth]{Images/Related-Work/Single-Sided-Two-Way-Ranging-SS-TWR-5.png}
 	\decoRule
 	\caption[Illustration of Single-sided Two-way ranging]{Illustration of Single-sided Two-way ranging \cite{uwb-imu-gps1}}
 	\label{fig:SS-TWR}
 \end{figure}
 
-τυπική απόκλιση = 0.1m
-\begin{gather*}
-    d_{ij} = \frac{1}{2}(T_{round} - T_{reply}) \times c = \norm{r_i - r_j} + n_{UWB}, \quad with \quad n_{UWB} \sim N(0, \sigma^2_{UWB}) 
-\end{gather*}
 
 Και ότι το ένα μπορεί να μεταφέρει τις πληροφορίες του στο άλλο
 
@@ -121,64 +139,26 @@ is calculated using GPS coordinates of several nodes.
 
 % ----------------------------------------------------------------
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{Images/Related-Work/body-frames.png}
-	\decoRule
-	\caption[Important coordinate frames]{Important coordinate frames as shown on \cite{uwb-imu-gps2} DecaWave frame (d), Navigation frame (n), the body frame (b), the translated DecaWave frame ($d_0$) and the projected body frame ($b_0$)}
-	\label{fig:Important-coordinate-frames}
-\end{figure}
+
 LPS methods based on Ultra-Wide Band (UWB)
 
 Local Ad-hoc Positioning and Landing
 System (LAOLa)
 
-Local Positioning System (LPS)
-
 
 Components-Off-The-Shelf (COTS)
 Radio based
-such as Radio Fre-
-quency Identification (RFID) [9], WiFi [10], Zigbee [11] and
+such as Radio Fre-, WiFi [10], Zigbee [11] and
 Ultra-Wideband (UWB)
-% \begin{gather}
-        
-% \end{gather}
-
-% \begin{gather}
-        
-% \end{gather}
 
 
-% Some systems have been deployed and tested in real-life scenarios, while others remain theoretical approaches
-% \cite{10.5555/3400306.3400339}
-\cite{6907551}
-% \cite{8355093}
-% \cite{PMID:33348720}
-% \cite{article5}
-% \cite{inproceedings}
-% \cite{inproceedings2}
-% \cite{8453331}
-% \cite{4967999}
-\cite{inproceedings51}
-% \cite{trilateration-application1}
-% \cite{Qi_2020}
 
 
-% \section{Demo: In-flight Localisation of Micro-UAVs using Ultra-Wide Band}
 
-% IEEE 802.15.4-2011 
 
-% distance measurement with a precision down to 10 cm within
-% a 250 m range
 
-% It combines good obstacle penetration, and
-% resilience to both multi-path effects and interference from
-% other wireless technologies
-% Symmetrical Double-
-% Sided Two-Way Ranging 
 
-% Local Positioning System (LPS) 
+
 
 
 
