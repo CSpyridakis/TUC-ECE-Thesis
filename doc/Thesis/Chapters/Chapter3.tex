@@ -57,7 +57,7 @@ WiFi έχει μικρή εμβέλεια\footnote{Αυτό είναι κυρί�
 \subsection{UWB, IMU and GPS}
 Στο \cite{uwb-imu-gps1} θεωρείται ότι υπάρχουν Ν αριθμημένα \hyperref[abbr:UAV]{UAV}, τα οποία επικοινωνούν σε \hyperref[abbr:UWB]{UWB}, 
 αξιοποιώντας την λογική του γράφου - για την αναπαράσταση τους - όπως 
-περιγράφτηκε στο \emph{Section} \ref{sec:Chapter2-3}. Ενώ κάθε node περιλαμβάνει \hyperref[abbr:IMU]{IMU}/Compass/\hyperref[abbr:GPS]{GPS} και A\-lti\-tu\-de and Heading Re\-fe\-re\-nce 
+περιγράφτηκε στο \emph{Section} \ref{sec:Chapter2-3}. Ενώ κάθε node περιλαμβάνει \hyperref[abbr:IMU]{IMU}, Compass, \hyperref[abbr:GPS]{GPS} και A\-lti\-tu\-de and Heading Re\-fe\-re\-nce 
 System (\hyperref[abbr:AHRS]{AHRS})\footnote{Αξιοποιείται από ένα flight control unit} με την χρήση των οποίων μπορούν σε N frame να συλλέξουν 
 πληροφορίες όπως παρουσιάζονται στους πα\-ρα\-κά\-τω πίνακες για κάθε time-frame k.
 
@@ -86,22 +86,16 @@ $0.1m$\footnote{Βάση θεώρησης των συγγραφών της έρ�
 	\label{fig:SS-TWR}
 \end{figure}
 
+Παρόμοιας λογικής σφάλματα θεωρείται ότι συμπεριλαμβάνουν και οι μετρήσεις από
+τους άλλους αισθητήρες, ενώ επίσης ότι το κάθε node μπορεί να μεταφέρει τις πληροφορίες 
+αυτές στα υπόλοιπα.
 
-Και ότι το ένα μπορεί να μεταφέρει τις πληροφορίες του στο άλλο
-
-UWB module is set to operate at a rate of 100Hz
-
-Each measuring interval
-	dij calculate
-	transmit to other nodes
-
-% GPS
-NEO-M8N GPS 5Hz.
-
-\begin{gather*}
-	r_{i,j} = r_{i, GPS} - r_{j, GPS} = r_{ij} + n_{GPS} \\
-\end{gather*}
-
+Πριν το relative position estimation, για λόγους που έχουν να κάνουν με 
+Ranging outlier rejection και Ranging failure data completion γίνεται ένα 
+preprocessing με χρήση του \hyperref[abbr:EKF]{EKF} στα δεδομένα - όπως 
+παρουσιάζεται στο \emph{Figure} \ref{fig:Data-preprocessing-work-flow-using-EKF} -
+ώστε να έχουμε σαν αποτέλεσμα μετά από αυτό το στάδιο μία καλύτερη εκτίμηση των αποστάσεων $d_{ij}$ 
+για κάθε \emph{i} και \emph{j} nodes. 
 
 \begin{figure} [H]
 	\centering
@@ -111,53 +105,25 @@ NEO-M8N GPS 5Hz.
 	\label{fig:Data-preprocessing-work-flow-using-EKF}
 \end{figure}
 
-Θεωρούν το σύστημα ως ένα γράφο το οποίο 
-το σημείο στο οποίο το σύστημα σταθεροποιηθεί θεωρείται ότι είναι το η γεωμετρία τοπολογίας των nodes
-ενώ θεωρούν το σύστημα ως rigid body 
+Ενώ σε επόμενο στάδιο, για το κομμάτι του relative position estimation, θεωρούν το σύστημα ως ένα γράφο 
+με λογική ενός \emph{spring system} - με διαφορετικούς $k_o$ συ\-ντε\-λεστές σκληρότητας - όπου στην κατάσταση 
+όπου το σύστημα σταθεροποιηθεί, θεωρείται ότι είναι το σημείο
+το οποίο περιγράφει την τοποθεσία των nodes. Ψάχνουν να βρουν το σημείο στο οποίο η συνολική δυναμική ενέργεια 
+στο σύστημα είναι η μικρότερη. Ουσιαστικά μετατρέπουν το position estimation πρόβλημα σε ένα 
+non-convex optimization πρόβλημα και προσπαθούν να το λύσουν. Ένα overview του συστήματος που δημιούργησαν 
+παρουσιάζεται στο \emph{Figure} \ref{fig:paper1-overview}.
 
-estimation problem into a non-convex optimization problem
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.69
+	\linewidth]{Images/Related-Work/UAV-swarm-system-diagram.png}
+	\decoRule
+	\caption[System overview]{System overview for paper \cite{uwb-imu-gps1}}
+	\label{fig:paper1-overview}
+\end{figure}
 
-
-
-small distance estimation error (within 0.4 m) while maintaining low
-computational load
-
-% 
-
-of UWB pulses transmission and reception [1], and has an accuracy of less
-than 10 cm UWB signals are particularly suitable for localization systems due to their high
-accuracy as well as the ability to operate in Non-Line-of-Sight (NLOS)
-it provides a channel for data communication and supports data transfer at a rate up to 6.8
-Mbps.
-
-First we
-incorporate the UWB and the IMU measurement to reject the ranging outlier and recover the
-distance between neighbors when ranging failure occurs, next we use these distance estimations
-to construct a rigid body composed of these moving nodes and edges of certain length by finding
-the global minimum of a non-convex function, finally the orientation of the rigid body system
-is calculated using GPS coordinates of several nodes.
 
 % ----------------------------------------------------------------
-
-
-LPS methods based on Ultra-Wide Band (UWB)
-
-Local Ad-hoc Positioning and Landing
-System (LAOLa)
-
-
-Components-Off-The-Shelf (COTS)
-Radio based
-such as Radio Fre-, WiFi [10], Zigbee [11] and
-Ultra-Wideband (UWB)
-
-
-
-
-
-
-
-
 
 
 
