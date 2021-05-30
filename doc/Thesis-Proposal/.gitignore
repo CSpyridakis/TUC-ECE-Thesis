@@ -1,0 +1,11 @@
+*
+!.gitignore
+!README.md
+
+!Images
+!Images/**
+
+!*.tex
+!*.cls
+!*.bib
+
