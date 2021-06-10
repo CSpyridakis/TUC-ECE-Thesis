@@ -17,5 +17,6 @@
 !*.tex
 !*.cls
 !*.bib
+main-blx.bib
 
 !Makefile
