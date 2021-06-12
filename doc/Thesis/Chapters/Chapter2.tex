@@ -1,10 +1,11 @@
 \chapter{Related Work} \label{chap:Chapter2}       
 \epigraph{``This is where technology is now, imagine where we can go in the future” }{\textit{Timothy Chung}}
 
-Σε αυτό το \emph{Chapter} περιγράφονται τρόποι - από την βιβλιογραφία - με τους οποί\-ους, οι υπάρχουσες εφαρμογές 
-από drone swarms επιλύουν το localization pro\-blem. Κάποια από τα συστήματα στις υπάρχουσες έρευνες\udot έχουν καθαρά
-θεωρητική πλευρά, άλλα έχουν δοκιμαστεί σε real-life scenarios.
-Ενώ, σε αρκετές από αυτές τις εφαρμογές χρησιμοποιούνται τεχνικές που στο \emph{Chapter} \ref{chap:Chapter3} αναλύονται από την θεωρητική τους πλευρά.
+Σε αυτό το \emph{Chapter} περιγράφονται τρόποι - από την βιβλιογραφία - με τους οποί\-ους, υπάρχουσες εφαρμογές 
+μεμονωμένων \hyperref[abbr:UAV]{UAV}, καθώς και drone swarms επιλύουν το localization pro\-blem. Κάποια από τα συστήματα στις παρακάτω έρευνες έχουν καθαρά
+θεωρητική πλευρά, ενώ άλλα έχουν δοκιμαστεί σε real-life scenarios.
+Τέλος, σε αρκετές από αυτές τις εφαρμογές χρησιμοποιούνται τεχνικές που θα αναλυθούν στο \emph{Chapter} \ref{chap:Chapter3} 
+σε μεγαλύτερο βάθος, καθώς θα αποτελέσουν το προαπαιτούμενο θεωρητικό και μαθηματικό υπόβαθρο για τον σχεδιασμό του συστήματος της παρούσας διπλωματικής.
 
 Κυρίως, αυτά που θα μελετήσουμε θα αφορούν Cooperative Localization (\hyperref[abbr:CL]{CL}) των \hyperref[abbr:UAV]{UAV}s, ενώ επίσης
 μας ενδιαφέρουν τα Distributed Computation - Real Time Location System (\hyperref[abbr:RTLS]{RTLS}) \cite{rtls}. Το πρόβλημα του Local Positioning System 
@@ -19,20 +20,20 @@ Extended Kalman Filter (\hyperref[abbr:EKF]{EKF}), Unscented Kalman Filter (\hyp
 Filter (\hyperref[abbr:CIF]{CIF}),  Split  Covariance  Intersection  Filter (\hyperref[abbr:SCIF]{SCIF}) και  Belief  Propagation 
 (\hyperref[abbr:BP]{BP}) \cite{fusion-filters}. 
 
-Τέλος, είναι επίσης σημαντικό να αναφερθούν τα βασικά \emph{coordinate frames} τα οποία χρησιμοποιούνται. 
-Αισθητήρες όπως το \hyperref[abbr:IMU]{IMU} και το compass κάνουνε μετρήσεις με γνώμονα το ίδιο το σώμα 
-του αντικειμένου για αυτό - σε αυτήν την περίπτωση το σύστημα αξόνων ονομάζεται body frame (B frame) \cite{uwb-imu-gps1}.
-Συχνά είναι όμως βολικό να μετατρέψουμε αυτές τις μετρήσεις σε ένα κοινό North East Down (\hyperref[abbr:NED]{NED}) 
-σύστημα, οπότε τότε αναφερόμαστε σε N frame \cite{uwb-imu-gps1} \cite{body-frames}. Παράδειγμα μεταξύ των δύο 
-συστημάτων βρίσκεται στο \emph{Figure} \ref{fig:Important-coordinate-frames}.
+% Τέλος, είναι επίσης σημαντικό να αναφερθούν τα βασικά \emph{coordinate frames} τα οποία χρησιμοποιούνται. 
+% Αισθητήρες όπως το \hyperref[abbr:IMU]{IMU} και το compass κάνουνε μετρήσεις με γνώμονα το ίδιο το σώμα 
+% του αντικειμένου για αυτό - σε αυτήν την περίπτωση το σύστημα αξόνων ονομάζεται body frame (B frame) \cite{uwb-imu-gps1}.
+% Συχνά είναι όμως βολικό να μετατρέψουμε αυτές τις μετρήσεις σε ένα κοινό North East Down (\hyperref[abbr:NED]{NED}) 
+% σύστημα, οπότε τότε αναφερόμαστε σε N frame \cite{uwb-imu-gps1} \cite{body-frames}. Παράδειγμα μεταξύ των δύο 
+% συστημάτων βρίσκεται στο \emph{Figure} \ref{fig:Important-coordinate-frames}.
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{Images/Related-Work/b-frame-n-frame-and-Euler-angles.png}
-	\decoRule
-	\caption[Important coordinate frames]{Important coordinate frames \cite{body-frames}}
-	\label{fig:Important-coordinate-frames}
-\end{figure}
+% \begin{figure} [H]
+% 	\centering
+% 	\includegraphics[width=0.6\linewidth]{Images/Related-Work/b-frame-n-frame-and-Euler-angles.png}
+% 	\decoRule
+% 	\caption[Important coordinate frames]{Important coordinate frames \cite{body-frames}}
+% 	\label{fig:Important-coordinate-frames}
+% \end{figure}
 
 
 % ------------------------------------------------------------------------------------
