@@ -7,14 +7,19 @@
 Τέλος, σε αρκετές από αυτές τις εφαρμογές χρησιμοποιούνται τεχνικές που θα αναλυθούν στο \emph{Chapter} \ref{chap:Chapter3} 
 σε μεγαλύτερο βάθος, καθώς θα αποτελέσουν το προαπαιτούμενο θεωρητικό και μαθηματικό υπόβαθρο για τον σχεδιασμό του συστήματος της παρούσας διπλωματικής.
 
-Κυρίως, αυτά που θα μελετήσουμε θα αφορούν Cooperative Localization (\hyperref[abbr:CL]{CL}) των \hyperref[abbr:UAV]{UAV}s, ενώ επίσης
-μας ενδιαφέρουν τα Distributed Computation - Real Time Location System (\hyperref[abbr:RTLS]{RTLS}) \cite{rtls}. Το πρόβλημα του Local Positioning System 
+% Κυρίως, αυτά που θα μελετήσουμε θα αφορούν Cooperative Localization (\hyperref[abbr:CL]{CL}) των \hyperref[abbr:UAV]{UAV}s, ενώ επίσης
+% μας ενδιαφέρουν τα Distributed Computation - Real Time Location System (\hyperref[abbr:RTLS]{RTLS}) \cite{rtls}. 
+
+Το πρόβλημα του Local Positioning System 
 (\hyperref[abbr:LPS]{LPS}) \cite{lps} έχει ερευνηθεί από διάφορες οπτικές\udot οι οποίες μπορεί να βασίζονται σε 
 \hyperref[abbr:RF]{RF}, sound waves ή ακόμα και να είναι image oriented.
 
 Σχεδόν βέβαιο είναι επίσης, ότι από όποια κατεύθυνση και αν προσεγγίσουμε το \hyperref[abbr:LPS]{LPS} να έχουμε την ανάγκη να 
 χρησιμοποιήσουμε κάποια τεχνική για να συνενώσουμε όλες τις πληροφορίες που έχουμε από τους διάφορους αισθητήρες για κάθε μεμονωμένο 
-time-frame. Την ανάγκη αυτού έρχεται να καλύψει η έννοια του \emph{sensor fusion} \cite{sensor-fusion}, με μερικούς γνωστούς 
+time-frame - με δεδομένο ότι κάνουμε χρήση πολλαπλών αισθητήρων ώστε να μειώσουμε την εντροπία, συνεπώς και την αβεβαιότητα ως 
+προς την εκτίμηση της θέσης. 
+Την ανάγκη αυτού έρχεται να καλύψει η έννοια του \emph{sensor fusion} \cite{sensor-fusion}. Όπως επίσης, συχνά 
+έχουμε την ανάγκη φιλτραρίσματος των μετρήσεων - που οδηγεί σε καλύτερα αποτελέσματα - με μερικούς γνωστούς 
 αλγόριθμους που να το επιτυγχάνουν - να είναι το  
 Extended Kalman Filter (\hyperref[abbr:EKF]{EKF}), Unscented Kalman Filter (\hyperref[abbr:UKF]{UKF}), Covariance Intersection  
 Filter (\hyperref[abbr:CIF]{CIF}),  Split  Covariance  Intersection  Filter (\hyperref[abbr:SCIF]{SCIF}) και  Belief  Propagation 
@@ -52,75 +57,100 @@ WiFi έχει μικρή εμβέλεια\footnote{Αυτό είναι κυρί�
 
 
 % ---------------------
-
-
-\subsection{UWB, IMU and GPS}
-Στο \cite{uwb-imu-gps1} θεωρείται ότι υπάρχουν Ν αριθμημένα \hyperref[abbr:UAV]{UAV}, τα οποία επικοινωνούν σε \hyperref[abbr:UWB]{UWB}, 
-αξιοποιώντας την λογική του γράφου - για την αναπαράσταση τους - όπως 
-περιγράφτηκε στο \emph{Section} \ref{sec:Chapter3-3}. Ενώ κάθε node περιλαμβάνει \hyperref[abbr:IMU]{IMU}, Compass, \hyperref[abbr:GPS]{GPS} και A\-lti\-tu\-de and Heading Re\-fe\-re\-nce 
-System (\hyperref[abbr:AHRS]{AHRS})\footnote{Αξιοποιείται από ένα flight control unit} με την χρήση των οποίων μπορούν σε N frame να συλλέξουν 
-πληροφορίες όπως παρουσιάζονται στους πα\-ρα\-κά\-τω πίνακες για κάθε time-frame k.
-
-\begin{gather*}
-	\textbf{GPS Position:}\quad r^k_{i, GPS} = \left[x^k_{i, GPS} \quad y^k_{i, GPS} \quad z^k_{i, GPS}\right]^T \\
-	\textbf{Velocity estimation:}\quad\hat{v}^k_i = \left[\hat{v}^k_{xi} \quad \hat{v}^k_{yi} \quad \hat{v}^k_{zi}\right]^T \\
-	\textbf{Acceleration estimation:}\quad\hat{a}^k_i = \left[\hat{a}^k_{xi} \quad \hat{a}^k_{yi} \quad \hat{a}^k_{zi}\right]^T
-\end{gather*}
-
-Σε αυτό το \hyperref[abbr:UWB]{UWB} δίκτυο είναι εύκολο το κάθε drone να μετρήσει την απόσταση του από ένα γειτονικό
-μέσω \hyperref[abbr:ToA]{ToA}-based \hyperref[abbr:RTT]{RTT} μεθόδου, με όνομα Single-sided Two-way Ranging (\hyperref[abbr:SS-TWR]{SS-TWR}),
-όπως περιγράφει η εξίσωση (\ref{eq:ss-twr}). Τα $T_{round}$ και $T_{reply}$ είναι
-οι χρόνοι που μετρήθηκαν για την εκτίμηση απόστασης - η οποία όμως περιλαμβάνει σφάλμα ως εξής, $\norm{r_i - r_j}$ η πραγματική απόσταση και $n_{UWB}$ τυχαία μεταβλητή με τυπική απόκλιση ίση με 
-$0.1m$\footnote{Βάση θεώρησης των συγγραφών της έρευνας} και στο \emph{Figure} \ref{fig:SS-TWR} υπάρχει παράδειγμα αυτής.
-
-\begin{gather}
-    d_{ij} = \frac{1}{2}(T_{round} - T_{reply}) \times c = \norm{r_i - r_j} + n_{UWB}, \quad with \quad n_{UWB} \sim N(0, \sigma^2_{UWB}) \label{eq:ss-twr}
-\end{gather}
+\subsection{WiFi}
+Μία αρχική προσέγγιση \cite{wifi-passive-active-drone-localization}
 
 \begin{figure} [H]
 	\centering
-	\includegraphics[width=0.69
-	\linewidth]{Images/Related-Work/Single-Sided-Two-Way-Ranging-SS-TWR-5.png}
-	\decoRule
-	\caption[Illustration of Single-sided Two-way ranging]{Illustration of Single-sided Two-way ranging \cite{uwb-imu-gps1}}
-	\label{fig:SS-TWR}
+    % -----------------
+		\begin{minipage}{.48\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{Images/Related-Work/PBR-and-PSL-approaches.png}
+			{(a) PBR and PSL (\href{https://ieeexplore.ieee.org/document/9253794/figures#figures}{URL})}
+		\end{minipage}%
+		\hspace*{+1cm}
+		% -----------------
+		\begin{minipage}{.48\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{Images/Related-Work/PBR-and-PSL-Features.png}
+			{(b) PBR and PSL Features (\href{https://ieeexplore.ieee.org/document/9253794/figures#figures}{URL})}
+		\end{minipage}
+	% -----------------
+    \hfill \break
+    \decoRule
+    \caption[PBR and PSL localization Appoaches]{PBR and PSL localization Appoaches based on \cite{wifi-passive-active-drone-localization}}
+    \label{fig:[PBR-and-PSL]}
 \end{figure}
 
-Παρόμοιας λογικής σφάλματα θεωρείται ότι συμπεριλαμβάνουν και οι μετρήσεις από
-τους άλλους αισθητήρες, ενώ επίσης ότι το κάθε node μπορεί να μεταφέρει τις πληροφορίες 
-αυτές στα υπόλοιπα.
+% ---------------------
 
-Πριν το relative position estimation, για λόγους που έχουν να κάνουν με 
-Ranging outlier rejection και Ranging failure data completion γίνεται ένα 
-preprocessing με χρήση του \hyperref[abbr:EKF]{EKF} στα δεδομένα - όπως 
-παρουσιάζεται στο \emph{Figure} \ref{fig:Data-preprocessing-work-flow-using-EKF} -
-ώστε να έχουμε σαν αποτέλεσμα μετά από αυτό το στάδιο μία καλύτερη εκτίμηση των αποστάσεων $d_{ij}$ 
-για κάθε \emph{i} και \emph{j} nodes. 
+% \subsection{UWB, IMU and GPS}
+% Στο \cite{uwb-imu-gps1} θεωρείται ότι υπάρχουν Ν αριθμημένα \hyperref[abbr:UAV]{UAV}, τα οποία επικοινωνούν σε \hyperref[abbr:UWB]{UWB}, 
+% αξιοποιώντας την λογική του γράφου - για την αναπαράσταση τους - όπως 
+% περιγράφτηκε στο \emph{Section} \ref{sec:Chapter3-3}. Ενώ κάθε node περιλαμβάνει \hyperref[abbr:IMU]{IMU}, Compass, \hyperref[abbr:GPS]{GPS} και A\-lti\-tu\-de and Heading Re\-fe\-re\-nce 
+% System (\hyperref[abbr:AHRS]{AHRS})\footnote{Αξιοποιείται από ένα flight control unit} με την χρήση των οποίων μπορούν σε N frame να συλλέξουν 
+% πληροφορίες όπως παρουσιάζονται στους πα\-ρα\-κά\-τω πίνακες για κάθε time-frame k.
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=\linewidth]{Images/Related-Work/Data-preprocessing-work-flow-using-EKF.png}
-	\decoRule
-	\caption[Data preprocessing work flow using EKF]{Data preprocessing work flow using EKF\cite{uwb-imu-gps1}}
-	\label{fig:Data-preprocessing-work-flow-using-EKF}
-\end{figure}
+% \begin{gather*}
+% 	\textbf{GPS Position:}\quad r^k_{i, GPS} = \left[x^k_{i, GPS} \quad y^k_{i, GPS} \quad z^k_{i, GPS}\right]^T \\
+% 	\textbf{Velocity estimation:}\quad\hat{v}^k_i = \left[\hat{v}^k_{xi} \quad \hat{v}^k_{yi} \quad \hat{v}^k_{zi}\right]^T \\
+% 	\textbf{Acceleration estimation:}\quad\hat{a}^k_i = \left[\hat{a}^k_{xi} \quad \hat{a}^k_{yi} \quad \hat{a}^k_{zi}\right]^T
+% \end{gather*}
 
-Ενώ σε επόμενο στάδιο, για το κομμάτι του relative position estimation, θεωρούν το σύστημα ως ένα γράφο 
-με λογική ενός \emph{spring system} - με διαφορετικούς $k_o$ συ\-ντε\-λεστές σκληρότητας - όπου στην κατάσταση 
-όπου το σύστημα σταθεροποιηθεί, θεωρείται ότι είναι το σημείο
-το οποίο περιγράφει την τοποθεσία των nodes. Ψάχνουν να βρουν το σημείο στο οποίο η συνολική δυναμική ενέργεια 
-στο σύστημα είναι η μικρότερη. Ουσιαστικά μετατρέπουν το position estimation πρόβλημα σε ένα 
-non-convex optimization πρόβλημα και προσπαθούν να το λύσουν. Ένα overview του συστήματος που δημιούργησαν 
-παρουσιάζεται στο \emph{Figure} \ref{fig:paper1-overview}.
+% Σε αυτό το \hyperref[abbr:UWB]{UWB} δίκτυο είναι εύκολο το κάθε drone να μετρήσει την απόσταση του από ένα γειτονικό
+% μέσω \hyperref[abbr:ToA]{ToA}-based \hyperref[abbr:RTT]{RTT} μεθόδου, με όνομα Single-sided Two-way Ranging (\hyperref[abbr:SS-TWR]{SS-TWR}),
+% όπως περιγράφει η εξίσωση (\ref{eq:ss-twr}). Τα $T_{round}$ και $T_{reply}$ είναι
+% οι χρόνοι που μετρήθηκαν για την εκτίμηση απόστασης - η οποία όμως περιλαμβάνει σφάλμα ως εξής, $\norm{r_i - r_j}$ η πραγματική απόσταση και $n_{UWB}$ τυχαία μεταβλητή με τυπική απόκλιση ίση με 
+% $0.1m$\footnote{Βάση θεώρησης των συγγραφών της έρευνας} και στο \emph{Figure} \ref{fig:SS-TWR} υπάρχει παράδειγμα αυτής.
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.69
-	\linewidth]{Images/Related-Work/UAV-swarm-system-diagram.png}
-	\decoRule
-	\caption[System overview]{System overview for paper \cite{uwb-imu-gps1}}
-	\label{fig:paper1-overview}
-\end{figure}
+% \begin{gather}
+%     d_{ij} = \frac{1}{2}(T_{round} - T_{reply}) \times c = \norm{r_i - r_j} + n_{UWB}, \quad with \quad n_{UWB} \sim N(0, \sigma^2_{UWB}) \label{eq:ss-twr}
+% \end{gather}
+
+% \begin{figure} [H]
+% 	\centering
+% 	\includegraphics[width=0.69
+% 	\linewidth]{Images/Related-Work/Single-Sided-Two-Way-Ranging-SS-TWR-5.png}
+% 	\decoRule
+% 	\caption[Illustration of Single-sided Two-way ranging]{Illustration of Single-sided Two-way ranging \cite{uwb-imu-gps1}}
+% 	\label{fig:SS-TWR}
+% \end{figure}
+
+% Παρόμοιας λογικής σφάλματα θεωρείται ότι συμπεριλαμβάνουν και οι μετρήσεις από
+% τους άλλους αισθητήρες, ενώ επίσης ότι το κάθε node μπορεί να μεταφέρει τις πληροφορίες 
+% αυτές στα υπόλοιπα.
+
+% Πριν το relative position estimation, για λόγους που έχουν να κάνουν με 
+% Ranging outlier rejection και Ranging failure data completion γίνεται ένα 
+% preprocessing με χρήση του \hyperref[abbr:EKF]{EKF} στα δεδομένα - όπως 
+% παρουσιάζεται στο \emph{Figure} \ref{fig:Data-preprocessing-work-flow-using-EKF} -
+% ώστε να έχουμε σαν αποτέλεσμα μετά από αυτό το στάδιο μία καλύτερη εκτίμηση των αποστάσεων $d_{ij}$ 
+% για κάθε \emph{i} και \emph{j} nodes. 
+
+% \begin{figure} [H]
+% 	\centering
+% 	\includegraphics[width=\linewidth]{Images/Related-Work/Data-preprocessing-work-flow-using-EKF.png}
+% 	\decoRule
+% 	\caption[Data preprocessing work flow using EKF]{Data preprocessing work flow using EKF\cite{uwb-imu-gps1}}
+% 	\label{fig:Data-preprocessing-work-flow-using-EKF}
+% \end{figure}
+
+% Ενώ σε επόμενο στάδιο, για το κομμάτι του relative position estimation, θεωρούν το σύστημα ως ένα γράφο 
+% με λογική ενός \emph{spring system} - με διαφορετικούς $k_o$ συ\-ντε\-λεστές σκληρότητας - όπου στην κατάσταση 
+% όπου το σύστημα σταθεροποιηθεί, θεωρείται ότι είναι το σημείο
+% το οποίο περιγράφει την τοποθεσία των nodes. Ψάχνουν να βρουν το σημείο στο οποίο η συνολική δυναμική ενέργεια 
+% στο σύστημα είναι η μικρότερη. Ουσιαστικά μετατρέπουν το position estimation πρόβλημα σε ένα 
+% non-convex optimization πρόβλημα και προσπαθούν να το λύσουν. Ένα overview του συστήματος που δημιούργησαν 
+% παρουσιάζεται στο \emph{Figure} \ref{fig:paper1-overview}.
+
+% \begin{figure} [H]
+% 	\centering
+% 	\includegraphics[width=0.69
+% 	\linewidth]{Images/Related-Work/UAV-swarm-system-diagram.png}
+% 	\decoRule
+% 	\caption[System overview]{System overview for paper \cite{uwb-imu-gps1}}
+% 	\label{fig:paper1-overview}
+% \end{figure}
 
 
 % ----------------------------------------------------------------

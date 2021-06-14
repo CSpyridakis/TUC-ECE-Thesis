@@ -148,12 +148,12 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-\section{Energy-based} \label{sec:Energy-based} 
+\section{Energy-based Localization} \label{sec:Energy-based} 
 
 \subsection{Distance/Angle Estimation}\label{sec:Distance-Angle-Estimation}
 
-Θα ξεκινήσουμε με μία σύντομη ανάλυση των τεχνικών εκτίμησης της απόστασης μεταξύ δύο nodes
-που χρησιμοποιούνται ήδη στις προσεγγίσεις \hyperref[abbr:RF]{RF} \& sound. 
+Θα ξεκινήσουμε με μία σύντομη ανάλυση των τεχνικών εκτίμησης της απόστασης - μεταξύ δύο nodes -
+που χρησιμοποιούνται ήδη, στις προσεγγίσεις \hyperref[abbr:RF]{RF} \& sound. 
 
 %----------------------------------------------------------------------
 \subsubsection{Received Signal Strength}
@@ -186,7 +186,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 η ισχύς του σήματος που λαμβάνει ο πομπός εξαρτάται από το αντίστροφο τετράγωνο της
 απόστασης των δύο nodes. Η σχέση (\ref{eq:signal-strength-simple}) συχνά αναφέρεται σε watt, 
 όμως όταν μιλάμε για transmitting power αντί για την χρήση των watt, είναι αρκετά βολική
-η χρήση του dBm \cite{wikipedia-dBm}. Για αυτό τον λόγω παρακάτω παραπείθονται τα conversion
+η χρήση του dBm \cite{wikipedia-dBm}. Για αυτό το λόγο, παρακάτω παρουσιάζονται τα conversion
 equations, από το ένα στο άλλο \cite{rssi-wlan} \cite{wikipedia-dBm}. 
 
 \begin{align}
@@ -207,7 +207,7 @@ equations, από το ένα στο άλλο \cite{rssi-wlan} \cite{wikipedia-d
 	\centering
 	\includegraphics[scale=0.32]{Images/Theoretical-Background/Ideal-RSSI-over-distance.png}
 	\decoRule
-	\caption[Ideal RSSI over distance]{Ideal RSSI over distance based on \cite{ideal-rssi-model}}
+	\caption[Ideal RSSI over distance]{Ideal RSSI over distance based on \cite{ideal-rssi-model} (\href{https://www.semanticscholar.org/paper/Adaptive-Distance-Estimation-Based-on-RSSI-in-802-.-Botta-Simek/8b7669850aecaa7b4f8a1b774f260bff24b20ef6}{URL})}
 	\label{fig:Ideal-RSSI-over-distance}
 \end{figure}
 
@@ -219,13 +219,14 @@ equations, από το ένα στο άλλο \cite{rssi-wlan} \cite{wikipedia-d
 ανακλάσεις του σήματος, διαθλάσεις, δυναμικά περιβάλλοντα ή εμπόδια σε αυτά, Non-Line of Sight (\hyperref[abbr:NLoS]{NLoS}) μετάδοση, 
 ή ακόμα και errors στο hardware 
 \cite{wsn-Localization-systems} \cite{ideal-rssi-model}.
-Σε ένα βαθμό μπορεί να βελτιωθεί η απόδοση με στατικό ή δυναμικό calibration του συστήματος ,
+Σε ένα βαθμό μπορεί να βελτιωθεί η απόδοση με στατικό ή δυναμικό calibration του συστήματος,
 όμως μέχρι τώρα δεν χρησιμοποιείται για εκτίμηση απόστασης σε εφαρμογές όπου nodes έχουν μεγάλη
 απόσταση μεταξύ τους ή μας ενδιαφέρει να έχουμε μεγάλη ακρίβεια προσέγγισης της απόστασης \cite{ideal-rssi-model}.
 
 %----------------------------------------------------------------------
 \subsubsection{Propagation Time}
-Σε αυτήν την κατηγορία εκτίμησης απόστασης μεταξύ nodes - η οποία βασίζεται σε χρονικές μετρήσεις της διάδοσης του σήματος Time of Flight (\hyperref[abbr:ToF]{ToF})
+Σε αυτήν την κατηγορία εκτίμησης απόστασης μεταξύ nodes - η οποία βασίζεται σε χρονικές μετρήσεις της διάδοσης του σήματος,
+ Time of Flight (\hyperref[abbr:ToF]{ToF})
 - κατά κύριο λόγο χρησιμοποιούνται δύο βασικές τεχνικές, η Time of Arrival (\hyperref[abbr:ToA]{ToA}) και η Time 
 Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-systems}. 
 
@@ -355,7 +356,7 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 Η δεύτερη εκδοχή της χρήσης \hyperref[abbr:TDoA]{TDoA} - η οποία είναι πιο συχνή στα \hyperref[abbr:WSN]{WSN} και 
 μας ε\-νδια\-φέ\-ρει περισσότερο, 
 χρησιμοποιεί multiple signals με single receiver και παρουσιάζεται στο \emph{Figure} \ref{fig:Time-Difference-of-Arrival-cases} (b). 
-Αρχή λειτουργίας έχει ότι ο transmitter θα στείλει πολλαπλά διαφορετικού είδους σήματα και ο δέκτης θα μετρήσει την χρονική διαφορά 
+Αρχή λειτουργίας έχει ότι ο transmitter θα στείλει πολλαπλά - διαφορετικού είδους - σήματα και ο δέκτης θα μετρήσει την χρονική διαφορά 
 που τα έλαβε. Ως παράδειγμα μπορεί το ένα σήμα να είναι σε \hyperref[abbr:RF]{RF} και να κινείται με ταχύτητα $s_r=c_o$ και το άλλο 
 ηχητικό με ταχύτητα $s_s \approx 343m/s$ \footnote{Για μετάδοση σε ξηρό αέρα υπό θερμοκρασία \SI{20}{\celsius} \cite{wikipedia-speed-of-sound}}. 
 Αν $t_r$ η χρονική στιγμή που λαμβάνει το \hyperref[abbr:RF]{RF} σήμα, $t_s$ το ηχητικό και $t_d$ το delay που μεσολάβησε από την αποστολή του ενός στο άλλο,
@@ -370,7 +371,7 @@ Difference of Arrival (\hyperref[abbr:TDoA]{TDoA}) \cite{wsn-Localization-system
 ώστε να μπορεί να στείλει και να λάβει πολλαπλά είδη σήματος - πράγμα που μπορεί να το κάνει αντι\-οι\-κο\-νο\-μι\-κό ή αρκετά μεγαλύτερο σε διαστάσεις από 
 το επιθυμητό. Όπως επίσης - και μάλιστα  
 σημαντικότερο - η απόσταση η οποία μπορεί να 
-χρησιμοποιηθεί, επηρεάζεται σε μεγάλο βαθμό από τα χαρακτηριστικά του δεύτερου σήματος. Ως παράδειγμα τα ηχητικά σήματα 
+χρησιμοποιηθεί, επηρεάζεται σε μεγάλο βαθμό από τα χαρακτηριστικά του δεύτερου σήματος. Ως παράδειγμα, τα ηχητικά σήματα 
 δεν μπορούν να μεταφερθούν σε μεγάλες αποστάσεις ή το ότι η ταχύτητα τους μπορεί να επηρεαστεί σημαντικά από περιβαλλοντολογικούς παράγοντες
 \cite{farooqiazam2016location}.\footnote{Η συγκεκριμένη μέθοδος είναι διαισθητικά παρόμοια, με αυτό που θα κάναμε για να εκτιμήσουμε 
 την απόσταση μίας αστραπής από εμάς, μετρώντας το χρονικό διάστημα μέχρι να ακούσουμε την βροντή.} 
@@ -472,7 +473,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \subsection{Position Computation} \label{sec:Chapter3-2} 
 Αν έχουμε δύο nodes, οι μετρήσεις που λάβαμε από το \emph{Section} \ref{sec:Distance-Angle-Estimation} είναι αρκετές για να γνωρίζουμε την θέση του καθενός,
 συνεπώς ενδιαφέρον βρίσκεται στην ύπαρξη τριών ή παραπάνω nodes σε ένα σύστημα. Με βάση τις πληροφορίες που έχουμε συλλέξει - μέσω των τεχνικών που 
-περιγράφτηκαν στο προηγούμενο κεφάλαιο - θα προσπαθήσουμε πλέον να εκτιμήσουμε την θέση ενός node. Στην συνέχεια αυτού του section περιγράφονται μέθοδοι οι οποίοι μπορούν να χρησιμοποιηθούν για να το επιτύχουν
+περιγράφτηκαν στο προηγούμενο κεφάλαιο - θα προσπαθήσουμε πλέον να εκτιμήσουμε την θέση ενός node. Στην συνέχεια αυτού του section, περιγράφονται μέθοδοι οι οποίοι μπορούν να χρησιμοποιηθούν για να το επιτύχουν
 αυτό. Κύρια διαφορά τους είναι η απόδοση που μπορεί να έχουν, η οποία όμως σχετίζεται με την αύξηση της πολυπλοκότητας στους υπολογισμούς που θα
 χρειαστούν\udot καθώς επίσης και ποιες από τις παραπάνω πληροφορίες θα εκμεταλλευτούν. 
 
@@ -963,10 +964,18 @@ nodes σε ένα \hyperref[abbr:WSN]{WSN}. Παρόλα αυτά, σε αυτό
 
 
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{Image-based localization} \label{chap:Image-based}
+\section{Image-based Localization} \label{chap:Image-based}
 
 
 % This should be the last section
 \section{Thesis Approach} \label{chap:thesis-approach}
 Σκοπός της παραπάνω βιβλιογραφικής αναζήτησης ήταν η απόκτηση μίας σφαιρικής γνώσης σχετικά με τους δυνατούς τρόπους επίλυσης του προβλήματος
 εντοπισμού της θέσης αντικειμένων.
+
+\begin{figure} [H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{../Photos/3dDrones-camera-pose.png}
+	\decoRule
+	\caption[Thesis drone swarm system overview]{Thesis drone swarm system overview}
+	\label{fig:thesis-system-overview}
+\end{figure}
