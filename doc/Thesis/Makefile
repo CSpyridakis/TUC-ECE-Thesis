@@ -37,6 +37,7 @@ clean:	## Clean auto generated files
 	$(RM) $(CLEAN_EXTS)
 	cd $(DIR)/Appendices && $(RM) *.aux
 	cd $(DIR)/Chapters && $(RM) *.aux
+	cd $(DIR)/Misc && $(RM) *.aux
 
 help:	## Print this help message and exit
 	@echo "$(HELPMENU)" ; grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "   %-30s %s\n", $$1, $$2}'

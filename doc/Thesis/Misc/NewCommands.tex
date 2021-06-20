@@ -8,17 +8,17 @@
 \newcommand{\Tabl}[1]{\emph{Table} \ref{tab:#1}}        % E.g.  \Tabl{comparison}
 \newcommand{\Equa}[1]{\emph{Equation} \ref{eq:#1}}      % E.g.  \Equa{linear}
 \newcommand{\Chap}[1]{\emph{Chapter} \ref{chap:#1}}     % E.g.  \Chap{second}
-\newcommand{\Sect}[1]{\emph{Section} \ref{sec:#1}}      % E.g.  \Sect{}
+\newcommand{\Sect}[1]{\emph{Section} \ref{sec:#1}}      % E.g.  \Sect{first}
+\newcommand{\URI}[1]{(\href{#1}{URL})}                                  % E.g.  \URI{www.google.com}  -> clickable (URL) text
 
-\newcommand{\URI}[1]{(\href{#1}{URL})}                  % E.g.  \URI{www.google.com}  -> clickable (URL) text
-\newcommand{\Abbr}[1]{\hyperref[abbr:#1]{#1}}           % E.g.  \Abbr{}
+\NewDocumentCommand\Abbr{m d<>}{\hyperref[abbr:#1]{#1\IfValueT{#2}{#2}}}  %E.g.  \Abbr{UAV}[s]
 
-% E.g. \CaptionBasedwithURL{caption}[based](url)
+% E.g. \CaptionBasedwithURL{caption}[based](URL)
 \NewDocumentCommand\CaptionBasedwithURL{m o d()}{
-    \caption[#1]{#1 \IfValueT{#2}{based on \cite{#2}} \IfValueT{#3}{\URI{#3}}}
+    \caption[\relax{#1}]{#1\IfValueT{#2}{ based on \cite{#2}}\IfValueT{#3}{ \URI{#3}}}
 }
 
-% E.g. \FigCaptBasedURL{image}{caption}{label}<imageWidth>[based](url)
+% E.g. \FigCaptBasedURL{image}{caption}{label}<imageWidth>[based](URL)
 \NewDocumentCommand\FigCaptLabelBasedURL{m m m D<>{0.5} o d()}{
     \begin{figure}[H]
         \centering
