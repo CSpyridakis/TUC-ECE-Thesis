@@ -1,0 +1,30 @@
+% Euclidean Norm symbol
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+% To use upper dot in Greek (equivalent of English semicolon)
+\newcommand{\udot}{$^{\mbox{\textbf{.}}}$ }
+ 
+\newcommand{\Fig}[1]{\emph{Figure} \ref{fig:#1}}        % E.g.  \Fig{drones}
+\newcommand{\Tabl}[1]{\emph{Table} \ref{tab:#1}}        % E.g.  \Tabl{comparison}
+\newcommand{\Equa}[1]{\emph{Equation} \ref{eq:#1}}      % E.g.  \Equa{linear}
+\newcommand{\Chap}[1]{\emph{Chapter} \ref{chap:#1}}     % E.g.  \Chap{second}
+\newcommand{\Sect}[1]{\emph{Section} \ref{sec:#1}}      % E.g.  \Sect{}
+
+\newcommand{\URI}[1]{(\href{#1}{URL})}                  % E.g.  \URI{www.google.com}  -> clickable (URL) text
+\newcommand{\Abbr}[1]{\hyperref[abbr:#1]{#1}}           % E.g.  \Abbr{}
+
+% E.g. \CaptionBasedwithURL{caption}[based](url)
+\NewDocumentCommand\CaptionBasedwithURL{m o d()}{
+    \caption[#1]{#1 \IfValueT{#2}{based on \cite{#2}} \IfValueT{#3}{\URI{#3}}}
+}
+
+% E.g. \FigCaptBasedURL{image}{caption}{label}<imageWidth>[based](url)
+\NewDocumentCommand\FigCaptLabelBasedURL{m m m D<>{0.5} o d()}{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#4\linewidth]{#1}
+        \decoRule
+        \CaptionBasedwithURL{#2}[#5](#6)
+        \label{fig:#3}
+    \end{figure}
+}

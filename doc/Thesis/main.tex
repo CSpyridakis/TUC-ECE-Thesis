@@ -64,6 +64,10 @@
 \usepackage{lmodern} 
 \usepackage{alphabeta}
 
+\usepackage{xparse}
+% Auxiliary Commands
+\include{Misc/NewCommands}
+
 % Diagrams
 \usepackage{tikz}
 \usetikzlibrary{arrows, shapes, positioning, shadows, trees}
@@ -71,19 +75,6 @@
 % The following two lines handle too long URLs on bibliography
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
-
-% Euclidean Norm symbol
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-
-% To use upper dot in Greek (equivalent of English semicolon)
-\newcommand{\udot}{$^{\mbox{\textbf{.}}}$ }
-
-
-\newcommand{\Fig}[1]{\emph{Figure} \ref{#1}}
-\newcommand{\Tabl}[1]{\emph{Table} \ref{#1}}
-\newcommand{\Eque}[1]{\emph{Equation} \ref{#1}}
-\newcommand{\Chap}[1]{\emph{Chapter} \ref{#1}}
-\newcommand{\Sect}[1]{\emph{Section} \ref{#1}}
 
 % To use comments in your text by using \* ... *\
 \def\*#1*\ {} %E.g. Text \* comment *\ text
