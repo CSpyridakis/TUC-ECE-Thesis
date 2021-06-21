@@ -866,6 +866,7 @@ Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \
 Όμοια με παραπάνω, στους \emph{Algorithms} \ref{alg:APIT} και \ref{alg:DV-Hop} παρουσιάζονται οι pseudo-codes 
 των \hyperref[abbr:APIT]{APIT} και \hyperref[abbr:DV-Hop]{DV-Hop} αντίστοιχα.
 
+% TABLE
 \begin{table}[H]
     \caption[Comparison of Range-based vs Range-free]{Comparison of Range-based vs Range-free \cite{localization-algorithms-comparizon-tables}}
 	\label{tab:Comparison-of-Range-based-vs-Range-free}
@@ -884,6 +885,7 @@ Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \
 	}
 \end{table}
 
+% ALGORITHM
 \begin{algorithm}[H]
 	\caption[Approximate Point in Triangle]{Approximate Point in Triangle \cite{localization-algorithms}}\label{alg:APIT}
 	\begin{algorithmic}[1]
@@ -902,6 +904,7 @@ Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \
 	\end{algorithmic}
 \end{algorithm}
 
+% ALGORITHM
 \begin{algorithm}[H]
 	\caption[Distance Vector-Hop]{Distance Vector-Hop \cite{dv-hop-algo} \cite{dv-hop-algo2} \cite{dv-hop-algo3}}\label{alg:DV-Hop}
 	\begin{algorithmic}[1]
@@ -934,29 +937,9 @@ Distance Vector-Hop (\hyperref[abbr:DV-Hop]{DV-Hop}), Centroid και Gradient \
 	\end{algorithmic}
 \end{algorithm}
 
-% \begin{algorithm}[H]
-% 	\caption{Centroid}\label{alg:Centroid}
-% 	\begin{algorithmic}[1]
-% 		\Procedure{Centroid}{}
-% 			\\TODO: 
-% 		\EndProcedure
-% 	\end{algorithmic}
-% \end{algorithm}
+% Horizontal Line
+\HLineWithSpaces
 
-% \begin{algorithm}[H]
-% 	\caption{Gradient}\label{alg:Gradient}
-% 	\begin{algorithmic}[1]
-% 		\Procedure{Gradient}{}
-% 			\\TODO: 
-% 		\EndProcedure
-% 	\end{algorithmic}
-% \end{algorithm}
-
-\vspace{3\baselineskip}
-\begin{center}
-	\line(1,0){400}
-\end{center}
-\vspace{3\baselineskip}
 Σε ευρύτερη κλίμακα, στην βιβλιογραφία υπάρχουν επιπλέον αλγόριθμοι ή παραλλαγές χρήσης αυτών που αναφέρθηκαν, για την εύρεση τοποθεσίας
 nodes σε ένα \hyperref[abbr:WSN]{WSN}. Παρόλα αυτά, σε αυτό το σημείο έγινε μία συνοπτική αναφορά τους,  και μία πρώτη
 ανάλυση γύρω από το localization problem. Στην συνέχεια,
@@ -965,7 +948,7 @@ nodes σε ένα \hyperref[abbr:WSN]{WSN}. Παρόλα αυτά, σε αυτό
 
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------
 \section{Image-based Localization} \label{chap:Image-based}
-
+TODO:
 
 % This should be the last section
 \section{Thesis Approach} \label{chap:thesis-approach}
@@ -976,7 +959,6 @@ nodes σε ένα \hyperref[abbr:WSN]{WSN}. Παρόλα αυτά, σε αυτό
 ή το Optitrack \cite{optitrack}, μιλάμε κυρίως για στατικά, εσωτερικών χώρων συστήματα 
 τα οποία είναι υπεύθυνα να ανιχνεύουν και να συλλαμβάνουν την κίνηση σωμάτων.
 
-
 Στην συγκεκριμένη διπλωματική εργασία γίνεται μία πρώτη
 προσπάθεια επίλυσης του προβλήματος υπολογισμού της θέσης
 ενός μεμονωμένου - γνωστών διαστάσεων - αντικειμένου με
@@ -986,13 +968,10 @@ nodes σε ένα \hyperref[abbr:WSN]{WSN}. Παρόλα αυτά, σε αυτό
 ένα real time tracking σύστημα αντικειμένων για εξωτερικούς
 χώρους και δυναμικά περιβάλλοντα.
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{../Photos/3dDrones-camera-pose.png}
-	\decoRule
-	\caption[Thesis drone swarm system overview]{Thesis drone swarm system overview}
-	\label{fig:thesis-system-overview}
-\end{figure}
+% IMAGE
+\FigCaptLabelBasedURL{../Photos/3dDrones-camera-pose.png}
+{Thesis drone swarm system overview}
+{thesis-system-overview}<0.6>
 
 Το σύστημα που θα σχεδιαστεί, θα είναι προσανατολισμένο να χρησιμοποιείται από Multirotor
 drones, τα οποία θα μπορούν να πραγματοποιήσουν hover σε αυθαίρετες θέσεις περιφερειακά του
@@ -1005,3 +984,7 @@ drones, τα οποία θα μπορούν να πραγματοποιήσου�
 είναι αρχικά να επιτευχθεί relative positioning του αντικειμένου με real time onboard sensing and computing.
 Άρα πρόκειται να σχεδιαστεί ένα Anchor-based, One-hop και Range-based σύστημα για Outdoor Scenarios το οποίο 
 προσπαθεί να επιτύχει Online Distributed Position Computation.
+
+\FigCaptLabelBasedURL{Images/Related-Work/swarm-related-work.png}
+{TODO}
+{TODO}<0.6>

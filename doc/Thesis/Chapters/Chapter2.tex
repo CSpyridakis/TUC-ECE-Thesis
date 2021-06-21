@@ -9,7 +9,7 @@
 του συστήματος της παρούσας διπλωματικής.
 
 Το πρόβλημα του Local Positioning System (\Abbr{LPS}) \cite{lps} έχει ερευνηθεί από διάφορες οπτικές\udot οι 
-οποίες μπορεί να βασίζονται σε Radio Frequency (\Abbr{RF}), Sound Waves ή ακόμα και να είναι Image Oriented.
+οποίες μπορεί να βασίζονται σε Radio Frequency (\Abbr{RF}), Sound Waves ή ακόμα και να είναι Optical Oriented.
 
 Σχεδόν βέβαιο είναι επίσης, ότι από όποια κατεύθυνση και αν προσεγγίσουμε το \Abbr{LPS} να έχουμε την ανάγκη να 
 χρησιμοποιήσουμε κάποια τεχνική για να συνενώσουμε όλες τις πληροφορίες που έχουμε από τους διάφορους αισθητήρες 
@@ -118,7 +118,9 @@ range είτε γωνία.
 non-convex optimization problem.
 
 % IMAGE
-\FigCaptLabelBasedURL{Images/Related-Work/paper-spring.png}{An illustration of the spring system}{spring-system}<0.5>[uwb-imu-gps1](https://www.researchgate.net/publication/345459052_Cooperative_3-D_relative_localization_for_UAV_swarm_by_fusing_UWB_with_IMU_and_GPS)
+\FigCaptLabelBasedURL{Images/Related-Work/paper-spring.png}
+{An illustration of the spring system}
+{spring-system}<0.5>[uwb-imu-gps1](https://www.researchgate.net/publication/345459052_Cooperative_3-D_relative_localization_for_UAV_swarm_by_fusing_UWB_with_IMU_and_GPS)
 
 Σχετικά με το υλικό που χρησιμοποιήθηκε, έγινε χρήση ενός NEO-M8N \Abbr{GPS} της U-blox με συχνότητα ανανέωσης τα 5Hz.  
 Σε κάθε \Abbr{UAV} χρησιμοποιήθηκε ένα Pixhawk PX4 flight management unit. Για το κομμάτι του \Abbr{UWB} έγινε χρήση
@@ -137,36 +139,79 @@ cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχε�
 και αφού το μοντελοποιήσουν\udot χρησιμοποιούν Monte Carlo simulation και το snapshot model, προκειμένου να αναλύσουν την επιρροή 
 των διάφορων παραμέτρων του συστήματος στην τελική απόδοση διάφορων localization τεχνικών (όπως με χρήση \Abbr{TDoA}). Τέτοιοι 
 παράμετροι - που υπάρχουν σε αυτά τα δίκτυα - είναι το πλήθος των κεραιών με τις οποίες μπορούμε να επικοινωνήσουμε και το πόσο συγχρονισμένες 
-είναι, τα χαρακτηριστικά του air-to-ground καναλιού καθώς και το αν υπάρχει ενδιάμεση ύπαρξη εμποδίων σε καθένα από αυτά. Επιπλέον, το 
-ύψος του αεροχήματος καθώς και οι λαμβανόμενες παρεμβολές.
+είναι, τα χαρακτηριστικά του air-to-ground καναλιού καθώς και το αν υπάρχει ενδιάμεση ύπαρξη εμποδίων σε καθένα από αυτά. Όπως και το 
+ύψος του αεροχήματος σε συνδυασμό με τις λαμβανόμενες παρεμβολές.
 \\[0.3cm]
 
 % IMAGE
-\FigCaptLabelBasedURL{Images/Related-Work/cellular.png}{Cellular network}{cellular-network}<0.6>[cellular-network-localization](https://ieeexplore.ieee.org/abstract/document/9120588/figures)
+\FigCaptLabelBasedURL{Images/Related-Work/cellular.png}
+{Cellular network}
+{cellular-network}<0.6>[cellular-network-localization](https://ieeexplore.ieee.org/abstract/document/9120588/figures)
 
 % ---------------------
 \subsection{Lora}
+
+Τα Long Range Wide Area Network (\Abbr{LoRaWAN}) αποτελούν ουσιαστικά παρακλάδι του ευρύτερου τομέα των Low Power Wide Area 
+Network (\Abbr{LPWAN}) ειδικά σε συνδυασμό με IOT Internet of Things \Abbr{IOT}
+
+% IMAGE
+\FigCaptLabelBasedURL{Images/Related-Work/lora-system-setup.png}
+{Lora system setup}
+{lora-system-setup}<0.6>[lora-localization](https://www.researchgate.net/figure/System-setup_fig1_341344946)
+
+
 \cite{lora-localization}
 
 % ---------------------
 \subsection{RTK GNSS}
+Απο την καθημερινότητα μας γνωρίζουμε την ύπαρξη 
 Ένας από τους τρόπους που μπορούν να χρησιμοποιηθούν προκειμένου να έχουμε ακρίβεια εκτίμησης
 της θέσης των drone σε επίπεδο μερικών εκατοστών ($\sim$2-3cm)
+Real Time Kinematic (\Abbr{RTK})
+
 \cite{rtk-gps-drone-localization}
-\FigCaptLabelBasedURL{../Photos/RTK.png}{RTK usage prinsiple}{rtk-usage}<0.55>
+
+% IMAGE
+\FigCaptLabelBasedURL{../Photos/RTK.png}
+{RTK usage prinsiple}
+{rtk-usage}<0.6>
 
 % ------------------------------------------------------------------------------------
 \section{Sound Waves}
 
 \cite{sound-waves-for-drone-localization}
-\cite{audio-based-localization}
+% \cite{audio-based-localization}
+
+% IMAGE
+\FigCaptLabelBasedURL{Images/Related-Work/accoustic-arrays.png}
+{Accoustic Arrays for localization}
+{accoustic-arrays}<0.55>[sound-waves-for-drone-localization](https://ieeexplore.ieee.org/document/8448409/figures)
 
 % ------------------------------------------------------------------------------------
-\section{Image Oriented}
+\section{Optical Oriented}
+
+
+% ---------------------
+\subsection{Camera}
+
+% ---------------------
+\subsection{LiDAR}
+Light Detection And Ranging (\Abbr{LiDAR})
+ 
+\FigCaptLabelBasedURL{Images/Related-Work/lidar-drone-example.png}
+{LiDAR UAV example}
+{drone-lidar-example}<0.8>(https://wingtra.com/drone-photogrammetry-vs-lidar/)
+
 
 % ---------------------
 \subsection{VSLAM}
+Visual Simultaneous Localization and Mapping (\Abbr{VSLAM})
+
 \cite{vslam-for-drone-localization}
+
+\FigCaptLabelBasedURL{Images/Related-Work/slam-drone.png}
+{VSLAM drone perception}
+{vslam-drone-visual-perception}<0.8>[vslam-image](https://www.mdpi.com/2504-446X/5/2/41/htm)
 
 % ---------------------
 \subsection{Motion Capturing System}
