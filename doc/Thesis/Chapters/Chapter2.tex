@@ -17,25 +17,21 @@
 συνεπώς και την αβεβαιότητα ως προς την εκτίμηση της θέσης. 
 Την ανάγκη αυτού έρχεται να καλύψει η έννοια του \emph{sensor fusion} \cite{sensor-fusion}. Όπως επίσης, και την 
 ανάγκη φιλτραρίσματος των μετρήσεων - που οδηγεί σε καλύτερα αποτε\-λέ\-σμα\-τα - με μερικούς γνωστούς αλγόριθμους 
-που να το επιτυγχάνουν - να είναι το Extended Kalman Filter (\Abbr{EKF}), Unscented Kalman Filter (\Abbr{UKF}), 
+που να το επιτυγχάνουν\udot να είναι o Extended Kalman Filter (\Abbr{EKF}), Unscented Kalman Filter (\Abbr{UKF}), 
 Covariance Intersection Filter (\Abbr{CIF}),  Split  Covariance  Intersection  Filter (\Abbr{SCIF}) και  Belief  
 Propagation (\Abbr{BP}) \cite{fusion-filters}. 
 
 % ------------------------------------------------------------------------------------
 \section{Radio Frequency}
-Το πιο εύκολο που μπορούμε να φανταστούμε είναι να χρησιμοποιήσουμε \Abbr{RF} τε\-χνο\-λο\-γίες όπως \Abbr{GPS}, WiFi, \TODO{short rang vs long range NFC, Bluetooth}
-Zigbee και Ultra-Wideband (\Abbr{UWB}) για την επικοινωνία και την υλοποίηση του \Abbr{LPS}. Το WiFi είναι εύκολα 
-προσβάσιμο\udot με μικρό κόστος ενώ το Zigbee προτιμάται για low power consumption εφαρμογές. Όμως προβλήματα αυτών 
-των δύο, μπορεί να είναι, ότι το WiFi έχει μικρή 
-εμβέλεια\footnote{Αυτό μπορεί να είναι αρνητικό για κάποιες εφαρμογές σε outdoor scenarios} 
-όπως επίσης είναι πολύ εύκολο να υπάρχουν παρεμβολές από τις υπόλοιπες γειτονικές 
+Το πιο εύκολο που μπορούμε να φανταστούμε είναι να χρησιμοποιήσουμε \Abbr{RF} τε\-χνο\-λο\-γίες όπως \Abbr{GPS}, WiFi, Zigbee, Bluetooth, Ultra-Wideband (\Abbr{UWB}) ή ακόμα και άλλα\udot για την επικοινωνία και την υλοποίηση του \Abbr{LPS}. Συχνός παράγοντας για το ποιο θα επιλεχθεί, σχετίζεται αν η εφαρμογή μας κυμαίνεται σε short ή long range εμβέλειες.
+
+Άλλοι παράγοντες, ως παράδειγμα, είναι ότι το WiFi είναι εύκολα προσβάσιμο\udot με μικρό κόστος, ενώ το Zigbee προτιμάται για low power consumption εφαρμογές. Όμως προβλήματα, μπορεί να είναι, ότι στο WiFi είναι πολύ εύκολο να υπάρχουν παρεμβολές από τις υπόλοιπες γειτονικές 
 συσκευές\footnote{Αυτό μπορεί να είναι αρνητικό για κάποιες εφαρμογές σε indoor scenarios} 
-άρα δεν το καθιστά καλή λύση για κάθε αποστολή ενός swarm. Το Zigbee επιλύει κάποια από αυτά τα 
-προβλήματα\footnote{Σε indoor σενάρια παραμένει η δυσκολία για collision-free formation}. 
-Συχνή εφαρμογή έχουν επίσης τα \Abbr{UWB} καθώς επιλύει θέματα σχετικά με την ακρίβεια των μετρήσεων, 
+άρα δεν το καθιστά καλή λύση για κάθε αποστολή ενός swarm. Το Zigbee επιλύει γενικά κάποιες από τις αδυναμίες του WiFi\footnote{Σε indoor σενάρια παραμένει η δυσκολία για collision-free formation} όμως ταυτόχρονα πρέπει να αποδεχτούμε το μικρό data rate που μπορούμε να μεταδώσουμε. 
+Συχνή εφαρμογή έχουν επίσης τα \Abbr{UWB} καθώς επιλύουν θέματα σχετικά με την ακρίβεια των μετρήσεων, 
 το κόστος καθώς και την εμβέλεια\udot ταυτόχρονα \cite{uwb-imu-gps3}. 
 
-Τέλος, θετικό στην χρήση \Abbr{RF} τεχνολογιών, είναι ότι μπορούμε εύκολα να δημιουργήσουμε
+Τέλος, θετικό στην χρήση \Abbr{RF} τεχνολογιών, είναι αρχικά ότι δεν χρειαζόμαστε άμεση οπτική επαφή με το ιπτάμενο, ενώ επίσης ότι μπορούμε εύκολα να δημιουργήσουμε
 ένα Flying Ad-hoc Network (\Abbr{FANET}) το οποίο βοηθάει στην ευελιξία του συστήματος.
 
 % ---------------------
@@ -62,7 +58,6 @@ range είτε γωνία.
 
 Συνοπτικά οι συγγραφείς της συγκεκριμένης έρευνας, παρουσιάζουν στο \Fig{PBR-and-PSL} (a) τον γενικό τρόπο λειτουργίας των δύο 
 μεθόδων, ενώ στο \Fig{PBR-and-PSL} (b) τις διαφορές τους.
-\\[0.3cm]
 
 % IMAGE
 \begin{figure} [H]
@@ -119,15 +114,18 @@ non-convex optimization problem.
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/paper-spring.png}
-{An illustration of the spring system}
-{spring-system}<0.5>[uwb-imu-gps1](https://www.researchgate.net/publication/345459052_Cooperative_3-D_relative_localization_for_UAV_swarm_by_fusing_UWB_with_IMU_and_GPS)
+{An illustration of the spring system}%
+{spring-system}%
+<0.5>%
+[uwb-imu-gps1]%
+(https://www.researchgate.net/publication/345459052_Cooperative_3-D_relative_localization_for_UAV_swarm_by_fusing_UWB_with_IMU_and_GPS)
 
 Σχετικά με το υλικό που χρησιμοποιήθηκε, έγινε χρήση ενός NEO-M8N \Abbr{GPS} της U-blox με συχνότητα ανανέωσης τα 5Hz.  
 Σε κάθε \Abbr{UAV} χρησιμοποιήθηκε ένα Pixhawk PX4 flight management unit. Για το κομμάτι του \Abbr{UWB} έγινε χρήση
 ενός module LinkTrack, για την επικοινωνία με το ground station χρησιμοποιήθηκε ένα UBNT, ενώ η επεξεργασία των 
 αλγορίθμων έγιναν σε ένα Raspberry Pi 3B+. 
 
-Τέλος, τα αποτελέσματα που κατάφεραν να έχουν ήταν 3D relative position estimation με σφάλμα απόκλισης τα 0.4m. 
+Τέλος, τα αποτελέσματα που κατάφεραν να έχουν ήταν, 3D relative position estimation με σφάλμα απόκλισης τα 0.4m. 
 
 % ---------------------
 \subsection{Cellular Networks}
@@ -139,64 +137,90 @@ cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχε�
 και αφού το μοντελοποιήσουν\udot χρησιμοποιούν Monte Carlo simulation και το snapshot model, προκειμένου να αναλύσουν την επιρροή 
 των διάφορων παραμέτρων του συστήματος στην τελική απόδοση διάφορων localization τεχνικών (όπως με χρήση \Abbr{TDoA}). Τέτοιοι 
 παράμετροι - που υπάρχουν σε αυτά τα δίκτυα - είναι το πλήθος των κεραιών με τις οποίες μπορούμε να επικοινωνήσουμε και το πόσο συγχρονισμένες 
-είναι, τα χαρακτηριστικά του air-to-ground καναλιού καθώς και το αν υπάρχει ενδιάμεση ύπαρξη εμποδίων σε καθένα από αυτά. Όπως και το 
+είναι, τα χαρακτηριστικά του air-to-ground καναλιού καθώς και το αν υπάρχει ενδιάμεση ύπαρξη εμποδίων σε καθένα από αυτά. Όπως, και το 
 ύψος του αεροχήματος σε συνδυασμό με τις λαμβανόμενες παρεμβολές.
-\\[0.3cm]
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/cellular.png}
-{Cellular network}
-{cellular-network}<0.6>[cellular-network-localization](https://ieeexplore.ieee.org/abstract/document/9120588/figures)
+{Cellular network}%
+{cellular-network}%
+<0.6>%
+[cellular-network-localization]%
+(https://ieeexplore.ieee.org/abstract/document/9120588/figures)
 
 % ---------------------
 \subsection{Lora}
 
-Χρησιμοποιούν τα drone για να mobile gateways για να βελτιώσουν τις μετρήσεις 
+Ο τομέας των Internet of Things (\Abbr{IoT}) έχει επιφέρει στην έντονη χρήση\udot για πολλές τεχνολογίες, με τα Long Range Wide Area Network (\Abbr{LoRaWAN}) - που πρακτικά αποτελούν παρακλάδι του ευρύτερου τομέα των Low Power Wide Area Network (\Abbr{LPWAN}) - να είναι μία από αυτές. Λόγοι που χρησιμοποιούνται συχνά - για τέτοιες εφαρμογές - είναι ότι τα Low Power Networks (\Abbr{LPN}) είναι ιδανικά όταν μας ε\-νδια\-φέ\-ρει το 
+power consumption ενός συστήματος, καθώς επίσης και η μεγάλη εμβέλεια των \Abbr{LoRaWAN}, που μπορούν να φτάσουν σε ακτίνες επικοινωνίας ακόμα και 2km σε κατοικημένες περιοχές εξυπηρετώντας χιλιάδες κόμβους σε ένα σύστημα \cite{lora-localization}.
 
-Τα Long Range Wide Area Network (\Abbr{LoRaWAN}) αποτελούν ουσιαστικά παρακλάδι του ευρύτερου τομέα των Low Power Wide Area 
-Network (\Abbr{LPWAN}) ειδικά σε συνδυασμό με IOT Internet of Things \Abbr{IoT}
- long communication with low Power
- develop and test a search algorithm in a realistic simulates scenario and then implement a real system 
-
-ten-fold improvment in localization precision
-
+Οι συγγραφείς του \cite{lora-localization} αξιοποιούν τα πλεονεκτήματα αυτά,
+και τα χρησιμοποιούν - παρόλο που δεν είναι σχεδιασμένα για αυτό το λόγο - επεκτείνοντας ένα σύστημα από στατικούς κόμβους, σε ένα και με δυναμικές μετρήσεις\udot με την βοήθεια drone σαν 3D-mobile gateway stations - \Fig{lora-system-setup}, όπου καταφέρνουν να βελτιώσουν έως και 10 φορές την ακρίβεια εκτίμησης της θέσης ενός αντικειμένου.
 
 % IMAGE
-\FigCaptLabelBasedURL{Images/Related-Work/lora-system-setup.png}
-{Lora system setup}
-{lora-system-setup}<0.6>[lora-localization](https://www.researchgate.net/figure/System-setup_fig1_341344946)
+\FigCaptLabelBasedURL{Images/Related-Work/lora-system-setup.png}%
+{Lora system setup}%
+{lora-system-setup}%
+<0.7>%
+[lora-localization](https://www.researchgate.net/figure/System-setup_fig1_341344946)
 
+Για να το καταφέρουν, αξιοποιούν πληροφορία σχετικά με την ένταση της ισχύς των λαμβανόμενων πακέτων, μοντελοποιούν αυτήν την σχέση για να καταφέρουν να εκτιμήσουν την απόσταση μεταξύ δύο κόμβων και στην συνέχεια με χρήση αυτών των αποστάσεων, καταφέρνουν να 
+βρουν την θέση του αντικειμένου (στο \Chap{Chapter3} υπάρχει ανάλυση των μεθόδων που ακολουθήθηκαν).
 
-\cite{lora-localization}
-\Fig{Denexists}
+Η έρευνα τους περιστρέφεται στο develop και testing ενός search algorithm, τόσο από την πλευρά των simulation καθώς και ως real system, καταλήγοντας σε διάφορα συμπεράσματα - με βάση την χρήση διαφορετικού πλήθος drone σε συνδυασμό με διαφορετικών συχνοτήτων λήψεις μετρήσεων.
+
+Σχετικά με τις τεχνολογίες που χρησιμοποιήθηκαν, ο search αλγόριθμος αρχικά δοκιμάστηκε σε 
+MATLAB simulations ενώ στην συνέχεια σε Software In The Loop (\Abbr{SITL}) simulations χρησιμοποιώντας 
+το Gazebo. Τέλος, στο κομμάτι του hardware, το κάθε drone ήταν εξοπλισμένο με ένα PixHawk flight το οποίο έτρεχε PX4 autopilot, ένα Raspberry Pi 3B+ στο οποίο υπήρχε το Robot Operating System (\Abbr{ROS}) και το MAVROS, ένα MultiTech MultiConnect Conduit LoRa gateway και η σύνδεση στο Swisscom \Abbr{LoRaWAN} έγινε με την βοήθεια ενός Huawei E3372 USB modem.
+
 % ---------------------
 \subsection{RTK GNSS}
-Από την καθημερινότητα μας γνωρίζουμε την ύπαρξη 
-Ένας από τους τρόπους που μπορούν να χρησιμοποιηθούν προκειμένου να έχουμε ακρίβεια εκτίμησης
-της θέσης των drone σε επίπεδο μερικών εκατοστών ($\sim$2-3cm)
-Real Time Kinematic (\Abbr{RTK})
+Ένας εύκολα προσβάσιμος τρόπος - για την εκτίμηση θέσης αντικειμένου - που ο καθένας εύκολα μπορεί να χρησιμοποιήσει, σχετίζεται με τους δορυφόρους και τη χρήση \Abbr{GNSS} τεχνικών όπως το \Abbr{GPS}.
 
-\cite{rtk-gps-drone-localization}
+Παρόλο, την πολλά υποσχόμενη, εξέλιξη της ακρίβειας από $\sim$5m \cite{gps-accuracy}
+σε $\sim$30cm \cite{superaccurate-gps} - για μη στρατιωτική χρήση -
+η οποία όμως επίσης δεν είναι αρκετή για τις ανάγκες ορισμένων εφαρμογών. 
+Πολλές φορές οδηγούμαστε να κινηθούμε σε αρκετά ακριβές 
+λύσεις διορθώσεις των σφαλμάτων, και να χρησιμοποιήσουμε  Real Time Kinematic (\Abbr{RTK}) \cite{rtk-gps} τεχνικές, οι οποίες είναι ικανές να προσφέρουν ακρίβεια 1-2cm σε ακτίνες $\sim$20km. 
 
 % IMAGE
 \FigCaptLabelBasedURL{../Photos/RTK.png}
 {RTK usage prinsiple}
-{rtk-usage}<0.6>
+{rtk-usage}<0.55>
+
+Η γενική αρχή λειτουργίας του \Abbr{RTK}-\Abbr{GPS}, είναι ότι αποτελείται από ένα επίγειο
+base station - ουσιαστικά μιλάμε για μία stationary \Abbr{GPS} master antenna - του οποίου οι
+συντεταγμένες είναι γνωστές εξ' αρχής. Αυτός είναι υπεύθυνος να συ\-γκρί\-νει τα carrier phase των λαμβανόμενων σημάτων από τους δορυφόρους\udot προκειμένου να κάνει τις απαραίτητες διορθώσεις, τις
+οποίες αποστέλλει στην συνέχεια - μέσω του πρωτοκόλλου Radio Technical Commission for Maritime Service
+(\Abbr{RTCM}) - στα κινούμενα rover, τα οποία τελικά επιθυμούν να υπολογίσουν την θέση τους. Απλοποιημένο παράδειγμα αυτού, βρίσκεται στο \Fig{rtk-usage}.
+
+Οι συγγραφείς του \cite{rtk-gps-drone-localization} πραγματοποιούν μεγαλύτερη ανάλυση λει\-του\-ργίας του, α\-να\-φέ\-ρουν λόγους ύπαρξης προβλημάτων, καθώς προτείνουν και μία αρχιτεκτονική η οποία μπορεί να βελτιώσει το availability του \Abbr{RTK}-\Abbr{GPS} σε ένα multi-vehicle system.
 
 % ------------------------------------------------------------------------------------
 \section{Sound Waves}
+Μία εναλλακτική εκδοχή προσέγγισης υπολογισμού της θέσης, είναι με την βοήθεια ακουστικών κυμάτων. Παρόλο που αναλογικά με τις άλλες μεθόδους δεν είναι τόσο συχνά χρησιμοποιούμενη, υφίσταται ερευνητικό ενδιαφέρον για προσπάθειας α\-πό\-κτη\-σης location information με χρήση ήχου. 
 
-\cite{sound-waves-for-drone-localization}
-% \cite{audio-based-localization}
+Υπάρχουν εφαρμογές στις οποίες χρειάζεται να ανιχνευτεί η θέση non cooperative - ακόμα και εχθρικών - drone τα οποία είτε να μην μπορούν να ανιχνευτούν - λόγο μεγέθους - από κάμερα είτε να μην μπορεί να χρησιμοποιηθεί κάποια \Abbr{RF} τεχνική.
+Στην έ\-ρ\-ευ\-να \cite{sound-waves-for-drone-localization} οι συγγραφείς εμπνευσμένοι από αυτό, κάνουν προσπάθεια δημιουργίας ενός συστήματος παρακολούθησης, για localization και tracking ενός drone με την χρήση acoustic arrays - παρουσιάζονται στο \Fig{acoustic-arrays}. 
 
 % IMAGE
-\FigCaptLabelBasedURL{Images/Related-Work/accoustic-arrays.png}
-{Accoustic Arrays for localization}
-{accoustic-arrays}<0.55>[sound-waves-for-drone-localization](https://ieeexplore.ieee.org/document/8448409/figures)
+\FigCaptLabelBasedURL{Images/Related-Work/acoustic-arrays.png}%
+{Acoustic Arrays for localization}%
+{acoustic-arrays}%
+<0.55>%
+[sound-waves-for-drone-localization]%
+(https://ieeexplore.ieee.org/document/8448409/figures)
+
+Συγκεκριμένα, τοποθετούν σε συγκεκριμένες θέσεις τα δύο arrays, από τα οποία λα\-μβά\-νουν - με χρήση Generalized Cross Correlation
+Phase Transform (\Abbr{GCC-PHAT}) - ένα πλήθος μετρήσεων \Abbr{TDoA} μεταξύ των δύο arrays. Λόγο όμως το ότι από μόνες τους αυτές οι
+μετρήσεις - εξ' αιτίας του multipath effect - καταλήγουν να περιλαμβάνουν σφάλματα, προτείνουν έναν βασισμένο στο Gauss
+priori Probability Density Function (\Abbr{GPDF}) αλγόριθμο\udot ώστε τελικά να εντοπίσουν την θέση των drone, ενώ στην συνέχεια χρησιμοποιούν \Abbr{KF} για να το κάνουν track.
+
+Ο εξοπλισμός που χρησιμοποιήθηκε ήταν sensors τύπου CHZ-213 1/2-inch me\-tro\-lo\-gi\-cal microphones, με κάθε sensor εφοδιασμένο με ένα pre-amplifiers τύπου YG-201. Ενώ, το drone του οποίου έγινε προσπάθεια να εκτιμηθεί η θέση ήταν το DJI Pha\-ntom 2. Τα αποτελέσματα που είχαν, ήταν να καταφέρουν στο μεγαλύτερο ποσοστό των εκτιμήσεων, τα σφάλματα να είναι μικρότερα των 6m σε μέγιστη απόσταση κάλυψης τα 100m.  
 
 % ------------------------------------------------------------------------------------
 \section{Optical Oriented}
-
+Ακόμα ένας τρόπος προσέγγισης του προβλήματος εκτίμησης θέσης ενός αντικειμένου, είναι με χρήση οπτικών μέσων. Τέτοιοι τρόποι μπορεί να είναι με χρήση mo\-no\-cu\-lar κάμερας, stereo κάμερας ή τεχνικές που σχετίζονται με το φως - με μερικές από αυτές, να αναλύονται συνοπτικά στην συνέχεια του κεφαλαίου.
 
 % ---------------------
 \subsection{Camera}
@@ -205,9 +229,12 @@ Real Time Kinematic (\Abbr{RTK})
 \subsection{LiDAR}
 Light Detection And Ranging (\Abbr{LiDAR})
  
+% IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/lidar-drone-example.png}
-{LiDAR UAV example}
-{drone-lidar-example}<0.8>(https://wingtra.com/drone-photogrammetry-vs-lidar/)
+{LiDAR UAV example}%
+{drone-lidar-example}%
+<0.8>%
+(https://wingtra.com/drone-photogrammetry-vs-lidar/)
 
 
 % ---------------------

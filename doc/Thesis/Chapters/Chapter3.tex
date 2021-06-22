@@ -418,7 +418,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \FigCaptLabelBasedURL{Images/Theoretical-Background/A-typical-radiation-pattern-of-the-directive-antenna.jpeg}%	Image Path
 {Typical anisotropic antenna pattern}%	Caption Text
 {Typical-anisotropic-antenna-pattern}%	Label used
-<0.4>
+<0.4>% Scale of image
 [wsn-Localization-techniques]%	Based on specific paper 
 (https://www.sciencedirect.com/science/article/abs/pii/S1389128606003227) % URL that found
 
@@ -586,13 +586,10 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Η συγκεκριμένη μέθοδος μπορεί να είναι ευκολότερη υπολογιστικά και να απαιτεί λιγότερα processor resources από το Trilateration, όμως ταυτόχρονα 
 προκύπτει και μεγαλύτερο σφάλμα απόκλισης \cite{wsn-Localization-systems}.   
 
-\begin{figure} [H]
-	\centering
-	\includegraphics[width=0.5\linewidth]{../Photos/Bounding-box.png}
-	\decoRule
-	\caption[Bounding Box example]{Bounding Box example}
-	\label{fig:Bounding-Box-example}
-\end{figure}
+% IMAGE
+\FigCaptLabelBasedURL{../Photos/Bounding-box.png}%
+{Bounding Box example}%
+{Bounding-Box-example}
 
 %----------------------------------------------------------------------
 \subsubsection{Triangulation}
@@ -601,15 +598,10 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 μπορούμε εύκολα να συμπεράνουμε ότι για τις γωνίες $\theta_1$ και $\theta_2$ ισχύουν οι σχέσεις \EqNum{angle-equations-triangulation}.
 
 % IMAGE
-\FigCaptLabelBasedURL{../Photos/Tringulation-principle.png}{Principles of Triangulation}{Principles-of-Triangulation}
+\FigCaptLabelBasedURL{../Photos/Tringulation-principle.png}%
+{Principles of Triangulation}%
+{Principles-of-Triangulation}
 
-% \begin{figure} [H]
-% 	\centering
-% 	\includegraphics[width=0.5\linewidth]{../Photos/Tringulation-principle.png}
-% 	\decoRule
-% 	\caption[Principles of Triangulation]{Principles of Triangulation}
-% 	\label{fig:Principles-of-Triangulation}
-% \end{figure}
 
 \begin{align}
 	\theta_1 = \frac{d}{d_1} = tan^{-1}\left(\frac{y_1-y}{x_1-x}\right) \quad \quad \quad
@@ -681,7 +673,9 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Παράδειγμα αυτής της μεθόδου βρίσκεται στο \Fig{Multilateration}.
 
 % IMAGE
-\FigCaptLabelBasedURL{../Photos/multilateration.png}{Multilateration example}{Multilateration}
+\FigCaptLabelBasedURL{../Photos/multilateration.png}%
+{Multilateration example}%
+{Multilateration}
 
 
 %----------------------------------------------------------------------
@@ -937,7 +931,7 @@ Distance Vector-Hop (\Abbr{DV-Hop}), Centroid και Gradient \cite{range-distri
 \end{algorithm}
 
 % Horizontal Line
-\HLineWithSpaces
+\HLineWithSpaces<3.2>[300]<3.2>
 
 Σε ευρύτερη κλίμακα, στην βιβλιογραφία υπάρχουν επιπλέον αλγόριθμοι ή παραλλαγές χρήσης αυτών που αναφέρθηκαν, για την εύρεση τοποθεσίας
 nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημείο έγινε μία συνοπτική αναφορά τους,  και μία πρώτη
