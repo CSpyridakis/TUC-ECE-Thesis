@@ -23,7 +23,7 @@ Propagation (\Abbr{BP}) \cite{fusion-filters}.
 
 % ------------------------------------------------------------------------------------
 \section{Radio Frequency}
-Το πιο εύκολο που μπορούμε να φανταστούμε είναι να χρησιμοποιήσουμε \Abbr{RF} τε\-χνο\-λο\-γίες όπως \Abbr{GPS}, WiFi, 
+Το πιο εύκολο που μπορούμε να φανταστούμε είναι να χρησιμοποιήσουμε \Abbr{RF} τε\-χνο\-λο\-γίες όπως \Abbr{GPS}, WiFi, \TODO{short rang vs long range NFC, Bluetooth}
 Zigbee και Ultra-Wideband (\Abbr{UWB}) για την επικοινωνία και την υλοποίηση του \Abbr{LPS}. Το WiFi είναι εύκολα 
 προσβάσιμο\udot με μικρό κόστος ενώ το Zigbee προτιμάται για low power consumption εφαρμογές. Όμως προβλήματα αυτών 
 των δύο, μπορεί να είναι, ότι το WiFi έχει μικρή 
@@ -124,7 +124,7 @@ non-convex optimization problem.
 
 Σχετικά με το υλικό που χρησιμοποιήθηκε, έγινε χρήση ενός NEO-M8N \Abbr{GPS} της U-blox με συχνότητα ανανέωσης τα 5Hz.  
 Σε κάθε \Abbr{UAV} χρησιμοποιήθηκε ένα Pixhawk PX4 flight management unit. Για το κομμάτι του \Abbr{UWB} έγινε χρήση
-ενός module LinkTrack, για την επικοινωνία με το ground station χρησιμοποιήθηκε ένα UBNT, ενώ τέλος η επεξεργασία των 
+ενός module LinkTrack, για την επικοινωνία με το ground station χρησιμοποιήθηκε ένα UBNT, ενώ η επεξεργασία των 
 αλγορίθμων έγιναν σε ένα Raspberry Pi 3B+. 
 
 Τέλος, τα αποτελέσματα που κατάφεραν να έχουν ήταν 3D relative position estimation με σφάλμα απόκλισης τα 0.4m. 
@@ -151,8 +151,15 @@ cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχε�
 % ---------------------
 \subsection{Lora}
 
+Χρησιμοποιούν τα drone για να mobile gateways για να βελτιώσουν τις μετρήσεις 
+
 Τα Long Range Wide Area Network (\Abbr{LoRaWAN}) αποτελούν ουσιαστικά παρακλάδι του ευρύτερου τομέα των Low Power Wide Area 
-Network (\Abbr{LPWAN}) ειδικά σε συνδυασμό με IOT Internet of Things \Abbr{IOT}
+Network (\Abbr{LPWAN}) ειδικά σε συνδυασμό με IOT Internet of Things \Abbr{IoT}
+ long communication with low Power
+ develop and test a search algorithm in a realistic simulates scenario and then implement a real system 
+
+ten-fold improvment in localization precision
+
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/lora-system-setup.png}
@@ -161,10 +168,10 @@ Network (\Abbr{LPWAN}) ειδικά σε συνδυασμό με IOT Internet of
 
 
 \cite{lora-localization}
-
+\Fig{Denexists}
 % ---------------------
 \subsection{RTK GNSS}
-Απο την καθημερινότητα μας γνωρίζουμε την ύπαρξη 
+Από την καθημερινότητα μας γνωρίζουμε την ύπαρξη 
 Ένας από τους τρόπους που μπορούν να χρησιμοποιηθούν προκειμένου να έχουμε ακρίβεια εκτίμησης
 της θέσης των drone σε επίπεδο μερικών εκατοστών ($\sim$2-3cm)
 Real Time Kinematic (\Abbr{RTK})
