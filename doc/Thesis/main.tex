@@ -50,14 +50,14 @@
 
 \usepackage[hyperfootnotes=false]{hyperref}
 \usepackage{graphicx}
-\usepackage{textcomp} %provide many text symbols (such as baht, bullet, copyright, musical note, one quarter, section, and yen)
+\usepackage{textcomp} 					%provide many text symbols (such as baht, bullet, copyright, musical note, one quarter, section, and yen)
 \usepackage{amsmath}
-\usepackage{amssymb} % Mathematical Symbols
+\usepackage{amssymb}					% Mathematical Symbols
 \usepackage{float}
-\usepackage{cancel}	% For cancel in equations 
-\usepackage{svg} 	% Maybe not used
-\usepackage[bottom]{footmisc}	% To add footnotes
-\usepackage[usestackEOL]{stackengine} % For multiple lines in tables and alignment
+\usepackage{cancel}						% For cancel in equations 
+\usepackage{svg} 						% Maybe not used
+\usepackage[bottom]{footmisc}			% To add footnotes
+\usepackage[usestackEOL]{stackengine} 	% For multiple lines in tables and alignment
 
 % Greek language support
 \usepackage{textgreek}
@@ -239,31 +239,17 @@
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE - ENGLISH
 %----------------------------------------------------------------------------------------
-
-\begin{abstract}
-	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-	TODO: Abstract
-	\ldots
-\end{abstract}
+\include{Misc/Abstract-en}
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE - GREEK
 %----------------------------------------------------------------------------------------
-
-\begin{extraAbstract}
-	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-	TODO: Περίληψη
-	\ldots
-\end{extraAbstract}
+\include{Misc/Abstract-gr}
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
-
-\begin{acknowledgements}
-	\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-	TODO: Acknowledgements
-\end{acknowledgements}
+\include{Misc/Acknowledgments}
 
 %----------------------------------------------------------------------------------------
 %	LIST OF CONTENTS/FIGURES/TABLES PAGES
@@ -311,104 +297,28 @@
 	$\lambda$ & wavelength & \si{\meter} \\
 	$\phi$ & phase & \si{\degree} \\
 	$\omega$ & angular frequency & \si{\radian} \\
-
 \end{symbols}
 
 	
 %----------------------------------------------------------------------------------------
 %	ABBREVIATIONS
 %----------------------------------------------------------------------------------------
+\include{Misc/Abbreviations} % TODO: edit to your requirements
 
-% Small tip: just append your new abbreviations, and at the end copy them
-% on a tmp.txt file and run this command 'sort -k1,1 tmp.txt' so then they
-% will be sorted!
+% --------------------------------------------------------------------------------
+% 		Basically a file containing the lines below to create your abbreviations list
+% --------------------------------------------------------------------------------
 
-% TODO: edit to your requirements
-% spell-checker: disable
-\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)]
-	\CreateAbbr{AoA}		{\textbf{A}ngle \textbf{o}f \textbf{A}rrival}
-	\CreateAbbr{AHD}		{\textbf{A}verage \textbf{H}op \textbf{D}istance} 
-	\CreateAbbr{AHRS}		{\textbf{A}ltitude \textbf{H}eading \textbf{R}eference \textbf{S}ystems}
-	\CreateAbbr{APIT}		{\textbf{A}pproximate \textbf{P}oint \textbf{I}n \textbf{T}riangle}
-	\CreateAbbr{BP}			{\textbf{B}elief \textbf{P}ropagation} 
-	\CreateAbbr{BS}			{\textbf{B}ase \textbf{S}tation}
-	\CreateAbbr{CIF}		{\textbf{C}ovariance \textbf{I}ntersection \textbf{F}ilter}   
-	\CreateAbbr{CL}			{\textbf{C}ooperative \textbf{L}ocalization}
-	\CreateAbbr{DoA}		{\textbf{D}irection \textbf{o}f \textbf{A}rrival}
-	\CreateAbbr{DoF}		{\textbf{D}egrees \textbf{o}f \textbf{F}reedom}
-	% \textbf{D{	& \textbf{D}irect \textbf{P}ath \label{abbr:DP} \\ 
-	\CreateAbbr{DV-Hop}		{\textbf{D}istance \textbf{V}ector-\textbf{Hop}}
-	% \textbf{ECEF}{\textbf{E}arth \textbf{C}entered \textbf{E}arth \textbf{F}ixed \label{abbr:ECEF} \\
-	\CreateAbbr{EKF}		{\textbf{E}xtended \textbf{K}alman \textbf{F}ilter}
-	% \textbf{E{	& \textbf{E}lectrο\textbf{m}agnetic \label{abbr:EM} \\ 
-	\CreateAbbr{ESC}		{\textbf{E}lectronic \textbf{S}peed \textbf{C}ontrol}
-	\CreateAbbr{GCC-PHAT}	{\textbf{G}eneralized \textbf{C}ross \textbf{C}orrelation \textbf{P}hase \textbf{T}ransform}
-	\CreateAbbr{GPDF}		{\textbf{G}auss priori \textbf{P}robability \textbf{D}ensity \textbf{F}unction}
-	\CreateAbbr{FANET}		{\textbf{F}lying \textbf{A}d-hoc \textbf{Net}work}
-	\CreateAbbr{FPV}		{\textbf{F}irst \textbf{P}erson \textbf{V}iew}
-	\CreateAbbr{FSPL}		{\textbf{F}ree \textbf{S}pace \textbf{P}ath \textbf{L}oss}
-	% \textbf{G{	& \textbf{G}lobal \textbf{I}nformation \label{abbr:GI} \\ 
-	\CreateAbbr{GNSS}		{\textbf{G}lobal \textbf{N}avigation \textbf{S}atellite \textbf{S}ystem}
-	\CreateAbbr{GPS}		{\textbf{G}lobal \textbf{P}ositioning \textbf{S}ystem}
-	\CreateAbbr{IC}			{\textbf{I}ntegrated  \textbf{C}ircuit}
-	\CreateAbbr{IMU}		{\textbf{I}ntertial \textbf{M}easurement \textbf{U}nit}
-	\CreateAbbr{IoT}		{\textbf{I}nternet \textbf{o}f \textbf{T}hings}
-	\CreateAbbr{ISR}		{\textbf{I}ntelligence, \textbf{S}urveillance, and \textbf{R}econnaissance}
-	\CreateAbbr{KF}			{\textbf{K}alman \textbf{F}ilter}
-	\CreateAbbr{LBSA}		{\textbf{L}ocalization \textbf{B}ased on \textbf{S}imulated \textbf{A}nnealing}
-	\CreateAbbr{LiDAR}		{\textbf{L}ight \textbf{D}etection \textbf{A}nd \textbf{R}anging}
-	\CreateAbbr{LoS}		{\textbf{L}ine   \textbf{o}f \textbf{S}ight}
-	\CreateAbbr{LPN}		{\textbf{L}ow \textbf{P}ower \textbf{N}etwork}
-	\CreateAbbr{LPS}		{\textbf{L}ocal \textbf{P}ositioning \textbf{S}ystem}
-	\CreateAbbr{LoRaWAN}	{\textbf{L}ong \textbf{R}ange \textbf{W}ide \textbf{A}rea \textbf{N}etwork}
-	\CreateAbbr{LPWAN}		{\textbf{L}ow \textbf{P}ower \textbf{W}ide \textbf{A}rea \textbf{N}etwork}
-	% \textbf{MAV}{\textbf{M}icro \textbf{A}erial \textbf{V}ehicle \label{abbr:MAV} \\
-	\CreateAbbr{MCU}		{\textbf{M}icro \textbf{C}ontroller \textbf{U}nit}
-	\CreateAbbr{MDS-MAP}	{\textbf{M}ulti \textbf{D}imensional \textbf{S}caling-\textbf{M}obile \textbf{A}ssisted \textbf{P}rogramming}
-	\CreateAbbr{MEMS}		{\textbf{M}icro-\textbf{e}lectro-\textbf{m}echanical \textbf{S}ystems}
-	\CreateAbbr{MLAT}		{\textbf{M}ulti\textbf{lat}eration}
-	\CreateAbbr{ML}			{\textbf{M}aximum \textbf{L}ikelihood}
-	\CreateAbbr{MPU}		{\textbf{M}icro \textbf{P}rocessor \textbf{U}nit}
-	\CreateAbbr{MRS}		{\textbf{M}inimal \textbf{R}equired number of \textbf{S}ensors}
-	% \textbf{NED}{\textbf{N}orth \textbf{E}ast \textbf{D}own \label{abbr:NED} \\ % USED
-	\CreateAbbr{NLoS}		{\textbf{N}on-\textbf{L}ine \textbf{o}f \textbf{S}ight}
-	% \textbf{PSO}{\textbf{P}article \textbf{S}warm \textbf{O}ptimization \label{abbr:PSO} \\
-	\CreateAbbr{PBR}		{\textbf{P}assive \textbf{B}istatic \textbf{R}adar}
-	\CreateAbbr{PSL}		{\textbf{P}assive \textbf{S}ource \textbf{L}ocation}
-	\CreateAbbr{RF}	   		{\textbf{R}adio \textbf{F}requency}
-	% \textbf{RMSE}{\textbf{R}oot \textbf{M}ean \textbf{S}quare \textbf{E}rror \label{abbr:RMSE} \\
-	\CreateAbbr{RSSI}		{\textbf{R}eceived \textbf{S}ignal \textbf{S}trength \textbf{I}ndicator}
-	\CreateAbbr{ROS}		{\textbf{R}obot \textbf{O}perating \textbf{S}ystem}
-	\CreateAbbr{RTCM}		{\textbf{R}adio \textbf{T}echnical \textbf{C}ommission for \textbf{M}aritime Service}
-	\CreateAbbr{RTK}		{\textbf{R}eal \textbf{T}ime \textbf{K}inematic}
-	\CreateAbbr{RTLS}		{\textbf{R}eal \textbf{T}ime \textbf{L}ocation \textbf{S}ystem}
-	\CreateAbbr{RTT}		{\textbf{R}ound-\textbf{T}rip \textbf{T}ime}
-	\CreateAbbr{SCIF}		{\textbf{S}plit \textbf{C}ovariance \textbf{I}ntersection \textbf{F}ilter}
-	\CreateAbbr{SITL}		{\textbf{S}oftware \textbf{I}n \textbf{T}he \textbf{L}oop}
-	\CreateAbbr{SR}			{\textbf{S}warm \textbf{R}obotics}
-	\CreateAbbr{S\&R}[SandR]{\textbf{S}earch \textbf{\&} \textbf{R}escue}
-	\CreateAbbr{SDP}		{\textbf{S}emi \textbf{D}efinite \textbf{P}rogramming}
-	% \textbf{SDS-TWR} & \textbf{S}ymmetrical \textbf{D}ouble-\textbf{S}ided \textbf{T}wo-\textbf{W}ay \textbf{R}anging \label{abbr:SDS-TWR} \\
-	\CreateAbbr{SS-TWR}		{\textbf{S}ingle-\textbf{S}ided \textbf{T}wo-\textbf{W}ay \textbf{R}anging}
-	\CreateAbbr{SNR}		{\textbf{S}ignal to \textbf{N}oise \textbf{R}atio}
-	\CreateAbbr{TDoA}		{\textbf{T}ime \textbf{D}ifference \textbf{o}f \textbf{A}rrival}
-	\CreateAbbr{ToA}		{\textbf{T}ime \textbf{o}f \textbf{A}rrival}
-	\CreateAbbr{ToF}		{\textbf{T}ime \textbf{o}f \textbf{F}light}
-	\CreateAbbr{UAS}		{\textbf{U}nmanned \textbf{A}ircraft \textbf{S}ystem}
-	\CreateAbbr{UAV}		{\textbf{U}nmanned \textbf{A}erial \textbf{V}ehicle}
-	\CreateAbbr{UCAV}		{\textbf{U}nmanned \textbf{C}ombat \textbf{A}erial \textbf{V}ehicle}
-	\CreateAbbr{UKF}		{\textbf{U}nscented \textbf{K}alman \textbf{F}ilter}
-	\CreateAbbr{UWB}		{\textbf{U}ltra-\textbf{w}ide\textbf{b}and}
-	\CreateAbbr{VSLAM}		{\textbf{V}isual \textbf{S}imultaneous \textbf{L}ocalization and \textbf{M}apping}
-	\CreateAbbr{VTOL}		{\textbf{V}ertically \textbf{H}over, \textbf{T}ake-off, and \textbf{L}and}
-	\CreateAbbr{WSN}		{\textbf{W}ireless \textbf{S}ensor \textbf{N}etwork}
-\end{abbreviations}
-% spell-checker: enable
+% \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)]
+% 	\CreateAbbr{2D}			{\textbf{2} \textbf{D}imensional}
+% \end{abbreviations}
+
+% Small tip: just run $make fixAbbr, so this file will be automatically sort in alphabetical 
+% order!
 
 %----------------------------------------------------------------------------------------
 %	DEDICATION
 %----------------------------------------------------------------------------------------
-
 \dedicatory{Dedicated to those people who have helped me be the person I am today\ldots}
 
 %----------------------------------------------------------------------------------------

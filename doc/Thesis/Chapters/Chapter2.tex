@@ -47,7 +47,7 @@ Passive Bistatic Radar (\Abbr{PBR}) και Passive Source Location (\Abbr{PSL}),
 
 Ξεκινώντας με τη τεχνική \Abbr{PBR}, η οποία αξιοποιεί τα echoes που
 γίνονται scatter από τα εμπόδια που υπάρχουν στον χώρο\udot προκειμένου να εντοπίσει το αντικείμενο. Έχει σαν κύρια χαρακτηριστικά 
-ότι χρησιμοποιείται για εντοπισμό κινούμενων αντικειμένων και δεν χρειάζεται το ίδιο το αντικείμενο να εκπέμπει σήματα, πράγμα που 
+ότι χρησιμοποιείται για εντοπισμό κινούμενων α\-ντι\-κειμένων και δεν χρειάζεται το ίδιο το αντικείμενο να εκπέμπει σήματα, πράγμα που 
 το καθιστά ιδανικό για εντοπισμό non-cooperative στόχων. Προκειμένου βέβαια να εκτιμηθεί η θέση, έπειτα από την αρχική επεξεργασία 
 που γίνεται από τα λαμβανόμενα echoes, ο εντοπισμός τελικά της θέσης πραγματοποιείται μέσω ενός συνδυασμού από μετρήσεις με βάση 
 range είτε γωνία. 
@@ -65,14 +65,14 @@ range είτε γωνία.
     % -----------------
 		\begin{minipage}{.47\textwidth}
 			\centering
-			\includegraphics[width=\linewidth]{Images/Related-Work/PBR-and-PSL-approaches.png}
+			\includegraphics[width=.9\linewidth]{Images/Related-Work/PBR-and-PSL-approaches.png}\\
 			{(a) PBR and PSL \URI{https://ieeexplore.ieee.org/document/9253794/figures}}
 		\end{minipage}%
 		\hspace*{+0.8cm}
 		% -----------------
 		\begin{minipage}{.47\textwidth}
 			\centering
-			\includegraphics[width=\linewidth]{Images/Related-Work/PBR-and-PSL-Features.png}
+			\includegraphics[width=.9\linewidth]{Images/Related-Work/PBR-and-PSL-Features.png}\\
 			{(b) PBR and PSL Features \URI{https://ieeexplore.ieee.org/document/9253794/figures}}
 		\end{minipage}
 	% -----------------
@@ -116,7 +116,7 @@ non-convex optimization problem.
 \FigCaptLabelBasedURL{Images/Related-Work/paper-spring.png}
 {An illustration of the spring system}%
 {spring-system}%
-<0.5>%
+<0.45>%
 [uwb-imu-gps1]%
 (https://www.researchgate.net/publication/345459052_Cooperative_3-D_relative_localization_for_UAV_swarm_by_fusing_UWB_with_IMU_and_GPS)
 
@@ -125,13 +125,21 @@ non-convex optimization problem.
 ενός module LinkTrack, για την επικοινωνία με το ground station χρησιμοποιήθηκε ένα UBNT, ενώ η επεξεργασία των 
 αλγορίθμων έγιναν σε ένα Raspberry Pi 3B+. 
 
-Τέλος, τα αποτελέσματα που κατάφεραν να έχουν ήταν, 3D relative position estimation με σφάλμα απόκλισης τα 0.4m. 
+Τέλος, τα αποτελέσματα που κατάφεραν να έχουν ήταν, \Abbr{3D} relative position estimation με σφάλμα απόκλισης τα 0.4m. 
 
 % ---------------------
 \subsection{Cellular Networks}
 Ένας ακόμα εφικτός τρόπος προσέγγισης - για την εκτίμηση της θέσης - είναι με χρήση
 cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχει οδηγήσει να γίνουν προσπάθειες εκτίμησης
 της θέσης των drones με την βοήθεια αυτών των τεχνολογιών, παράδειγμα της μεθόδου βρίσκεται στο \Fig{cellular-network}. 
+
+% IMAGE
+\FigCaptLabelBasedURL{Images/Related-Work/cellular.png}
+{Cellular network}%
+{cellular-network}%
+<0.5>%
+[cellular-network-localization]%
+(https://ieeexplore.ieee.org/abstract/document/9120588/figures)
 
 Συγκεκριμένα, οι συγγραφείς του \cite{cellular-network-localization} ερευνούν από την θεωρητική οπτική το συ\-γκε\-κρι\-μένο πρόβλημα, 
 και αφού το μοντελοποιήσουν\udot χρησιμοποιούν Monte Carlo simulation και το snapshot model, προκειμένου να αναλύσουν την επιρροή 
@@ -140,14 +148,6 @@ cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχε�
 είναι, τα χαρακτηριστικά του air-to-ground καναλιού καθώς και το αν υπάρχει ενδιάμεση ύπαρξη εμποδίων σε καθένα από αυτά. Όπως, και το 
 ύψος του αεροχήματος σε συνδυασμό με τις λαμβανόμενες παρεμβολές.
 
-% IMAGE
-\FigCaptLabelBasedURL{Images/Related-Work/cellular.png}
-{Cellular network}%
-{cellular-network}%
-<0.6>%
-[cellular-network-localization]%
-(https://ieeexplore.ieee.org/abstract/document/9120588/figures)
-
 % ---------------------
 \subsection{Lora}
 
@@ -155,13 +155,13 @@ cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχε�
 power consumption ενός συστήματος, καθώς επίσης και η μεγάλη εμβέλεια των \Abbr{LoRaWAN}, που μπορούν να φτάσουν σε ακτίνες επικοινωνίας ακόμα και 2km σε κατοικημένες περιοχές εξυπηρετώντας χιλιάδες κόμβους σε ένα σύστημα \cite{lora-localization}.
 
 Οι συγγραφείς του \cite{lora-localization} αξιοποιούν τα πλεονεκτήματα αυτά,
-και τα χρησιμοποιούν - παρόλο που δεν είναι σχεδιασμένα για αυτό το λόγο - επεκτείνοντας ένα σύστημα από στατικούς κόμβους, σε ένα και με δυναμικές μετρήσεις\udot με την βοήθεια drone σαν 3D-mobile gateway stations - \Fig{lora-system-setup}, όπου καταφέρνουν να βελτιώσουν έως και 10 φορές την ακρίβεια εκτίμησης της θέσης ενός αντικειμένου.
+και τα χρησιμοποιούν - παρόλο που δεν είναι σχεδιασμένα για αυτό το λόγο - επεκτείνοντας ένα σύστημα από στατικούς κόμβους, σε ένα και με δυναμικές μετρήσεις\udot με την βοήθεια drone σαν \Abbr{3D} mobile gateway stations - \Fig{lora-system-setup}, όπου καταφέρνουν να βελτιώσουν έως και 10 φορές την ακρίβεια εκτίμησης της θέσης ενός αντικειμένου.
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/lora-system-setup.png}%
 {Lora system setup}%
 {lora-system-setup}%
-<0.7>%
+<0.55>%
 [lora-localization](https://www.researchgate.net/figure/System-setup_fig1_341344946)
 
 Για να το καταφέρουν, αξιοποιούν πληροφορία σχετικά με την ένταση της ισχύς των λαμβανόμενων πακέτων, μοντελοποιούν αυτήν την σχέση για να καταφέρουν να εκτιμήσουν την απόσταση μεταξύ δύο κόμβων και στην συνέχεια με χρήση αυτών των αποστάσεων, καταφέρνουν να 
@@ -184,9 +184,10 @@ MATLAB simulations ενώ στην συνέχεια σε Software In The Loop (\
 λύσεις διορθώσεις των σφαλμάτων, και να χρησιμοποιήσουμε  Real Time Kinematic (\Abbr{RTK}) \cite{rtk-gps} τεχνικές, οι οποίες είναι ικανές να προσφέρουν ακρίβεια 1-2cm σε ακτίνες $\sim$20km. 
 
 % IMAGE
-\FigCaptLabelBasedURL{../Photos/RTK.png}
-{RTK usage prinsiple}
-{rtk-usage}<0.55>
+\FigCaptLabelBasedURL{../Photos/RTK.png}%
+{RTK usage Principle}%
+{rtk-usage}%
+<0.42>%
 
 Η γενική αρχή λειτουργίας του \Abbr{RTK}-\Abbr{GPS}, είναι ότι αποτελείται από ένα επίγειο
 base station - ουσιαστικά μιλάμε για μία stationary \Abbr{GPS} master antenna - του οποίου οι
@@ -197,7 +198,7 @@ base station - ουσιαστικά μιλάμε για μία stationary \Abbr{
 Οι συγγραφείς του \cite{rtk-gps-drone-localization} πραγματοποιούν μεγαλύτερη ανάλυση λει\-του\-ργίας του, α\-να\-φέ\-ρουν λόγους ύπαρξης προβλημάτων, καθώς προτείνουν και μία αρχιτεκτονική η οποία μπορεί να βελτιώσει το availability του \Abbr{RTK}-\Abbr{GPS} σε ένα multi-vehicle system.
 
 % ------------------------------------------------------------------------------------
-\section{Sound Waves}
+\section{Sound Waves} \label{sec:related-sound}
 Μία εναλλακτική εκδοχή προσέγγισης υπολογισμού της θέσης, είναι με την βοήθεια ακουστικών κυμάτων. Παρόλο που αναλογικά με τις άλλες μεθόδους δεν είναι τόσο συχνά χρησιμοποιούμενη, υφίσταται ερευνητικό ενδιαφέρον για προσπάθειας α\-πό\-κτη\-σης location information με χρήση ήχου. 
 
 Υπάρχουν εφαρμογές στις οποίες χρειάζεται να ανιχνευτεί η θέση non cooperative - ακόμα και εχθρικών - drone τα οποία είτε να μην μπορούν να ανιχνευτούν - λόγο μεγέθους - από κάμερα είτε να μην μπορεί να χρησιμοποιηθεί κάποια \Abbr{RF} τεχνική.
@@ -211,45 +212,110 @@ base station - ουσιαστικά μιλάμε για μία stationary \Abbr{
 [sound-waves-for-drone-localization]%
 (https://ieeexplore.ieee.org/document/8448409/figures)
 
-Συγκεκριμένα, τοποθετούν σε συγκεκριμένες θέσεις τα δύο arrays, από τα οποία λα\-μβά\-νουν - με χρήση Generalized Cross Correlation
-Phase Transform (\Abbr{GCC-PHAT}) - ένα πλήθος μετρήσεων \Abbr{TDoA} μεταξύ των δύο arrays. Λόγο όμως το ότι από μόνες τους αυτές οι
+Συγκεκριμένα, τοποθετούν σε συγκεκριμένες θέσεις τα δύο arrays, από τα οποία λα\-μβά\-νουν, με χρήση Generalized Cross Correlation - Phase Transform (\Abbr{GCC-PHAT}), ένα πλήθος μετρήσεων \Abbr{TDoA} μεταξύ των δύο arrays. Λόγο όμως το ότι από μόνες τους αυτές οι
 μετρήσεις - εξ' αιτίας του multipath effect - καταλήγουν να περιλαμβάνουν σφάλματα, προτείνουν έναν βασισμένο στο Gauss
 priori Probability Density Function (\Abbr{GPDF}) αλγόριθμο\udot ώστε τελικά να εντοπίσουν την θέση των drone, ενώ στην συνέχεια χρησιμοποιούν \Abbr{KF} για να το κάνουν track.
 
 Ο εξοπλισμός που χρησιμοποιήθηκε ήταν sensors τύπου CHZ-213 1/2-inch me\-tro\-lo\-gi\-cal microphones, με κάθε sensor εφοδιασμένο με ένα pre-amplifiers τύπου YG-201. Ενώ, το drone του οποίου έγινε προσπάθεια να εκτιμηθεί η θέση ήταν το DJI Pha\-ntom 2. Τα αποτελέσματα που είχαν, ήταν να καταφέρουν στο μεγαλύτερο ποσοστό των εκτιμήσεων, τα σφάλματα να είναι μικρότερα των 6m σε μέγιστη απόσταση κάλυψης τα 100m.  
 
 % ------------------------------------------------------------------------------------
-\section{Optical Oriented}
-Ακόμα ένας τρόπος προσέγγισης του προβλήματος εκτίμησης θέσης ενός αντικειμένου, είναι με χρήση οπτικών μέσων. Τέτοιοι τρόποι μπορεί να είναι με χρήση mo\-no\-cu\-lar κάμερας, stereo κάμερας ή τεχνικές που σχετίζονται με το φως - με μερικές από αυτές, να αναλύονται συνοπτικά στην συνέχεια του κεφαλαίου.
+\section{Optical Oriented} \label{sec:related-optical}
+Το πρόβλημα της εκτίμησης θέσης ενός αντικειμένου, έχει επίσης επιστημονικό ε\-νδια\-φέ\-ρον να λυθεί με χρήση οπτικών μέσων. Τέτοιοι τρόποι μπορεί να είναι με χρήση mo\-no\-cu\-lar κάμερας, stereo κάμερας ή τεχνικές που σχετίζονται με το φως - με μερικές από αυτές, να αναλύονται συνοπτικά στην συνέχεια του κεφαλαίου.
 
 % ---------------------
-\subsection{Camera}
+\subsection{Camera} \label{sec:related-camera}
+H πιο απλή εκδοχή\udot είναι να γίνει χρήση μίας κάμερας και τεχνικών image processing για την εκροή συμπερασμάτων σχετικά με την θέση του \Abbr{UAV}.
+
+
+% he  scenario  considered  in  this  paper  is  a  team  of  anunmanned aerial vehicle  (UAV) and multiple unmanned groundvehicles  (UGVs)  tracking  and  controlling  crowds  on  a  borderarea
+
+% A customized motion detection algorithm is applied to fol-low the crowd from the moving camera mounted on the UAV. 
+% We present a LIDAR localization algorithm that elim-
+% inates the need for cameras and therefore works inde-
+% pendent of lighting conditions.
 
 % ---------------------
-\subsection{LiDAR}
-Light Detection And Ranging (\Abbr{LiDAR})
- 
+\subsection{LiDAR} \label{sec:related-lidar}
+Ένας ακόμα τρόπος εκτίμησης της θέσης, μπορεί να προκύψει με χρήση τεχνικών από τον κλάδο των  
+remote sensing technologies, συγκεκριμένα με την χρήση Light Detection And Ranging (\Abbr{LiDAR}) προσέγγισης. Ο τρόπος λειτουργίας αυτής της τεχνικής - απλοποιημένο παράδειγμα στο \Fig{drone-lidar} (a) - είναι πρακτικά η εκπομπή laser pulses προς διάφορες κατευθύνσεις, η εκτίμηση της απόστασης κάθε αντικειμένου στα οποία ανακλά η κάθε στοιχειώδη αυτή ακτινοβολία και ο συνδυασμός αυτών των αποστάσεων σε ένα συνολικό μοντέλο, ώστε τελικά να δημιουργήσουμε \Abbr{3D} reconstructions των σκαναρισμένων χώρων, που συχνά τις ονομάζουμε \Abbr{LiDAR} Cloud Point Data - \Fig{drone-lidar} (b) -  οι οποίες χρησιμοποιούνται στην συνέχεια για το localization \cite{lidar-basics}.
+
+
+% To achieve drift-free localization in the absence of GPS,
+% we match light detection and ranging (LIDAR) measure-
+% ments against a digital elevation model (DEM) for localiza-
+% tion
+% Our technique fits into the category of terrain referenced
+% navigation (TRN) [8] in which terrain models are used for
+% localization
+% The a priori DEM provides a surface elevation
+% map at various resolutions for the entire desired flight plan.
+
+% Our LIDAR localization intermittently localizes the heli-
+% copter by aligning LIDAR measurements to a geo-referenced
+% Digital Elevation Model (DEM).
+
+% Our goal is to estimate
+% our true 3D world position by searching for an optimal
+% alignment between a 3D LIDAR point cloud as measured
+% by the helicopter and the a priori DEM.
+% We make use of
+% the current position estimate to restrict the search area to a
+% local DEM neighborhood. This requires a low-drift estimate,
+% which is achieved by tightly coupled LIDAR-inertial fusion
+% We decompose the 3D localization problem into a 2D
+% translation and a 1D altitude problem that are solved se-
+% quentially.
+
 % IMAGE
-\FigCaptLabelBasedURL{Images/Related-Work/lidar-drone-example.png}
-{LiDAR UAV example}%
-{drone-lidar-example}%
-<0.8>%
-(https://wingtra.com/drone-photogrammetry-vs-lidar/)
+\begin{figure} [H]
+	\centering
+    % -----------------
+		\begin{minipage}{.47\textwidth}
+			\centering
+			\includegraphics[width=.9\linewidth]{Images/Related-Work/lidar-drone-example.png}\\
+			{(a) UAV usage \URI{https://wingtra.com/drone-photogrammetry-vs-lidar/}}
+		\end{minipage}%
+		\hspace*{+0.8cm}
+		% -----------------
+		\begin{minipage}{.47\textwidth}
+			\centering
+			\includegraphics[width=.9\linewidth]{Images/Related-Work/lidar-cloud.png}\\
+			{(b) Cloud Point Data example \URI{https://community.safe.com/s/article/what-is-a-point-cloud-what-is-lidar}}
+		\end{minipage}
+	% -----------------
+    \hfill \break
+    \decoRule
+	\caption[LiDAR examples]{LiDAR examples}
+    \label{fig:drone-lidar}
+\end{figure}
 
+Οι συγγραφείς του \cite{lidar-usage-example} κάνουν προσπάθεια χρήσης αυτής της τεχνολογίας, προκειμένου 
 
 % ---------------------
-\subsection{VSLAM}
-Visual Simultaneous Localization and Mapping (\Abbr{VSLAM})
+\subsection{VSLAM}	\label{sec:related-vslam}
+Μία ειδική κατηγορία - με χρήση κάμερας - είναι αυτή στην οποία ακολουθείται η λογική του Visual Simultaneous Localization and Mapping (\Abbr{VSLAM}). Σε αυτήν την περίπτωση, το \Abbr{UAV} προσπαθεί να εντοπίσει τις συντεταγμένες του - αφού πρώτα δημιουργήσει έναν map του χώρου στον οποίο βρίσκεται - ώστε τελικά να βρει την θέση που έχει μέσα σε αυτόν.
 
 \cite{vslam-for-drone-localization}
 
 \FigCaptLabelBasedURL{Images/Related-Work/slam-drone.png}
-{VSLAM drone perception}
-{vslam-drone-visual-perception}<0.8>[vslam-image](https://www.mdpi.com/2504-446X/5/2/41/htm)
+{VSLAM drone perception}%
+{vslam-drone-visual-perception}%
+<0.7>%
+[vslam-image]%
+(https://www.mdpi.com/2504-446X/5/2/41/htm)
+
+
 
 % ---------------------
-\subsection{Motion Capturing System}
-\FigCaptLabelBasedURL{Images/Related-Work/optitrack.png}{Motion Capturing System for drone swarm localization}{motion-capturing-drone-swarm}<0.7>(https://optitrack.com/systems/)
+\subsection{Motion Capturing System} \label{sec:related-motion-capturing-systems}
+Συχνή χρήση έχουν επίσης τα Motion Capturing Systems \cite{motion-capture}. Όταν αναφερόμαστε σε motion capturing systems, όπως το Vicon \cite{vicon} ή το Optitrack \cite{optitrack}, μιλάμε κυρίως για στατικά, εσωτερικών χώρων συστήματα 
+τα οποία είναι υπεύθυνα να ανιχνεύουν και να συλλαμβάνουν την κίνηση σωμάτων. Αποτελούνται από ένα πλήθος καμερών - οι οποίες είναι τοποθετημένες σε προκαθορισμένες θέσεις - μέσω των οποίων μπορεί να εκτιμηθεί η θέση αντικειμένων - όπως drones - στο χώρο αναφοράς. Παράδειγμα αυτού υπάρχει στο \Fig{motion-capturing-drone-swarm}
+
+\FigCaptLabelBasedURL{Images/Related-Work/optitrack.png}%
+{Optitrack Motion Capturing System for drone swarm localization}%
+{motion-capturing-drone-swarm}%
+<0.6>%
+(https://optitrack.com/systems/)
 
 % ---------------------
 

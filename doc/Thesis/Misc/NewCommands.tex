@@ -36,7 +36,7 @@
 \textbf{#1} & #3\IfValueTF{#2}{\label{abbr:#2}}{\label{abbr:#1}}\\}  %E.g.  \Abbr{UAV}{Unmanned Aerial Vehicle}
 
 % Use it whenever you want to call an abbreviation
-\NewDocumentCommand\Abbr{m d<>}{%
+\NewDocumentCommand\Abbr{m d() D<>{}}{%
     \ifcsundef{r@abbr:#1}{%
         \colorbox{red}{\textbf{Add #1 to your Abbr list}}%
     }{%
@@ -48,7 +48,7 @@
         %     \endgroup%
         %     % 
         % }{%
-            \hyperref[abbr:#1]{#1\IfValueT{#2}{#2}}%
+            \hyperref[abbr:#1]{\IfValueTF{#2}{#2}{#1}#3}%
         % }%
     }%
 }  %E.g.  \Abbr{UAV}[s]
