@@ -4,14 +4,14 @@
 % To use upper dot in Greek (equivalent of English semicolon)
 \newcommand{\udot}{$^{\mbox{\textbf{.}}}$ }
  
-\newcommand{\Fig}[1]{\emph{Figure} \getLabel{fig:#1}}       % E.g.  \Fig{drones}
-\newcommand{\Tabl}[1]{\emph{Table} \getLabel{tab:#1}}       % E.g.  \Tabl{comparison}
-\newcommand{\Equa}[1]{\emph{Equation} \getLabel{eq:#1}}     % E.g.  \Equa{linear}
+\newcommand{\Fig}[1]{\emph{Fi\-gu\-re} \getLabel{fig:#1}}       % E.g.  \Fig{drones}
+\newcommand{\Tabl}[1]{\emph{Ta\-ble} \getLabel{tab:#1}}       % E.g.  \Tabl{comparison}
+\newcommand{\Equa}[1]{\emph{E\-qua\-tion} \getLabel{eq:#1}}     % E.g.  \Equa{linear}
 \newcommand{\EqNum}[1]{(\getLabel{eq:#1})}                  % E.g.  \EqNum{linear}
-\newcommand{\Chap}[1]{\emph{Chapter} \getLabel{chap:#1}}    % E.g.  \Chap{second}
-\newcommand{\Sect}[1]{\emph{Section} \getLabel{sec:#1}}     % E.g.  \Sect{first}
+\newcommand{\Chap}[1]{\emph{Cha\-pter} \getLabel{chap:#1}}    % E.g.  \Chap{second}
+\newcommand{\Sect}[1]{\emph{Se\-ction} \getLabel{sec:#1}}     % E.g.  \Sect{first}
 \newcommand{\URI}[1]{(\href{#1}{URL})}                      % E.g.  \URI{www.google.com}  -> clickable (URL) text
-\newcommand{\Algo}[1]{\emph{Algorithm} \ref{alg:#1}}        % E.g.  \URI{www.google.
+\newcommand{\Algo}[1]{\emph{A\-lgo\-ri\-thm} \ref{alg:#1}}        % E.g.  \URI{www.google.
 \newcommand{\TODO}[1]{\colorbox{orange}{#1}}                % E.g.  \TODO{Testing}
 
 \newcommand{\getLabel}[1]{%
@@ -74,3 +74,9 @@
         \label{fig:#3}
     \end{figure}
 }
+
+
+% \let\oldcite\cite
+% \renewcommand{\cite}[1]{%
+%     \oldcite{#1}
+% }

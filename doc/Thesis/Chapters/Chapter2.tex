@@ -1,8 +1,8 @@
 \chapter{Related Work} \label{chap:Chapter2}       
 \epigraph{``This is where technology is now, imagine where we can go in the future” }{\textit{Timothy Chung}}
 
-Σε αυτό το \emph{Chapter} περιγράφονται τρόποι - από την βιβλιογραφία - με τους οποί\-ους, υπάρχουσες εφαρμογές 
-μεμονωμένων \Abbr{UAV}, καθώς και drone swarms επιλύουν το localization pro\-blem. Κάποια από τα συστήματα στις 
+Σε αυτό το \emph{Chapter} περιγράφονται τρόποι με τους οποί\-ους υπάρχουσες εφαρμογές \Abbr{UAV} swarms, καθώς και 
+μεμονωμένων drone - των οποίων οι βασικές αρχές μπορούν να χρησιμοποιηθούν στα σμήνη - επιλύουν το localization pro\-blem. Κάποια από τα συστήματα στις 
 παρακάτω έρευνες έχουν καθαρά θεωρητική πλευρά, ενώ, άλλα έχουν δοκιμαστεί σε real-life scenarios.
 Τέλος, σε α\-ρκε\-τές από αυτές τις εφαρμογές χρησιμοποιούνται τεχνικές που θα αναλυθούν στο \Chap{Chapter3}
 σε μεγαλύτερο βάθος, καθώς θα αποτελέσουν το προαπαιτούμενο θεωρητικό και μαθηματικό υπόβαθρο για τον σχεδιασμό 
@@ -12,7 +12,7 @@
 οποίες μπορεί να βασίζονται σε Radio Frequency (\Abbr{RF}), Sound Waves ή ακόμα και να είναι Optical Oriented.
 
 Σχεδόν βέβαιο είναι επίσης, ότι από όποια κατεύθυνση και αν προσεγγίσουμε το \Abbr{LPS} να έχουμε την ανάγκη να 
-χρησιμοποιήσουμε κάποια τεχνική για να συνενώσουμε όλες τις πληροφορίες που έχουμε από τους διάφορους αισθητήρες 
+χρησιμοποιήσουμε κάποια τεχνική για να συνενώσουμε όλες τις πληροφορίες που έχουμε από τους διάφορους αισθητήρες -
 για κάθε μεμονωμένο time-frame - με δεδομένο ότι κάνουμε χρήση πολλαπλών αισθητήρων ώστε να μειώσουμε την εντροπία, 
 συνεπώς και την αβεβαιότητα ως προς την εκτίμηση της θέσης. 
 Την ανάγκη αυτού έρχεται να καλύψει η έννοια του \emph{sensor fusion} \cite{sensor-fusion}. Όπως επίσης, και την 
@@ -21,7 +21,8 @@
 Covariance Intersection Filter (\Abbr{CIF}),  Split  Covariance  Intersection  Filter (\Abbr{SCIF}) και  Belief  
 Propagation (\Abbr{BP}) \cite{fusion-filters}. 
 
-% ------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \section{Radio Frequency}
 Το πιο εύκολο που μπορούμε να φανταστούμε είναι να χρησιμοποιήσουμε \Abbr{RF} τε\-χνο\-λο\-γίες όπως \Abbr{GPS}, WiFi, Zigbee, Bluetooth, Ultra-Wideband (\Abbr{UWB}) ή ακόμα και άλλα\udot για την επικοινωνία και την υλοποίηση του \Abbr{LPS}. Συχνός παράγοντας για το ποιο θα επιλεχθεί, σχετίζεται αν η εφαρμογή μας κυμαίνεται σε short ή long range εμβέλειες.
 
@@ -34,7 +35,8 @@ Propagation (\Abbr{BP}) \cite{fusion-filters}.
 Τέλος, θετικό στην χρήση \Abbr{RF} τεχνολογιών, είναι αρχικά ότι δεν χρειαζόμαστε άμεση οπτική επαφή με το ιπτάμενο, ενώ επίσης ότι μπορούμε εύκολα να δημιουργήσουμε
 ένα Flying Ad-hoc Network (\Abbr{FANET}) το οποίο βοηθάει στην ευελιξία του συστήματος.
 
-% ---------------------
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \subsection{WiFi}
 Μία αρχική προσέγγιση για τον εντοπισμό ενός drone δίνεται από τους συγγραφείς του \cite{wifi-passive-active-drone-localization}
 οι οποίοι χρησιμοποιούν WiFi προκειμένου να εντοπίσουν την θέση του αεροχήματος. Το ενδιαφέρον - με την χρήση του WiFi - είναι ότι, 
@@ -87,8 +89,8 @@ range είτε γωνία.
 σε μία transmitting directive antenna (TP-LINK TL-ANT2409A). Ενώ για τα receivers χρησιμοποιήθηκαν οι ίδιες κεραίες σε συνδυασμό 
 με ένα URSP-2955 της National Instruments.
 
-
-% ---------------------
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \subsection{UWB}
 Όπως αναφέρθηκε στην αρχή αυτού του κεφαλαίου, ένας τρόπος προσδιορισμού της θέσης\udot είναι με χρήση \Abbr{UWB}.
 Ένα από τα πλεονεκτήματα της χρήσης \Abbr{UWB} είναι η ικανότητα υπολογισμού της σχετικής απόστασης μεταξύ δύο
@@ -127,7 +129,8 @@ non-convex optimization problem.
 
 Τέλος, τα αποτελέσματα που κατάφεραν να έχουν ήταν, \Abbr{3D} relative position estimation με σφάλμα απόκλισης τα 0.4m. 
 
-% ---------------------
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \subsection{Cellular Networks}
 Ένας ακόμα εφικτός τρόπος προσέγγισης - για την εκτίμηση της θέσης - είναι με χρήση
 cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχει οδηγήσει να γίνουν προσπάθειες εκτίμησης
@@ -148,7 +151,8 @@ cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχε�
 είναι, τα χαρακτηριστικά του air-to-ground καναλιού καθώς και το αν υπάρχει ενδιάμεση ύπαρξη εμποδίων σε καθένα από αυτά. Όπως, και το 
 ύψος του αεροχήματος σε συνδυασμό με τις λαμβανόμενες παρεμβολές.
 
-% ---------------------
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \subsection{Lora}
 
 Ο τομέας των Internet of Things (\Abbr{IoT}) έχει επιφέρει στην έντονη χρήση\udot για πολλές τεχνολογίες, με τα Long Range Wide Area Network (\Abbr{LoRaWAN}) - που πρακτικά αποτελούν παρακλάδι του ευρύτερου τομέα των Low Power Wide Area Network (\Abbr{LPWAN}) - να είναι μία από αυτές. Λόγοι που χρησιμοποιούνται συχνά - για τέτοιες εφαρμογές - είναι ότι τα Low Power Networks (\Abbr{LPN}) είναι ιδανικά όταν μας ε\-νδια\-φέ\-ρει το 
@@ -173,7 +177,8 @@ power consumption ενός συστήματος, καθώς επίσης και 
 MATLAB simulations ενώ στην συνέχεια σε Software In The Loop (\Abbr{SITL}) simulations χρησιμοποιώντας 
 το Gazebo. Τέλος, στο κομμάτι του hardware, το κάθε drone ήταν εξοπλισμένο με ένα PixHawk flight το οποίο έτρεχε PX4 autopilot, ένα Raspberry Pi 3B+ στο οποίο υπήρχε το Robot Operating System (\Abbr{ROS}) και το MAVROS, ένα MultiTech MultiConnect Conduit LoRa gateway και η σύνδεση στο Swisscom \Abbr{LoRaWAN} έγινε με την βοήθεια ενός Huawei E3372 USB modem.
 
-% ---------------------
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \subsection{RTK GNSS}
 Ένας εύκολα προσβάσιμος τρόπος - για την εκτίμηση θέσης αντικειμένου - που ο καθένας εύκολα μπορεί να χρησιμοποιήσει, σχετίζεται με τους δορυφόρους και τη χρήση \Abbr{GNSS} τεχνικών όπως το \Abbr{GPS}.
 
@@ -197,7 +202,8 @@ base station - ουσιαστικά μιλάμε για μία stationary \Abbr{
 
 Οι συγγραφείς του \cite{rtk-gps-drone-localization} πραγματοποιούν μεγαλύτερη ανάλυση λει\-του\-ργίας του, α\-να\-φέ\-ρουν λόγους ύπαρξης προβλημάτων, καθώς προτείνουν και μία αρχιτεκτονική η οποία μπορεί να βελτιώσει το availability του \Abbr{RTK}-\Abbr{GPS} σε ένα multi-vehicle system.
 
-% ------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \section{Sound Waves} \label{sec:related-sound}
 Μία εναλλακτική εκδοχή προσέγγισης υπολογισμού της θέσης, είναι με την βοήθεια ακουστικών κυμάτων. Παρόλο που αναλογικά με τις άλλες μεθόδους δεν είναι τόσο συχνά χρησιμοποιούμενη, υφίσταται ερευνητικό ενδιαφέρον για προσπάθειας α\-πό\-κτη\-σης location information με χρήση ήχου. 
 
@@ -218,53 +224,29 @@ priori Probability Density Function (\Abbr{GPDF}) αλγόριθμο\udot ώστ
 
 Ο εξοπλισμός που χρησιμοποιήθηκε ήταν sensors τύπου CHZ-213 1/2-inch me\-tro\-lo\-gi\-cal microphones, με κάθε sensor εφοδιασμένο με ένα pre-amplifiers τύπου YG-201. Ενώ, το drone του οποίου έγινε προσπάθεια να εκτιμηθεί η θέση ήταν το DJI Pha\-ntom 2. Τα αποτελέσματα που είχαν, ήταν να καταφέρουν στο μεγαλύτερο ποσοστό των εκτιμήσεων, τα σφάλματα να είναι μικρότερα των 6m σε μέγιστη απόσταση κάλυψης τα 100m.  
 
-% ------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \section{Optical Oriented} \label{sec:related-optical}
 Το πρόβλημα της εκτίμησης θέσης ενός αντικειμένου, έχει επίσης επιστημονικό ε\-νδια\-φέ\-ρον να λυθεί με χρήση οπτικών μέσων. Τέτοιοι τρόποι μπορεί να είναι με χρήση mo\-no\-cu\-lar κάμερας, stereo κάμερας ή τεχνικές που σχετίζονται με το φως - με μερικές από αυτές, να αναλύονται συνοπτικά στην συνέχεια του κεφαλαίου.
 
-% ---------------------
+% ---------------------------------------------------------------------------------------------------------
+% ---------------------------------------------------------------------------------------------------------
 \subsection{Camera} \label{sec:related-camera}
-H πιο απλή εκδοχή\udot είναι να γίνει χρήση μίας κάμερας και τεχνικών image processing για την εκροή συμπερασμάτων σχετικά με την θέση του \Abbr{UAV}.
+H πιο απλή εκδοχή\udot είναι να γίνει χρήση μίας κάμερας και τεχνικών image processing για την εκροή συμπερασμάτων σχετικά με τον εντοπισμό θέσης \Abbr{UAV}.
 
+Στην έρευνα τους οι \cite{related-simple-camera}, προτείνουν την δημιουργία ενός 2-tier heterogeneous \Abbr{UAV} swarm συστήματος το οποίο θα είναι σε θέση να αντικαταστήσει την ανάγκη από ανθρώπινο δυναμικό να διεκπεραιώνει επικίνδυνες διαδικασίες (όπως καθάρισμα των παραθύρων σε ουρανοξύστη).
 
-% he  scenario  considered  in  this  paper  is  a  team  of  anunmanned aerial vehicle  (UAV) and multiple unmanned groundvehicles  (UGVs)  tracking  and  controlling  crowds  on  a  borderarea
+Το σύστημα τους αποτελείται από τους workers και τους spotters, με τους workers να είναι τα να drone τα οποία δεν είναι απαραίτητο να είναι εφοδιασμένα με πλήθος αισθητήρων - καθώς με το να είναι τόσο κοντά σε κτίρια οι μετρήσεις τους μπορεί να μην έχουν ακριβή αποτελέσματα - και είναι αυτά που πραγματοποιούν το κύριο μέρος της αποστολής. Σε αντίθεση, οι spotters τοποθετούνται σε απόσταση από τους workers και είναι αυτοί που είναι υπεύθυνοι για τον εντοπισμό της θέσης των workers, με το μεγαλύτερο μέρος της επεξεργασίας να πραγματοποιείται σε αυτούς.
 
-% A customized motion detection algorithm is applied to fol-low the crowd from the moving camera mounted on the UAV. 
-% We present a LIDAR localization algorithm that elim-
-% inates the need for cameras and therefore works inde-
-% pendent of lighting conditions.
+Με την βοήθεια μίας πολύχρωμης ping pong μπάλας - η οποία είναι τοποθετημένη πάνω στους workers και χρησιμοποιείται ως vision marker - χρήση μίας κάμερας και συνδυασμό αυτής με την βιβλιοθήκη OpenCV \cite{opencv}, καταφέρνουν να εντοπίσουν στο \Abbr{3D} την θέση της μπάλας, ενώ σε συνδυασμό με statistical Sensor Fusion, χρήση \Abbr{EKF} και dead-reckoning καταφέρνουν να κινήσουν τους workers στον χώρο.
 
-% ---------------------
+Για τα workers - τα οποία κατάφεραν στα πειράματα τους να κάνουν hover με ακρίβεια <0.1m - χρησιμοποίησαν πολλαπλά CrazyFlie 2.0, ενώ για το spotter έγινε χρήση υπολογιστή και μίας USB κάμερας.
+
+% ---------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \subsection{LiDAR} \label{sec:related-lidar}
 Ένας ακόμα τρόπος εκτίμησης της θέσης, μπορεί να προκύψει με χρήση τεχνικών από τον κλάδο των  
 remote sensing technologies, συγκεκριμένα με την χρήση Light Detection And Ranging (\Abbr{LiDAR}) προσέγγισης. Ο τρόπος λειτουργίας αυτής της τεχνικής - απλοποιημένο παράδειγμα στο \Fig{drone-lidar} (a) - είναι πρακτικά η εκπομπή laser pulses προς διάφορες κατευθύνσεις, η εκτίμηση της απόστασης κάθε αντικειμένου στα οποία ανακλά η κάθε στοιχειώδη αυτή ακτινοβολία και ο συνδυασμός αυτών των αποστάσεων σε ένα συνολικό μοντέλο, ώστε τελικά να δημιουργήσουμε \Abbr{3D} reconstructions των σκαναρισμένων χώρων, που συχνά τις ονομάζουμε \Abbr{LiDAR} Cloud Point Data - \Fig{drone-lidar} (b) -  οι οποίες χρησιμοποιούνται στην συνέχεια για το localization \cite{lidar-basics}.
-
-
-% To achieve drift-free localization in the absence of GPS,
-% we match light detection and ranging (LIDAR) measure-
-% ments against a digital elevation model (DEM) for localiza-
-% tion
-% Our technique fits into the category of terrain referenced
-% navigation (TRN) [8] in which terrain models are used for
-% localization
-% The a priori DEM provides a surface elevation
-% map at various resolutions for the entire desired flight plan.
-
-% Our LIDAR localization intermittently localizes the heli-
-% copter by aligning LIDAR measurements to a geo-referenced
-% Digital Elevation Model (DEM).
-
-% Our goal is to estimate
-% our true 3D world position by searching for an optimal
-% alignment between a 3D LIDAR point cloud as measured
-% by the helicopter and the a priori DEM.
-% We make use of
-% the current position estimate to restrict the search area to a
-% local DEM neighborhood. This requires a low-drift estimate,
-% which is achieved by tightly coupled LIDAR-inertial fusion
-% We decompose the 3D localization problem into a 2D
-% translation and a 1D altitude problem that are solved se-
-% quentially.
 
 % IMAGE
 \begin{figure} [H]
@@ -272,14 +254,14 @@ remote sensing technologies, συγκεκριμένα με την χρήση Lig
     % -----------------
 		\begin{minipage}{.47\textwidth}
 			\centering
-			\includegraphics[width=.9\linewidth]{Images/Related-Work/lidar-drone-example.png}\\
+			\includegraphics[width=\linewidth]{Images/Related-Work/lidar-drone-example.png}\\
 			{(a) UAV usage \URI{https://wingtra.com/drone-photogrammetry-vs-lidar/}}
 		\end{minipage}%
 		\hspace*{+0.8cm}
 		% -----------------
 		\begin{minipage}{.47\textwidth}
 			\centering
-			\includegraphics[width=.9\linewidth]{Images/Related-Work/lidar-cloud.png}\\
+			\includegraphics[width=\linewidth]{Images/Related-Work/lidar-cloud.png}\\
 			{(b) Cloud Point Data example \URI{https://community.safe.com/s/article/what-is-a-point-cloud-what-is-lidar}}
 		\end{minipage}
 	% -----------------
@@ -289,35 +271,44 @@ remote sensing technologies, συγκεκριμένα με την χρήση Lig
     \label{fig:drone-lidar}
 \end{figure}
 
-Οι συγγραφείς του \cite{lidar-usage-example} κάνουν προσπάθεια χρήσης αυτής της τεχνολογίας, προκειμένου 
+Οι συγγραφείς του \cite{lidar-usage-example} κάνουν προσπάθεια χρήσης αυτής της τεχνολογίας, προκειμένου να εξαλείψουν την ανάγκη καμερών - οι οποίες είναι σε άμεση εξάρτηση από τις συνθήκες φωτισμού - ώστε να επιτύχουν ένα long distance drift-free navigation ενός ελικοπτέρου.
 
-% ---------------------
+Η μεθοδολογία που ακολουθούν είναι να σπάνε το 3D localization problem σε ένα 2D translation problem και ένα 1D altitude problem, τα οποία διαδοχικά προσπαθούν να επιλύσουν. Η γενική αρχή που ακολουθούν είναι ότι προσπαθούν να βρουν την βέλτιστη ευθυγράμμιση μεταξύ των μετρήσεων του \Abbr{LiDAR} και ενός geo-referenced Digital Elevation Model (\Abbr{DEM}) ώστε να καταλήξουν στο 3D world position.
+
+Τα αποτελέσματα που είχαν ήταν final position error της τάξης των 27m σε απόσταση ταξιδιού τα 218km. Χρησιμοποιήθηκαν dataset από ένα Bell 206L (Long-Ranger) helicopter, εξοπλισμένο με ένα Near Earth Autonomy m4 sensor suite το οποίο περιλαμβάνει ένα \Abbr{2D} \Abbr{LiDAR} και ένα fiber-optic \Abbr{IMU}. Ενώ χρησιμοποιήθηκε υπο\-λο\-γι\-στής εξοπλισμένος με quad-core 2.5GHz i7 processor, στον οποίο σε παράλληλο προγραμματισμό έγινε το filtering και matching.
+
+% ---------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \subsection{VSLAM}	\label{sec:related-vslam}
-Μία ειδική κατηγορία - με χρήση κάμερας - είναι αυτή στην οποία ακολουθείται η λογική του Visual Simultaneous Localization and Mapping (\Abbr{VSLAM}). Σε αυτήν την περίπτωση, το \Abbr{UAV} προσπαθεί να εντοπίσει τις συντεταγμένες του - αφού πρώτα δημιουργήσει έναν map του χώρου στον οποίο βρίσκεται - ώστε τελικά να βρει την θέση που έχει μέσα σε αυτόν.
+Μία ειδική κατηγορία - με χρήση κάμερας - είναι αυτή στην οποία ακολουθείται η λογική του Visual Simultaneous Localization and Mapping (\Abbr{VSLAM}). Σε αυτήν την περίπτωση, το \Abbr{UAV} προσπαθεί να εντοπίσει τις συντεταγμένες του - αφού πρώτα δημιουργήσει έναν map του χώρου στον οποίο βρίσκεται - ώστε τελικά να βρει την θέση που έχει μέσα σε αυτόν. 
+Υπάρχουν διαφορετικοί Simultaneous Lo\-ca\-li\-za\-tion and Mapping (\Abbr{SLAM}) αλγόριθμοι γενικά, με αυτούς που μπορούν να κατηγοριοποιηθούν στους σχετιζόμενος με filtering και αυτούς που σχετίζονται με smoothing τεχνικές \cite{related-slam-difs}. Συνήθως σε αυτούς τους αλγορίθμους, γίνεται εύρεση landmarks στον χώρο, τα οποία χρησιμοποιούνται - \Fig{vslam-drone-visual-perception-example} - στην διαδικασία.
 
-\cite{vslam-for-drone-localization}
-
+% IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/slam-drone.png}
-{VSLAM drone perception}%
-{vslam-drone-visual-perception}%
+{VSLAM drone perception example}%
+{vslam-drone-visual-perception-example}%
 <0.7>%
 [vslam-image]%
 (https://www.mdpi.com/2504-446X/5/2/41/htm)
 
 
+Στο \cite{vslam-for-drone-localization} προτείνουν μία αρχιτεκτονική ενός συνεργατικού key-frame-based Multi-\Abbr{UAV} {SLAM} συστήματος. Σε αυτό το σύστημα το κάθε μεμονωμένο drone έχει την δυνατότητα μέσω μίας monocular κάμερας και χρήση real-time Visual Odometry να εκτιμήσει την θέση του, και να παρέχει ένα - περιορισμένων key-frames, εξαιτίας των on-board computation δυνατοτήτων - Local Map του περίγυρου του. Ταυτόχρονα, το σύστημα αποτελείται και από ένα communication module, ώστε τα drone να μπορούν να αλληλεπιδρούν με ένα server, ο οποίος χρησιμοποιείτε για non time-critical computationally expensive processes. 
 
-% ---------------------
+Βασικές τεχνολογίες που χρησιμοποιήθηκαν ήταν Visual Odometry and Place Re\-co\-gni\-tion βασισμένες στην υλοποίηση του ORB-SLAM2 αλγόριθμου, το \Abbr{ROS} framework για τις επικοινωνίες. Επίσης, ο server που χρησιμοποιήθηκε ήταν ένα Thinkpad T460s notebook εξοπλισμένο με τον τετραπύρηνο Core i7-6600U @ 2.60GHz και 20 GB RAM.
+
+% --------------------------------------------------------------------------------------------------------
+% --------------------------------------------------------------------------------------------------------
 \subsection{Motion Capturing System} \label{sec:related-motion-capturing-systems}
-Συχνή χρήση έχουν επίσης τα Motion Capturing Systems \cite{motion-capture}. Όταν αναφερόμαστε σε motion capturing systems, όπως το Vicon \cite{vicon} ή το Optitrack \cite{optitrack}, μιλάμε κυρίως για στατικά, εσωτερικών χώρων συστήματα 
+Συχνή χρήση έχουν επίσης τα Motion Capture (\Abbr{MoCap}) Systems \cite{motion-capture}. Όταν αναφερόμαστε σε \Abbr{MoCap} systems, όπως το Vicon \cite{vicon} ή το Optitrack \cite{optitrack}, μιλάμε κυρίως για στατικά, εσωτερικών χώρων συστήματα 
 τα οποία είναι υπεύθυνα να ανιχνεύουν και να συλλαμβάνουν την κίνηση σωμάτων. Αποτελούνται από ένα πλήθος καμερών - οι οποίες είναι τοποθετημένες σε προκαθορισμένες θέσεις - μέσω των οποίων μπορεί να εκτιμηθεί η θέση αντικειμένων - όπως drones - στο χώρο αναφοράς. Παράδειγμα αυτού υπάρχει στο \Fig{motion-capturing-drone-swarm}
 
+% IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/optitrack.png}%
 {Optitrack Motion Capturing System for drone swarm localization}%
 {motion-capturing-drone-swarm}%
 <0.6>%
 (https://optitrack.com/systems/)
 
-% ---------------------
+Στην προσπάθεια τους οι \cite{related-motion-captu} χρησιμοποιούν ένα τέτοιο \Abbr{MoCap} system, προκειμένου να δημιουργήσουν ένα multi-\Abbr{UAV} αλγόριθμο ελέγχου για centralized formation flight. 
 
-
-
+Στα πειράματα τους χρησιμοποιήθηκαν το Vicon, ως drone τα Parrot AR Drone 2.0, ενώ η υλοποίηση έγινε στο περιβάλλον του MATLAB/SI\-MU\-LI\-NK αξιοποιώντας το AR Drone Simulink Development Kit.
