@@ -1,4 +1,4 @@
-#include "include/CameraHandler.hpp"
+#include "../include/CameraHandler.hpp"
 
 CameraHandler::CameraHandler(/* args */){
 }
@@ -17,6 +17,6 @@ bool CameraHandler::setResolution(cv::VideoCapture cap, int width, int height, i
     int dHeight = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
     int fps_counter = cap.get(cv::CAP_PROP_FPS);
 
-    cout << "Resolution of the video : " << dWidth << " x " << dHeight << " FPS: " << fps_counter << endl;
+    std::cout << "Resolution of the video : " << dWidth << " x " << dHeight << " FPS: " << fps_counter << std::endl;
     return true;
 }
