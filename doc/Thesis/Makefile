@@ -16,9 +16,16 @@ HELPMENU = $(USAGE)\n$(DESCRIPTION)\nOPTIONS:
 
 #  -------------------------------
 
-all: report	rename clean view ## Build pdf file, clean auxiliary files and open pdf 
+all: fixAbbr report	rename clean view ## Build pdf file, clean auxiliary files and open pdf 
 
 .PHONY: clean
+
+fixAbbr: ## Sort abbreviation list file on alphabetical order
+	cp ./Misc/Abbreviations.tex ./Misc/Abbreviations.tex.bu
+	cat ./Misc/Abbreviations.tex.bu | grep . | head -n 1 > ./Misc/Abbreviations.tex
+	cat ./Misc/Abbreviations.tex.bu | grep . | head -n -1 | tail -n +2 | sort -k1,1 >> ./Misc/Abbreviations.tex
+	cat ./Misc/Abbreviations.tex.bu | grep . | tail -n 1 >> ./Misc/Abbreviations.tex
+	rm -rf ./Misc/Abbreviations.tex.bu
 
 report: ## Only build pdf file
 	pdflatex $(FLAGS) -output-directory=$(DIR) -job-name=$(TEXNAME).pdf $(TEXNAME).tex
@@ -37,6 +44,7 @@ clean:	## Clean auto generated files
 	$(RM) $(CLEAN_EXTS)
 	cd $(DIR)/Appendices && $(RM) *.aux
 	cd $(DIR)/Chapters && $(RM) *.aux
+	cd $(DIR)/Misc && $(RM) *.aux
 
 help:	## Print this help message and exit
 	@echo "$(HELPMENU)" ; grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "   %-30s %s\n", $$1, $$2}'

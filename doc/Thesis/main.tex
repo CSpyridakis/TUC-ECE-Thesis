@@ -50,19 +50,24 @@
 
 \usepackage[hyperfootnotes=false]{hyperref}
 \usepackage{graphicx}
-\usepackage{textcomp} %provide many text symbols (such as baht, bullet, copyright, musical note, one quarter, section, and yen)
+\usepackage{textcomp} 					%provide many text symbols (such as baht, bullet, copyright, musical note, one quarter, section, and yen)
 \usepackage{amsmath}
-\usepackage{amssymb} % Mathematical Symbols
+\usepackage{amssymb}					% Mathematical Symbols
 \usepackage{float}
-\usepackage{cancel}	% For cancel in equations 
-\usepackage{svg} 	% Maybe not used
-\usepackage[bottom]{footmisc}	% To add footnotes
-\usepackage[usestackEOL]{stackengine} % For multiple lines in tables and alignment
+\usepackage{cancel}						% For cancel in equations 
+\usepackage{svg} 						% Maybe not used
+\usepackage[bottom]{footmisc}			% To add footnotes
+\usepackage[usestackEOL]{stackengine} 	% For multiple lines in tables and alignment
 
 % Greek language support
 \usepackage{textgreek}
 \usepackage{lmodern} 
 \usepackage{alphabeta}
+
+% Auxiliary Commands
+\usepackage{etoolbox}
+\usepackage{xparse}
+\include{Misc/NewCommands}
 
 % Diagrams
 \usepackage{tikz}
@@ -71,12 +76,6 @@
 % The following two lines handle too long URLs on bibliography
 \setcounter{biburllcpenalty}{7000}
 \setcounter{biburlucpenalty}{8000}
-
-% Euclidean Norm symbol
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-
-% To use upper dot in Greek (equivalent of English semicolon)
-\newcommand{\udot}{$^{\mbox{\textbf{.}}}$ }
 
 % To use comments in your text by using \* ... *\
 \def\*#1*\ {} %E.g. Text \* comment *\ text
@@ -240,31 +239,17 @@
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE - ENGLISH
 %----------------------------------------------------------------------------------------
-
-\begin{abstract}
-	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-	TODO: Abstract
-	\ldots
-\end{abstract}
+\include{Misc/Abstract-en}
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE - GREEK
 %----------------------------------------------------------------------------------------
-
-\begin{extraAbstract}
-	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-	TODO: Περίληψη
-	\ldots
-\end{extraAbstract}
+\include{Misc/Abstract-gr}
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
-
-\begin{acknowledgements}
-	\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-	TODO: Acknowledgements
-\end{acknowledgements}
+\include{Misc/Acknowledgments}
 
 %----------------------------------------------------------------------------------------
 %	LIST OF CONTENTS/FIGURES/TABLES PAGES
@@ -312,90 +297,28 @@
 	$\lambda$ & wavelength & \si{\meter} \\
 	$\phi$ & phase & \si{\degree} \\
 	$\omega$ & angular frequency & \si{\radian} \\
-
 \end{symbols}
 
 	
 %----------------------------------------------------------------------------------------
 %	ABBREVIATIONS
 %----------------------------------------------------------------------------------------
+\include{Misc/Abbreviations} % TODO: edit to your requirements
 
-% Small tip: just append your new abbreviations, and at the end copy them
-% on a tmp.txt file and run this command 'sort -k1,1 tmp.txt' so then they
-% will be sorted!
+% --------------------------------------------------------------------------------
+% 		Basically a file containing the lines below to create your abbreviations list
+% --------------------------------------------------------------------------------
 
-% TODO: edit to your requirements
-% spell-checker: disable
-\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)]
-	\textbf{AoA}	& \textbf{A}ngle \textbf{o}f \textbf{A}rrival \label{abbr:AoA} \\ % USED
-	\textbf{AHD}	& \textbf{A}verage \textbf{H}op \textbf{D}istance \label{abbr:AHD} \\ % USED
-	\textbf{AHRS}	& \textbf{A}ltitude \textbf{H}eading \textbf{R}eference \textbf{S}ystem \label{abbr:AHRS} \\ % USED
-	\textbf{APIT}	& \textbf{A}pproximate \textbf{P}oint \textbf{I}n \textbf{T}riangle \label{abbr:APIT} \\ % USED
-	\textbf{BP}		& \textbf{B}elief \textbf{P}ropagation \label{abbr:BP} \\ % USED  
-	\textbf{BS}		& \textbf{B}ase \textbf{S}tation \label{abbr:BS} \\ % USED
-	\textbf{CIF}	& \textbf{C}ovariance \textbf{I}ntersection \textbf{F}ilter \label{abbr:CIF} \\ % USED    
-	\textbf{CL}		& \textbf{C}ooperative \textbf{L}ocalization \label{abbr:CL} \\ % USED
-	\textbf{DoA}	& \textbf{D}irection \textbf{o}f \textbf{A}rrival \label{abbr:DoA} \\ % USED
-	\textbf{DoF}	& \textbf{D}egrees \textbf{o}f \textbf{F}reedom \label{abbr:DoF} \\ % USED
-	% \textbf{DP}		& \textbf{D}irect \textbf{P}ath \label{abbr:DP} \\ 
-	\textbf{DV-Hop}	& \textbf{D}istance \textbf{V}ector-\textbf{Hop} \label{abbr:DV-Hop} \\ % USED
-	% \textbf{ECEF}	& \textbf{E}arth \textbf{C}entered \textbf{E}arth \textbf{F}ixed \label{abbr:ECEF} \\
-	\textbf{EKF}	& \textbf{E}xtended \textbf{K}alman \textbf{F}ilter \label{abbr:EKF} \\
-	% \textbf{EM}		& \textbf{E}lectrο\textbf{m}agnetic \label{abbr:EM} \\ 
-	\textbf{ESC}	& \textbf{E}lectronic \textbf{S}peed \textbf{C}ontrol \label{abbr:ESC} \\ % USED
-	\textbf{FANET}	& \textbf{F}lying \textbf{A}d-hoc \textbf{Net}work \label{abbr:FANET} \\ % USED
-	\textbf{FPV}	& \textbf{F}irst \textbf{P}erson \textbf{V}iew \label{abbr:FPV} \\	% USED
-	\textbf{FSPL}	& \textbf{F}ree \textbf{S}pace \textbf{P}ath \textbf{L}oss \label{abbr:FSPL} \\ % USED
-	% \textbf{GI}		& \textbf{G}lobal \textbf{I}nformation \label{abbr:GI} \\ 
-	\textbf{GNSS}	& \textbf{G}lobal \textbf{N}avigation \textbf{S}atellite \textbf{S}ystem \label{abbr:GNSS} \\ % USED
-	\textbf{GPS}	& \textbf{G}lobal \textbf{P}ositioning \textbf{S}ystem \label{abbr:GPS} \\ % USED
-	\textbf{IC}		& \textbf{I}ntegrated  \textbf{C}ircuit  \label{abbr:IC} \\ % USED
-	\textbf{IMU}	& \textbf{I}ntertial \textbf{M}easurement \textbf{U}nit \label{abbr:IMU} \\ % USED
-	\textbf{ISR}	& \textbf{I}ntelligence, \textbf{S}urveillance, and \textbf{R}econnaissance \label{abbr:ISR} \\ % USED
-	\textbf{LBSA}	& \textbf{L}ocalization \textbf{B}ased on \textbf{S}imulated \textbf{A}nnealing \label{abbr:LBSA} \\ % USED
-	\textbf{LoS}	& \textbf{L}ine   \textbf{o}f \textbf{S}ight \label{abbr:LoS} \\ % USED
-	\textbf{LPS}	& \textbf{L}ocal \textbf{P}ositioning \textbf{S}ystem \textbf{A}rea \textbf{N}etwork \label{abbr:LPS} \\ % USED
-	% \textbf{LPWAN}	& \textbf{L}ow \textbf{P}ower \textbf{W}ide \textbf{A}rea \textbf{N}etwork \label{abbr:LPWAN} \\
-	% \textbf{MAV}	& \textbf{M}icro \textbf{A}erial \textbf{V}ehicle \label{abbr:MAV} \\
-	\textbf{MCU}	& \textbf{M}icro \textbf{C}ontroller \textbf{U}nit \label{abbr:MCU} \\ % USED
-	\textbf{MDS-MAP}& \textbf{M}ulti \textbf{D}imensional \textbf{S}caling-\textbf{M}obile \textbf{A}ssisted \textbf{P}rogramming\label{abbr:MDS-MAP} \\ % USED
-	\textbf{MEMS}	& \textbf{M}icro-\textbf{e}lectro-\textbf{m}echanical \textbf{S}ystems \label{abbr:MEMS} \\
-	\textbf{MLAT}	& \textbf{M}ulti\textbf{lat}eration \label{abbr:MLAT} \\ % USED
-	\textbf{ML}		& \textbf{M}aximum \textbf{L}ikelihood \label{abbr:ML} \\ % USED
-	\textbf{MPU}	& \textbf{M}icro \textbf{P}rocessor \textbf{U}nit \label{abbr:MPU} \\  % USED
-	\textbf{MRS}	& \textbf{M}inimal \textbf{R}equired number of \textbf{S}ensors\label{abbr:MRS} \\  % USED
-	\textbf{NED}	& \textbf{N}orth \textbf{E}ast \textbf{D}own \label{abbr:NED} \\ % USED
-	\textbf{NLoS}	& \textbf{N}on-\textbf{L}ine \textbf{o}f \textbf{S}ight \label{abbr:NLoS} \\ % USED
-	% \textbf{PSO}	& \textbf{P}article \textbf{S}warm \textbf{O}ptimization \label{abbr:PSO} \\
-	\textbf{RF}	    & \textbf{R}adio \textbf{F}requency \label{abbr:RF} \\ % USED
-	% \textbf{RMSE}	& \textbf{R}oot \textbf{M}ean \textbf{S}quare \textbf{E}rror \label{abbr:RMSE} \\
-	\textbf{RSSI}	& \textbf{R}eceived \textbf{S}ignal \textbf{S}trength \textbf{I}ndicator \label{abbr:RSSI} \\ % USED
-	\textbf{RTLS}	& \textbf{R}eal \textbf{T}ime \textbf{L}ocation \textbf{S}ystem \label{abbr:RTLS} \\
-	\textbf{RTT}	& \textbf{R}ound-\textbf{T}rip \textbf{T}ime \label{abbr:RTT} \\ % USED
-	\textbf{SCIF}	& \textbf{S}plit \textbf{C}ovariance \textbf{I}ntersection \textbf{F}ilter \label{abbr:SCIF} \\ % USED
-	\textbf{SR}		& \textbf{S}warm \textbf{R}obotics \label{abbr:SR} \\ % USED
-	\textbf{S\&R}	& \textbf{S}earch \textbf{\&} \textbf{R}escue \label{abbr:SnR} \\ % USED
-	\textbf{SDP}	& \textbf{S}emi \textbf{D}efinite \textbf{P}rogramming \label{abbr:SDP} \\ % USED
-	% \textbf{SDS-TWR}& \textbf{S}ymmetrical \textbf{D}ouble-\textbf{S}ided \textbf{T}wo-\textbf{W}ay \textbf{R}anging \label{abbr:SDS-TWR} \\
-	\textbf{SS-TWR} & \textbf{S}ingle-\textbf{S}ided \textbf{T}wo-\textbf{W}ay \textbf{R}anging \label{abbr:SS-TWR} \\ % USED
-	\textbf{SNR}	& \textbf{S}ignal to \textbf{N}oise \textbf{R}atio \label{abbr:SNR} \\ % USED
-	\textbf{TDoA}	& \textbf{T}ime \textbf{D}ifference \textbf{o}f \textbf{A}rrival \label{abbr:TDoA} \\ % USED
-	\textbf{ToA}	& \textbf{T}ime \textbf{o}f \textbf{A}rrival \label{abbr:ToA} \\ % USED
-	\textbf{ToF}	& \textbf{T}ime \textbf{o}f \textbf{F}light \label{abbr:ToF} \\ % USED
-	\textbf{UAS}	& \textbf{U}nmanned \textbf{A}ircraft \textbf{S}ystem \label{abbr:UAS} \\ % USED
-	\textbf{UAV}	& \textbf{U}nmanned \textbf{A}erial \textbf{V}ehicle \label{abbr:UAV} \\ % USED
-	\textbf{UCAV}	& \textbf{U}nmanned \textbf{C}ombat \textbf{A}erial \textbf{V}ehicle \label{abbr:UCAV} \\ % USED
-	\textbf{UKF}	& \textbf{U}nscented \textbf{K}alman \textbf{F}ilter \label{abbr:UKF} \\ % USED
-	\textbf{UWB}	& \textbf{U}ltra-\textbf{w}ide\textbf{b}and \label{abbr:UWB} \\
-	\textbf{VTOL}	& \textbf{V}ertically \textbf{H}over, \textbf{T}ake-off, and \textbf{L}and \label{abbr:VTOL} \\ % USED
-	\textbf{WSN}	& \textbf{W}ireless \textbf{S}ensor \textbf{N}etworks \label{abbr:WSN} \\ % USED
-\end{abbreviations}
-% spell-checker: enable
+% \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)]
+% 	\CreateAbbr{2D}			{\textbf{2} \textbf{D}imensional}
+% \end{abbreviations}
+
+% Small tip: just run $make fixAbbr, so this file will be automatically sort in alphabetical 
+% order!
 
 %----------------------------------------------------------------------------------------
 %	DEDICATION
 %----------------------------------------------------------------------------------------
-
 \dedicatory{Dedicated to those people who have helped me be the person I am today\ldots}
 
 %----------------------------------------------------------------------------------------

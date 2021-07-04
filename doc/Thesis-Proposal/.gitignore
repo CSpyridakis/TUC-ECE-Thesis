@@ -5,6 +5,8 @@
 !Images
 !Images/**
 
+!Makefile
+
 !*.tex
 !*.cls
 !*.bib
