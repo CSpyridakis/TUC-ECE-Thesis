@@ -1,5 +1,8 @@
+# Build files
 CMakeFiles
 cmake_install.cmake
 CMakeCache.txt
-example
 Makefile
+
+# Executable's name
+EstimateBallRange 

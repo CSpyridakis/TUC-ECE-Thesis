@@ -3,8 +3,10 @@ project( EstimateBallRange )
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 set(FilesToInclude 
-src/range.cpp
-src/CameraHandler.cpp
+src/main.cpp
+src/cameraHandler.cpp
+src/debug.cpp
+src/rangeLogic.cpp
 )
 add_executable(${PROJECT_NAME} ${FilesToInclude})
 target_link_libraries( ${PROJECT_NAME} ${OpenCV_LIBS} )

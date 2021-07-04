@@ -12,7 +12,6 @@
 
 # TODO: If you need to work on a different project you may want to rename executable's name
 EXEC_NAME="EstimateBallRange"       
-MAIN_SRC="range.cpp"
 
 all(){
     clean
@@ -26,12 +25,6 @@ build(){
     # Check that executable's name is not empty
     if [ -z ${EXEC_NAME} ]; then
         echo "Please give name for executable"    
-        exit 0
-    fi 
-
-    # Check that source's file name is not empty
-    if [ -z ${MAIN_SRC} ]; then
-        echo "Please give name for main source file"    
         exit 0
     fi 
     
@@ -49,7 +42,10 @@ clean(){
 deepClean(){
     echo "Deep Clean Project.."
     clean
-    rm -rf CMakeLists.txt
+    read -p 'Do you want to delete CMakeLists.txt? (y/n): ' deleteAll
+    if [ $deleteAll == "y" ]; then 
+        rm -rf CMakeLists.txt
+    fi 
 }
 
 createCMakeList(){
@@ -60,7 +56,7 @@ createCMakeList(){
         find_package( OpenCV REQUIRED )
         include_directories( \${OpenCV_INCLUDE_DIRS} )
         set(FilesToInclude 
-            src/${MAIN_SRC}
+            src/main.cpp
         )
         add_executable(\${PROJECT_NAME} \${FilesToInclude})
         target_link_libraries( \${PROJECT_NAME} \${OpenCV_LIBS} )" | tr -s ' ' | cut -d' ' -f2- > CMakeLists.txt

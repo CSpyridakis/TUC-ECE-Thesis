@@ -9,7 +9,8 @@
         "latex",
         "plaintext",
         "makefile",
-        "shellscript"
+        "shellscript",
+        "cpp"
     ],
     "files.associations": {
         "array": "cpp",
