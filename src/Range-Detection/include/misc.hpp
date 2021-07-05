@@ -14,27 +14,32 @@
 *   ---------------------------------------------------------------------------
 */
 
-#ifndef RANGE_LOGIC_H
-#define RANGE_LOGIC_H
+#ifndef CAMERA_HPP
+#define CAMERA_HPP
 
 #include <opencv2/opencv.hpp>
+#include <iostream>
 
-/**
- * \brief: Find balls in the given frame
- * 
- * \param:  Frame to 
- * \param: circles
- * 
- * \return: True if at least a single ball was detected or else return false
-*/
-bool detectBall(cv::Mat img, std::vector<cv::Vec3f>& circles);
+#define CP_MJPG 0
+#define CP_YUYV 1
+#define CP_H264 2
 
 /**
  * \brief:
  * 
  * \param:
+ * \param:
 */
-void estimateDistance(cv::Mat img);
+void helpmenu();
 
-#endif //RANGE_LOGIC_H
+/**
+ * \brief:
+ * 
+ * \param:
+ * \param:
+ * 
+ * \return:
+*/
+bool setResolution(cv::VideoCapture cap, int width, int height, int fps = 30, int codecCode = CP_MJPG);
 
+#endif //CAMERA_HPP

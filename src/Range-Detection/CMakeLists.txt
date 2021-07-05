@@ -4,7 +4,7 @@ find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 set(FilesToInclude 
 src/main.cpp
-src/cameraHandler.cpp
+src/misc.cpp
 src/debug.cpp
 src/rangeLogic.cpp
 )
