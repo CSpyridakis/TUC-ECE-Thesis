@@ -44,33 +44,36 @@ int main(int argc, char* argv[]){
         case 'x': video_width = atoi(optarg); break;
         case 'y': video_height = atoi(optarg); break;
         case '?':
-            if (optopt == 'c') fprintf (stderr, "Option -%c requires an argument.\n", optopt);
-            else if (isprint (optopt)) fprintf (stderr, "Unknown option `-%c'.\n", optopt);
-            else fprintf (stderr, "Unknown option character `\\x%x'.\n", optopt);
+            if (optopt == 'c'){ EMESS("Option -%c requires an argument.\n", optopt); } 
+            else if (isprint (optopt)) { EMESS("Unknown option `-%c'.\n", optopt); }
+            else { EMESS("Unknown option character `\\x%x'.\n", optopt); }
             return 1;
         default: abort ();
     }
 
-
     // Print input arguments
 #ifdef DEBUG_S
-    std::cerr << YELLOW << "[DEBUG] " << NORMAL << ": Input stream: " ;
+    DMESS("Input stream: ");
     if(openFile) std::cerr << video_file << std::endl;
     else std::cerr << camera_id << std::endl;
-    DMESS("Input args: resolution %d x %d at %d fps and format %d.", video_width, video_height, video_fps, video_form);
+    DMESS("Input args: resolution %d x %d at %d fps and format %d.\n", video_width, video_height, video_fps, video_form);
 #endif
 
     // Open video from camera/file or exit
     cv::VideoCapture cap;
     if(!openFile) cap.open(camera_id, cv::CAP_V4L2);
     else cap.open(video_file);
-    if (!cap.isOpened()){ DMESS("Cannot open stream"); return -1;} 
+    if (!cap.isOpened()){ EMESS("Cannot open stream\n"); return -1;} 
 
     // Set camera's resolution, fps and format
     setResolution(cap, video_width, video_height, video_fps, video_form);
 
     // Default values for filters' variables 
-    int gaussianKernelSize = 9, gausianDerivX = 2, gausiaDerivY = 2, cannythr1 = 50, cannythr2 = 150;
+    int gaussianKernelSize = 9, 
+        gausianDerivX = 2, 
+        gausiaDerivY = 2, 
+        cannythr1 = 50, 
+        cannythr2 = 150;
 
 #ifdef DEBUG_C
     createTrackers(gaussianKernelSize, gausianDerivX, gausiaDerivY, cannythr1, cannythr2);
@@ -79,7 +82,7 @@ int main(int argc, char* argv[]){
     // For each frame 
     while(true){
         cv::Mat img, imgGray, imgBlur, imgCanny, imgout;
-        if (!cap.read(img)){ DMESS("Input has disconnected"); break;}
+        if (!cap.read(img)){ EMESS("Input has disconnected\n"); break;}
 
         // --------------------------------------------------------------------
         // --------------------------------------------------------------------
@@ -101,6 +104,13 @@ int main(int argc, char* argv[]){
         std::vector<cv::Vec3f> circles;
         bool ballsDetected = detectBall(imgCanny, circles);
 
+
+        if(!ballsDetected){
+#ifdef DEBUG_S
+            DMESS("No ball detected.\n");
+#endif
+        }
+
         // --------------------------------------------------------------------
         // --------------------------------------------------------------------
         // Find ball range
@@ -119,7 +129,7 @@ int main(int argc, char* argv[]){
             cv::imshow("Canny", imgCanny);
 #endif
         // Exit
-        if (cv::waitKey(1) == 27){ DMESS("Esc key is pressed by user. Exit!"); break;}
+        if (cv::waitKey(1) == 27){ DMESS("Esc key is pressed by user. Exit!\n"); break;}
     }
     cv::destroyAllWindows();
     cap.release();

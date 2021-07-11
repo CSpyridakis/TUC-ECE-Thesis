@@ -28,14 +28,18 @@
 #define BUFSIZE 1024
 
 // Colors for stderr messages
+#define RED     "\033[31;1m"
 #define YELLOW  "\033[33;1m"
 #define NORMAL  "\033[0m"
 
-// Use this function to print debug messages (use it as you would use printf)
-#define DMESS(mess...){if(DEBUG_S){\
-                        char infoBuffer[BUFSIZE]; \
+#define MESSAGE(type, color, mess...){ char infoBuffer[BUFSIZE]; \
                         snprintf(infoBuffer, sizeof(infoBuffer), mess);\
-                        fprintf(stderr, "%s[DEBUG]%s : %s\n", YELLOW, NORMAL, infoBuffer );}}
+                        fprintf(stderr, "%s[%s]%s : %s", color, type, NORMAL, infoBuffer );\
+                        }
+
+// Use this function to print debug messages (use it as you would use printf)
+#define DMESS(mess...) MESSAGE("DEBUG", YELLOW, mess)
+#define EMESS(mess...) MESSAGE("ERROR", RED, mess)
 
 // ---------------
 

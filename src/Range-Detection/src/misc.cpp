@@ -32,6 +32,6 @@ bool setResolution(cv::VideoCapture cap, int width, int height, int fps, int cod
     int dHeight = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
     int fps_counter = cap.get(cv::CAP_PROP_FPS);
 
-    DMESS("After set, actual resolution of the video w:%d h:%d fps:%d", dWidth, dHeight, fps_counter); 
+    DMESS("After set, actual resolution of the video w:%d h:%d fps:%d\n", dWidth, dHeight, fps_counter); 
     return true;
 }

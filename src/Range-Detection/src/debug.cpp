@@ -54,7 +54,7 @@ void drawCircles(cv::Mat img, cv::Mat& outimg, std::vector<cv::Vec3f>& circles){
         cv::Scalar redColor(0, 0, 255);
         cv::Vec3i c = circles[k];       /// x: c[0], y:c[1], radius: c[2]
         cv::Point center(c[0], c[1]);
-        DMESS("Circle[%d] - at (%d, %d) radius = %d px", k, (int)c[0], (int)c[1], (int)c[2])
+        DMESS("Circle[%d] - at (%d, %d) radius = %d px\n", k, (int)c[0], (int)c[1], (int)c[2])
 
         // circle center
         circle(outimg, center, 1, redColor, 2, cv::LINE_AA);
