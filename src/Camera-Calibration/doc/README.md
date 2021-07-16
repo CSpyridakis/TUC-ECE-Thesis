@@ -1,0 +1,2 @@
+## Note
+* camera-calibration-checker-board_9x7.pdf downloaded from [here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwixm6jB-t_xAhXphP0HHbPuBnsQFnoECDMQAA&url=https%3A%2F%2Fwww.mrpt.org%2Fdownloads%2Fcamera-calibration-checker-board_9x7.pdf&usg=AOvVaw358nLCw2j5DTB-UK_RsDCZ) (www.mrpt.org).

@@ -7,11 +7,18 @@
 #   Email : spyridakischristos@gmail.com
 #
 #   Description : Handle OpenCV project actions like Clean, Build and Run 
+#  
+#   Requirements :
+#           - GNU Make 4.1 or later
+#           - cmake version 3.10.2 or later
+#           - gcc 7.5.0 or later
+#           - opencv 4.5.2 or later
 #
 ##################################################################################################
 
 # TODO: If you need to work on a different project you may want to rename executable's name
 EXEC_NAME="EstimateBallRange"       
+RUN_COMMAND_ARGS=""  
 
 all(){
     clean
@@ -84,7 +91,7 @@ help(){
 
 run(){
     echo "Run Project..."
-    bash -c "./${EXEC_NAME}"
+    bash -c "./${EXEC_NAME} ${RUN_COMMAND_ARGS}"
 }
 
 while getopts ":abcdhlr" opt ; do

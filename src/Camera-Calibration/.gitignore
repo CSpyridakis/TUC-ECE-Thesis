@@ -5,4 +5,8 @@ CMakeCache.txt
 Makefile
 
 # Executable's name
-CameraCalibration 
+CalibrateCamera 
+
+data/
+data2/
+data-bu/
