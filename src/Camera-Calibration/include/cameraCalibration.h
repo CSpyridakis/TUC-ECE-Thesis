@@ -110,27 +110,27 @@ int createDataset(const std::string folderName, const cv::Size chessboardDimensi
  * @see The code below created based on OpenCV official site calibration tutorial https://docs.opencv.org
  */
 int createIntrinsicParametersFile(const std::string folderName, const cv::Size chessboardDimensions, const float squareDimension){    
-    std::vector<std::vector<cv::Point3f> > objectPoints;
-    std::vector<std::vector<cv::Point2f> > imagePoints;
-    std::vector<cv::Point3f> objp;
+    std::vector<std::vector<cv::Point3f>> objectPoints;
+    std::vector<std::vector<cv::Point2f>> imagePoints;
 
+    std::vector<cv::Point3f> objp;
     for(int i = 0; i<chessboardDimensions.height; i++)
         for(int j = 0; j<chessboardDimensions.width; j++)
-            objp.push_back(cv::Point3f(i,j,0));
+            objp.push_back(cv::Point3f(i*squareDimension,j*squareDimension,0));
 
     // Create vector to store all images names
     std::vector<cv::String> imgNames;
     cv::glob(("./" + folderName + "/*.png"), imgNames);
     
-    cv::Mat imgGray;
+    cv::Mat img, imgGray;
     int validImages=0;
+    std::vector<cv::Point2f> corners;
     // For each calibration image
     for(int i{0}; i< imgNames.size(); i++){
-        cv::Mat img = cv::imread(imgNames[i]);
+       img = cv::imread(imgNames[i]);
 
         cv::cvtColor(img, imgGray, cv::COLOR_BGR2GRAY);
         
-        std::vector<cv::Point2f> corners;
         bool foundChessboard = cv::findChessboardCorners(imgGray, chessboardDimensions, corners, cv::CALIB_CB_ADAPTIVE_THRESH + cv::CALIB_CB_NORMALIZE_IMAGE + cv::CALIB_CB_FAST_CHECK);
 
         if(foundChessboard){
@@ -150,14 +150,38 @@ int createIntrinsicParametersFile(const std::string folderName, const cv::Size c
 	cv::destroyAllWindows();   
 
     DMESS("Valid images are %d. Begin Calibration...", validImages);
-    cv::Mat intrinsicMatrix, distCoeffs, rotationMatrix, translationMatrix;
+    cv::Mat cameraMatrix, distCoeffs, rotationMatrix, translationMatrix, newCameraMatrix;
 
-    cv::calibrateCamera(objectPoints, imagePoints, cv::Size(imgGray.rows,imgGray.cols), intrinsicMatrix, distCoeffs, rotationMatrix, translationMatrix);
+    if(validImages<1){EMESS("Too low number of valid images. Please take more chessboard images."); return -1;}
+    cv::calibrateCamera(objectPoints, imagePoints, cv::Size(imgGray.rows,imgGray.cols), cameraMatrix, distCoeffs, rotationMatrix, translationMatrix, cv::CALIB_FIX_ASPECT_RATIO + cv::CALIB_FIX_K3 + cv::CALIB_ZERO_TANGENT_DIST + cv::CALIB_FIX_PRINCIPAL_POINT);
 
-    std::cout << "intrinsicMatrix : " << intrinsicMatrix << std::endl << std::endl;
-    std::cout << "distCoeffs : " << distCoeffs << std::endl << std::endl;
-    std::cout << "Rotation vector : " << rotationMatrix << std::endl << std::endl;
-    std::cout << "Translation vector : " << translationMatrix << std::endl << std::endl;
+    // std::cout << "intrinsicMatrix : " << intrinsicMatrix << std::endl << std::endl;
+    // std::cout << "distCoeffs : " << distCoeffs << std::endl << std::endl;
+    // std::cout << "Rotation vector : " << rotationMatrix << std::endl << std::endl;
+    // std::cout << "Translation vector : " << translationMatrix << std::endl << std::endl;
+
+
+    cv::Mat mapX, mapY;
+    cv::initUndistortRectifyMap(cameraMatrix, distCoeffs, cv::Mat(), cameraMatrix, cv::Size(img.cols, img.rows), CV_32FC1, mapX, mapY);
+
+    ////////////////////////
+    cv::VideoCapture cap;
+    cap.open(0, cv::CAP_V4L2);
+    if (!cap.isOpened()){ EMESS("Cannot open camera"); return -1;} 
+    setResolution(cap, 1920, 1080, 30, 0);
+
+    cv::Mat undimg;
+    while(true){
+        if (!cap.read(img)){EMESS("Input has disconnected"); break;}
+
+        cv::remap(img, undimg, mapX, mapY, cv::INTER_LINEAR);
+        cv::imshow("Original", img);
+        cv::imshow("Remaped", undimg);
+        if (cv::waitKey(1) == 27){ DMESS("Esc key is pressed by user. Exit!"); break;}
+    }
+
+    cv::destroyAllWindows();
+    cap.release();
 }
 
 #endif //CAMERA_CALIBRATION_H

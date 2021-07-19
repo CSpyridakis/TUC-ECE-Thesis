@@ -18,8 +18,8 @@
 
 # TODO: If you need to work on a different project you may want to rename executable's name
 EXEC_NAME="CalibrateCamera"
-RUN_COMMAND_ARGS="-D -f data2 -x 1920 -y 1080 -p 30 -c 0 -n 10 -t 2"       
-# RUN_COMMAND_ARGS="-I"       
+# RUN_COMMAND_ARGS="-D -f data2 -x 1920 -y 1080 -p 30 -c 0 -n 10 -t 2"       
+RUN_COMMAND_ARGS="-I -f data2"       
 
 all(){
     clean
