@@ -22,5 +22,8 @@
 #define BOARD_SIZE          cv::Size(7,9)
 #define SQUARE_DIMENSION    0.02013f 
 
+static float cameraCalibrationdata[9] = {1496.109661878852, 0, 539.5, 0, 1496.109661878852, 959.5,  0, 0, 1};
+static float distCoeffsCalibrationdata[5] = {-0.2335183398761917, 0.06116931263162484, 0, 0, 0};
+
 
 #endif //SETUP_H

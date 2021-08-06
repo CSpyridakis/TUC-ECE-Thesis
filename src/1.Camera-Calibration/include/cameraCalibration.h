@@ -18,8 +18,10 @@
 
 #include <opencv2/opencv.hpp>
 #include "debug.h"
+#include "setup.h"
 #include "misc.hpp"
 #include <ctime>
+
 
 /**
  * @brief
@@ -83,25 +85,6 @@ int createDataset(const std::string folderName, const cv::Size chessboardDimensi
 }
 
 
-// [DEBUG] : Valid images are 11. Begin Calibration...
-// intrinsicMatrix : [1185.777855814654, 0, 547.49575806643;
-//  0, 1265.658701057108, 906.5493764006484;
-//  0, 0, 1]
-// distCoeffs : [-0.0007322861698132749, -0.02188488141160843, 0.01820508111982341, -0.03281229620621096, 0.005712609878082597]
-
-// [DEBUG] : Valid images are 47. Begin Calibration...
-// intrinsicMatrix : [1800.936965129956, 0, 696.1242205703089;
-//  0, 1800.961799765369, 708.5973066042861;
-//  0, 0, 1]
-// distCoeffs : [-0.002716396560153968, 0.2293808193662089, 0.02226005045854939, -0.03104624188697552, -0.2480605993413657]
-
-// [DEBUG] : Valid images are 94. Begin Calibration...
-// intrinsicMatrix : [1574.312106469767, 0, 646.797345228185;
-//  0, 1574.142710655664, 847.7187521150353;
-//  0, 0, 1]
-
-// distCoeffs : [-0.06101324133001612, 0.1310067282250084, 0.02292885491796105, -0.04099213981890655, -0.08268354895899227]
-
 /**
  * @brief
  * @param
@@ -153,35 +136,38 @@ int createIntrinsicParametersFile(const std::string folderName, const cv::Size c
     cv::Mat cameraMatrix, distCoeffs, rotationMatrix, translationMatrix, newCameraMatrix;
 
     if(validImages<1){EMESS("Too low number of valid images. Please take more chessboard images."); return -1;}
-    cv::calibrateCamera(objectPoints, imagePoints, cv::Size(imgGray.rows,imgGray.cols), cameraMatrix, distCoeffs, rotationMatrix, translationMatrix, cv::CALIB_FIX_ASPECT_RATIO + cv::CALIB_FIX_K3 + cv::CALIB_ZERO_TANGENT_DIST + cv::CALIB_FIX_PRINCIPAL_POINT);
+    float rms_error = cv::calibrateCamera(objectPoints, imagePoints, cv::Size(imgGray.rows,imgGray.cols), cameraMatrix, distCoeffs, rotationMatrix, translationMatrix, cv::CALIB_FIX_ASPECT_RATIO + cv::CALIB_FIX_K3 + cv::CALIB_ZERO_TANGENT_DIST + cv::CALIB_FIX_PRINCIPAL_POINT);
 
-    // std::cout << "intrinsicMatrix : " << intrinsicMatrix << std::endl << std::endl;
-    // std::cout << "distCoeffs : " << distCoeffs << std::endl << std::endl;
-    // std::cout << "Rotation vector : " << rotationMatrix << std::endl << std::endl;
-    // std::cout << "Translation vector : " << translationMatrix << std::endl << std::endl;
-
+    std::cout << "cameraMatrix : " << cameraMatrix << std::endl << std::endl;
+    std::cout << "distCoeffs : " << distCoeffs << std::endl << std::endl;
+    std::cout << "Rotation vector : " << rotationMatrix << std::endl << std::endl;
+    std::cout << "Translation vector : " << translationMatrix << std::endl << std::endl;
+    std::cerr << "Error: " << rms_error << std::endl;
 
     cv::Mat mapX, mapY;
     cv::initUndistortRectifyMap(cameraMatrix, distCoeffs, cv::Mat(), cameraMatrix, cv::Size(img.cols, img.rows), CV_32FC1, mapX, mapY);
 
+    
+
     ////////////////////////
-    cv::VideoCapture cap;
-    cap.open(0, cv::CAP_V4L2);
-    if (!cap.isOpened()){ EMESS("Cannot open camera"); return -1;} 
-    setResolution(cap, 1920, 1080, 30, 0);
+    // cv::VideoCapture cap;
+    // cap.open(0, cv::CAP_V4L2);
+    // if (!cap.isOpened()){ EMESS("Cannot open camera"); return -1;} 
+    // setResolution(cap, 1920, 1080, 30, 0);
 
-    cv::Mat undimg;
-    while(true){
-        if (!cap.read(img)){EMESS("Input has disconnected"); break;}
+    // cv::Mat undimg;
+    // while(true){
+    //     if (!cap.read(img)){EMESS("Input has disconnected"); break;}
 
-        cv::remap(img, undimg, mapX, mapY, cv::INTER_LINEAR);
-        cv::imshow("Original", img);
-        cv::imshow("Remaped", undimg);
-        if (cv::waitKey(1) == 27){ DMESS("Esc key is pressed by user. Exit!"); break;}
-    }
+    //     cv::remap(img, undimg, mapX, mapY, cv::INTER_LINEAR);
+    //     cv::imshow("Original", img);
+    //     cv::imshow("Remaped", undimg);
+    //     if (cv::waitKey(1) == 27){ DMESS("Esc key is pressed by user. Exit!"); break;}
+    // }
 
-    cv::destroyAllWindows();
-    cap.release();
+    // cv::destroyAllWindows();
+    // cap.release();
 }
 
 #endif //CAMERA_CALIBRATION_H
+

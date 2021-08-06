@@ -24,6 +24,13 @@
 #define CP_YUYV 1
 #define CP_H264 2
 
+#define RES_NOT_AVAILABLE   0
+#define RES_1920x1080       1
+#define RES_1280x720        2
+#define RES_720x480         3
+#define RES_640x360         4
+#define RES_640x480         5
+
 /**
  * \brief:
  * 
@@ -40,6 +47,6 @@ void helpmenu();
  * 
  * \return:
 */
-bool setResolution(cv::VideoCapture cap, int width, int height, int fps = 30, int codecCode = CP_MJPG);
+int setResolution(cv::VideoCapture cap, int width, int height, int fps = 30, int codecCode = CP_MJPG);
 
 #endif //CAMERA_HPP

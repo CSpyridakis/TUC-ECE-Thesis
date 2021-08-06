@@ -17,7 +17,7 @@
 ##################################################################################################
 
 # TODO: If you need to work on a different project you may want to rename executable's name
-EXEC_NAME="EstimateBallRange"       
+EXEC_NAME="BallDetection"       
 RUN_COMMAND_ARGS=""  
 
 all(){

@@ -16,7 +16,7 @@ void helpmenu(){
     std::cerr << "./EstimateBallRange -v 0 -x 1920 -y 1080 -p 30 -c 0" << std::endl;
 }
 
-bool setResolution(cv::VideoCapture cap, int width, int height, int fps, int codecCode){
+int setResolution(cv::VideoCapture cap, int width, int height, int fps, int codecCode){
     int codec;
     // Run `v4l2-ctl --list-formats-ext` to find your camera's available formats
     if (codecCode == CP_MJPG) codec = cv::VideoWriter::fourcc('M', 'J', 'P', 'G'); 
@@ -32,6 +32,18 @@ bool setResolution(cv::VideoCapture cap, int width, int height, int fps, int cod
     int dHeight = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
     int fps_counter = cap.get(cv::CAP_PROP_FPS);
 
-    DMESS("After set, actual resolution of the video w:%d h:%d fps:%d\n", dWidth, dHeight, fps_counter); 
-    return true;
+    DMESS("After set, actual resolution of the video w:%d h:%d fps:%d", dWidth, dHeight, fps_counter);
+
+    if(dWidth == 1920 && dHeight == 1080)
+        return RES_1920x1080;
+    else if (dWidth == 1280 && dHeight == 720)
+        return RES_1280x720;
+    else if (dWidth == 720 && dHeight == 480)
+        return RES_720x480;
+    else if (dWidth == 640 && dHeight == 480)
+        return RES_640x480;
+    else if (dWidth == 640 && dHeight == 360)
+        return RES_640x360;
+     
+    return RES_NOT_AVAILABLE;
 }
