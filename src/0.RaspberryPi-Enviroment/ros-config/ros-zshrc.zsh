@@ -142,13 +142,15 @@ ros_develop
 
 # Dislay both active topics and nodes
 function rnt() {
-    echo "${CLR_GREEN}----------- ROS Nodes -----------${CLR_RST}"
+    echo "${CLR_GREEN}-ROS Nodes-${CLR_RST}"
     rosnode list
-    echo "${CLR_GREEN}----------- ROS Topics -----------${CLR_RST}"
+    echo "${CLR_GREEN}-ROS Topics-${CLR_RST}"
     rostopic list
 }
 
 # aliases
+alias crnt="clear && rnt"
+alias cdrnt="clear && ros_develop && echo && rnt"
 alias rni="rosnode info"
 alias rti="rostopic info"
 alias rms="rosmsg show"
