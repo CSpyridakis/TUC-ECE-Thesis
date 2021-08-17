@@ -15,6 +15,11 @@ __INST(){
     done
 }
 
+__ADDREP(){
+    sudo add-apt-repository -y ${1}
+    sudo apt-get -y update --fix-missing
+}
+
 __INST speedtest-cli 
 __INST htop 
 __INST psensor 
@@ -33,9 +38,49 @@ chsh -s $(which zsh)
 
 
 #Neofetch
-    __ADDREP ppa:dawidd0811/neofetch
-    __INST neofetch
+__ADDREP ppa:dawidd0811/neofetch
+__INST neofetch
 
 # Tmux
 __INST tmux
 __INST xclip
+
+
+# --------------------------------------------------------------------------------------------------
+
+# For I2C error in ros-adafruit-10dof-library
+sudo apt get install libi2c-dev 
+# -----------------------------------------------------------------------------------
+# * Add #include <sys/ioctl.h>
+#
+# * Then replace on I2CBuss.cpp line containing #include <linux/i2c-dev.h> with ->
+#       extern "C" {
+#           include <linux/i2c.h>
+#           include <linux/i2c-dev.h>
+#           include <i2c/smbus.h>
+#       }
+# -----------------------------------------------------------------------------------
+
+
+# TODO: edit them
+WIFI_SSID=""
+WIFI_PASS=""
+
+# Connect to wifi
+nmcli device wifi connect ${WIFI_SSID} password ${WIFI_PASS}
+
+# Disable gui on boot
+sudo systemctl set-default multi-user
+gnome-session-quit
+
+# Disable suspend
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+
+
+
+# --------------------------------------------------------------------------------------------------
+# Extra ROS packages
+__INST ros-noetic-nmea-navsat-driver    # For UART GPS
+__INST ros-noetic-usb-cam               # For USB camera
+__INST ros-noetic-robot-localization    # For tf and EKF

@@ -1,0 +1,129 @@
+% This template is used from here: 
+\documentclass[a4paper, 9pt, conference]{ieeeconf}      % Use this line for a4
+                                                          % paper
+
+\IEEEoverridecommandlockouts                              % This command is only
+                                                          % needed if you want to
+                                                          % use the \thanks command
+% \overrideIEEEmargins
+\usepackage[utf8]{inputenc}
+\usepackage[LGR, T1]{fontenc} % Output font encoding for international characters
+% \usepackage{babel} % Use the Palatino font by default [default or mathpazo]
+\usepackage[backend=bibtex,style=ieee,natbib=true,sorting=none,maxbibnames=99]{biblatex} % Use the bibtex back-end with the numeric citation style
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage[section]{placeins}
+\usepackage{comment}
+
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{textcomp}
+\usepackage{graphicx}
+
+\usepackage{url}
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e}
+%\usepackage{algorithm}
+\usepackage{verbatim} 
+%\usepackage[noend]{algpseudocode}
+\usepackage{soul, color}
+\usepackage{fancyhdr}
+\usepackage{fourier} 
+\usepackage{array}
+\usepackage{makecell}
+\usepackage[hyperfootnotes=false]{hyperref}
+\usepackage[usestackEOL]{stackengine} % For multiple lines in tables and alignment
+\usepackage{cancel}	% For cancel in equations 
+\usepackage{float}
+
+\usepackage[bottom]{footmisc}	% To add footnotes
+
+% Greek language support
+\usepackage{textgreek}
+\usepackage{lmodern} 
+\usepackage{alphabeta}
+
+% Diagrams
+\usepackage{tikz}
+\usetikzlibrary{arrows, shapes, positioning, shadows, trees}
+
+% The following two lines handle too long URLs on bibliography
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+\SetNlSty{large}{}{:}
+
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
+\newcommand{\revision}{1.0}
+
+% Custom header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\today}
+\lhead{Rev: \revision}
+
+
+\newcommand{\rework}[1]{\todo[color=yellow,inline]{#1}}
+
+% Euclidean Norm symbol
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+% To use upper dot in Greek (equivalent of English semicolon)
+\newcommand{\udot}{$^{\mbox{\textbf{\large .}}}$ }
+
+\makeatletter
+\newcommand{\rom}[1]{\romannumeral #1}
+\newcommand{\Rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+
+\title{\LARGE \bf
+Technical Specifications Document
+}
+
+
+\author{\textbf{"Design and Implementation of a Low Cost Embedded System for}
+\\\textbf{Localization of Drones Flying in Swarms"}
+\\
+}
+
+\addbibresource{References.bib}
+
+\begin{document}
+
+\vspace{4cm}
+\maketitle
+% \thispagestyle{plain}
+\thispagestyle{fancy}
+\pagestyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{Chapters}
+
+% \addtolength{\textheight}{-12cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section*{APPENDIX}
+
+
+% \section*{ACKNOWLEDGMENT}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbibfilter{reference-or-link}{%
+    keyword=References or keyword=Link
+}
+\addcontentsline{toc}{chapter}{References}
+\printbibliography[filter=reference-or-link, title={References}]
+% \printbibliography[keyword={Link}, title={Links}]
+
+\end{document}
