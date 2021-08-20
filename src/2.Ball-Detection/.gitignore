@@ -5,4 +5,4 @@ CMakeCache.txt
 Makefile
 
 # Executable's name
-EstimateBallRange 
+BallDetection 

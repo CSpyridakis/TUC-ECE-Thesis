@@ -34,7 +34,7 @@ bool detectBall(cv::Mat img, std::vector<cv::Vec3f>& circles);
  * 
  * \param:
 */
-void estimateDistance(cv::Mat img);
+void estimateDistance(std::vector<cv::Vec3f>& circles, double &distances);
 
 #endif //RANGE_LOGIC_H
 

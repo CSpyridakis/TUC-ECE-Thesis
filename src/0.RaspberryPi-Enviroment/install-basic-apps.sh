@@ -20,6 +20,11 @@ __ADDREP(){
     sudo apt-get -y update --fix-missing
 }
 
+
+sudo apt-get -y update && sudo apt-get -y upgrade
+
+# ----------------------------------------------------------------------------------------------------------------
+
 __INST speedtest-cli 
 __INST htop 
 __INST psensor 
@@ -29,13 +34,13 @@ __INST ncdu
 __INST ranger 
 __INST screenfetch 
 __INST python3-pip
+__INST dc
 
 # ZSH
 __INST zsh 
 __INST fonts-powerline 
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 chsh -s $(which zsh)
-
 
 #Neofetch
 __ADDREP ppa:dawidd0811/neofetch
@@ -76,11 +81,14 @@ gnome-session-quit
 # Disable suspend
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
-
-
-
 # --------------------------------------------------------------------------------------------------
 # Extra ROS packages
 __INST ros-noetic-nmea-navsat-driver    # For UART GPS
-__INST ros-noetic-usb-cam               # For USB camera
 __INST ros-noetic-robot-localization    # For tf and EKF
+
+__INST ros-noetic-usb-cam               # For USB camera
+__INST ros-noetic-opencv                # For image processing
+__INST ros-noetic-cv-bridge             # ROS < -- > OpenCV transports (need to include image_transport/image_transport.h & cv_bridge/cv_bridge.h)
+
+
+

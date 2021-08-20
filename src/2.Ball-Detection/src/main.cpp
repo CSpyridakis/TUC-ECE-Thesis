@@ -84,7 +84,7 @@ int main(int argc, char* argv[]){
     cv::Mat mapX, mapY;
     if(!findCameraRemapMats(cv::Size(video_width, video_height), mapX, mapY, resolution)){
         EMESS("There are not calibration data for this resolution yet");
-        // return -1;
+        return -1;
     }
     
     // For each frame 
@@ -103,15 +103,15 @@ int main(int argc, char* argv[]){
         cv::cvtColor(img, imgGray, cv::COLOR_BGR2GRAY); 
         // Apply Blur
         // cv::medianBlur(imgGray, imgBlur, 5);
-        cv::GaussianBlur(imgGray, imgBlur, cv::Size(gaussianKernelSize, gaussianKernelSize), gausianDerivX, gausiaDerivY);
+        // cv::GaussianBlur(imgGray, imgBlur, cv::Size(gaussianKernelSize, gaussianKernelSize), gausianDerivX, gausiaDerivY);
         // Detect edges
-        cv::Canny(imgBlur, imgCanny, cannythr1, cannythr2);
+        // cv::Canny(imgBlur, imgCanny, cannythr1, cannythr2);
         
         // --------------------------------------------------------------------
         // --------------------------------------------------------------------
         // Detect ball
         std::vector<cv::Vec3f> circles;
-        bool ballsDetected ;//= detectBall(imgCanny, circles);
+        bool ballsDetected = detectBall(imgCanny, circles);
 
 
         if(!ballsDetected){

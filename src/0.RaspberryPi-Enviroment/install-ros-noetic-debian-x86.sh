@@ -28,7 +28,7 @@ sudo apt install ros-noetic-desktop-full    # Desktop-Full Install
 # sudo apt install ros-noetic-ros-base      # ROS-Base
 
 # Environment setup
-[ ${SHELL} = "/usr/bin/zsh" ] && (echo "source /opt/ros/noetic/setup.zsh" >> ~/.zshrc && source ~/.zshrc)
+[ ${SHELL} = "/usr/bin/zsh" ] && (echo -e "\nsource /opt/ros/noetic/setup.zsh \n" >> ~/.zshrc && source ~/.zshrc)
 
 # Dependencies for building packages
 sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
