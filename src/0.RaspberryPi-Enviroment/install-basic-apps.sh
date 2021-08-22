@@ -91,4 +91,5 @@ __INST ros-noetic-opencv                # For image processing
 __INST ros-noetic-cv-bridge             # ROS < -- > OpenCV transports (need to include image_transport/image_transport.h & cv_bridge/cv_bridge.h)
 
 
-
+# Raspberry Pi serial port is: /dev/ttyS0
+# Raspberry Pi bluetooth is: /dev/ttyAMA0
