@@ -139,6 +139,7 @@ include_directories(
 # add_executable(${PROJECT_NAME}_node src/adafruit_10dof_imu_node.cpp)
 add_executable(imuout src/talker.cpp)
 target_link_libraries(imuout ${catkin_LIBRARIES})
+target_link_libraries(imuout i2c)
 add_dependencies(imuout adafruit_10dof_imu_generate_messages_cpp)
 
 ## Rename C++ executable without prefix

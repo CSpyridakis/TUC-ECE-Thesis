@@ -1,7 +1,14 @@
 #include "I2CBus.h"
 #include <unistd.h>
 #include <fcntl.h>
-#include <linux/i2c-dev.h>
+
+// run sudo apt-get install libi2c-dev
+#include <sys/ioctl.h>
+extern "C" {
+    #include <linux/i2c.h>
+    #include <linux/i2c-dev.h>
+    #include <i2c/smbus.h>
+}
 
 I2CBus::I2CBus(const char * deviceName)
 {

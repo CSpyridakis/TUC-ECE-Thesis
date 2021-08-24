@@ -72,7 +72,7 @@ WIFI_SSID=""
 WIFI_PASS=""
 
 # Connect to wifi
-nmcli device wifi connect ${WIFI_SSID} password ${WIFI_PASS}
+nmcli device wifi connect ${WIFI_SSID} password ${WIFI_PASS} hidden yes
 
 # Disable gui on boot
 sudo systemctl set-default multi-user
@@ -91,5 +91,23 @@ __INST ros-noetic-opencv                # For image processing
 __INST ros-noetic-cv-bridge             # ROS < -- > OpenCV transports (need to include image_transport/image_transport.h & cv_bridge/cv_bridge.h)
 
 
+# --------------------------------------------------------------------------------------------------
+
+# Serial fix
+
+# -----------
 # Raspberry Pi serial port is: /dev/ttyS0
 # Raspberry Pi bluetooth is: /dev/ttyAMA0
+
+# 1. add enable_uart=1 to /boot/config.txt
+# 2. remove console=serial0,115200 from /boot/firmware/cmdline.txt
+# 3. disable the serial console: 
+sudo systemctl stop serial-getty@ttyS0.service && sudo systemctl disable serial-getty@ttyS0.service
+
+sudo adduser $USER tty
+sudo adduser $USER dialout
+
+sudo chmod g+r /dev/ttyS0
+sudo chmod g+r /dev/ttyAMA0
+
+# -----------
