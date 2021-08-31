@@ -89,7 +89,7 @@ __INST ros-noetic-robot-localization    # For tf and EKF
 __INST ros-noetic-usb-cam               # For USB camera
 __INST ros-noetic-opencv                # For image processing
 __INST ros-noetic-cv-bridge             # ROS < -- > OpenCV transports (need to include image_transport/image_transport.h & cv_bridge/cv_bridge.h)
-
+__INST ros-${ROS_DISTRO}-rviz-imu-plugin
 
 # --------------------------------------------------------------------------------------------------
 
