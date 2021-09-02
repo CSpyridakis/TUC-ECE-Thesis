@@ -1,18 +1,125 @@
 \chapter{Design Features and Implementation} % Main chapter title
 \label{chap:Chapter4}  % For referencing the chapter elsewhere, use \ref{Chapter4}
 
-\epigraph{” }{\textit{}}
+% \epigraph{”Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success." }{\textit{Pablo Picasso}}
 
-\TODO{TODO!}
+\epigraph{”Plan your work, execute it, get the result" }{\textit{ascertainsolo}}
+
+Στο παρόν κεφάλαιο περιγράφεται η διαδικασία σχεδιασμού και υλοποίησης του \Abbr{MoCap} με χρήση drone swarm συστήματος, 
+που συσχετίζεται η παρούσα διπλωματική. 
+
+Μία high level προσέγγιση, θα μπορούσε να διαχωρίζει το σύστημα σε τρία διακριτά
+υποσυστήματα. Αρχικά το optical, του οποίου αρμοδιότητα είναι το detection, tracking του αντικειμένου, καθώς και η εκτίμηση
+του range ή γωνίας του από την camera. Δεύτερο, η λήψη των πληροφοριών από τους αισθητήρες ώστε να προσεγγιστεί η θέση του ίδιου
+του drone. Τέλος, ο συνδυασμός των δύο παραπάνω μερών και η χρήση κατάλληλης localization τεχνική για να βρεθεί η θέση του αντικειμένου
+στο \Abbr{3D} χώρο.
+
+Πηγές από τις οποίες πάρθηκαν γνώσεις για την υλοποίηση 
+
+%----------------------------------------------------------------------
+\section{Equipment and Tools Used} \label{sec:design-tools}
+Αρχικά θα αναφερθούν συνοπτικά η αρχιτεκτονική στην οποία έγινε επιλογή να επιλυθεί το πρόβλημα,
+τα εξαρτήματα/αισθητήρια όργανα καθώς και τα λογισμικά. 
+
+\subsection{Embedded Linux System}
+Δύο πολύ 
+
+\begin{figure} [H]
+	\centering
+	% -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{Images/Design-Implementation/raspberry-pi-4.png}\\
+      {(a) Raspberry Pi 4 \URI{https://www.hellasdigital.gr/go-create/raspberry-and-accessories-el/raspberry-pi/raspberry-pi-4-4gb-ram/}}
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{Images/Design-Implementation/jetson-nano.jpeg}\\
+      {(b) Jetson Nano \URI{https://www.hellasdigital.gr/computers/accessories/nvidia-jetson-nano-developer-kit/}}
+	\end{minipage}
+	% -----------------
+    \hfill \break
+    \decoRule
+    \CaptionBasedwithURL{Possible Embedded Linux Systems} 
+    \label{fig:Antenna-Arrays}
+\end{figure}
+
+% -----------------
+
+\subsection{ROS}
+\cite{ros}
+
+
+% -----------------
+\subsection{OpenCV}
+\cite{opencv}
+
+% -----------------
+\subsection{Camera}
+\cite{creative-camera}
+\FigCaptLabelBasedURL{Images/Design-Implementation/creative-web-cam.jpeg}{Camera used for ball detection and tracking}{creative-camera}<0.4>(https://en.creative.com/p/peripherals/creative-live-cam-sync-1080p)
+
+
+% -----------------
+\subsection{GPS}
+\cite{bn-220-gps}
+\FigCaptLabelBasedURL{Images/Design-Implementation/bn220.png}{GPS module used to estimate position}{bn-220-gps}<0.4>
+
+% -----------------
+\subsection{IMU}
+\cite{adafruit-10dof-imu}
+\FigCaptLabelBasedURL{Images/Design-Implementation/10DoF-Adafruit-IMU.jpeg}{Adafruit 10 DoF IMU}{adafruit-10DoF-imu}<0.4>
+
+% -----------------
+\subsection{Breakout Board}
+
+\FigCaptLabelBasedURL{Images/Design-Implementation/Rpi-breakout.png}{Raspberry Pi breakout}{raspberry-pi-brk}<0.65>
+\cite{raspberry-pi-fan-breadkout}
+
+
+% -----------------
+\subsection{System Overview}
+\FigCaptLabelBasedURL{Images/Design-Implementation/thesis-system.jpg}{System designed}{thesis-system}<0.65>
+
+\begin{table}[H]
+    \caption[]{Bill of Materials}
+    \label{tab:2}
+    \centering
+    \begin{tabular}{ll}
+        \hline
+        \textbf{Component} & \textbf{Cost}  \\
+        \hline
+            Raspberry Pi 4 Model B 8GB & \Centerstack{$\sim$ 100 €}\\
+            Creative live cam sync 1080p \cite{creative-camera} & \Centerstack{$\sim$ 44 €}\\
+            BN-220 GPS Module \cite{bn-220-gps} & \Centerstack{$\sim$ 15 €}\\
+            Adafruit 10 DoF IMU \cite{adafruit-10dof-imu} & \Centerstack{$\sim$ 30 €}\\
+            Breakout Board with fan \cite{raspberry-pi-fan-breadkout} & \Centerstack{$\sim$ 8 €}\\
+            \hline
+    \end{tabular}
+  \end{table}
+
+% ------------------------------------------------------------------------------------------------------
+\section{Environment}
+\subsection{Operation System} 
+\subsection{Sensors' Communication} 
 
 
 %----------------------------------------------------------------------
-\section{Tools Used} \label{sec:design-tools}
-\TODO{TODO}
-
+\section{Camera}
 Internal parameters
     Intrinsic 
     Distortion (ideal Pinhole model does not have lens)
 
     
 Extrinsic 
+\subsubsection{Camera Calibration}
+\subsubsection{Ball Detection and Tracking}
+\subsubsection{Range Estimation}
+
+%----------------------------------------------------------------------
+
+\section{Networking}
+
+%----------------------------------------------------------------------
+

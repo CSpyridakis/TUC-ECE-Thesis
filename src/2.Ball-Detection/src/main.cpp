@@ -102,7 +102,7 @@ int main(int argc, char* argv[]){
         // Convert to gray scale
         cv::cvtColor(img, imgGray, cv::COLOR_BGR2GRAY); 
         // Apply Blur
-        // cv::medianBlur(imgGray, imgBlur, 5);
+        cv::medianBlur(imgGray, imgBlur, 5);
         // cv::GaussianBlur(imgGray, imgBlur, cv::Size(gaussianKernelSize, gaussianKernelSize), gausianDerivX, gausiaDerivY);
         // Detect edges
         // cv::Canny(imgBlur, imgCanny, cannythr1, cannythr2);
@@ -111,7 +111,7 @@ int main(int argc, char* argv[]){
         // --------------------------------------------------------------------
         // Detect ball
         std::vector<cv::Vec3f> circles;
-        bool ballsDetected = detectBall(imgCanny, circles);
+        bool ballsDetected = detectBall(imgBlur, circles);
 
 
         if(!ballsDetected){
@@ -136,10 +136,10 @@ int main(int argc, char* argv[]){
             
             // Intermediate images 
             cv::imshow("Blur", imgBlur);   
-            cv::imshow("Canny", imgCanny);
+            // cv::imshow("Canny", imgCanny);
 #endif
         // Exit
-        if (cv::waitKey(1) == 27){ DMESS("Esc key is pressed by user. Exit!"); break;}
+        if (cv::waitKey(30) == 27){ DMESS("Esc key is pressed by user. Exit!"); break;}
     }
     cv::destroyAllWindows();
     cap.release();
