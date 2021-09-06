@@ -7,6 +7,7 @@
 #   Description:
 #       Install basic apps in raspberry pi
 #
+# Default username: ubuntu | password: ubuntu
 
 __INST(){
     for app in "$@" 

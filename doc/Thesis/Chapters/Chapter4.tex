@@ -8,10 +8,10 @@
 Στο παρόν κεφάλαιο περιγράφεται η διαδικασία σχεδιασμού και υλοποίησης του \Abbr{MoCap} με χρήση drone swarm συστήματος, 
 που συσχετίζεται η παρούσα διπλωματική. 
 
-Μία high level προσέγγιση, θα μπορούσε να διαχωρίζει το σύστημα σε τρία διακριτά
+Μία high-level προσέγγιση, θα μπορούσε να διαχωρίζει το σύστημα σε τρία διακριτά
 υποσυστήματα. Αρχικά το optical, του οποίου αρμοδιότητα είναι το detection, tracking του αντικειμένου, καθώς και η εκτίμηση
 του range ή γωνίας του από την camera. Δεύτερο, η λήψη των πληροφοριών από τους αισθητήρες ώστε να προσεγγιστεί η θέση του ίδιου
-του drone. Τέλος, ο συνδυασμός των δύο παραπάνω μερών και η χρήση κατάλληλης localization τεχνική για να βρεθεί η θέση του αντικειμένου
+του drone. Τέλος, ο συνδυασμός των δύο παραπάνω μερών και η χρήση κατάλληλης localization τεχνικής για να βρεθεί η θέση του αντικειμένου
 στο \Abbr{3D} χώρο.
 
 Πηγές από τις οποίες πάρθηκαν γνώσεις για την υλοποίηση 
@@ -19,7 +19,7 @@
 %----------------------------------------------------------------------
 \section{Equipment and Tools Used} \label{sec:design-tools}
 Αρχικά θα αναφερθούν συνοπτικά η αρχιτεκτονική στην οποία έγινε επιλογή να επιλυθεί το πρόβλημα,
-τα εξαρτήματα/αισθητήρια όργανα καθώς και τα λογισμικά. 
+τα εξαρτήματα/αισθητήρια όργανα καθώς και τα λογισμικά τα οποία χρησιμοποιήθηκαν. 
 
 \subsection{Embedded Linux System}
 Δύο πολύ 
@@ -42,14 +42,56 @@
     \hfill \break
     \decoRule
     \CaptionBasedwithURL{Possible Embedded Linux Systems} 
-    \label{fig:Antenna-Arrays}
+    \label{fig:embedded-linux-systems}
 \end{figure}
+
+\begin{table}[H]
+    \caption[]{Raspberry Pi 4 Model B Specifications}
+    \label{tab:raspberry-pi-specs}
+    \centering
+    \resizebox{.6\textwidth}{!}{
+        \begin{tabular}{ll}
+            \hline
+            \textbf{Feature} & \textbf{Value}  \\
+            \hline
+                Processor & \Centerstack{Broadcom BCM2711, Quad core Cortex-A72 \\(ARM v8) 64-bit SoC @ 1.5GHz }\\
+                Memory & 8GB LPDDR4-3200 SDRAM \\
+                Storage & External Micro-SD \\  
+                Power & 5V DC (maximum 3A), 5-15Watt \\
+                Cost & $\sim$100 €\\
+                Weight & 46 grams (without case), 99 grams (with case) \\
+                Peripherals & GPIO, I2C, SPI, UART \\
+                \hline
+        \end{tabular}
+    }
+  \end{table}
+
+  \begin{table}[H]
+        \caption[]{Jetson Nano Developer Kit Specifications}
+        \label{tab:jetson-nano-specs}
+        \centering
+        \resizebox{.6\textwidth}{!}{
+            \begin{tabular}{ll}
+                \hline
+                \textbf{Feature} & \textbf{Value}  \\
+                \hline
+                    CPU & Quad-core ARM Cortex-A57 MPCore processor\\
+                    GPU & \Centerstack{NVIDIA Maxwell architecture with 128 NVIDIA\\ CUDA® cores} \\
+                    Memory & 4 GB 64-bit LPDDR4; 25.6 gigabytes/second \\
+                    Storage & External Micro-SD \\  
+                    Power & 5V DC, 5-10Watt \\
+                    Cost & $\sim$120€\\
+                    Weight & 250 grams (without case)\\
+                    Peripherals & GPIO, I2C, I2S, SPI, UART \\
+                    \hline
+            \end{tabular}
+        }
+      \end{table}
 
 % -----------------
 
 \subsection{ROS}
 \cite{ros}
-
 
 % -----------------
 \subsection{OpenCV}
@@ -58,46 +100,71 @@
 % -----------------
 \subsection{Camera}
 \cite{creative-camera}
-\FigCaptLabelBasedURL{Images/Design-Implementation/creative-web-cam.jpeg}{Camera used for ball detection and tracking}{creative-camera}<0.4>(https://en.creative.com/p/peripherals/creative-live-cam-sync-1080p)
+
+\FigCaptLabelBasedURL{Images/Design-Implementation/creative-web-cam.jpeg}%
+{Camera used for ball detection and tracking}%
+{creative-camera}%
+<0.4>%
+(https://en.creative.com/p/peripherals/creative-live-cam-sync-1080p)
 
 
 % -----------------
 \subsection{GPS}
 \cite{bn-220-gps}
-\FigCaptLabelBasedURL{Images/Design-Implementation/bn220.png}{GPS module used to estimate position}{bn-220-gps}<0.4>
+\FigCaptLabelBasedURL{Images/Design-Implementation/bn220.png}%
+{GPS module used to estimate position}%
+{bn-220-gps}%
+<0.4>
 
 % -----------------
 \subsection{IMU}
 \cite{adafruit-10dof-imu}
-\FigCaptLabelBasedURL{Images/Design-Implementation/10DoF-Adafruit-IMU.jpeg}{Adafruit 10 DoF IMU}{adafruit-10DoF-imu}<0.4>
+\FigCaptLabelBasedURL{Images/Design-Implementation/10DoF-Adafruit-IMU.jpeg}%
+{Adafruit 10 DoF IMU}%
+{adafruit-10DoF-imu}%
+<0.4>
 
 % -----------------
 \subsection{Breakout Board}
+Για να λειτουργήσουν τα παραπάνω υποσυστήματα, χρειαζόταν να πραγματοποιηθούν οι κατάλληλες συνδέσεις μεταξύ τους. Η απλούστερη εκδοχή θα ήταν να γίνει αυτό με χρήση breadboard, πράγμα όμως που θα πρόσθετε όγκο και βάρος στο τελικό σύστημα, τα οποία σε περίπτωση δοκιμών πάνω σε πραγματικά drone θα ήταν απαγορευτικοί παράγοντες όμως. Συνεπώς, προκειμένου να μπορεί με ευκολία να γίνει η ανάπτυξη του συστήματος, σχεδιάστηκε (στο cad εργαλείο KiCad \cite{KiCad}) και κατασκευάστηκε ένα custom breakout, το οποίο παρέχει εύκολη πρόσβαση στα GPIO του Raspberry, έξτρα pins για τροφοδοσία στα 5 και 3.3 Volt, pins για τοποθέτηση αισθητήρων - όπως του \Abbr{IMU} - καθώς και mounting holes στα οποία μπορεί να τοποθετηθεί 40x40mm fan για την ψύξη του συστήματος. 
 
-\FigCaptLabelBasedURL{Images/Design-Implementation/Rpi-breakout.png}{Raspberry Pi breakout}{raspberry-pi-brk}<0.65>
+% Image
+\FigCaptLabelBasedURL{Images/Design-Implementation/Rpi-breakout.png}%
+{Raspberry Pi breakout}%
+{raspberry-pi-breakout}%
+<0.55>
+
 \cite{raspberry-pi-fan-breadkout}
 
 
 % -----------------
 \subsection{System Overview}
-\FigCaptLabelBasedURL{Images/Design-Implementation/thesis-system.jpg}{System designed}{thesis-system}<0.65>
+
+% Image
+\FigCaptLabelBasedURL{Images/Design-Implementation/thesis-system.jpg}
+{System designed}%
+{thesis-system}%
+<0.65>
 
 \begin{table}[H]
     \caption[]{Bill of Materials}
-    \label{tab:2}
+    \label{tab:thesis-system-bom}
     \centering
-    \begin{tabular}{ll}
-        \hline
-        \textbf{Component} & \textbf{Cost}  \\
-        \hline
-            Raspberry Pi 4 Model B 8GB & \Centerstack{$\sim$ 100 €}\\
-            Creative live cam sync 1080p \cite{creative-camera} & \Centerstack{$\sim$ 44 €}\\
-            BN-220 GPS Module \cite{bn-220-gps} & \Centerstack{$\sim$ 15 €}\\
-            Adafruit 10 DoF IMU \cite{adafruit-10dof-imu} & \Centerstack{$\sim$ 30 €}\\
-            Breakout Board with fan \cite{raspberry-pi-fan-breadkout} & \Centerstack{$\sim$ 8 €}\\
+    \resizebox{0.6\textwidth}{!}{
+        \begin{tabular}{ll}
             \hline
-    \end{tabular}
+            \textbf{Component} & \textbf{Cost}  \\
+            \hline
+                Raspberry Pi 4 Model B 8GB & \Centerstack{$\sim$ 100 €}\\
+                Creative live cam sync 1080p \cite{creative-camera} & \Centerstack{$\sim$ 44 €}\\
+                Adafruit 10 DoF IMU \cite{adafruit-10dof-imu} & \Centerstack{$\sim$ 30 €}\\
+                BN-220 GPS Module \cite{bn-220-gps} & \Centerstack{$\sim$ 15 €}\\
+                Breakout Board with fan \cite{raspberry-pi-fan-breadkout} & \Centerstack{$\sim$ 8 €}\\
+                \hline
+        \end{tabular}
+    }
   \end{table}
+
 
 % ------------------------------------------------------------------------------------------------------
 \section{Environment}
