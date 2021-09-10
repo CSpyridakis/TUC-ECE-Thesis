@@ -1,30 +1,28 @@
 \chapter{Design Features and Implementation} % Main chapter title
 \label{chap:Chapter4}  % For referencing the chapter elsewhere, use \ref{Chapter4}
 
-% \epigraph{”Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success." }{\textit{Pablo Picasso}}
+\epigraph{”Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success." }{\textit{Pablo Picasso}}
 
-\epigraph{”Plan your work, execute it, get the result" }{\textit{ascertainsolo}}
+% \epigraph{”Plan your work, execute it, get the result" }{\textit{ascertainsolo}}
 
 Στο παρόν κεφάλαιο περιγράφεται η διαδικασία σχεδιασμού και υλοποίησης του \Abbr{MoCap} με χρήση drone swarm συστήματος, 
 που συσχετίζεται η παρούσα διπλωματική. 
 
 Μία high-level προσέγγιση, θα μπορούσε να διαχωρίζει το σύστημα σε τρία διακριτά
-υποσυστήματα. Αρχικά το optical, του οποίου αρμοδιότητα είναι το detection, tracking του αντικειμένου, καθώς και η εκτίμηση
-του range ή γωνίας του από την camera. Δεύτερο, η λήψη των πληροφοριών από τους αισθητήρες ώστε να προσεγγιστεί η θέση του ίδιου
+υποσυστήματα. Αρχικά το optical, του οποίου αρμοδιότητα είναι το detection, το tra\-cking, καθώς και η εκτίμηση
+του range ή γωνίας του αντικειμένου από την camera. Δεύτερο, η λήψη των πληροφοριών από τους αισθητήρες ώστε να προσεγγιστεί η θέση του ίδιου
 του drone. Τέλος, ο συνδυασμός των δύο παραπάνω μερών και η χρήση κατάλληλης localization τεχνικής για να βρεθεί η θέση του αντικειμένου
 στο \Abbr{3D} χώρο.
-
-Πηγές από τις οποίες πάρθηκαν γνώσεις για την υλοποίηση 
-
 
 
 %----------------------------------------------------------------------
 \section{Equipment and Tools Used} \label{sec:design-tools}
 Αρχικά θα αναφερθούν συνοπτικά η αρχιτεκτονική στην οποία έγινε επιλογή να επιλυθεί το πρόβλημα,
-τα εξαρτήματα/αισθητήρια όργανα καθώς και τα λογισμικά τα οποία χρησιμοποιήθηκαν. 
+τα εξαρτήματα/αισθητήρια όργανα καθώς και τα λογισμικά τα οποία χρησιμοποιήθηκαν στην παρούσα διπλωματική. 
 
 \subsection{Embedded Linux System}
-Δύο πολύ 
+Δύο πολύ δημοφιλείς επιλογές στον χώρο των ενσωματωμένων συστημάτων - ως κεντρικές μονάδες επεξεργασίας - είναι οι πλακέτες Raspberry Pi που κατασκευάζονται από την Raspberry Pi Foundation σε συνεργασία με την Broadcom, καθώς και οι πλακέτες Jetson της Nvidia. Στο \Fig{embedded-linux-systems} ως παράδειγμα παρουσιάζονται ενδεικτικά μία εκδοχή από την κάθε οικογένεια, ενώ στα \Tabl{raspberry-pi-specs} και \Tabl{jetson-nano-specs} τα τεχνικά χαρακτηριστικά της εκάστοτε πλακέτας ως αρχικό σημείο αναφοράς. 
+
 
 \begin{figure} [H]
 	\centering
@@ -46,6 +44,8 @@
     \CaptionBasedwithURL{Possible Embedded Linux Systems} 
     \label{fig:embedded-linux-systems}
 \end{figure}
+
+Και οι δύο επιλογές αποτελούνται από έναν ARM αρχιτεκτονικής Central Processing Unit (\Abbr{CPU}), ενώ στις Jetson βρίσκεται επιπρόσθετα και Graphics Processing Unit (\Abbr{GPU}) που μπορεί να χρησιμοποιηθεί σε ενσωματωμένα με μεγάλες ανάγκες επεξεργασίας (όπως αυτά που σχετίζονται με εικόνα).
 
 \begin{table}[H]
     \caption[]{Raspberry Pi 4 Model B Specifications}
