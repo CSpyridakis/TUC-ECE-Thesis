@@ -3,10 +3,7 @@
 
 \epigraph{”Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success." }{\textit{Pablo Picasso}}
 
-% \epigraph{”Plan your work, execute it, get the result" }{\textit{ascertainsolo}}
-
-Στο παρόν κεφάλαιο περιγράφεται η διαδικασία σχεδιασμού και υλοποίησης του \Abbr{MoCap} με χρήση drone swarm συστήματος, 
-που συσχετίζεται η παρούσα διπλωματική. 
+Στο παρόν κεφάλαιο περιγράφεται η διαδικασία σχεδιασμού και υλοποίησης του \Abbr{MoCap} με χρήση drone swarm συστήματος, που συσχετίζεται η παρούσα διπλωματική. 
 
 Μία high-level προσέγγιση, θα μπορούσε να διαχωρίζει το σύστημα σε τρία διακριτά
 υποσυστήματα. Αρχικά το optical, του οποίου αρμοδιότητα είναι το detection, το tra\-cking, καθώς και η εκτίμηση
@@ -51,7 +48,7 @@
     \caption[]{Raspberry Pi 4 Model B Specifications}
     \label{tab:raspberry-pi-specs}
     \centering
-    \resizebox{.6\textwidth}{!}{
+    \resizebox{.63\textwidth}{!}{
         \begin{tabular}{ll}
             \hline
             \textbf{Feature} & \textbf{Value}  \\
@@ -74,7 +71,7 @@
         \caption[]{Jetson Nano Developer Kit Specifications}
         \label{tab:jetson-nano-specs}
         \centering
-        \resizebox{.6\textwidth}{!}{
+        \resizebox{.63\textwidth}{!}{
             \begin{tabular}{ll}
                 \hline
                 \textbf{Feature} & \textbf{Value}  \\
@@ -94,7 +91,7 @@
 
 % -----------------
 
-\subsection{ROS}
+\subsection{ROS} \label{sec:ROS}
 Συνδετικός κρίκος των υποσυστημάτων είναι το open-source middleware Robot Operation System (\Abbr{ROS}) \cite{ros} το οποίο 
 πε\-ρι\-λα\-μβά\-νει ένα εκτενές σύνολο εργαλείων, βιβλιοθηκών και συ\-μβά\-σεων. Τα πακέτα του οποίου χρησιμοποιούνται για την
 λήψη και φιλτράρισμα από τους αισθητήρες των πληροφοριών, επικοινωνία μεταξύ των drone όπως τέλος και 
@@ -104,22 +101,14 @@
 
 Το \Abbr{ROS} στην πραγματικότητα είναι ένα meta-operating system, με αποτέλεσμα να χρειάζεται να τρέχει σε ένα πρωτεύον Operating System (\Abbr{OS}), συγκεκριμένα μέχρι αυτήν την στιγμή απαιτεί την χρήση Ubuntu Linux. 
 
-Στην συγκεκριμένη περίπτωση χρησιμοποιήθηκε η έκδοση noetic του \Abbr{ROS}, στην οποία εγκαταστάθηκαν τα παρακάτω πακέτα
 
-
-ROS Packages(\TODO{update them}):
-\begin{itemize}
-  \addtolength{\itemindent}{0.3cm}
-  \item tf2\_ros
-  \item robot\_localization
-  \item usb\_cam
-  \item nmea\_navsat\_driver
-\end{itemize}
-
+% -----------------
+\subsection{Operation System}
+Από την στιγμή που επιλέχθηκε να γίνει χρήση του \Abbr{ROS} - το οποίο όπως αναφέρθηκε στο \Sect{ROS} απαιτεί την χρήση Ubuntu Linux - έγινε εγκατάσταση στο Raspberry Pi η έκδοση Ubuntu Linux 20.04.2 64bit version για ΑRM \cite{ubuntu-raspberry} που είναι ειδικά σχεδιασμένη για το Raspberry Pi.
 
 % -----------------
 \subsection{OpenCV}
-Για το οπτικό σκέλος χρησιμοποιήθηκε η ανοιχτού κώδικα βιβλιοθήκη OpenCV \cite{opencv}, η οποία αποτελεί την δημοφιλέστερη επιλογή για real-time Computer Vision related εφαρμογές. Ξεκίνησε η ανάπτυξη της στα εργαστήρια της Intel και έχει ήδη διάρκεια ζωής λίγο περισσότερο από δύο δεκαετίες. Για τις ανάγκες στης συγκεκριμένης εργασίας χρησιμοποιήθηκε η έκδοση της \TODO{add opencv version}.
+Για το οπτικό σκέλος χρησιμοποιήθηκε η ανοιχτού κώδικα βιβλιοθήκη OpenCV \cite{opencv}, η οποία αποτελεί την δημοφιλέστερη επιλογή για real-time Computer Vision related εφαρμογές. Ξεκίνησε η ανάπτυξη της στα εργαστήρια της Intel και έχει ήδη διάρκεια ζωής λίγο περισσότερο από δύο δεκαετίες. Για τις ανάγκες στης συγκεκριμένης εργασίας χρησιμοποιήθηκε η έκδοση της \TODO{add opencv version}. Ενώ ένα αρκετά βοηθητικό Massive Open Online Course (\Abbr{MOOC}) το οποίο βοήθησε να κατανοηθεί περισσότερο το σκέλος του \Abbr{CV} είναι το \cite{introduction-to-computer-vision}.
 
 % -----------------
 \subsection{Camera}
@@ -128,7 +117,7 @@ ROS Packages(\TODO{update them}):
 \FigCaptLabelBasedURL{Images/Design-Implementation/creative-web-cam.jpeg}%
 {Camera used for ball detection and tracking}%
 {creative-camera}%
-<0.4>%
+<0.35>%
 (https://en.creative.com/p/peripherals/creative-live-cam-sync-1080p)
 
 
@@ -136,38 +125,41 @@ ROS Packages(\TODO{update them}):
 \subsection{GPS}
 Παρόλο που - όπως αναφέρθηκε στο \Chap{thesis-approach} - στο συγκεκριμένο σύστημα μας ενδιαφέρει το relative positioning και όχι το absolute, σκεπτόμενοι ότι στην πραγματικότητα το σύστημα σχεδιάζεται με γνώμονα το να λειτουργεί σε outdoor scenarios\udot ένας άμεσος τρόπος προσδιορισμού της θέσης του κάθε drone είναι με χρήση κάποιου εμπορικού αισθητήρα \Abbr{GPS}. Στην συνέχεια και αφού έχει αποκτηθεί πληροφορία απόλυτης θέσης για το κάθε drone μπορεί - θεωρώντας ένα από αυτά ως αρχή των αξόνων - να γίνει translate των απόλυτων συντεταγμένων ώστε να κρατηθεί μόνο πληροφορία σχετικά με την χωρική τοπολογία του δικτύου.
 
-Συγκεκριμένα, χρησιμοποιείται το GPS για commercial χρήση ΒΝ-220 \cite{bn-220-gps}, το οποίο υπόσχεται εμβέλειας ακρίβειας της τάξης των δύο μέτρων. Πρακτικά, παρόλο που για ένα \Abbr{MoCap} σύστημα αυτή η τιμή είναι απαγορευτική, χρησιμοποιείται στα πρώτα versions, καθαρά αναφορικά με την εξικοίωση του τρόπου επικοινωνίας \Abbr{ROS} - \Abbr{GPS}. Σε επόμενα revisions σκοπός είναι η αντικατάσταση του με \Abbr{RTK}-\Abbr{GPS} που συχνά μπορεί να φέρουν drone για αυτήν την χρήση\footnote{Τα drone του εργαστηρίου SenseLab, } ώστε να φτάσει η συνολική ακρίβεια εκτίμησης της απόλυτης θέσης στα μερικά εκατοστά. 
+Συγκεκριμένα, χρησιμοποιείται το \Abbr{GPS} για commercial χρήση ΒΝ-220 \cite{bn-220-gps} - \Fig{bn-220-gps} - το οποίο υπόσχεται εμβέλειας ακρίβειας της τάξης των δύο μέτρων. Πρακτικά, παρόλο που για ένα \Abbr{MoCap} σύστημα αυτή η τιμή είναι απαγορευτική, χρησιμοποιείται στα πρώτα versions, καθαρά αναφορικά με την εξικοίωση του τρόπου επικοινωνίας \Abbr{ROS} - \Abbr{GPS}. Σε επόμενα revisions σκοπός είναι η αντικατάσταση του με \Abbr{RTK}-\Abbr{GPS} που συχνά μπορεί να φέρουν drone για αυτήν την χρήση ώστε να φτάσει η συνολική ακρίβεια εκτίμησης της απόλυτης θέσης στα μερικά εκατοστά. 
 
-Το συγκεκριμένο GPS συνδέεται με το Raspberry Pi μέσω Universal Asynchronous Receiver-Transmitter (\Abbr{UART}) \TODO{add cite} σύνδεσης και χρησιμοποιεί NMEA \TODO{add cite} πακέτα για την επικοινωνία. 
+Το συγκεκριμένο \Abbr{GPS} συνδέεται με το Raspberry Pi μέσω Universal Asynchronous Receiver-Transmitter (\Abbr{UART}) \cite{uart-protocol} σύνδεσης και χρησιμοποιεί NMEA-0183 \cite{NMEA-0183-packets} πακέτα για την επικοινωνία. 
 
 \FigCaptLabelBasedURL{Images/Design-Implementation/bn220.png}%
 {GPS module used to estimate position}%
 {bn-220-gps}%
-<0.4>
+<0.35>
 
 % -----------------
 \subsection{IMU}
-\cite{adafruit-10dof-imu}
+Ήδη από το \Sect{Chapter1-1-2} έχει γίνει αναφορά για την σημαντικότητα των \Abbr{IMU}, καθώς αποτελούν τα κύρια αισθητήρια όργανα καθορισμού σε πολλαπλούς άξονες της σχετικής θέσης/κίνησης του drone. Επιλέχθηκε να χρησιμοποιηθεί το \Abbr{IMU} \cite{adafruit-10dof-imu} της Adafruit - \Fig{adafruit-10DoF-imu} - το οποίο παρέχει 10-\Abbr{DoF} με onboard αισθητήρες ένα τριών αξόνων accelerometer, τριών αξόνων gyroscope, τριών αξόνων magnetometer (compass), ένα barometric pressure/altitude αισθητήρα και δυνατότητα υπολογισμού της θερμοκρασίας.
+
+Θετικό του συγκεκριμένου module είναι ότι όλοι οι παραπάνω αισθητήρες είναι συνδεδεμένοι σε ένα κοινό bus Inter-Integrated Circuit (\Abbr{I2C}) \cite{I2C-protocol}, μέσω του οποίου μπορεί πολύ εύκολα να γίνει  η διασύνδεση με την επεξεργαστική μονάδα που επιθυμούμε και να πραγματοποιηθεί επικοινωνία.  
 \FigCaptLabelBasedURL{Images/Design-Implementation/10DoF-Adafruit-IMU.jpeg}%
 {Adafruit 10 DoF IMU}%
 {adafruit-10DoF-imu}%
-<0.4>
+<0.35>
 
 % -----------------
 \subsection{Breakout Board}
-Για να λειτουργήσουν τα παραπάνω υποσυστήματα, χρειαζόταν να πραγματοποιηθούν οι κατάλληλες συνδέσεις μεταξύ τους. Η απλούστερη εκδοχή θα ήταν να γίνει αυτό με χρήση breadboard, πράγμα όμως που θα πρόσθετε όγκο και βάρος στο τελικό σύστημα, τα οποία σε περίπτωση δοκιμών πάνω σε πραγματικά drone θα ήταν απαγορευτικοί παράγοντες όμως. Συνεπώς, προκειμένου να μπορεί με ευκολία να γίνει η ανάπτυξη του συστήματος, σχεδιάστηκε (στο cad εργαλείο KiCad \cite{KiCad}) και κατασκευάστηκε ένα custom breakout, το οποίο παρέχει εύκολη πρόσβαση στα GPIO του Raspberry, έξτρα pins για τροφοδοσία στα 5 και 3.3 Volt, pins για τοποθέτηση αισθητήρων - όπως του \Abbr{IMU} - καθώς και mounting holes στα οποία μπορεί να τοποθετηθεί 40x40mm fan για την ψύξη του συστήματος. 
+Για να λειτουργήσουν τα παραπάνω υποσυστήματα, χρειαζόταν να πραγματοποιηθούν οι κατάλληλες φυσικές διασυνδέσεις. Η απλούστερη εκδοχή θα ήταν να γίνει αυτό με χρήση breadboard, πράγμα όμως που θα πρόσθετε όγκο και βάρος στο τελικό σύστημα, οι οποίοι σε περίπτωση δοκιμών πάνω σε πραγματικά drone να είναι απαγορευτικοί παράγοντες. Συνεπώς, προκειμένου να μπορεί με ευκολία να γίνει η ανάπτυξη του συστήματος, σχεδιάστηκε (στο cad εργαλείο KiCad \cite{KiCad}) και κατασκευάστηκε ένα custom breakout board\footnote{Είναι διαθέσιμο ως open hardware project στο \cite{raspberry-pi-fan-breadkout}} όπως φαίνεται στο \Fig{raspberry-pi-breakout}. Αυτό παρέχει εύκολη πρόσβαση στα GPIO του Raspberry, έξτρα pins για τροφοδοσία στα 5 και 3.3 Volt, pins για τοποθέτηση αισθητήρων - όπως του \Abbr{IMU} - καθώς και mounting holes στα οποία μπορεί να τοποθετηθεί 40x40mm fan για την ψύξη του συστήματος. 
 
 % Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/Rpi-breakout.png}%
 {Raspberry Pi breakout}%
 {raspberry-pi-breakout}%
-<0.55>
-
-\cite{raspberry-pi-fan-breadkout}
+<0.50>
 
 
 % -----------------
 \subsection{System Overview}
+Η ολοκληρωμένη μορφή του πρωτότυπου συστήματος παρουσιάζεται στο \Fig{thesis-system}, ενώ στο \Tabl{thesis-system-bom} μπορούν να βρεθούν συνολικά τα εξαρτήματα που χρησιμοποιήθηκαν μαζί με την κοστολόγηση τους. 
+
+Το σύστημα ζυγίζει $\sim$ 250gr, μία αρχική εκτίμηση κατανάλωσης είναι τα 15 watt και οι εξωτερικές διαστάσεις του είναι \TODO{διαστάσεις}.
 
 % Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/thesis-system.jpg}
@@ -179,7 +171,7 @@ ROS Packages(\TODO{update them}):
     \caption[]{Bill of Materials}
     \label{tab:thesis-system-bom}
     \centering
-    \resizebox{0.6\textwidth}{!}{
+    \resizebox{0.55\textwidth}{!}{
         \begin{tabular}{ll}
             \hline
             \textbf{Component} & \textbf{Cost}  \\
@@ -197,9 +189,31 @@ ROS Packages(\TODO{update them}):
 
 % ------------------------------------------------------------------------------------------------------
 \section{Environment}
-\subsection{Operation System} 
-\subsection{Sensors' Communication} 
+Αφού αναφέρθηκαν όλα τα υποσυστήματα που χρησιμοποιούνται, σε αυτό το section θα δοθεί ο τρόπος με τον οποίο διαμορφώθηκαν/προγραμματίστηκαν ώστε να λειτουργούν μεταξύ τους.
 
+\subsection{Operation System} 
+Στο \cite{ubuntu-raspi-intall} βρίσκονται αναλυτικές οδηγίες εγκατάστασης του Ubuntu στο Raspberry Pi, ανάλογα με το λειτουργικό που ήδη χρησιμοποιούμε. Στην συγκεκριμένη περίπτωση - επειδή η εγκατάσταση έγινε από διανομή Linux - αφού έγινε λήψη του image του Ubuntu, βρέθηκε το path της SD card στον υπολογιστή, στην οποία έγινε umount, και στην συνέχεια χρησιμοποιήθηκε η εντολή dd για την δημιουργία του bootable μέσου, με τον εξής τρόπο.
+
+\begin{lstlisting}[language=sh, escapechar=@, caption={Create bootable SD from Linux},label=create-bootable-sd-terminal]
+    @\color{dkgreen}{\$}@ sudo dd bs=4M @if@=PATH_TO_YOUR_IMAGE_FILE of=PATH_TO_YOUR_SD_CARD status=progress
+\end{lstlisting}
+
+Μόλις ολοκληρωθεί η παραπάνω διαδικασία, το λειτουργικό σύστημα είναι έτοιμο προς χρήση. Αφού έγινε update του συστήματος, έγιναν οι εξής παραμετροποιήσεις. Αρχικά απενεργοποιήθηκε το Graphical User Interface κατά την διάρκεια του boot, επίσης απενεργοποιήθηκε το auto-suspend μετά από χρονικό διάστημα μη χρήσης, και τέλος εγκαταστάθηκαν οι εφαρμογές/πακέτα/βιβλιοθήκες - όπως το \Abbr{ROS} - που είναι απαραίτητα για την υλοποίηση του συστήματος. 
+
+Σε αυτό το σημείο να αναφερθεί ότι χρησιμοποιήθηκε η έκδοση noetic του \Abbr{ROS}, στην οποία εγκαταστάθηκαν τα παρακάτω πακέτα:
+
+ROS Packages(\TODO{update them}):
+\begin{itemize}
+  \addtolength{\itemindent}{0.3cm}
+  \item tf2\_ros
+  \item robot\_localization
+  \item usb\_cam
+  \item nmea\_navsat\_driver
+\end{itemize}
+
+
+% -------------------------
+\subsection{Sensors' Communication} 
 
 \begin{lstlisting}[language=sh, escapechar=@, caption={Descriptive Caption Text},label=DescriptiveLabel]
     @\color{dkgreen}{\$}@ sudo apt-get update
