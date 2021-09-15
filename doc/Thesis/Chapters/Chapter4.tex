@@ -11,7 +11,6 @@
 του drone. Τέλος, ο συνδυασμός των δύο παραπάνω μερών και η χρήση κατάλληλης localization τεχνικής για να βρεθεί η θέση του αντικειμένου
 στο \Abbr{3D} χώρο.
 
-
 %----------------------------------------------------------------------
 \section{Equipment and Tools Used} \label{sec:design-tools}
 Αρχικά θα αναφερθούν συνοπτικά η αρχιτεκτονική στην οποία έγινε επιλογή να επιλυθεί το πρόβλημα,
@@ -19,7 +18,6 @@
 
 \subsection{Embedded Linux System}
 Δύο πολύ δημοφιλείς επιλογές στον χώρο των ενσωματωμένων συστημάτων - ως κεντρικές μονάδες επεξεργασίας - είναι οι πλακέτες Raspberry Pi που κατασκευάζονται από την Raspberry Pi Foundation σε συνεργασία με την Broadcom, καθώς και οι πλακέτες Jetson της Nvidia. Στο \Fig{embedded-linux-systems} ως παράδειγμα παρουσιάζονται ενδεικτικά μία εκδοχή από την κάθε οικογένεια, ενώ στα \Tabl{raspberry-pi-specs} και \Tabl{jetson-nano-specs} τα τεχνικά χαρακτηριστικά της εκάστοτε πλακέτας ως αρχικό σημείο αναφοράς. 
-
 
 \begin{figure} [H]
 	\centering
@@ -108,12 +106,13 @@
 
 % -----------------
 \subsection{OpenCV}
-Για το οπτικό σκέλος χρησιμοποιήθηκε η ανοιχτού κώδικα βιβλιοθήκη OpenCV \cite{opencv}, η οποία αποτελεί την δημοφιλέστερη επιλογή για real-time Computer Vision related εφαρμογές. Ξεκίνησε η ανάπτυξη της στα εργαστήρια της Intel και έχει ήδη διάρκεια ζωής λίγο περισσότερο από δύο δεκαετίες. Για τις ανάγκες στης συγκεκριμένης εργασίας χρησιμοποιήθηκε η έκδοση της \TODO{add opencv version}. Ενώ ένα αρκετά βοηθητικό Massive Open Online Course (\Abbr{MOOC}) το οποίο βοήθησε να κατανοηθεί περισσότερο το σκέλος του \Abbr{CV} είναι το \cite{introduction-to-computer-vision}.
+Για το οπτικό σκέλος χρησιμοποιήθηκε η ανοιχτού κώδικα βιβλιοθήκη OpenCV \cite{opencv}, η οποία αποτελεί την δημοφιλέστερη επιλογή για real-time Computer Vision related εφαρμογές. Ξεκίνησε η ανάπτυξη της στα εργαστήρια της Intel και έχει ήδη διάρκεια ζωής λίγο περισσότερο από δύο δεκαετίες. Για τις ανάγκες στης συγκεκριμένης εργασίας χρησιμοποιήθηκε η έκδοση της 4.2.0. 
 
 % -----------------
 \subsection{Camera}
 Σχετικά με την κάμερα, ήταν ανάγκη - όντας πρώτη γενιά του συστήματος -  να επιλεχθεί μία low-cost 1080p camera η οποία θα παρέχει δυνατότητα επιλογής χαμηλότερου resolution για λόγους δοκιμών. Στο πρωτότυπο σύστημα τελικά γίνεται χρήση μία 1080p web cameras της Creative \cite{creative-camera} - \Fig{creative-camera} - με δυνατότητες λήξης βίντεο στα 30fps, η οποία συνδέεται μέσω USB στο Raspberry Pi.
 
+% Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/creative-web-cam.jpeg}%
 {Camera used for ball detection and tracking}%
 {creative-camera}%
@@ -122,7 +121,7 @@
 
 
 % -----------------
-\subsection{GPS}
+\subsection{GPS} \label{sec:GPS}
 Παρόλο που - όπως αναφέρθηκε στο \Chap{thesis-approach} - στο συγκεκριμένο σύστημα μας ενδιαφέρει το relative positioning και όχι το absolute, σκεπτόμενοι ότι στην πραγματικότητα το σύστημα σχεδιάζεται με γνώμονα το να λειτουργεί σε outdoor scenarios\udot ένας άμεσος τρόπος προσδιορισμού της θέσης του κάθε drone είναι με χρήση κάποιου εμπορικού αισθητήρα \Abbr{GPS}. Στην συνέχεια και αφού έχει αποκτηθεί πληροφορία απόλυτης θέσης για το κάθε drone μπορεί - θεωρώντας ένα από αυτά ως αρχή των αξόνων - να γίνει translate των απόλυτων συντεταγμένων ώστε να κρατηθεί μόνο πληροφορία σχετικά με την χωρική τοπολογία του δικτύου.
 
 Συγκεκριμένα, χρησιμοποιείται το \Abbr{GPS} για commercial χρήση ΒΝ-220 \cite{bn-220-gps} - \Fig{bn-220-gps} - το οποίο υπόσχεται εμβέλειας ακρίβειας της τάξης των δύο μέτρων. Πρακτικά, παρόλο που για ένα \Abbr{MoCap} σύστημα αυτή η τιμή είναι απαγορευτική, χρησιμοποιείται στα πρώτα versions, καθαρά αναφορικά με την εξικοίωση του τρόπου επικοινωνίας \Abbr{ROS} - \Abbr{GPS}. Σε επόμενα revisions σκοπός είναι η αντικατάσταση του με \Abbr{RTK}-\Abbr{GPS} που συχνά μπορεί να φέρουν drone για αυτήν την χρήση ώστε να φτάσει η συνολική ακρίβεια εκτίμησης της απόλυτης θέσης στα μερικά εκατοστά. 
@@ -132,17 +131,21 @@
 \FigCaptLabelBasedURL{Images/Design-Implementation/bn220.png}%
 {GPS module used to estimate position}%
 {bn-220-gps}%
-<0.35>
+<0.35>%
+(https://www.google.com/imgres?imgurl=https\%3A\%2F\%2Fimages.jdmagicbox.com\%2Fquickquotes\%2Fimages_main\%2Fb07wwx5jvp-electroprime-bn-220-3-0v-5-0v-ttl-level-gnss-module-gps-glonass-dual-gps-module-antenna-v4b2-181504802-qn443.jpg&imgrefurl=https\%3A\%2F\%2Fwww.justdial.com\%2FELECTROPRIME-BN-220-3-0V-5-0V-TTL-Level-Gnss-Module-GPS-Glonass-Dual-GPS-Module-Antenna-V4B2\%2Fpid-181504802&tbnid=YJcAk2WsHSEZiM&vet=10CF8QMyiOAWoXChMI2M3PyrCA8wIVAAAAAB0AAAAAEAk..i&docid=xDxMDFHprlF2iM&w=500&h=500&itg=1&q=bn-220\%20image&hl=el&client=ubuntu&ved=0CF8QMyiOAWoXChMI2M3PyrCA8wIVAAAAAB0AAAAAEAk)
 
 % -----------------
-\subsection{IMU}
-Ήδη από το \Sect{Chapter1-1-2} έχει γίνει αναφορά για την σημαντικότητα των \Abbr{IMU}, καθώς αποτελούν τα κύρια αισθητήρια όργανα καθορισμού σε πολλαπλούς άξονες της σχετικής θέσης/κίνησης του drone. Επιλέχθηκε να χρησιμοποιηθεί το \Abbr{IMU} \cite{adafruit-10dof-imu} της Adafruit - \Fig{adafruit-10DoF-imu} - το οποίο παρέχει 10-\Abbr{DoF} με onboard αισθητήρες ένα τριών αξόνων accelerometer, τριών αξόνων gyroscope, τριών αξόνων magnetometer (compass), ένα barometric pressure/altitude αισθητήρα και δυνατότητα υπολογισμού της θερμοκρασίας.
+\subsection{IMU}\label{sec:imu}
+Ήδη από το \Sect{Chapter1-1-2} έχει γίνει αναφορά για την σημαντικότητα των \Abbr{IMU}, καθώς αποτελούν τα κύρια αισθητήρια όργανα καθορισμού σε πολλαπλούς άξονες της σχετικής θέσης/κίνησης του drone. Επιλέχθηκε να χρησιμοποιηθεί το \Abbr{IMU} \cite{adafruit-10dof-imu} της Adafruit - \Fig{adafruit-10DoF-imu} - το οποίο παρέχει 10-\Abbr{DoF} με onboard αισθητήρες ένα τριών αξόνων accelerometer, τριών αξόνων gyroscope, τριών αξόνων magnetometer (compass), ένα barometric pressure/altitude αισθητήρα και δυνατότητα υ\-πο\-λο\-γι\-σμού της θερμοκρασίας.
 
-Θετικό του συγκεκριμένου module είναι ότι όλοι οι παραπάνω αισθητήρες είναι συνδεδεμένοι σε ένα κοινό bus Inter-Integrated Circuit (\Abbr{I2C}) \cite{I2C-protocol}, μέσω του οποίου μπορεί πολύ εύκολα να γίνει  η διασύνδεση με την επεξεργαστική μονάδα που επιθυμούμε και να πραγματοποιηθεί επικοινωνία.  
+Θετικό του συγκεκριμένου module είναι ότι όλοι οι παραπάνω αισθητήρες είναι συ\-νδε\-δε\-μέ\-νοι σε ένα κοινό bus Inter-Integrated Circuit (\Abbr{I2C}) \cite{I2C-protocol}, μέσω του οποίου μπορεί πολύ εύκολα να γίνει  η διασύνδεση με την επεξεργαστική μονάδα που επιθυμούμε και να πραγματοποιηθεί επικοινωνία. 
+
+% Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/10DoF-Adafruit-IMU.jpeg}%
 {Adafruit 10 DoF IMU}%
 {adafruit-10DoF-imu}%
-<0.35>
+<0.35>%
+% ()
 
 % -----------------
 \subsection{Breakout Board}
@@ -159,7 +162,7 @@
 \subsection{System Overview}
 Η ολοκληρωμένη μορφή του πρωτότυπου συστήματος παρουσιάζεται στο \Fig{thesis-system}, ενώ στο \Tabl{thesis-system-bom} μπορούν να βρεθούν συνολικά τα εξαρτήματα που χρησιμοποιήθηκαν μαζί με την κοστολόγηση τους. 
 
-Το σύστημα ζυγίζει $\sim$ 250gr, μία αρχική εκτίμηση κατανάλωσης είναι τα 15 watt και οι εξωτερικές διαστάσεις του είναι \TODO{διαστάσεις}.
+Το σύστημα ζυγίζει $\sim$ 250gr, μία αρχική εκτίμηση κατανάλωσης είναι τα 15 watt και οι εξωτερικές διαστάσεις του είναι 17x7.5x10.5cm.
 
 % Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/thesis-system.jpg}
@@ -192,7 +195,7 @@
 Αφού αναφέρθηκαν όλα τα υποσυστήματα που χρησιμοποιούνται, σε αυτό το section θα δοθεί ο τρόπος με τον οποίο διαμορφώθηκαν/προγραμματίστηκαν ώστε να λειτουργούν μεταξύ τους.
 
 \subsection{Operation System} 
-Στο \cite{ubuntu-raspi-intall} βρίσκονται αναλυτικές οδηγίες εγκατάστασης του Ubuntu στο Raspberry Pi, ανάλογα με το λειτουργικό που ήδη χρησιμοποιούμε. Στην συγκεκριμένη περίπτωση - επειδή η εγκατάσταση έγινε από διανομή Linux - αφού έγινε λήψη του image του Ubuntu, βρέθηκε το path της SD card στον υπολογιστή, στην οποία έγινε umount, και στην συνέχεια χρησιμοποιήθηκε η εντολή dd για την δημιουργία του bootable μέσου, με τον εξής τρόπο.
+Στο \cite{ubuntu-raspi-intall} βρίσκονται αναλυτικές οδηγίες εγκατάστασης του Ubuntu στο Ra\-spbe\-rry Pi, ανάλογα με το λειτουργικό που ήδη χρησιμοποιούμε. Στην συγκεκριμένη περίπτωση - επειδή η εγκατάσταση έγινε από διανομή Linux - αφού έγινε λήψη του image του Ubuntu, βρέθηκε το path της SD card στον υπολογιστή, στην οποία έγινε umount, και στην συνέχεια χρησιμοποιήθηκε η εντολή dd για την δημιουργία του bootable μέσου, με τον εξής τρόπο.
 
 \begin{lstlisting}[language=sh, escapechar=@, caption={Create bootable SD from Linux},label=create-bootable-sd-terminal]
     @\color{dkgreen}{\$}@ sudo dd bs=4M @if@=PATH_TO_YOUR_IMAGE_FILE of=PATH_TO_YOUR_SD_CARD status=progress
@@ -200,28 +203,121 @@
 
 Μόλις ολοκληρωθεί η παραπάνω διαδικασία, το λειτουργικό σύστημα είναι έτοιμο προς χρήση. Αφού έγινε update του συστήματος, έγιναν οι εξής παραμετροποιήσεις. Αρχικά απενεργοποιήθηκε το Graphical User Interface κατά την διάρκεια του boot, επίσης απενεργοποιήθηκε το auto-suspend μετά από χρονικό διάστημα μη χρήσης, και τέλος εγκαταστάθηκαν οι εφαρμογές/πακέτα/βιβλιοθήκες - όπως το \Abbr{ROS} - που είναι απαραίτητα για την υλοποίηση του συστήματος. 
 
-Σε αυτό το σημείο να αναφερθεί ότι χρησιμοποιήθηκε η έκδοση noetic του \Abbr{ROS}, στην οποία εγκαταστάθηκαν τα παρακάτω πακέτα:
+Σε αυτό το σημείο να αναφερθεί ότι χρησιμοποιήθηκε η έκδοση noetic του \Abbr{ROS}.
 
-ROS Packages(\TODO{update them}):
-\begin{itemize}
-  \addtolength{\itemindent}{0.3cm}
-  \item tf2\_ros
-  \item robot\_localization
-  \item usb\_cam
-  \item nmea\_navsat\_driver
-\end{itemize}
-
+% ROS Packages(\TODO{update them}):
+% \begin{itemize}
+%   \addtolength{\itemindent}{0.3cm}
+%   \item tf2\_ros
+%   \item robot\_localization
+%   \item usb\_cam
+%   \item nmea\_navsat\_driver
+% \end{itemize}
 
 % -------------------------
 \subsection{Sensors' Communication} 
+Αφού είχαν γίνει οι παραπάνω απαραίτητες ενέργειες - έχοντας πλέον ένα λειτουργικό περιβάλλον - ακολούθησε η διαδικασία πραγματοποίησης επιτυχημένης επικοινωνίας με το κάθε υποσύστημα.
 
-\begin{lstlisting}[language=sh, escapechar=@, caption={Descriptive Caption Text},label=DescriptiveLabel]
-    @\color{dkgreen}{\$}@ sudo apt-get update
+%---------------------------
+\subsubsection{Serial Communication}
+Πρώτα θα αναφερθεί η επικοινωνία με το \Abbr{GPS} η οποία όπως αναφέρθηκε στο \Sect{GPS} γίνεται μέσω \Abbr{UART}. Η σειριακή port του Raspberry μπορεί να γίνει access μέσω του αρχείου \textit{/dev/ttyS0}. Ενώ, για να μπορεί να προσπελαστεί από τον χρήστη χρειάστηκε να γίνουν τα βήματα \cite{serial-fix} που υπάρχουν στο \List{fix-serial-communication}.
+
+% \begin{enumerate}
+%     \item Να προστεθεί η γραμμή `enable\_uart=1' στο αρχείο \textit{/boot/config.txt}
+%     \item Να αφαιρεθεί το `console=serial0,115200' από το αρχείο \textit{/boot/firmware/cmdline.txt}
+%     \item 
+% \end{enumerate}
+
+\begin{lstlisting}[language=bash, escapechar=?, caption={Fix serial communication},label=list:fix-serial-communication]
+    # 1. Add `enable_uart=1' to /boot/config.txt file
+    sudo bash -c '?echo "enable\_uart=1"? >> /boot/config.txt'
+
+    # 2. Remove `console=serial0,115200' from /boot/firmware/cmdline.txt
+    sudo ?sed -e "s/console=serial0,115200//g"? -i /boot/firmware/cmdline.txt
+
+    # 3. Disable serial console service
+    sudo systemctl stop serial-getty@ttyS0.service
+    sudo systemctl disable serial-getty@ttyS0.service
+
+    # 4. Give privileges to user
+    sudo adduser $USER tty
+    sudo adduser $USER dialout
+    sudo chmod g+r /dev/ttyS0
 \end{lstlisting}
 
+Αφού γίνουν τα παραπάνω, συνδέοντας κατάλληλα τα RX - TX του \Abbr{GPS} στο Ra\-spbe\-rry, είναι εφικτό εκτελώντας την εντολή \textbf{cat /dev/ttyS0} να έχουμε πρόσβαση στα πακέτα NMEA που στέλνει το \Abbr{GPS}, που έχουν μορφή παρόμοια με το \List{serial-output}.
+
+\begin{lstlisting}[language=bash, escapechar=@, caption={Serial Output, NMEA packets example},label=list:serial-output]
+    ...
+    $GNGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99*2E
+    $GPGSV,1,1,01,31,,,13*78
+    $GLGSV,1,1,00*65
+    $GNGLL,,,,,180928.00,V,N*5E
+    ...
+\end{lstlisting}
+
+Ενώ προκειμένου το \Abbr{ROS} να χρησιμοποιεί το \Abbr{GPS}, χρειάστηκε να εγκατασταθεί το πακέτο \textbf{nmea\_navsat\_driver} \cite{nmea-navsat-driver} και παράδειγμα χρήσης με το \Abbr{ROS} υπάρχει στο \List{gps-ros-sample-usage}.  
+
+\begin{lstlisting}[language=bash, escapechar=@, caption={GPS - ROS sample usage},label=list:gps-ros-sample-usage]
+    rosrun nmea_navsat_driver nmea_serial_driver _port:=/dev/ttyS0 _baud:=9600 
+\end{lstlisting}
+
+Σημαντικό είναι να αναφερθεί ότι η σειριακή θύρα χρησιμοποιείται για Debug λόγους κατά το boot
+του Raspberry Pi, συνεπώς το \Abbr{GPS} πρέπει να μην είναι συνδεδεμένο αρχικά και μόνο αφού ολοκληρωθεί το boot να συνδεθεί στο σύστημα.
+
+%---------------------------
+\subsubsection{I2C communication}
+Σε αντίθεση με την σειριακή επικοινωνία, όπως αναφέρθηκε στο \Sect{imu} ο \Abbr{IMU} χρησιμοποιεί το \Abbr{I2C} πρωτόκολλο.
+Για να μπορέσουμε να χρησιμοποιήσουμε το \Abbr{I2C} στο Raspberry, χρειάστηκε να εκτελεστούν οι εντολές που υπάρχουν στο \List{fix-I2C-communication}.
+
+\begin{lstlisting}[language=bash, escapechar=@, caption={Fix I2C communication},label=list:fix-I2C-communication]
+    # 1. Install cpp needed library
+    sudo apt-get install -y libi2c-dev 
+
+    # 2. Give privileges to user
+    sudo adduser $USER i2c
+    sudo chmod g+r /dev/i2c-1
+\end{lstlisting}
+
+Στην συνέχεια μπορούν να γίνουν οι κατάλληλες συνδέσεις και εκτελώντας την εντολή \textbf{i2cdetect -y 1} να εμφανιστούν
+οι διευθύνσεις όλων των αισθητήρων που είναι συνδεδεμένες στο \Abbr{I2C} bus, παράδειγμα του output από την εντολή υπάρχει στο \List{I2C-output}.
+
+\begin{lstlisting}[language=bash, escapechar=@, caption={I2C addressed output example},label=list:I2C-output]
+    0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+    00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+    10: -- -- -- -- -- -- -- -- -- 19 -- -- -- -- 1e -- 
+    20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+    30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+    40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+    50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+    60: -- -- -- -- -- -- -- -- -- 69 -- -- -- -- -- -- 
+    70: -- -- -- -- -- -- -- 77       
+\end{lstlisting}
+
+Η επίσημη βιβλιοθήκη της Adafruit για το module 
+\TODO{about ROS package}
 
 %----------------------------------------------------------------------
 \section{Camera}
+Ένα αρκετά βοηθητικό Massive Open Online Course (\Abbr{MOOC}) το οποίο βοήθησε να κατανοηθεί περισσότερο το σκέλος του \Abbr{CV} είναι το \cite{introduction-to-computer-vision}.
+
+Ένα απλό - παρόλα αυτά αρκετά περιγραφικό και κοντά στην πραγματικότητα - μοντέλο, το οποίο χρησιμοποιείται συχνά για το στο \Abbr{CV} είναι αυτό του pinhole model, παράδειγμα στο \Fig{ideal-pinhole-model}.
+
+% Image
+\FigCaptLabelBasedURL{../Photos/pinhole-model.png}%
+{Ideal pinhole model}%
+{ideal-pinhole-model}%
+<0.65>
+
+
+\begin{gather}
+	x \simeq \begin{bmatrix} sx \\ sy \\ s \end{bmatrix} = MX = M \begin{bmatrix} X \\ Y \\ Z  \\ 1 \end{bmatrix} 
+\end{gather}
+
+\begin{gather}
+	M_{(3x4)} = I_{(3x3)} P_{(4x4)} R_{(2x2)} T_{(2x2)}
+\end{gather}
+
 Internal parameters
     Intrinsic 
     Distortion (ideal Pinhole model does not have lens)
@@ -229,6 +325,19 @@ Internal parameters
     
 Extrinsic 
 \subsubsection{Camera Calibration}
+
+% Image
+\FigCaptLabelBasedURL{../Photos/CameraCalibration/1920x1080/camera-calibration-mean-error.png}%
+{1080p camera calibration error}%
+{1080p-camera-error}%
+<0.65>
+
+% Image
+\FigCaptLabelBasedURL{../Photos/CameraCalibration/1920x1080/cameraParams.png}%
+{1080p Camera parameters}%
+{1080p-camera-parameters}%
+<0.5>
+
 \subsubsection{Ball Detection and Tracking}
 \subsubsection{Range Estimation}
 
