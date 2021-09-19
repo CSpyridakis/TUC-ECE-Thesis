@@ -942,7 +942,46 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 
 %----------------------------------------------------------------------
 \subsection{Structure from Reference} \label{sec:theo-structure-from-reference}
-\TODO{TODO}
+Τυπικά, κατά τη μεταφορά των σημείων του πραγματικού κόσμου \Abbr{3D} σε pixel μίας εικόνας \Abbr{2D} χάνουμε την διάσταση του βάθους, πράγμα που μπορεί να δημιουργήσει πλάνες/αυταπάτες - παράδειγμα αυτού στο \Fig{depth-ambiguity-optical-illusion}. Ένας τρόπος για την επανάκτηση της πληροφορίας του depth - προκειμένου να εκτιμήσουμε μέσω εικόνας την θέση των αντικειμένων - είναι με το να υπάρχουν στο scene αντικείμενα γνωστών διαστάσεων, τα οποία θα χρησιμοποιηθούν ως reference objects.
+
+\begin{figure} [H]
+	\centering
+    % -----------------
+		\begin{minipage}{.4\textwidth}
+			\centering
+			\captionsetup{width=.9\linewidth}
+			\includegraphics[width=0.8\linewidth]{Images/Theoretical-Background/Two-well-known-optical-illusions-where-the-actual-depth-order-of-the-scene-objects-is.jpg}\\
+			\decoRule
+			\CaptionBasedwithURL{Optical illusion due to depth ambiguity of scene objects}%
+			(https://www.researchgate.net/figure/Two-well-known-optical-illusions-where-the-actual-depth-order-of-the-scene-objects-is_fig4_285270806)
+			\label{fig:depth-ambiguity-optical-illusion}
+		\end{minipage}%
+		% -----------------
+		\begin{minipage}{.6\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{Images/Theoretical-Background/Lens_angle_of_view.png}\\
+			\decoRule
+			\CaptionBasedwithURL{Optical axis from object to camera sensor}%
+			(https://en.wikipedia.org/wiki/Angle\_of\_view) 
+			\label{fig:optical-axis-from-object-to-camera-sensor}
+		\end{minipage}
+	% -----------------
+    % \hfill \break
+\end{figure}
+
+Στο \Fig{optical-axis-from-object-to-camera-sensor} παρουσιάζονται οι νοητές ευθείες πορείας του φωτός στο thin lens model, από τα σημεία του τρισδιάστατου κόσμου, προς τον αισθητήρα της κάμερας. Όπου $S_1$ η απόσταση του αντικειμένου από την κάμερα σε $m$, $S_2$ η απόσταση του image plane για το pinhole model (περισσότερες πληροφορίες στο \Sect{design-implementation-camera}) σε $mm$, $F$ το focal length σε $mm$, $d$ το μέγεθος του αντικειμένου στην εικόνα σε $mm$ και $H$ το μέγεθος του αντικειμένου στον πραγματικό κόσμο σε $m$. Επίσης, θεωρούμε ότι το αντικείμενο είναι σε focus, συνεπώς $F=S_2$. Τότε, με χρήση τριγωνομετρίας και όμοιων τριγώνων τόσο από την μεριά του αισθητήρα, όσο και του αντικειμένου, καταλήγουμε στην σχέση \EqNum{distance-from-object-dim-triangles} \cite{calculate-distance-or-size-of-an-objectin-a-photo-image} \cite{calculate-distance-opencv} \cite{calculate-distance-stackexchange}.
+
+\begin{align}
+	\frac{d}{F} &= \frac{H}{S_1} \label{eq:distance-from-object-dim-triangles}
+\end{align}
+
+Από την οποία καταλήγουμε στο \Equa{distance-from-object}. Όπου στο μέγεθος του αντικειμένου μπορούμε να χρησιμοποιήσουμε οποιαδήποτε διάσταση επιθυμούμε, όπως το ύψος, το πλάτος ή ακόμα και κάποια διαγώνιο του.
+
+\begin{align}
+	\textrm{Distance to object $S_1$ (m)} &= \textrm{Focal length $F$ (mm)}\frac{\textrm{Object's real size $H$ (m)}}{\textrm{Object's size on sensor $d$ (mm)}} \label{eq:distance-from-object}
+\end{align}
+
+Σε γενικές γραμμές η αναδόμηση της τρίτης διάστασης από single view ακόμα και με ύπαρξη γνωστών αντικειμένων στο scene, μπορεί να καταλήξει να είναι μία εξαιρετικά ασαφής διαδικασία. Για αυτό τον λόγο προσπαθούμε είτε μέσω monocular vision να πάρουμε πολλαπλά views ενός κινούμενου αντικειμένου και να χρησιμοποιήσουμε τεχνικές με όνομα Structure from Motion (βλ. \Sect{theo-structure-from-motion}), είτε από πολλαπλές κάμερες - stereo vision (βλ. \Sect{theo-stereo}) - να λάβουμε πολλαπλά view στατικού αντικειμένου για την εκτίμηση τελικά του depth. 
 
 %----------------------------------------------------------------------
 \subsection{Structure from Motion} \label{sec:theo-structure-from-motion}
