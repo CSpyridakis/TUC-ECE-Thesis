@@ -587,7 +587,6 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 προκύπτει και μεγαλύτερο σφάλμα απόκλισης \cite{wsn-Localization-systems}.   
 
 
-
 %----------------------------------------------------------------------
 \subsubsection{Triangulation}
 Σε αντίθεση με τις παραπάνω μεθόδους, η τεχνική Triangulation εκτιμάει την θέση του node που μας ενδιαφέρει, χρησιμοποιώντας   
@@ -981,15 +980,48 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 	\textrm{Distance to object $S_1$ (m)} &= \textrm{Focal length $F$ (mm)}\frac{\textrm{Object's real size $H$ (m)}}{\textrm{Object's size on sensor $d$ (mm)}} \label{eq:distance-from-object}
 \end{align}
 
-Σε γενικές γραμμές η αναδόμηση της τρίτης διάστασης από single view ακόμα και με ύπαρξη γνωστών αντικειμένων στο scene, μπορεί να καταλήξει να είναι μία εξαιρετικά ασαφής διαδικασία. Για αυτό τον λόγο προσπαθούμε είτε μέσω monocular vision να πάρουμε πολλαπλά views ενός κινούμενου αντικειμένου και να χρησιμοποιήσουμε τεχνικές με όνομα Structure from Motion (βλ. \Sect{theo-structure-from-motion}), είτε από πολλαπλές κάμερες - stereo vision (βλ. \Sect{theo-stereo}) - να λάβουμε πολλαπλά view στατικού αντικειμένου για την εκτίμηση τελικά του depth. 
+Σε γενικές γραμμές η αναδόμηση της τρίτης διάστασης από single view ακόμα και με ύπαρξη γνωστών αντικειμένων στο scene, μπορεί να καταλήξει να είναι μία εξαιρετικά ασαφής διαδικασία. Για αυτό τον λόγο προσπαθούμε είτε μέσω monocular vision να πάρουμε πολλαπλά views ενός κινούμενου αντικειμένου και να χρησιμοποιήσουμε τεχνικές με όνομα Structure from Motion (βλ. \Sect{theo-structure-from-motion}), είτε από πολλαπλές κάμερες - stereo vision (βλ. \Sect{theo-stereo}) - να λάβουμε πολλαπλά views στατικού αντικειμένου για την εκτίμηση τελικά του depth. 
 
 %----------------------------------------------------------------------
 \subsection{Structure from Motion} \label{sec:theo-structure-from-motion}
 \TODO{TODO}
 
+
+
 %----------------------------------------------------------------------
-\subsection{Stereo} \label{sec:theo-stereo}
-\TODO{TODO}
+\subsection{Stereo Vision} \label{sec:theo-stereo}
+Για τον υπολογισμό του depth με χρήση stereo vision, λαμβάνουμε από δύο κάμερες views ενός scene. Σε γενίκευση τα image planes μπορεί να έχουν οποιαδήποτε προσανατολισμό, ειδική περίπτωση - και συχνά πιο χρησιμοποιούμενη - είναι αυτή που υπάρχει στο \Fig{stereo-vision} (a) στην οποία είναι παράλληλα. Προκειμένου να εκτιμηθεί το depth με χρήση stereo γίνονται υπολογισμοί βασισμένοι στο Epipolar Geometry \cite{wiki-epipolar-geometry}.
+
+\begin{figure} [H]
+	\centering
+    % -----------------
+		\begin{minipage}{.5\textwidth}
+			\centering
+			% \captionsetup{width=.9\linewidth}
+			\includegraphics[width=\linewidth]{Images/Theoretical-Background/Stereo-vision-principle.png}\\
+			{(a) Stereo Vision Principle \URI{https://www.researchgate.net/figure/Stereo-vision-principle-two-cameras-which-view-the-same-scene-detect-a-common-3D-point_fig1_221908788}}
+		\end{minipage}%
+		% -----------------
+		\begin{minipage}{.5\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{../Photos/stereo-math.png}\\
+			{(b) Stereo Vision Geometry}
+		\end{minipage}
+	% -----------------
+    \hfill \break \\
+	\decoRule
+	\caption[Stereo Vision]{Stereo Vision}
+	\label{fig:stereo-vision}
+\end{figure}
+
+Το \Fig{stereo-vision} (b) παρουσιάζει την γεωμετρία στην περίπτωση των parallel optical axis. Μέσω σχέσεων των όμοιων τριγώνων $(p_l, P, p_r)$ και $(COP_L, P, COP_R)$ μπορούμε να δημιουργήσουμε την σχέση \EqNum{stereo-basic-eq}, από την οποία τελικά καταλήγουμε στο \Equa{stereo-depth-est} για τον υπολογισμό του depth ενός Point \cite{introduction-to-computer-vision}. 
+
+\begin{gather}
+	\frac{B-x_l+x_r}{Z-F} = \frac{B}{Z} \Rightarrow \label{eq:stereo-basic-eq} \\
+	Z = F \frac{B}{x_l - x_r} \label{eq:stereo-depth-est}
+\end{gather}
+
+Η ποσότητα $x_l - x_r$ ονομάζεται Disparity, και ουσιαστικά μετρώντας την διαφορά της θέσης που εμφανίζεται στο κάθε plane το point, υπολογίζουμε την απόσταση του σημείου από το baseline των καμερών \cite{introduction-to-computer-vision}.
 
 % This should be the last section
 \section{Thesis Approach} \label{chap:thesis-approach}

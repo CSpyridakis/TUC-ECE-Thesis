@@ -146,7 +146,7 @@
 {Adafruit 10 DoF IMU}%
 {adafruit-10DoF-imu}%
 <0.35>%
-% ()
+(https://www.banggood.com/10DOF-LSM303-L3G4200D-BMP180-Pressure-Sensor-Barometer-Accelerometer-Magnetometer-Gyroscope-Compass-Gyro-Module-p-1660604.html?utm_source=googleshopping&utm_medium=cpc_organic&gmcCountry=GR&utm_content=minha&utm_campaign=minha-gr-en-pc&currency=EUR&cur_warehouse=CN&createTmp=1&utm_source=googleshopping&utm_medium=cpc_bgs&utm_content=sxxx&utm_campaign=sxxx-pla-gr-en-all-purchase-rm-pc-0720&ad_id=534554931006&gclid=Cj0KCQjwv5uKBhD6ARIsAGv9a-zYv4IDUcaDBSG_7ggf1nlFXmcM6l9fHjUUGiwKJGhUsgZsQ_BVn4YaAkG4EALw_wcB)
 
 % -----------------
 \subsection{Breakout Board}
@@ -296,103 +296,119 @@
 \end{lstlisting}
 
 Η επίσημη βιβλιοθήκη της Adafruit για το module 
-\TODO{about ROS package}
+\TODO{TODO: about ROS package}
 
 %----------------------------------------------------------------------
 
-Notes
 \section{Camera} \label{sec:design-implementation-camera}
-image as a function from  
-2d projection of 3d points
-losing 3rd dimension
 
-lens are not perfect
-- geometric lens distortion
-- ακόμα και chromatic aberration
-- vignetting
+Πριν αναφερθεί ο τρόπος με τον οποίο χρησιμοποιήθηκε η κάμερα, χρειάζεται πρώτα να μοντελοποιηθεί η πληροφορία που μας παρέχει μία εικόνα. Στην πραγματικότητα όταν μιλάμε για images, ουσιαστικά αναφερόμαστε σε functions που έχουν ως πεδίο ορισμού τα \Abbr{3D} points του χώρου στον οποίο τα λάβαμε, και ως πεδίο τιμών τα \Abbr{2D} projection points που κατέγραψε ο sensor της κάμερας. Για το projection υπάρχουν διάφορα μοντέλα, όπως το Perspective, Weak και Orthographic. Στα πλαίσια της συγκεκριμένης διπλωματικής βασιζόμαστε στο Perspective projection model.
 
-\begin{gather}
-	\phi = \taninv{\left( \frac{d/2}{f} \right)}
-\end{gather}
-
-
-Perspective Projection equation:
-\begin{gather}
-	(X, Y, Z) \rightarrow (-d \frac{X}{Z}, -d \frac{Y}{Z}, -d)
-\end{gather}
-
-"we get the projection by throwing out the last coordinate"
-\begin{gather}
-	(x', y') \rightarrow (-d \frac{X}{Z}, -d \frac{Y}{Z})
-\end{gather}
-
-"Obvious application of this dividing by z, is that distant objects are smaller in the image"
-
-"Zero is the center of the image"
-
-Homogeneous Coordinates or homogeneus component of the vector
-
-$\frac{X}{Z}$ and $\frac{Y}{Z}$ is not a linear transformation because Z is not constant so, we add one more coordinate $(x/w,y/w) \Leftrightarrow \begin{bmatrix} x \\ y \\ w \end{bmatrix} $ for (2d) coordinates, Homogeneous image
-and $(x/w,y/w,z/w) \Leftrightarrow \begin{bmatrix} x \\ y \\ z \\w \end{bmatrix} $ for (3d) coordinates, Homogeneous scene.
-
-this makes homogeneout coordinates invariant under scale
-
-so now perspective projection is like that
-
-use homogeneous coordinates to do matrix operations without the fear on non linearity until the very end
-\begin{gather}
-	\begin{bmatrix} 
-        1 & 0 & 0 & 0 \\ 
-        0 & 1 & 0 & 0 \\ 
-        0 & 0 & 1/f & 0 \\
-    \end{bmatrix} 
-    \begin{bmatrix} x \\ y \\ z \\ 1 \end{bmatrix}
-    =
-    \begin{bmatrix} x \\ y \\ z/f \end{bmatrix}
-    \Rightarrow
-    \left( f\frac{x}{z}, f\frac{y}{z} \right)
-    \Rightarrow
-    (u,v)
-\end{gather}
-
-projection matrix is $\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1/f & 0 \\\end{bmatrix}$
-
-u, v points in the image of some point x,y,z in the world
-
-points go to points
-lines go to lines
-polygons go to polygons
-
-\begin{table}[H]
-    \caption[Three camera projections]{Three camera projections}
-	\label{tab:three-camera-projections}
-	\centering
-	\resizebox{.8\textwidth}{!}{
-		\begin{tabular}{lllll}
-			\toprule
-			 & & \Centerstack{3D point} & & 2D image\\
-			\midrule
-            $\imath$. & Perspective: & $(x,y,z)$ & $\rightarrow$ & $\left(\frac{fx}{z}, \frac{fy}{z}\right)$ \\ 
-            $\imath\imath$. & Weak perspective & $(x,y,z)$ & $\rightarrow$ & $\left(\frac{fx}{z_0}, \frac{fy}{z_0}\right)$ \\ 
-            $\imath\imath\imath$. & Orthographic & $(x,y,z)$ & $\rightarrow$ & $(x,y)$ \\ 
-			\bottomrule
-		\end{tabular}
-	}
-\end{table}
-projection models: orthographic (telephoto lens), weak perspective (each object has it's own scale factor), perspective projection
-%----------------------------------------------------------------------
-
-
-% ------------------
-Ένα αρκετά βοηθητικό Massive Open Online Course (\Abbr{MOOC}) το οποίο βοήθησε να κατανοηθεί περισσότερο το σκέλος του \Abbr{CV} είναι το \cite{introduction-to-computer-vision}.
-
-Ένα απλό - παρόλα αυτά αρκετά περιγραφικό και κοντά στην πραγματικότητα - μοντέλο, το οποίο χρησιμοποιείται συχνά για το στο \Abbr{CV} είναι αυτό του pinhole model, παράδειγμα στο \Fig{ideal-pinhole-model}.
+% \begin{table}[H]
+%     \caption[Three camera projections]{Three camera projections}
+% 	\label{tab:three-camera-projections}
+% 	\centering
+% 	\resizebox{.8\textwidth}{!}{
+% 		\begin{tabular}{lllll}
+% 			\toprule
+% 			 & & \Centerstack{3D point} & & 2D image\\
+% 			\midrule
+%             $\imath$. & Perspective: & $(x,y,z)$ & $\rightarrow$ & $\left(\frac{fx}{z}, \frac{fy}{z}\right)$ \\ 
+%             $\imath\imath$. & Weak perspective & $(x,y,z)$ & $\rightarrow$ & $\left(\frac{fx}{z_0}, \frac{fy}{z_0}\right)$ \\ 
+%             $\imath\imath\imath$. & Orthographic & $(x,y,z)$ & $\rightarrow$ & $(x,y)$ \\ 
+% 			\bottomrule
+% 		\end{tabular}
+% 	}
+% \end{table}
 
 % Image
 \FigCaptLabelBasedURL{../Photos/pinhole-model.png}%
 {Ideal pinhole model}%
 {ideal-pinhole-model}%
-<0.65>
+<0.8>
+
+Επίσης, ένα απλό (για την κάμερα) - παρόλα αυτά αρκετά περιγραφικό και κοντά στην πραγματικότητα - μοντέλο, το οποίο χρησιμοποιείται συχνά για \Abbr{CV} applications είναι αυτό του Pinhole Model, παράδειγμα στο \Fig{ideal-pinhole-model}, με το COP να είναι το Center of Projection και να χρησιμοποιούμε το Virtual Image Plane για τους υπολογισμούς - μαθηματικά ισοδύναμο με το πραγματικό Image Plane - με τη διαφορά του μη ανεστραμμένου ειδώλου.
+
+Μπορούμε να μεταφερθούμε - από ένα κοινό σε όλους - World Coordinate System (${}^{w}\overrightarrow{p}$) στο Coordinate System της κάμερας (${}^{c}\overrightarrow{p}$) μέσω μίας Rotation (${}^{c}_{w}R$) και μίας Translation (${}^{c}_{w}\overrightarrow{t}$) διαδικασίας - \Equa{world-to-camera-frame}. Συχνά τα περιεχόμενα των Rotation κι Translation ονομάζονται από κοινού Extrinsic Parameters.
+
+Ενώ για τη πραγματική μεταφορά από το Camera Coordinate System σε αυτό της εικόνας θα πρέπει να λάβουμε υπόψιν τις φυσικές παραμέτρους της κάμερας όπως το Focal Length, Skew, etc., οι οποίες συνολικά ονομάζονται Intrinsic Parameters. Η σχέση \EqNum{camera-to-image-plane} παρουσιάζει αυτόν τον μετασχηματισμό, με $(u,v)$ τα pixel στην κάμερα, $(x,y,z)$ οι συντεταγμένες του αντικειμένου με βάση το Camera Coordinate System και $(\alpha, \beta, \theta, u_0, v_0)$ τα Intrinsic Parameters.
+
+
+\begin{gather}
+	{}^{c}\overrightarrow{p} \quad = \quad {}^{c}_{w}R \quad {}^{w}\overrightarrow{p} \quad + \quad {}^{c}_{w}\overrightarrow{t} \label{eq:world-to-camera-frame}\\
+    \begin{matrix}
+        u = \alpha \frac{x}{z} - \alpha cot(\theta)\frac{y}{z} + u_0
+    \end{matrix} 
+    \quad \quad \quad
+    \begin{matrix}
+        v = \frac{\beta}{\sin{\theta}} \frac{y}{z} + v_0
+    \end{matrix} \label{eq:camera-to-image-plane}
+\end{gather}
+
+Οι παραπάνω υπολογισμοί με τη μορφή που είναι αυτή την στιγμή κάνουν πιο δύσκολο τον τρόπο υπολογισμού σε ψηφιακά συστήματα. Επιπλέον έχουν μη γραμμικά μέρη, με αποτέλεσμα να μην είναι αναστρέψιμοι, για αυτόν τον λόγο γίνεται αναφορά των homogeneous coordinates. Τα homogeneous coordinates χρησιμοποιούνται ώστε να μπορούμε να μετασχηματίσουμε εύκολα, σε μία πλέον τις παραπάνω σχέσεις, με χρήση πινάκων - \Equa{world-to-image-trans}. Όπου $x$ οι συντεταγμένες στην εικόνα, $X$ οι συντεταγμένες στον φυσικό κόσμο και $M$ ο πίνακας μετασχηματισμού, τα περιεχόμενα του οποίου αναλύονται στην σχέση \EqNum{world-to-image-matrix} 
+
+\begin{align}
+	\begin{matrix}
+        (x/w,y/w) \Leftrightarrow \begin{bmatrix} x \\ y \\ w \end{bmatrix} \\ 
+        \textrm{homogeneous image} \\ 
+        \textrm{(2D) coordinates}
+    \end{matrix} 
+    \nonumber \quad \quad
+    \begin{matrix}
+        (x/w,y/w,z/w) \Leftrightarrow \begin{bmatrix} x \\ y \\ z \\ w \end{bmatrix} \\ 
+        \textrm{homogeneous scene} \\ 
+        \textrm{(3D) coordinates }
+    \end{matrix} \nonumber
+\end{align}
+
+\begin{gather}
+	x \simeq \begin{bmatrix} sx \\ sy \\ s \end{bmatrix} = MX = M \begin{bmatrix} X \\ Y \\ Z  \\ 1 \end{bmatrix} \label{eq:world-to-image-trans}
+\end{gather}
+
+\begin{gather}
+	M_{3x4} = 
+    \begin{matrix}
+        \begin{bmatrix} 
+            f & s & x'_c \\ 
+            0 & af & y'_c \\
+            0  & 0 & 1
+        \end{bmatrix}\\
+        Intrinsics
+    \end{matrix}
+    \begin{matrix}
+        \begin{bmatrix} 
+            1 & 0 & 0 & 0 \\ 
+            0 & 1 & 0 & 0 \\ 
+            0 & 0 & 1 & 0 \\ 
+        \end{bmatrix}\\
+        Projection
+    \end{matrix}
+    \begin{matrix}
+        \begin{bmatrix} 
+            R_{3x3} & 0_{3x1} \\ 
+            0_{1x3} & 1 \\  
+        \end{bmatrix}\\
+        Rotation
+    \end{matrix}
+    \begin{matrix}
+        \begin{bmatrix} 
+            I_{3x3} & T_{3x1} \\ 
+            0_{1x3} & 1 \\  
+        \end{bmatrix}\\
+        Translation
+    \end{matrix} \label{eq:world-to-image-matrix}
+\end{gather}
+
+Ένα αρκετά βοηθητικό Massive Open Online Course (\Abbr{MOOC}) το οποίο βοήθησε ώστε να κατανοηθεί περισσότερο το σκέλος του \Abbr{CV} και στο οποίο μπορεί κάποιος να ανατρέξει για περισσότερες λεπτομέρειες σε σχέση με τους παραπάνω φορμαλισμούς είναι το \cite{introduction-to-computer-vision}. Επιπρόσθετα, στο \Sect{camera-calibration} περιγράφεται ο τρόπος υπολογισμού των στοιχείων του πίνακα μετασχηματισμού $M$.
+
+% ------------------
+\subsubsection{Camera Calibration} \label{sec:camera-calibration}
+Στο \Sect{design-implementation-camera} έγινε αναφορά του πίνακα μετασχηματισμού $M$. Επίσης, τα lens μίας κάμερας δεν είναι ιδανικά, κάνοντας τις λήψεις να φέρουν παραμορφώσεις (βλ. \Fig{distortion-types}), όμως μπορεί να περιγραφεί η συνολική παραμόρφωση ενός lens μέσω των Distortion coefficients. Η διαδικασία υπολογισμού όλων των παραμέτρων της κάμερας προκειμένου αξιόπιστα να μπορούμε να κάνουμε υπολογισμούς με βάση των λήψεων της σε μία \Abbr{CV} εφαρμογή ονομάζεται camera calibration. 
+
+Για να πραγματοποιηθεί στην συγκεκριμένη διπλωματική το calibration της κάμερας, 
+
+checkerboard
+
 
 % Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/distortion-types.png}%
@@ -401,21 +417,13 @@ projection models: orthographic (telephoto lens), weak perspective (each object 
 <0.65>%
 (https://learnopencv.com/understanding-lens-distortion/)
 
-\begin{gather}
-	x \simeq \begin{bmatrix} sx \\ sy \\ s \end{bmatrix} = MX = M \begin{bmatrix} X \\ Y \\ Z  \\ 1 \end{bmatrix} 
-\end{gather}
 
-\begin{gather}
-	M_{(3x4)} = I_{(3x3)} P_{(4x4)} R_{(2x2)} T_{(2x2)}
-\end{gather}
-
-Internal parameters
-    Intrinsic 
-    Distortion (ideal Pinhole model does not have lens)
-
-    
-Extrinsic 
-\subsubsection{Camera Calibration}
+% Image
+\FigCaptLabelBasedURL{Images/Design-Implementation/checkerboard-sample.png}%
+{Checkerboard}%
+{Checkerboard-sample}%
+<0.4>%
+(https://learnopencv.com/understanding-lens-distortion/)
 
 % Image
 \FigCaptLabelBasedURL{../Photos/CameraCalibration/1920x1080/camera-calibration-mean-error.png}%
@@ -429,12 +437,68 @@ Extrinsic
 {1080p-camera-parameters}%
 <0.5>
 
+\begin{lstlisting}[basicstyle=\small, language=bash, escapechar=@, caption={I2C addressed output example},label=list:I2C-output]
+cameraMatrix : [1221.670078632844, 0, 359.5; 0, 1221.670078632844, 639.5; 0, 0, 1]
+distCoeffs : [-0.2506578326392855, 0.1182628760317329, 0, 0, 0]
+Rotation vector : [3.190633323577214, ...]
+Translation vector : [0.02939835187912455, ...]
+   
+Error: 3.09597
+\end{lstlisting}
+
+% ------------------
+\subsubsection{Camera Usage} \label{sec:camera-usage}
+Προκειμένου να χρησιμοποιηθεί η κάμερα, συνδέθηκε στο Raspbe
+
+% ------------------
 \subsubsection{Ball Detection and Tracking}
+\begin{figure} [H]
+	\centering
+	% -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=0.5\linewidth]{Images/Design-Implementation/rgb.png}\\
+      {(a) RGB \URI{https://www.google.com/imgres?imgurl=https\%3A\%2F\%2Fqph.fs.quoracdn.net\%2Fmain-qimg-d33e22b88db273d09513f652bcb79736&imgrefurl=https\%3A\%2F\%2Fwww.quora.com\%2FWhat-are-the-differences-between-RGB-HSV-and-CIE-Lab&tbnid=XWOdefD1z2_-gM&vet=12ahUKEwjE5Iacxo_zAhW95LsIHeBlCGYQMygKegUIARCzAQ..i&docid=8mJRsf1Rk3zM_M&w=1600&h=1200&q=rgb\%20vs\%20hsv&hl=el&client=ubuntu&ved=2ahUKEwjE5Iacxo_zAhW95LsIHeBlCGYQMygKegUIARCzAQ}}
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=.6\linewidth]{Images/Design-Implementation/hsv.png}\\
+      {(b) HSV \URI{https://www.google.com/imgres?imgurl=https\%3A\%2F\%2Fqph.fs.quoracdn.net\%2Fmain-qimg-7c6685f64cf5ea346a9c33be0d256a95&imgrefurl=https\%3A\%2F\%2Fwww.quora.com\%2FWhat-are-the-differences-between-RGB-HSV-and-CIE-Lab&tbnid=BwsDxAXpjI2MqM&vet=12ahUKEwjE5Iacxo_zAhW95LsIHeBlCGYQMygBegUIARCdAQ..i&docid=8mJRsf1Rk3zM_M&w=1600&h=1200&q=rgb\%20vs\%20hsv&hl=el&client=ubuntu&ved=2ahUKEwjE5Iacxo_zAhW95LsIHeBlCGYQMygBegUIARCdAQ}}
+	\end{minipage}
+	% -----------------
+    \hfill \break
+    \decoRule
+    \CaptionBasedwithURL{Color Spaces} 
+    \label{fig:color-space}
+\end{figure}
+
+% ALGORITHM
+\begin{algorithm}[H]
+	\caption[Distance Vector-Hop]{Distance Vector-Hop}\label{alg:DV-Hop}
+	\begin{algorithmic}[1]
+		\Statex{{\bf procedure} DV-Hop}{}
+			
+        \State
+	\end{algorithmic}
+\end{algorithm}
+
+\FigCaptLabelBasedURL{../Photos/thesis-hsv.png}%
+{Detect balls based on their color}%
+{balls-detection-color}%
+<0.9>
+
+\FigCaptLabelBasedURL{../Photos/thesis-hough.png}%
+{Detect balls based on their shape}%
+{balls-detection-shape}%
+<0.8>
+
+% ------------------
+
 \subsubsection{Range Estimation}
 Για τον υπολογισμό της απόστασης της μπάλας από την κάμερα, χρησιμοποιείται ως κύρια αρχή ο φορμαλισμός που περιγράφηκε στο \Sect{theo-structure-from-reference}.
 
 %----------------------------------------------------------------------
-
 \section{Networking}
 
 %----------------------------------------------------------------------
