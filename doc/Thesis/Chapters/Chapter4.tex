@@ -107,7 +107,7 @@
 
 % -----------------
 \subsection{OpenCV}
-Για το οπτικό σκέλος χρησιμοποιήθηκε η ανοιχτού κώδικα βιβλιοθήκη OpenCV \cite{opencv}, η οποία αποτελεί την δημοφιλέστερη επιλογή για real-time Computer Vision related εφαρμογές. Ξεκίνησε η ανάπτυξη της στα εργαστήρια της Intel και έχει ήδη διάρκεια ζωής λίγο περισσότερο από δύο δεκαετίες. Για τις ανάγκες στης συγκεκριμένης εργασίας χρησιμοποιήθηκε η έκδοση της 4.2.0. Όμοια με το \Abbr{ROS} και για την εκμάθηση του \Abbr{OpenCV} ήταν το documentation του
+Για το οπτικό σκέλος χρησιμοποιήθηκε η ανοιχτού κώδικα βιβλιοθήκη OpenCV \cite{opencv}, η οποία αποτελεί την δημοφιλέστερη επιλογή για real-time Computer Vision related εφαρμογές. Ξεκίνησε η ανάπτυξη της στα εργαστήρια της Intel και έχει ήδη διάρκεια ζωής λίγο περισσότερο από δύο δεκαετίες. Για τις ανάγκες στης συγκεκριμένης εργασίας χρησιμοποιήθηκε η έκδοση της 4.2.0. Όμοια με το \Abbr{ROS} και για την εκμάθηση του \Abbr{OpenCV} ήταν το documentation του \TODO{TODO}.
 
 % -----------------
 \subsection{Camera}
@@ -163,13 +163,13 @@
 \subsection{System Overview}
 Η ολοκληρωμένη μορφή του πρωτότυπου συστήματος παρουσιάζεται στο \Fig{thesis-system}, ενώ στο \Tabl{thesis-system-bom} μπορούν να βρεθούν συνολικά τα εξαρτήματα που χρησιμοποιήθηκαν μαζί με την κοστολόγηση τους. 
 
-Το σύστημα ζυγίζει $\sim$ 250gr, μία αρχική εκτίμηση κατανάλωσης είναι τα 15 watt και οι εξωτερικές διαστάσεις του είναι 17x7.5x10.5cm.
-
 % Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/thesis-system.jpg}
 {System designed}%
 {thesis-system}%
 <0.65>
+
+Το σύστημα ζυγίζει $\sim$ 250gr, μία αρχική εκτίμηση κατανάλωσης είναι τα 15 watt και οι εξωτερικές διαστάσεις του είναι 17x7.5x10.5cm.
 
 \begin{table}[H]
     \caption[]{Bill of Materials}
@@ -222,7 +222,7 @@
 %---------------------------
 \subsubsection{Serial Communication}
 Πρώτα θα αναφερθεί η επικοινωνία με το \Abbr{GPS} η οποία όπως αναφέρθηκε στο \Sect{GPS} γίνεται μέσω \Abbr{UART}. Η σειριακή port του Raspberry μπορεί να γίνει access μέσω του αρχείου \textit{/dev/ttyS0}. Ενώ, για να μπορεί να προσπελαστεί από τον χρήστη χρειάστηκε να γίνουν τα βήματα \cite{serial-fix} που υπάρχουν στο \List{fix-serial-communication}.
-
+\newpage
 % \begin{enumerate}
 %     \item Να προστεθεί η γραμμή `enable\_uart=1' στο αρχείο \textit{/boot/config.txt}
 %     \item Να αφαιρεθεί το `console=serial0,115200' από το αρχείο \textit{/boot/firmware/cmdline.txt}
@@ -263,7 +263,7 @@
     rosrun nmea_navsat_driver nmea_serial_driver _port:=/dev/ttyS0 _baud:=9600 
 \end{lstlisting}
 
-Σημαντικό είναι να αναφερθεί ότι η σειριακή θύρα χρησιμοποιείται για Debug λόγους κατά το boot
+Σημαντικό είναι να αναφερθεί ότι η σειριακή θύρα χρησιμοποιείται για debug λόγους κατά το boot
 του Raspberry Pi, συνεπώς το \Abbr{GPS} πρέπει να μην είναι συνδεδεμένο αρχικά και μόνο αφού ολοκληρωθεί το boot να συνδεθεί στο σύστημα.
 
 %---------------------------
@@ -401,12 +401,7 @@
 
 % ------------------
 \subsubsection{Camera Calibration} \label{sec:camera-calibration}
-Στο \Sect{design-implementation-camera} έγινε αναφορά του πίνακα μετασχηματισμού $M$. Επίσης, τα lens μίας κάμερας δεν είναι ιδανικά, κάνοντας τις λήψεις να φέρουν παραμορφώσεις (βλ. \Fig{distortion-types}), όμως μπορεί να περιγραφεί η συνολική παραμόρφωση ενός lens μέσω των Distortion coefficients. Η διαδικασία υπολογισμού όλων των παραμέτρων της κάμερας προκειμένου αξιόπιστα να μπορούμε να κάνουμε υπολογισμούς με βάση των λήψεων της σε μία \Abbr{CV} εφαρμογή ονομάζεται camera calibration. 
-
-Για να πραγματοποιηθεί στην συγκεκριμένη διπλωματική το calibration της κάμερας, 
-
-checkerboard
-
+Στο \Sect{design-implementation-camera} έγινε αναφορά του πίνακα μετασχηματισμού $M$. Επίσης, τα lens μίας κάμερας δεν είναι ιδανικά, κάνοντας τις λήψεις να φέρουν παραμορφώσεις (βλ. \Fig{distortion-types}). Η συνολική παραμόρφωση ενός lens μπορεί να περιγραφεί μέσω των Distortion coefficients. Η διαδικασία υπολογισμού όλων των παραμέτρων της κάμερας - προκειμένου αξιόπιστα να μπορούμε να κάνουμε υπολογισμούς με βάση τις λήψεις της σε μία \Abbr{CV} εφαρμογή - ονομάζεται camera calibration. 
 
 % Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/distortion-types.png}%
@@ -415,34 +410,31 @@ checkerboard
 <0.65>%
 (https://learnopencv.com/understanding-lens-distortion/)
 
+Στην συγκεκριμένη διπλωματική τυπώθηκε ένα checkerboard pattern, και α\-ξιο\-ποιή\-θη\-καν εργαλεία που υλοποιούν το Zhang's method για τον υπολογισμό των πα\-ρα\-μέ\-τρων. Αρχικά, έγινε προσπάθεια με native τρόπο χρησιμοποιώντας άμεσα το framework \Abbr{OpenCV} να πραγματοποιηθεί το calibration, επειδή όμως κατέληγε σε μεγάλο mean error in pixel - περίπου 3.56 στα πειράματα - αποφασίστηκε να χρησιμοποιηθεί εναλλακτική μέθοδος. Παρόλο που και το \Abbr{ROS} παρέχει πακέτο για το calibration, επιλέχθηκε μέσω του Matlab και χρήση του Camera Calibration toolkit να πραγματοποιηθεί τελικά. Κύριος λόγος διότι σε αυτό παρέχονται επιπρόσθετες πληροφορίες - βλ. \Fig{matlab-useful-graphs} - κατά το calibration, επιτυγχάνοντας τελικά mean error in pixel περίπου 0.25. Αυτή η διαδικασία πραγματοποιήθηκε για αναλύσεις 1920x1080, 1280x720 και 640x480. 
 
-% Image
-\FigCaptLabelBasedURL{Images/Design-Implementation/checkerboard-sample.png}%
-{Checkerboard}%
-{Checkerboard-sample}%
-<0.4>%
-(https://learnopencv.com/understanding-lens-distortion/)
+Στο τέλος του calibration, είχαν υπολογιστεί και έγιναν exported τα parameters. Ενώ με τα περιεχόμενα των πεδίων FocalLength, PrincipalPoint, RadialDistortion, TangentialDistortion και Skew δημιουργήθηκαν τα yaml αρχεία που χρειάζεται το \Abbr{ROS} \cite{ros-calibration-instr1} \cite{ros-calibration-instr2}.
 
-% Image
-\FigCaptLabelBasedURL{../Photos/CameraCalibration/1920x1080/camera-calibration-mean-error.png}%
-{1080p camera calibration error}%
-{1080p-camera-error}%
-<0.65>
 
-% Image
-\FigCaptLabelBasedURL{../Photos/CameraCalibration/1920x1080/cameraParams.png}%
-{1080p Camera parameters}%
-{1080p-camera-parameters}%
-<0.5>
-
-\begin{lstlisting}[basicstyle=\small, language=bash, escapechar=@, caption={I2C addressed output example},label=list:I2C-output]
-cameraMatrix : [1221.670078632844, 0, 359.5; 0, 1221.670078632844, 639.5; 0, 0, 1]
-distCoeffs : [-0.2506578326392855, 0.1182628760317329, 0, 0, 0]
-Rotation vector : [3.190633323577214, ...]
-Translation vector : [0.02939835187912455, ...]
-   
-Error: 3.09597
-\end{lstlisting}
+\begin{figure} [H]
+	\centering
+	% -----------------
+    \begin{minipage}{.4\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../Photos/CameraCalibration/1920x1080/calib-samples.png}\\
+      {(a) Images in \Abbr{3D} space }
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.6\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../Photos/CameraCalibration/1920x1080/calib-mean-error.png}\\
+      {(b) Mean Error in pixels per image }
+	\end{minipage}
+	% ----------------- 
+    \hfill \break
+    \decoRule
+    \CaptionBasedwithURL{Matlab camera toolkit} 
+    \label{fig:matlab-useful-graphs}
+\end{figure}
 
 % ------------------
 \subsubsection{Camera Usage} \label{sec:camera-usage}
@@ -476,7 +468,17 @@ Error: 3.09597
 
 % ALGORITHM
 \begin{algorithm}[H]
-	\caption[Distance Vector-Hop]{Distance Vector-Hop}\label{alg:DV-Hop}
+	\caption[HSV (color based) ball detection]{HSV (color based) ball detection}\label{alg:hsv-detect}
+	\begin{algorithmic}[1]
+		\Statex{{\bf procedure} DV-Hop}{}
+			
+        \State
+	\end{algorithmic}
+\end{algorithm}
+
+% ALGORITHM
+\begin{algorithm}[H]
+	\caption[Hough circle (shape based) ball detection]{Hough circle (shape based) ball detection}\label{alg:hough-detect}
 	\begin{algorithmic}[1]
 		\Statex{{\bf procedure} DV-Hop}{}
 			
