@@ -14,7 +14,7 @@
 %----------------------------------------------------------------------
 \section{Equipment and Tools Used} \label{sec:design-tools}
 Αρχικά θα αναφερθούν συνοπτικά η αρχιτεκτονική στην οποία έγινε επιλογή να επιλυθεί το πρόβλημα,
-όπως επίσης και τα εξαρτήματα/αισθητήρια όργανα καθώς και τα λογισμικά τα οποία χρησιμοποιήθηκαν στην παρούσα διπλωματική. 
+όπως επίσης και τα εξαρτήματα/αισθητήρια όργανα καθώς και τα λογισμικά τα οποία χρησιμοποιήθηκαν. 
 
 \subsection{Embedded Linux System}
 Δύο πολύ δημοφιλείς επιλογές στον χώρο των ενσωματωμένων συστημάτων - ως κεντρικές μονάδες επεξεργασίας - είναι οι πλακέτες Raspberry Pi που κατασκευάζονται από την Raspberry Pi Foundation σε συνεργασία με την Broadcom, καθώς και οι πλακέτες Jetson της Nvidia. Στο \Fig{embedded-linux-systems} ως παράδειγμα παρουσιάζονται ενδεικτικά μία εκδοχή από την κάθε οικογένεια, ενώ στα \Tabl{raspberry-pi-specs} και \Tabl{jetson-nano-specs} τα τεχνικά χαρακτηριστικά της εκάστοτε πλακέτας ως αρχικό σημείο αναφοράς. 
@@ -97,17 +97,17 @@
 
 Μεγάλο πλεονέκτημα του \Abbr{ROS} είναι η ύπαρξη των packages. Τα packages είναι δια\-κρι\-τά αυτόνομα κομμάτια κώδικα τα οποία περικλείουν μία συχνά επαναλαμβανόμενη λογική, συνεπώς μπορούν να χρησιμοποιηθούν αυτούσια - με πολύ εύκολο τρόπο - σε διαφορετικές εφαρμογές χωρίς να υπάρχει η ανάγκη να κάνουμε \textit{reinvent the wheel} κάθε φορά, πετυχαίνοντας με αυτό τον τρόπο το rapid prototyping and testing ενός συστήματος καθώς και την αποφυγή δημιουργίας boilerplate κώδικα δίνοντας έμφαση περισσότερο στο main logic του εκάστοτε συστήματος. 
 
-Το \Abbr{ROS} στην πραγματικότητα είναι ένα meta-operating system, με αποτέλεσμα να χρειάζεται να τρέχει σε ένα πρωτεύον Operating System (\Abbr{OS}), συγκεκριμένα μέχρι αυτήν την στιγμή απαιτεί την χρήση Ubuntu Linux. 
+Το \Abbr{ROS} στην πραγματικότητα είναι ένα meta-operating system, με αποτέλεσμα να χρειάζεται να τρέχει σε ένα πρωτεύον Operating System (\Abbr{OS}), με την μεγαλύτερη συμβατότητά να παρέχεται από διανομές Ubuntu Linux. 
 
-Πηγές οι οποίες χρησιμοποιήθηκαν για την εκμάθηση του \Abbr{ROS} ήταν
+Σημαντικές πηγές που χρησιμοποιήθηκαν για την εκμάθηση του \Abbr{ROS} ήταν κυρίως το documentation του \cite{ros-doc}, καθώς και κάποια από τα external tutorials τα οποία προτείνονται στην παραπάνω σελίδα.
 
 % -----------------
 \subsection{Operation System}
-Από την στιγμή που επιλέχθηκε να γίνει χρήση του \Abbr{ROS} - που όπως αναφέρθηκε στο \Sect{ROS} απαιτεί την χρήση Ubuntu Linux - έγινε εγκατάσταση στο Raspberry Pi η ειδικά σχεδιασμένη για το αυτό έκδοση Ubuntu Linux 20.04.2 64bit version για ΑRM \cite{ubuntu-raspberry} αρχιτεκτονική. Ουσιαστικά όλες οι λειτουργίες της εφαρμογής θα χρησιμοποιούν το Embedded General Purpose Operating System προκειμένου να λειτουργήσουν, το οποίο σημαίνει ότι αυτό θα είναι κυρίως υπεύθυνο για το scheduling, file-system abstraction, networking, etc. 
+Από την στιγμή που επιλέχθηκε να γίνει χρήση του \Abbr{ROS} - που όπως αναφέρθηκε στο \Sect{ROS} προτείνεται ο συνδυασμός του με Ubuntu Linux - έγινε εγκατάσταση στο Raspberry Pi η ειδικά σχεδιασμένη για το αυτό\udot έκδοση Ubuntu Linux 20.04.2 64bit version για ΑRM \cite{ubuntu-raspberry} αρχιτεκτονική. Ουσιαστικά όλες οι λειτουργίες της εφαρμογής θα χρησιμοποιούν το Embedded General Purpose Operating System προκειμένου να λειτουργήσουν, το οποίο σημαίνει ότι αυτό θα είναι κυρίως υπεύθυνο για το scheduling, file-system abstraction, networking, etc. 
 
 % -----------------
 \subsection{OpenCV}
-Για το οπτικό σκέλος χρησιμοποιήθηκε η ανοιχτού κώδικα βιβλιοθήκη OpenCV \cite{opencv}, η οποία αποτελεί την δημοφιλέστερη επιλογή για real-time Computer Vision related εφαρμογές. Ξεκίνησε η ανάπτυξη της στα εργαστήρια της Intel και έχει ήδη διάρκεια ζωής λίγο περισσότερο από δύο δεκαετίες. Για τις ανάγκες στης συγκεκριμένης εργασίας χρησιμοποιήθηκε η έκδοση της 4.2.0. 
+Για το οπτικό σκέλος χρησιμοποιήθηκε η ανοιχτού κώδικα βιβλιοθήκη OpenCV \cite{opencv}, η οποία αποτελεί την δημοφιλέστερη επιλογή για real-time Computer Vision related εφαρμογές. Ξεκίνησε η ανάπτυξη της στα εργαστήρια της Intel και έχει ήδη διάρκεια ζωής λίγο περισσότερο από δύο δεκαετίες. Για τις ανάγκες στης συγκεκριμένης εργασίας χρησιμοποιήθηκε η έκδοση της 4.2.0. Όμοια με το \Abbr{ROS} και για την εκμάθηση του \Abbr{OpenCV} ήταν το documentation του
 
 % -----------------
 \subsection{Camera}
@@ -132,7 +132,7 @@
 \FigCaptLabelBasedURL{Images/Design-Implementation/bn220.png}%
 {GPS module used to estimate position}%
 {bn-220-gps}%
-<0.35>%
+<0.28>%
 (https://www.google.com/imgres?imgurl=https\%3A\%2F\%2Fimages.jdmagicbox.com\%2Fquickquotes\%2Fimages_main\%2Fb07wwx5jvp-electroprime-bn-220-3-0v-5-0v-ttl-level-gnss-module-gps-glonass-dual-gps-module-antenna-v4b2-181504802-qn443.jpg&imgrefurl=https\%3A\%2F\%2Fwww.justdial.com\%2FELECTROPRIME-BN-220-3-0V-5-0V-TTL-Level-Gnss-Module-GPS-Glonass-Dual-GPS-Module-Antenna-V4B2\%2Fpid-181504802&tbnid=YJcAk2WsHSEZiM&vet=10CF8QMyiOAWoXChMI2M3PyrCA8wIVAAAAAB0AAAAAEAk..i&docid=xDxMDFHprlF2iM&w=500&h=500&itg=1&q=bn-220\%20image&hl=el&client=ubuntu&ved=0CF8QMyiOAWoXChMI2M3PyrCA8wIVAAAAAB0AAAAAEAk)
 
 % -----------------
@@ -145,18 +145,18 @@
 \FigCaptLabelBasedURL{Images/Design-Implementation/10DoF-Adafruit-IMU.jpeg}%
 {Adafruit 10 DoF IMU}%
 {adafruit-10DoF-imu}%
-<0.35>%
+<0.28>%
 (https://www.banggood.com/10DOF-LSM303-L3G4200D-BMP180-Pressure-Sensor-Barometer-Accelerometer-Magnetometer-Gyroscope-Compass-Gyro-Module-p-1660604.html?utm_source=googleshopping&utm_medium=cpc_organic&gmcCountry=GR&utm_content=minha&utm_campaign=minha-gr-en-pc&currency=EUR&cur_warehouse=CN&createTmp=1&utm_source=googleshopping&utm_medium=cpc_bgs&utm_content=sxxx&utm_campaign=sxxx-pla-gr-en-all-purchase-rm-pc-0720&ad_id=534554931006&gclid=Cj0KCQjwv5uKBhD6ARIsAGv9a-zYv4IDUcaDBSG_7ggf1nlFXmcM6l9fHjUUGiwKJGhUsgZsQ_BVn4YaAkG4EALw_wcB)
 
 % -----------------
 \subsection{Breakout Board}
-Για να λειτουργήσουν τα παραπάνω υποσυστήματα, χρειαζόταν να πραγματοποιηθούν οι κατάλληλες φυσικές διασυνδέσεις. Η απλούστερη εκδοχή θα ήταν να γίνει αυτό με χρήση breadboard, πράγμα όμως που θα πρόσθετε όγκο και βάρος στο τελικό σύστημα, οι οποίοι σε περίπτωση δοκιμών πάνω σε πραγματικά drone να είναι απαγορευτικοί παράγοντες. Συνεπώς, προκειμένου να μπορεί με ευκολία να γίνει η ανάπτυξη του συστήματος, σχεδιάστηκε (στο cad εργαλείο KiCad \cite{KiCad}) και κατασκευάστηκε ένα custom breakout board\footnote{Είναι διαθέσιμο ως open hardware project στο \cite{raspberry-pi-fan-breadkout}} όπως φαίνεται στο \Fig{raspberry-pi-breakout}. Αυτό παρέχει εύκολη πρόσβαση στα GPIO του Raspberry, έξτρα pins για τροφοδοσία στα 5 και 3.3 Volt, pins για τοποθέτηση αισθητήρων - όπως του \Abbr{IMU} - καθώς και mounting holes στα οποία μπορεί να τοποθετηθεί 40x40mm fan για την ψύξη του συστήματος. 
+Για να λειτουργήσουν τα παραπάνω υποσυστήματα, χρειαζόταν να πραγματοποιηθούν οι κατάλληλες φυσικές διασυνδέσεις. Η απλούστερη εκδοχή θα ήταν να γίνει αυτό με χρήση breadboard, πράγμα όμως που θα πρόσθετε όγκο και βάρος στο τελικό σύστημα, οι οποίοι σε περίπτωση δοκιμών πάνω σε πραγματικά drone να είναι απαγορευτικοί παράγοντες. Συνεπώς, προκειμένου να μπορεί με ευκολία να γίνει η ανάπτυξη του συστήματος, σχεδιάστηκε (στο cad εργαλείο KiCad \cite{KiCad}) και κατασκευάστηκε ένα custom breakout board (το οποίο είναι διαθέσιμο ως open hardware project στο \cite{raspberry-pi-fan-breadkout}) όπως φαίνεται στο \Fig{raspberry-pi-breakout}. Αυτό παρέχει εύκολη πρόσβαση στα GPIO του Raspberry, έξτρα pins για τροφοδοσία στα 5 και 3.3 Volt, pins για τοποθέτηση αισθητήρων - όπως του \Abbr{IMU} - καθώς και mounting holes στα οποία μπορεί να τοποθετηθεί 40x40mm fan για την ψύξη του συστήματος. 
 
 % Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/Rpi-breakout.png}%
 {Raspberry Pi breakout}%
 {raspberry-pi-breakout}%
-<0.50>
+<0.4>
 
 
 % -----------------
@@ -217,7 +217,7 @@
 
 % -------------------------
 \subsection{Sensors' Communication} 
-Στο σημείο που ολοκληρώθηκαν οι παραπάνω απαραίτητες ενέργειες, υπήρχε  πλέον ένα λειτουργικό περιβάλλον, οπότε και ξεκίνησε η διαδικασία πραγματοποίησης ε\-πι\-τυ\-χη\-μέ\-νης επικοινωνίας με το κάθε υποσύστημα.
+Αφού ολοκληρώθηκαν οι παραπάνω απαραίτητες ενέργειες, υπήρχε πλέον ένα λειτουργικό περιβάλλον, οπότε και ξεκίνησε η διαδικασία πραγματοποίησης ε\-πι\-τυ\-χη\-μέ\-νης επικοινωνίας με το κάθε υποσύστημα.
 
 %---------------------------
 \subsubsection{Serial Communication}
@@ -272,16 +272,15 @@
 Για να μπορέσουμε να χρησιμοποιήσουμε το \Abbr{I2C} στο Raspberry, χρειάστηκε να εκτελεστούν οι εντολές που υπάρχουν στο \List{fix-I2C-communication}.
 
 \begin{lstlisting}[language=bash, escapechar=@, caption={Fix I2C communication},label=list:fix-I2C-communication]
-    # 1. Install cpp needed library
-    sudo apt-get install -y libi2c-dev 
+    # 1. Install needed library
+    sudo apt-get install -y libi2c-dev i2c-tools 
 
     # 2. Give privileges to user
     sudo adduser $USER i2c
     sudo chmod g+r /dev/i2c-1
 \end{lstlisting}
 
-Στην συνέχεια μπορούν να γίνουν οι κατάλληλες συνδέσεις και εκτελώντας την εντολή `\textbf{i2cdetect -y 1}' να εμφανιστούν
-οι διευθύνσεις όλων των αισθητήρων που είναι συνδεδεμένες στο \Abbr{I2C} bus, παράδειγμα του output από την εντολή υπάρχει στο \List{I2C-output}.
+Στην συνέχεια μπορούν να γίνουν οι κατάλληλες συνδέσεις και εκτελώντας την ε\-ντο\-λή `\textbf{i2cdetect -y 1}' έχουμε πρόσβαση στις διευθύνσεις όλων των αισθητήρων που είναι συνδεδεμένες στο \Abbr{I2C} bus, παράδειγμα του output από την εντολή υπάρχει στο \List{I2C-output}\footnote{Το συγκεκριμένο module έχει δοθεί από την Adafruit ως open hardware project, σε περίπτωση που χρησιμοποιηθεί κάποιο replica του, πιθανόν κάποιο address να είναι διαφορετικό}.
 
 \begin{lstlisting}[language=bash, escapechar=@, caption={I2C addressed output example},label=list:I2C-output]
     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
@@ -291,12 +290,11 @@
     30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
     40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
     50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-    60: -- -- -- -- -- -- -- -- -- 69 -- -- -- -- -- -- 
+    60: -- -- -- -- -- -- -- -- -- -- -- 6B -- -- -- -- 
     70: -- -- -- -- -- -- -- 77       
 \end{lstlisting}
 
-Η επίσημη βιβλιοθήκη της Adafruit για το module 
-\TODO{TODO: about ROS package}
+Το μόνο \Abbr{ROS} πακέτο που βρέθηκε \cite{ros-adafruit-10dof-imu-original} - που χρησιμιμοποιεί αυτό το module - περιείχε κάποια compilation errors. Αφού διορθώθηκαν και προστέθηκαν επιπλέον log messages - το updated repo μπορεί να βρεθεί εδώ \cite{ros-adafruit-10dof-imu-cspyridakis} - ήταν πλέον δυνατό το \Abbr{IMU} να επικοινωνήσει επιτυχώς με το \Abbr{ROS}.
 
 %----------------------------------------------------------------------
 
@@ -448,8 +446,11 @@ Error: 3.09597
 
 % ------------------
 \subsubsection{Camera Usage} \label{sec:camera-usage}
-Προκειμένου να χρησιμοποιηθεί η κάμερα, συνδέθηκε στο Raspbe
+% Προκειμένου να χρησιμοποιηθεί η κάμερα, συνδέθηκε στο Raspbe
+% usb\_cam για να πάρουμε την εικόνα
+% ros packages vision\_opencv το οποίο είναι metapackage που περιέχει τα πακέτα cv\_bridge και image\_geometry
 
+% επίσης υπάρχει το image\_transport για το pub\ sub (χρησιμοποιεί compression techniques)
 % ------------------
 \subsubsection{Ball Detection and Tracking}
 \begin{figure} [H]
