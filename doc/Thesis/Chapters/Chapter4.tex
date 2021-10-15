@@ -150,7 +150,7 @@
 
 % -----------------
 \subsection{Breakout Board}
-Για να λειτουργήσουν τα παραπάνω υποσυστήματα, χρειαζόταν να πραγματοποιηθούν οι κατάλληλες φυσικές διασυνδέσεις. Η απλούστερη εκδοχή θα ήταν να γίνει αυτό με χρήση breadboard, πράγμα όμως που θα πρόσθετε όγκο και βάρος στο τελικό σύστημα, οι οποίοι σε περίπτωση δοκιμών πάνω σε πραγματικά drone να είναι απαγορευτικοί παράγοντες. Συνεπώς, προκειμένου να μπορεί με ευκολία να γίνει η ανάπτυξη του συστήματος, σχεδιάστηκε (στο cad εργαλείο KiCad \cite{KiCad}) και κατασκευάστηκε ένα custom breakout board (το οποίο είναι διαθέσιμο ως open hardware project στο \cite{raspberry-pi-fan-breadkout}) όπως φαίνεται στο \Fig{raspberry-pi-breakout}. Αυτό παρέχει εύκολη πρόσβαση στα GPIO του Raspberry, έξτρα pins για τροφοδοσία στα 5 και 3.3 Volt, pins για τοποθέτηση αισθητήρων - όπως του \Abbr{IMU} - καθώς και mounting holes στα οποία μπορεί να τοποθετηθεί 40x40mm fan για την ψύξη του συστήματος. 
+Για να λειτουργήσουν τα παραπάνω υποσυστήματα, χρειαζόταν να πραγματοποιηθούν οι κατάλληλες φυσικές διασυνδέσεις. Η απλούστερη εκδοχή θα ήταν να γίνει αυτό με χρήση breadboard, πράγμα όμως που θα πρόσθετε όγκο και βάρος στο τελικό σύστημα, οι οποίοι σε περίπτωση δοκιμών πάνω σε πραγματικά drone να είναι απαγορευτικοί παράγοντες. Συνεπώς, προκειμένου να μπορεί με ευκολία να γίνει η ανάπτυξη του συστήματος, σχεδιάστηκε (στο cad εργαλείο KiCad \cite{KiCad}) και κατασκευάστηκε ένα custom breakout board - το οποίο είναι διαθέσιμο ως open hardware project στο \cite{raspberry-pi-fan-breadkout} - όπως φαίνεται στο \Fig{raspberry-pi-breakout}. Αυτό παρέχει εύκολη πρόσβαση στα GPIO του Raspberry, έξτρα pins για τροφοδοσία στα 5 και 3.3 Volt, pins για τοποθέτηση αισθητήρων - όπως του \Abbr{IMU} - καθώς και mounting holes στα οποία μπορεί να τοποθετηθεί 40x40mm fan για την ψύξη του συστήματος. 
 
 % Image
 \FigCaptLabelBasedURL{Images/Design-Implementation/Rpi-breakout.png}%
@@ -438,11 +438,17 @@
 
 % ------------------
 \subsubsection{Camera Usage} \label{sec:camera-usage}
-% Προκειμένου να χρησιμοποιηθεί η κάμερα, συνδέθηκε στο Raspbe
-% usb\_cam για να πάρουμε την εικόνα
-% ros packages vision\_opencv το οποίο είναι metapackage που περιέχει τα πακέτα cv\_bridge και image\_geometry
+Προκειμένου να λειτουργεί η κάμερα με το \Abbr{ROS}, χρειάστηκε αρχικά να συνδεθεί μέσω USB με το Raspberry Pi, ενώ χρησιμοποιήθηκε το package \textbf{usb\_cam} για την διαχείριση της. Στο launch αρχείο που δημιουργήθηκε για να εκτελεστεί το \textit{/usb\_cam\_node} γίνεται επιλογή της ανάλυσης που πρόκειται να χρησιμοποιηθεί\udot όπως επίσης μέσω της παραμέτρου \textit{camera\_info\_url} επιλέγεται το yaml αρχείο με τα χαρακτηριστικά της κάμερας που δημιουργήθηκε κατά το calibration. 
 
-% επίσης υπάρχει το image\_transport για το pub\ sub (χρησιμοποιεί compression techniques)
+Το \textit{/usb\_cam\_node} κάνει publish στο topic \textit{/usb\_cam/image\_raw} τα περιεχόμενα της κάμερας. Η επεξεργασία του stream της κάμερας γίνεται από το node με όνομα worker\_node που δημιουργήθηκε, το οποίο κάνει subscribe στο topic της κάμερας, μετασχηματίζει από πακέτα \Abbr{ROS} σε Mat στοιχεία - που χρησιμοποιεί το \Abbr{OpenCV},  μέσω του \textit{cv\_bridge} - και αναλαμβάνει το κομμάτι της \Abbr{CV} επεξεργασίας για της ανάγκες της εφαρμογής. 
+
+\FigCaptLabelBasedURL{../Photos/camera-usage-ros.png}%
+{ROS - camera related nodes/topics setup}%
+{thesis-camera-nodes-topics-setup}%
+<0.7>
+
+Στα πρώτα στάδια ήταν ανάγκη να υπάρχει (για λόγους αποσφαλμάτωσης), οπτικό feedback του \Abbr{CV} αποτελέσματος - από nodes όπως το master, που μπορεί να είναι διαφορετικά μηχανήματα - γίνεται επίσης χρήση του package \textbf{/web\_video\_server}. Αυτό κάνει subscribe στο topic \textit{/usb\_cam/processed\_image} (topic στο οποίο το /\textit{worker\_node} κάνει publish τα αποτελέσματα της επεξεργασίας) ώστε μέσω κάποιου browser να μπορούμε εύκολα να δούμε τα αποτελέσματα της επεξεργασίας. Το \Fig{thesis-camera-nodes-topics-setup} παρουσιάζει τα topics/nodes που αναφέρθηκαν και τον τρόπο με τον οποίο επι\-κοι\-νω\-νούν.
+
 % ------------------
 \subsubsection{Ball Detection and Tracking}
 \begin{figure} [H]
@@ -499,7 +505,11 @@
 % ------------------
 
 \subsubsection{Range Estimation}
-Για τον υπολογισμό της απόστασης της μπάλας από την κάμερα, χρησιμοποιείται ως κύρια αρχή ο φορμαλισμός που περιγράφηκε στο \Sect{theo-structure-from-reference}.
+Για τον υπολογισμό της απόστασης της μπάλας από την κάμερα, χρησιμοποιείται ως κύρια αρχή ο φορμαλισμός που περιγράφηκε στο \Sect{theo-structure-from-reference} - \Equa{distance-from-object} - η οποία χρειάζεται να μετασχηματιστεί ώστε σαν είσοδο να χρησιμοποιεί πλήθος pixel και όχι mm, συνεπώς μέσω της εξίσωσης \EqNum{distance-from-object-pixels} μπορούμε να υπολογίσουμε την απόσταση της μπάλας από την κάμερα υπολογίζοντας μόνο το πλήθος των pixel που καταλαμβάνει στην εικόνα \cite{calculate-distance-stackexchange} \cite{calculate-distance-or-size-of-an-objectin-a-photo-image}.
+
+\begin{align}
+	\textrm{Distance (m)} &= \frac{\textrm{$f$ (mm)}\; x\;\textrm{Object's real size(m)}\; x\; \textrm{Image size(pixels)}}{\textrm{Object's size on sensor (pixels)}\; x\; \textrm{Sensor's size(mm)}} \label{eq:distance-from-object-pixels}
+\end{align}
 
 %----------------------------------------------------------------------
 \section{Networking}
