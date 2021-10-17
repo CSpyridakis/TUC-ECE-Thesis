@@ -103,7 +103,7 @@
 
 % -----------------
 \subsection{Operation System}
-Από την στιγμή που επιλέχθηκε να γίνει χρήση του \Abbr{ROS} - που όπως αναφέρθηκε στο \Sect{ROS} προτείνεται ο συνδυασμός του με Ubuntu Linux - έγινε εγκατάσταση στο Raspberry Pi η ειδικά σχεδιασμένη για το αυτό\udot έκδοση Ubuntu Linux 20.04.2 64bit version για ΑRM \cite{ubuntu-raspberry} αρχιτεκτονική. Ουσιαστικά όλες οι λειτουργίες της εφαρμογής θα χρησιμοποιούν το Embedded General Purpose Operating System προκειμένου να λειτουργήσουν, το οποίο σημαίνει ότι αυτό θα είναι κυρίως υπεύθυνο για το scheduling, file-system abstraction, networking, etc. 
+Από την στιγμή που επιλέχθηκε να γίνει χρήση του \Abbr{ROS} - που όπως αναφέρθηκε στο \Sect{ROS} προτείνεται ο συνδυασμός του με Ubuntu Linux - έγινε εγκατάσταση στο Raspberry Pi η ειδικά σχεδιασμένη για το αυτό έκδοση Ubuntu Linux 20.04.2 64bit version για ΑRM \cite{ubuntu-raspberry} αρχιτεκτονική. Ουσιαστικά όλες οι λειτουργίες της εφαρμογής θα χρησιμοποιούν το Embedded General Purpose Operating System προκειμένου να λειτουργήσουν, το οποίο σημαίνει ότι αυτό θα είναι κυρίως υπεύθυνο για το scheduling, file-system abstraction, networking, etc. 
 
 % -----------------
 \subsection{OpenCV}
@@ -440,17 +440,22 @@
 \subsubsection{Camera Usage} \label{sec:camera-usage}
 Προκειμένου να λειτουργεί η κάμερα με το \Abbr{ROS}, χρειάστηκε αρχικά να συνδεθεί μέσω USB με το Raspberry Pi, ενώ χρησιμοποιήθηκε το package \textbf{usb\_cam} για την διαχείριση της. Στο launch αρχείο που δημιουργήθηκε για να εκτελεστεί το \textit{/usb\_cam\_node} γίνεται επιλογή της ανάλυσης που πρόκειται να χρησιμοποιηθεί\udot όπως επίσης μέσω της παραμέτρου \textit{camera\_info\_url} επιλέγεται το yaml αρχείο με τα χαρακτηριστικά της κάμερας που δημιουργήθηκε κατά το calibration. 
 
-Το \textit{/usb\_cam\_node} κάνει publish στο topic \textit{/usb\_cam/image\_raw} τα περιεχόμενα της κάμερας. Η επεξεργασία του stream της κάμερας γίνεται από το node με όνομα worker\_node που δημιουργήθηκε, το οποίο κάνει subscribe στο topic της κάμερας, μετασχηματίζει από πακέτα \Abbr{ROS} σε Mat στοιχεία - που χρησιμοποιεί το \Abbr{OpenCV},  μέσω του \textit{cv\_bridge} - και αναλαμβάνει το κομμάτι της \Abbr{CV} επεξεργασίας για της ανάγκες της εφαρμογής. 
+Το \textit{/usb\_cam\_node} κάνει publish στο topic \textit{/usb\_cam/image\_raw} τα περιεχόμενα της κάμερας. Η επεξεργασία του stream της κάμερας γίνεται από το node με όνομα \textit{/worker\_node} που δημιουργήθηκε, το οποίο κάνει subscribe στο topic της κάμερας, μετασχηματίζει από πακέτα \Abbr{ROS} σε Mat στοιχεία - που χρησιμοποιεί το \Abbr{OpenCV},  μέσω του \textit{cv\_bridge} - και αναλαμβάνει το κομμάτι της \Abbr{CV} επεξεργασίας για της ανάγκες της εφαρμογής. 
 
 \FigCaptLabelBasedURL{../Photos/camera-usage-ros.png}%
 {ROS - camera related nodes/topics setup}%
 {thesis-camera-nodes-topics-setup}%
 <0.7>
 
-Στα πρώτα στάδια ήταν ανάγκη να υπάρχει (για λόγους αποσφαλμάτωσης), οπτικό feedback του \Abbr{CV} αποτελέσματος - από nodes όπως το master, που μπορεί να είναι διαφορετικά μηχανήματα - γίνεται επίσης χρήση του package \textbf{/web\_video\_server}. Αυτό κάνει subscribe στο topic \textit{/usb\_cam/processed\_image} (topic στο οποίο το /\textit{worker\_node} κάνει publish τα αποτελέσματα της επεξεργασίας) ώστε μέσω κάποιου browser να μπορούμε εύκολα να δούμε τα αποτελέσματα της επεξεργασίας. Το \Fig{thesis-camera-nodes-topics-setup} παρουσιάζει τα topics/nodes που αναφέρθηκαν και τον τρόπο με τον οποίο επι\-κοι\-νω\-νούν.
+Αρκετές ήταν οι φορές που υπήρχε ανάγκη (για λόγους αποσφαλμάτωσης), σε οπτικό feedback της \Abbr{CV} επεξεργασίας από nodes όπως το master, που μπορεί να είναι διαφορετικά φυσικά μηχανήματα. Πράγμα που εύκολα επιλύεται αξιοποιώντας το package \textbf{/web\_video\_server}. Αυτό είναι subscriber στο topic \textit{/usb\_\-cam/processed\_ image} (topic στο οποίο το \textit{/worker\_node} κάνει publish τα αποτελέσματα της επεξεργασίας) ώστε μέσω κάποιου browser να μπορούμε εύκολα να δούμε τα αποτελέσματα της. Το \Fig{thesis-camera-nodes-topics-setup} παρουσιάζει τα topics/nodes που αναφέρθηκαν και τον τρόπο με τον οποίο επι\-κοι\-νω\-νούν.
 
 % ------------------
 \subsubsection{Ball Detection and Tracking}
+Το αντικείμενο του οποίου η θέση επιλέχθηκε να προσδιοριστεί, είναι μία μπάλα - καθώς μπορεί να προσφέρει ανεξαρτήτου γωνία λήψης ίδια πληροφορία για τις διαστάσεις της - μεγέθους ανάλογη με τις μπάλες ping-pong. 
+Συνεπώς δεν μας ενδιαφέρει το orientation του αντικειμένου, παρά μόνο το location.
+
+Πρώτη προσπάθεια εκτίμησης της θέσης, ήταν χρησιμοποιώντας ως σημείο αναφοράς το χρώμα της. Έχοντας επιλέξει το χρώμα της μπάλας να είναι διαφορετικό από τα περισσότερα στοιχεία της σκηνής στην οποία την καταγράφουμε, μπορούμε να προσδιορίσουμε και την θέση του αντικειμένου στο image plane.
+
 \begin{figure} [H]
 	\centering
 	% -----------------
@@ -482,6 +487,13 @@
 	\end{algorithmic}
 \end{algorithm}
 
+
+\FigCaptLabelBasedURL{../Photos/thesis-hsv.png}%
+{Detect balls based on their color}%
+{balls-detection-color}%
+<0.9>
+
+
 % ALGORITHM
 \begin{algorithm}[H]
 	\caption[Hough circle (shape based) ball detection]{Hough circle (shape based) ball detection}\label{alg:hough-detect}
@@ -491,11 +503,6 @@
         \State
 	\end{algorithmic}
 \end{algorithm}
-
-\FigCaptLabelBasedURL{../Photos/thesis-hsv.png}%
-{Detect balls based on their color}%
-{balls-detection-color}%
-<0.9>
 
 \FigCaptLabelBasedURL{../Photos/thesis-hough.png}%
 {Detect balls based on their shape}%
@@ -512,7 +519,11 @@
 \end{align}
 
 %----------------------------------------------------------------------
-\section{Networking}
+\section{Message Passing}
+\TODO{TODO}
+
+\section{3D Representation}
+\TODO{TODO}
 
 %----------------------------------------------------------------------
 
