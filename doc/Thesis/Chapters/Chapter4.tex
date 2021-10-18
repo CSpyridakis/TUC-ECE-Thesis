@@ -400,7 +400,7 @@
 Ένα αρκετά βοηθητικό Massive Open Online Course (\Abbr{MOOC}) το οποίο βοήθησε ώστε να κατανοηθεί περισσότερο το σκέλος του \Abbr{CV} και στο οποίο μπορεί κάποιος να ανατρέξει για περισσότερες λεπτομέρειες σε σχέση με τους παραπάνω φορμαλισμούς είναι το \cite{introduction-to-computer-vision}. Επιπρόσθετα, στο \Sect{camera-calibration} περιγράφεται ο τρόπος υπολογισμού των στοιχείων του πίνακα μετασχηματισμού $M$.
 
 % ------------------
-\subsubsection{Camera Calibration} \label{sec:camera-calibration}
+\subsection{Camera Calibration} \label{sec:camera-calibration}
 Στο \Sect{design-implementation-camera} έγινε αναφορά του πίνακα μετασχηματισμού $M$. Επίσης, τα lens μίας κάμερας δεν είναι ιδανικά, κάνοντας τις λήψεις να φέρουν παραμορφώσεις (βλ. \Fig{distortion-types}). Η συνολική παραμόρφωση ενός lens μπορεί να περιγραφεί μέσω των Distortion coefficients. Η διαδικασία υπολογισμού όλων των παραμέτρων της κάμερας - προκειμένου αξιόπιστα να μπορούμε να κάνουμε υπολογισμούς με βάση τις λήψεις της σε μία \Abbr{CV} εφαρμογή - ονομάζεται camera calibration. 
 
 % Image
@@ -437,7 +437,7 @@
 \end{figure}
 
 % ------------------
-\subsubsection{Camera Usage} \label{sec:camera-usage}
+\subsection{Camera Usage} \label{sec:camera-usage}
 Προκειμένου να λειτουργεί η κάμερα με το \Abbr{ROS}, χρειάστηκε αρχικά να συνδεθεί μέσω USB με το Raspberry Pi, ενώ χρησιμοποιήθηκε το package \textbf{usb\_cam} για την διαχείριση της. Στο launch αρχείο που δημιουργήθηκε για να εκτελεστεί το \textit{/usb\_cam\_node} γίνεται επιλογή της ανάλυσης που πρόκειται να χρησιμοποιηθεί\udot όπως επίσης μέσω της παραμέτρου \textit{camera\_info\_url} επιλέγεται το yaml αρχείο με τα χαρακτηριστικά της κάμερας που δημιουργήθηκε κατά το calibration. 
 
 Το \textit{/usb\_cam\_node} κάνει publish στο topic \textit{/usb\_cam/image\_raw} τα περιεχόμενα της κάμερας. Η επεξεργασία του stream της κάμερας γίνεται από το node με όνομα \textit{/worker\_node} που δημιουργήθηκε, το οποίο κάνει subscribe στο topic της κάμερας, μετασχηματίζει από πακέτα \Abbr{ROS} σε Mat στοιχεία - που χρησιμοποιεί το \Abbr{OpenCV},  μέσω του \textit{cv\_bridge} - και αναλαμβάνει το κομμάτι της \Abbr{CV} επεξεργασίας για της ανάγκες της εφαρμογής. 
@@ -450,9 +450,11 @@
 Αρκετές ήταν οι φορές που υπήρχε ανάγκη (για λόγους αποσφαλμάτωσης), σε οπτικό feedback της \Abbr{CV} επεξεργασίας από nodes όπως το master, που μπορεί να είναι διαφορετικά φυσικά μηχανήματα. Πράγμα που εύκολα επιλύεται αξιοποιώντας το package \textbf{/web\_video\_server}. Αυτό είναι subscriber στο topic \textit{/usb\_\-cam/processed\_ image} (topic στο οποίο το \textit{/worker\_node} κάνει publish τα αποτελέσματα της επεξεργασίας) ώστε μέσω κάποιου browser να μπορούμε εύκολα να δούμε τα αποτελέσματα της. Το \Fig{thesis-camera-nodes-topics-setup} παρουσιάζει τα topics/nodes που αναφέρθηκαν και τον τρόπο με τον οποίο επι\-κοι\-νω\-νούν.
 
 % ------------------
-\subsubsection{Ball Detection and Tracking}
+\subsection{Ball Detection and Tracking}
 Το αντικείμενο του οποίου η θέση επιλέχθηκε να προσδιοριστεί, είναι μία μπάλα - καθώς μπορεί να προσφέρει ανεξαρτήτου γωνία λήψης ίδια πληροφορία για τις διαστάσεις της - μεγέθους ανάλογη με τις μπάλες ping-pong. 
 Συνεπώς δεν μας ενδιαφέρει το orientation του αντικειμένου, παρά μόνο το location.
+
+\subsubsection{Color based}
 
 Πρώτη προσπάθεια εκτίμησης της θέσης, ήταν χρησιμοποιώντας ως σημείο αναφοράς το χρώμα της. Έχοντας επιλέξει το χρώμα της μπάλας να είναι διαφορετικό από τα περισσότερα στοιχεία της σκηνής στην οποία την καταγράφουμε, μπορούμε εύκολα να προσδιορίσουμε και την θέση του αντικειμένου στο image plane.
 
@@ -513,12 +515,9 @@
 
 Συγκεκριμένα χρησιμοποιήθηκε Gaussian μορφής kernel το οποίο παρέχει πιο φυσικής μορφής blur, και αφού έγινε το transform σε HSV επιλέχθηκαν μόνο τα pixel των οποίων οι τιμές ήταν αποδεκτές. Δύο μειονεκτήματα της συγκεκριμένης μεθόδου είναι ότι τα αποτελέσματα μεταβάλλονται σημαντικά ανάλογα τις συνθήκες φωτισμού, ακόμα και σε επίπεδο που για ίδια thresholds να μην γίνεται ανίχνευση του αντικειμένου. Όπως επίσης, αν το χρώμα του αντικειμένου δεν επιλεχθεί κατάλληλα - παράδειγμα στο \Fig{balls-detection-color} για τις άσπρες μπάλες - το αντικείμενο τελικά να μην μπορεί να εντοπιστεί. 
 
-Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο ο \Algo{hough-detect} παρουσιάζει σε ψευδοκώδικα την διαδικασία, ενώ το \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
+\subsubsection{Shape based}
 
-\FigCaptLabelBasedURL{../Photos/thesis-hough.png}%
-{Detect balls based on their shape}%
-{balls-detection-shape}%
-<0.8>
+Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο ο \Algo{hough-detect} παρουσιάζει σε ψευδοκώδικα την διαδικασία, ενώ το \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
 
 % ALGORITHM
 \begin{algorithm}[H]
@@ -532,14 +531,19 @@
 	\end{algorithmic}
 \end{algorithm}
 
+\FigCaptLabelBasedURL{../Photos/thesis-hough.png}%
+{Detect balls based on their shape}%
+{balls-detection-shape}%
+<0.8>
+
 Για τον εντοπισμό του κυκλικού σχήματος της μπάλας χρησιμοποιήθηκε o Hough Transform for circles detection.
 
 \TODO{TODO}
 
 % ------------------
 
-\subsubsection{Range Estimation}
-Για τον υπολογισμό της απόστασης της μπάλας από την κάμερα, χρησιμοποιείται ως κύρια αρχή ο φορμαλισμός που περιγράφηκε στο \Sect{theo-structure-from-reference} - \Equa{distance-from-object} - η οποία χρειάζεται να μετασχηματιστεί ώστε σαν είσοδο να χρησιμοποιεί πλήθος pixel και όχι mm, συνεπώς μέσω της εξίσωσης \EqNum{distance-from-object-pixels} μπορούμε να υπολογίσουμε την απόσταση της μπάλας από την κάμερα υπολογίζοντας μόνο το πλήθος των pixel που καταλαμβάνει στην εικόνα \cite{calculate-distance-stackexchange} \cite{calculate-distance-or-size-of-an-objectin-a-photo-image}.
+\subsection{Range Estimation}
+Στον υπολογισμό της απόστασης της μπάλας από την κάμερα, χρησιμοποιείται ως κύρια αρχή ο φορμαλισμός που περιγράφηκε στο \Sect{theo-structure-from-reference} - \Equa{distance-from-object} - η οποία χρειάζεται να μετασχηματιστεί ώστε σαν είσοδο να χρησιμοποιεί πλήθος pixel και όχι mm, συνεπώς μέσω της εξίσωσης \EqNum{distance-from-object-pixels} μπορούμε να υπολογίσουμε την απόσταση της μπάλας από την κάμερα υπολογίζοντας μόνο το πλήθος των pixel που καταλαμβάνει στην εικόνα \cite{calculate-distance-stackexchange} \cite{calculate-distance-or-size-of-an-objectin-a-photo-image}.
 
 \begin{align}
 	\textrm{Distance (m)} &= \frac{\textrm{$f$ (mm)}\; x\;\textrm{Object's real size(m)}\; x\; \textrm{Image size(pixels)}}{\textrm{Object's size on sensor (pixels)}\; x\; \textrm{Sensor's size(mm)}} \label{eq:distance-from-object-pixels}
