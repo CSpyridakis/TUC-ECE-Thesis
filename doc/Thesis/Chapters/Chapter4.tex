@@ -294,7 +294,7 @@
     70: -- -- -- -- -- -- -- 77       
 \end{lstlisting}
 
-Το μόνο \Abbr{ROS} πακέτο που βρέθηκε \cite{ros-adafruit-10dof-imu-original} - που χρησιμιμοποιεί αυτό το module - περιείχε κάποια compilation errors. Αφού διορθώθηκαν και προστέθηκαν επιπλέον log messages - το updated repo μπορεί να βρεθεί εδώ \cite{ros-adafruit-10dof-imu-cspyridakis} - ήταν πλέον δυνατό το \Abbr{IMU} να επικοινωνήσει επιτυχώς με το \Abbr{ROS}.
+Το μόνο \Abbr{ROS} πακέτο που βρέθηκε \cite{ros-adafruit-10dof-imu-original} - που χρησιμοποιεί αυτό το module - περιείχε κάποια compilation errors. Αφού διορθώθηκαν και προστέθηκαν επιπλέον log messages - το updated repo μπορεί να βρεθεί εδώ \cite{ros-adafruit-10dof-imu-cspyridakis} - ήταν πλέον δυνατό το \Abbr{IMU} να επικοινωνήσει επιτυχώς με το \Abbr{ROS}.
 
 %----------------------------------------------------------------------
 
@@ -454,7 +454,9 @@
 Το αντικείμενο του οποίου η θέση επιλέχθηκε να προσδιοριστεί, είναι μία μπάλα - καθώς μπορεί να προσφέρει ανεξαρτήτου γωνία λήψης ίδια πληροφορία για τις διαστάσεις της - μεγέθους ανάλογη με τις μπάλες ping-pong. 
 Συνεπώς δεν μας ενδιαφέρει το orientation του αντικειμένου, παρά μόνο το location.
 
-Πρώτη προσπάθεια εκτίμησης της θέσης, ήταν χρησιμοποιώντας ως σημείο αναφοράς το χρώμα της. Έχοντας επιλέξει το χρώμα της μπάλας να είναι διαφορετικό από τα περισσότερα στοιχεία της σκηνής στην οποία την καταγράφουμε, μπορούμε να προσδιορίσουμε και την θέση του αντικειμένου στο image plane.
+Πρώτη προσπάθεια εκτίμησης της θέσης, ήταν χρησιμοποιώντας ως σημείο αναφοράς το χρώμα της. Έχοντας επιλέξει το χρώμα της μπάλας να είναι διαφορετικό από τα περισσότερα στοιχεία της σκηνής στην οποία την καταγράφουμε, μπορούμε εύκολα να προσδιορίσουμε και την θέση του αντικειμένου στο image plane.
+
+Συχνά οι λήψεις μίας κάμερας αναπαριστάνονται στο RGB color space, αρκετά χρήσιμο όμως είναι η χρήση του HSV για \Abbr{CV} εφαρμογές, με κύριο λόγο τον διαχωρισμό που παρέχεται μεταξύ color information και intensity στο συγκεκριμένο color space. Οπτική αναπαράσταση αυτών βρίσκεται στο \Fig{color-space}. 
 
 \begin{figure} [H]
 	\centering
@@ -477,37 +479,62 @@
     \label{fig:color-space}
 \end{figure}
 
+Ο \Algo{hsv-detect} παρουσιάζει την διαδικασία που ακολουθήθηκε προκειμένου να ε\-ντο\-πι\-στεί η μπάλα στην σκηνή με βάση το χρώμα της, ενώ στο \Fig{balls-detection-color} εμφανίζονται τα αποτελέσματα από το κάθε επίπεδο επεξεργασίας.
+
 % ALGORITHM
 \begin{algorithm}[H]
 	\caption[HSV (color based) ball detection]{HSV (color based) ball detection}\label{alg:hsv-detect}
 	\begin{algorithmic}[1]
-		\Statex{{\bf procedure} DV-Hop}{}
-			
-        \State
+		\Statex{{\bf procedure} detectBall}{}
+            \State Define preferable color's limit HSV values
+            \State Get one frame of the video
+            \State Remove high frequencies from the frame
+            \State Convert frame from RGB to HSV color space
+            \State Choose only pixels that are in between preferable color's limit values 
 	\end{algorithmic}
 \end{algorithm}
-
 
 \FigCaptLabelBasedURL{../Photos/thesis-hsv.png}%
 {Detect balls based on their color}%
 {balls-detection-color}%
 <0.9>
 
+Ένα μεγάλο μέρος των \Abbr{CV} εφαρμογών περιλαμβάνει ως διαδικασίες επεξεργασίας το να γίνεται convolution ή cross-correlation\footnote{Η διαφορά μεταξύ του convolution και του cross-correlation, είναι ότι στο convolution ο kernel αναστρέφεται} ενός kernel με τα pixel της εικόνας. Αυτή η διαδικασία - που για το convolution περιγράφεται μαθηματικά από την εξίσωση \EqNum{cross-correlation} και οπτικά από το \Fig{convolution-example} - έχει ποικίλες εφαρμογές οι οποίες διαχωρίζονται με βάση την επιλογή του kernel. Μία εξ' αυτών είναι για λόγους smoothing, που στην συγκεκριμένη περίπτωση περιλαμβάνει σημαντική διαδικασία του preprocessing, καθώς με αυτόν τον τρόπο μειώνουμε την ποσότητα των υψηλών συχνοτήτων συνεπώς και τον θόρυβο στην εικόνα.
 
-% ALGORITHM
-\begin{algorithm}[H]
-	\caption[Hough circle (shape based) ball detection]{Hough circle (shape based) ball detection}\label{alg:hough-detect}
-	\begin{algorithmic}[1]
-		\Statex{{\bf procedure} DV-Hop}{}
-			
-        \State
-	\end{algorithmic}
-\end{algorithm}
+\begin{gather}
+	O[i,j] = k * I = \sum_{u=-k}^{k} \sum_{v=-k}^{k} k[u,v]I[i-u,j-v] \label{eq:cross-correlation}
+\end{gather}
+
+\FigCaptLabelBasedURL{Images/Design-Implementation/cross-correlation.png}%
+{Convolution Example}%
+{convolution-example}%
+<0.5>%
+(http://intellabs.github.io/RiverTrail/tutorial/)
+
+Συγκεκριμένα χρησιμοποιήθηκε Gaussian μορφής kernel το οποίο παρέχει πιο φυσικής μορφής blur, και αφού έγινε το transform σε HSV επιλέχθηκαν μόνο τα pixel των οποίων οι τιμές ήταν αποδεκτές. Δύο μειονεκτήματα της συγκεκριμένης μεθόδου είναι ότι τα αποτελέσματα μεταβάλλονται σημαντικά ανάλογα τις συνθήκες φωτισμού, ακόμα και σε επίπεδο που για ίδια thresholds να μην γίνεται ανίχνευση του αντικειμένου. Όπως επίσης, αν το χρώμα του αντικειμένου δεν επιλεχθεί κατάλληλα - παράδειγμα στο \Fig{balls-detection-color} για τις άσπρες μπάλες - το αντικείμενο τελικά να μην μπορεί να εντοπιστεί. 
+
+Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο ο \Algo{hough-detect} παρουσιάζει σε ψευδοκώδικα την διαδικασία, ενώ το \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
 
 \FigCaptLabelBasedURL{../Photos/thesis-hough.png}%
 {Detect balls based on their shape}%
 {balls-detection-shape}%
 <0.8>
+
+% ALGORITHM
+\begin{algorithm}[H]
+	\caption[Hough circle (shape based) ball detection]{Hough circle (shape based) ball detection}\label{alg:hough-detect}
+	\begin{algorithmic}[1]
+		\Statex{{\bf procedure} HoughdetectBall}{}
+            \State Get one frame of the video
+            \State Convert frame from RGB to Gray scale
+            \State Remove high frequencies from the frame
+            \State Use Hough Transform principle to detect circles in image 
+	\end{algorithmic}
+\end{algorithm}
+
+Για τον εντοπισμό του κυκλικού σχήματος της μπάλας χρησιμοποιήθηκε o Hough Transform for circles detection.
+
+\TODO{TODO}
 
 % ------------------
 
