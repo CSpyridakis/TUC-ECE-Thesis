@@ -1,4 +1,4 @@
-\chapter{Related Work} \label{chap:Chapter2}       
+\chapter{Προυπάρχουσες προσεγγίσεις} \label{chap:Chapter2}       
 \epigraph{``This is where technology is now, imagine where we can go in the future” }{\textit{Timothy Chung}}
 
 Σε αυτό το \emph{Chapter} περιγράφονται τρόποι με τους οποί\-ους υπάρχουσες εφαρμογές \Abbr{UAV} swarms, καθώς και 
@@ -23,7 +23,7 @@ Propagation (\Abbr{BP}) \cite{fusion-filters}.
 
 % --------------------------------------------------------------------------------------------------------
 % --------------------------------------------------------------------------------------------------------
-\section{Radio Frequency}
+\section{Ραδιοσυχνότητες}
 Το πιο εύκολο που μπορούμε να φανταστούμε είναι να χρησιμοποιήσουμε \Abbr{RF} τε\-χνο\-λο\-γίες όπως \Abbr{GPS}, WiFi, Zigbee, Bluetooth, Ultra-Wideband (\Abbr{UWB}) ή ακόμα και άλλα\udot για την επικοινωνία και την υλοποίηση του \Abbr{LPS}. Συχνός παράγοντας για το ποιο θα επιλεχθεί, σχετίζεται αν η εφαρμογή μας κυμαίνεται σε short ή long range εμβέλειες.
 
 Άλλοι παράγοντες, ως παράδειγμα, είναι ότι το WiFi είναι εύκολα προσβάσιμο\udot με μικρό κόστος, ενώ το Zigbee προτιμάται για low power consumption εφαρμογές. Όμως προβλήματα, μπορεί να είναι, ότι στο WiFi είναι πολύ εύκολο να υπάρχουν παρεμβολές από τις υπόλοιπες γειτονικές 
@@ -68,19 +68,19 @@ range είτε γωνία.
 		\begin{minipage}{.47\textwidth}
 			\centering
 			\includegraphics[width=.9\linewidth]{Images/Related-Work/PBR-and-PSL-approaches.png}\\
-			{(a) PBR and PSL \URI{https://ieeexplore.ieee.org/document/9253794/figures}}
+			{(a) PBR και PSL \URI{https://ieeexplore.ieee.org/document/9253794/figures}}
 		\end{minipage}%
 		\hspace*{+0.8cm}
 		% -----------------
 		\begin{minipage}{.47\textwidth}
 			\centering
 			\includegraphics[width=.9\linewidth]{Images/Related-Work/PBR-and-PSL-Features.png}\\
-			{(b) PBR and PSL Features \URI{https://ieeexplore.ieee.org/document/9253794/figures}}
+			{(b) Χαρακτηριστικά των PBR και PSL \URI{https://ieeexplore.ieee.org/document/9253794/figures}}
 		\end{minipage}
 	% -----------------
     \hfill \break
     \decoRule
-    \caption[PBR and PSL localization Approaches]{PBR and PSL localization Approaches based on \cite{wifi-passive-active-drone-localization}}
+    \caption[PBR και PSL προσεγγίσεις εντοπισμού]{PBR και PSL προσεγγίσεις εντοπισμού βάση του \cite{wifi-passive-active-drone-localization}}
     \label{fig:PBR-and-PSL}
 \end{figure}
 
@@ -116,7 +116,7 @@ non-convex optimization problem.
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/paper-spring.png}
-{An illustration of the spring system}%
+{Αναπαράσταση του spring system}%
 {spring-system}%
 <0.45>%
 [uwb-imu-gps1]%
@@ -131,14 +131,14 @@ non-convex optimization problem.
 
 % --------------------------------------------------------------------------------------------------------
 % --------------------------------------------------------------------------------------------------------
-\subsection{Cellular Networks}
+\subsection{Κυψελωτά δίκτυα}
 Ένας ακόμα εφικτός τρόπος προσέγγισης - για την εκτίμηση της θέσης - είναι με χρήση
 cellular networks. Η εξέλιξη των mobile networks (GSM/LTE/5G) έχει οδηγήσει να γίνουν προσπάθειες εκτίμησης
 της θέσης των drones με την βοήθεια αυτών των τεχνολογιών, παράδειγμα της μεθόδου βρίσκεται στο \Fig{cellular-network}. 
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/cellular.png}
-{Cellular network}%
+{Κυψελωτά δίκτυα}%
 {cellular-network}%
 <0.5>%
 [cellular-network-localization]%
@@ -163,7 +163,7 @@ power consumption ενός συστήματος, καθώς επίσης και 
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/lora-system-setup.png}%
-{Lora system setup}%
+{Σύνθεση συστήματος Lora}%
 {lora-system-setup}%
 <0.55>%
 [lora-localization](https://www.researchgate.net/figure/System-setup_fig1_341344946)
@@ -190,7 +190,7 @@ MATLAB simulations ενώ στην συνέχεια σε Software In The Loop (\
 
 % IMAGE
 \FigCaptLabelBasedURL{../Photos/RTK.png}%
-{RTK usage Principle}%
+{Αρχή λειτουργίας RTK}%
 {rtk-usage}%
 <0.42>%
 
@@ -204,7 +204,7 @@ base station - ουσιαστικά μιλάμε για μία stationary \Abbr{
 
 % --------------------------------------------------------------------------------------------------------
 % --------------------------------------------------------------------------------------------------------
-\section{Sound Waves} \label{sec:related-sound}
+\section{Ηχητικά κύματα} \label{sec:related-sound}
 Μία εναλλακτική εκδοχή προσέγγισης υπολογισμού της θέσης, είναι με την βοήθεια ακουστικών κυμάτων. Παρόλο που αναλογικά με τις άλλες μεθόδους δεν είναι τόσο συχνά χρησιμοποιούμενη, υφίσταται ερευνητικό ενδιαφέρον για προσπάθειας α\-πό\-κτη\-σης location information με χρήση ήχου. 
 
 Υπάρχουν εφαρμογές στις οποίες χρειάζεται να ανιχνευτεί η θέση non cooperative - ακόμα και εχθρικών - drone τα οποία είτε να μην μπορούν να ανιχνευτούν - λόγο μεγέθους - από κάμερα είτε να μην μπορεί να χρησιμοποιηθεί κάποια \Abbr{RF} τεχνική.
@@ -212,7 +212,7 @@ base station - ουσιαστικά μιλάμε για μία stationary \Abbr{
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/acoustic-arrays.png}%
-{Acoustic Arrays for localization}%
+{Χρήση ακουστικών διατάξεων για εντοπισμό θέσης}%
 {acoustic-arrays}%
 <0.55>%
 [sound-waves-for-drone-localization]%
@@ -231,7 +231,7 @@ priori Probability Density Function (\Abbr{GPDF}) αλγόριθμο\udot ώστ
 
 % ---------------------------------------------------------------------------------------------------------
 % ---------------------------------------------------------------------------------------------------------
-\subsection{Camera} \label{sec:related-camera}
+\subsection{Κάμερα} \label{sec:related-camera}
 H πιο απλή εκδοχή\udot είναι να γίνει χρήση μίας κάμερας και τεχνικών image processing για την εκροή συμπερασμάτων σχετικά με τον εντοπισμό θέσης \Abbr{UAV}.
 
 Στην έρευνα τους οι \cite{related-simple-camera}, προτείνουν την δημιουργία ενός 2-tier heterogeneous \Abbr{UAV} swarm συστήματος το οποίο θα είναι σε θέση να αντικαταστήσει την ανάγκη από ανθρώπινο δυναμικό να διεκπεραιώνει επικίνδυνες διαδικασίες (όπως καθάρισμα των παραθύρων σε ουρανοξύστη).
@@ -255,19 +255,19 @@ remote sensing technologies, συγκεκριμένα με την χρήση Lig
 		\begin{minipage}{.47\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{Images/Related-Work/lidar-drone-example.png}\\
-			{(a) UAV usage \URI{https://wingtra.com/drone-photogrammetry-vs-lidar/}}
+			{(a) Χρήση των UAV \URI{https://wingtra.com/drone-photogrammetry-vs-lidar/}}
 		\end{minipage}%
 		\hspace*{+0.8cm}
 		% -----------------
 		\begin{minipage}{.47\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{Images/Related-Work/lidar-cloud.png}\\
-			{(b) Cloud Point Data example \URI{https://community.safe.com/s/article/what-is-a-point-cloud-what-is-lidar}}
+			{(b) Παράδειγμα Cloud Point Data \URI{https://community.safe.com/s/article/what-is-a-point-cloud-what-is-lidar}}
 		\end{minipage}
 	% -----------------
     \hfill \break
     \decoRule
-	\caption[LiDAR examples]{LiDAR examples}
+	\caption[LiDAR]{LiDAR}
     \label{fig:drone-lidar}
 \end{figure}
 
@@ -285,7 +285,7 @@ remote sensing technologies, συγκεκριμένα με την χρήση Lig
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/slam-drone.png}
-{VSLAM drone perception example}%
+{Παράδειγμα αντιληπτικής ικανότητας VSLAM σε drone}%
 {vslam-drone-visual-perception-example}%
 <0.7>%
 [vslam-image]%
@@ -304,7 +304,7 @@ remote sensing technologies, συγκεκριμένα με την χρήση Lig
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Related-Work/optitrack.png}%
-{Optitrack Motion Capture System for drone swarm localization}%
+{Χρήση του Optitrack Motion Capture System για εντοπισμό σμήνος από drone}%
 {motion-capturing-drone-swarm}%
 <0.6>%
 (https://optitrack.com/systems/)

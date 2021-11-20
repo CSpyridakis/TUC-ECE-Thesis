@@ -4,15 +4,15 @@
 % To use upper dot in Greek (equivalent of English semicolon)
 \newcommand{\udot}{$^{\mbox{\textbf{.}}}$ }
  
-\newcommand{\Fig}[1]{\emph{Fi\-gu\-re} \getLabel{fig:#1}}       % E.g.  \Fig{drones}
-\newcommand{\Tabl}[1]{\emph{Ta\-ble} \getLabel{tab:#1}}         % E.g.  \Tabl{comparison}
-\newcommand{\Equa}[1]{\emph{E\-qua\-tion} (\getLabel{eq:#1})}     % E.g.  \Equa{linear}
+\newcommand{\Fig}[1]{\emph{Ει\-κό\-να} \getLabel{fig:#1}}       % E.g.  \Fig{drones}
+\newcommand{\Tabl}[1]{\emph{Πί\-να\-κα} \getLabel{tab:#1}}         % E.g.  \Tabl{comparison}
+\newcommand{\Equa}[1]{\emph{Ε\-ξί\-σω\-ση} (\getLabel{eq:#1})}     % E.g.  \Equa{linear}
 \newcommand{\EqNum}[1]{(\getLabel{eq:#1})}                      % E.g.  \EqNum{linear}
-\newcommand{\Chap}[1]{\emph{Cha\-pter} \getLabel{chap:#1}}      % E.g.  \Chap{second}
-\newcommand{\Sect}[1]{\emph{Se\-ction} \getLabel{sec:#1}}       % E.g.  \Sect{first}
+\newcommand{\Chap}[1]{\emph{Κε\-φά\-λαι\-ο} \getLabel{chap:#1}}      % E.g.  \Chap{second}
+\newcommand{\Sect}[1]{\emph{Πα\-ρά\-γρα\-φο} \getLabel{sec:#1}}       % E.g.  \Sect{first}
 \newcommand{\URI}[1]{(\href{#1}{URL})}                          % E.g.  \URI{www.google.com}  -> clickable (URL) text
-\newcommand{\Algo}[1]{\emph{A\-lgo\-ri\-thm} \getLabel{alg:#1}} % E.g.  \Algo{pseudocode}
-\newcommand{\List}[1]{\emph{Li\-sting} \getLabel{list:#1}}      % E.g.  \List{code}
+\newcommand{\Algo}[1]{\emph{Α\-λγό\-ρι\-θμο} \getLabel{alg:#1}} % E.g.  \Algo{pseudocode}
+\newcommand{\List}[1]{\emph{Πα\-ρά\-θε\-ση} \getLabel{list:#1}}      % E.g.  \List{code}
 \newcommand{\TODO}[1]{\colorbox{orange}{#1}}                    % E.g.  \TODO{Testing}
 
 \newcommand{\getLabel}[1]{%
@@ -62,7 +62,7 @@
 
 % E.g. \CaptionBasedwithURL{caption}[based](URL) 
 \NewDocumentCommand\CaptionBasedwithURL{m o d()}{
-    \caption[\relax{#1}]{#1\IfValueT{#2}{ based on \cite{#2}}\IfValueT{#3}{ \URI{#3}}}
+    \caption[\relax{#1}]{#1\IfValueT{#2}{ βασισμένο στο \cite{#2}}\IfValueT{#3}{ \URI{#3}}}
 }
 
 % E.g. \FigCaptBasedURL{image}{caption}{label}<imageWidth>[based](URL)
