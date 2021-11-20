@@ -1,0 +1,413 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MHL Thesis LaTeX Template
+% Version 1.0 (23/6/2020)
+%
+% This template is based on a template by:
+% Steve Gunn (http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/)
+% Sunil Patel (http://www.sunilpatel.co.uk/thesis-template/)
+%
+% found on:
+% http://www.LaTeXTemplates.com/template/masters-doctoral-thesis
+%
+% Template license:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	12pt, % The default document font size, options: 10pt, 11pt, 12pt
+	% oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+	english, % ngerman for German
+	onehalfspacing, % Single line spacing, alternatives: singlespacing or doublespacing
+	%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+	%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+	liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+	toctotoc, % Uncomment to add the main table of contents to the table of contents
+	parskip, % Uncomment to add space between paragraphs
+	%nohyperref, % Uncomment to not load the hyperref package
+	headsepline, % Uncomment to get a line under the header
+	% chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+	% consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{MastersDoctoralThesis} % The class file specifying the document structure
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[LGR, T1]{fontenc} % Output font encoding for international characters
+\usepackage{babel} % Use the Palatino font by default [default or mathpazo]
+\usepackage[backend=bibtex,style=ieee,natbib=true,sorting=none,maxbibnames=99]{biblatex} % Use the bibtex back-end with the numeric citation style
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage[section]{placeins}
+\usepackage{comment}
+\usepackage{algorithm} % \usepackage{algorithm}  vs	 \usepackage[linesnumbered, ruled, vlined]{algorithm2e} 
+\usepackage[noend]{algpseudocode}
+\def\NoNumber#1{{\def\alglinenumber##1{}\State #1}\addtocounter{ALG@line}{-1}}
+
+\usepackage[hyperfootnotes=false]{hyperref}
+\usepackage{graphicx}
+\usepackage{textcomp} 					%provide many text symbols (such as baht, bullet, copyright, musical note, one quarter, section, and yen)
+\usepackage{amsmath}
+\usepackage{amssymb}					% Mathematical Symbols
+\usepackage{float}
+\usepackage{cancel}						% For cancel in equations 
+\usepackage{svg} 						% Maybe not used
+\usepackage[bottom]{footmisc}			% To add footnotes
+\usepackage[usestackEOL]{stackengine} 	% For multiple lines in tables and alignment
+
+% Greek language support
+\usepackage{textgreek}
+\usepackage{lmodern} 
+\usepackage{alphabeta}
+
+% Auxiliary Commands
+\usepackage{etoolbox}
+\usepackage{xparse}
+\include{Misc/NewCommands}
+
+% For tan^-1
+\newcommand{\taninv}{\tan^{-1}}
+
+% Diagrams
+\usepackage{tikz}
+\usetikzlibrary{arrows, shapes, positioning, shadows, trees}
+
+% The following two lines handle too long URLs on bibliography
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+% To use comments in your text by using \* ... *\
+\def\*#1*\ {} %E.g. Text \* comment *\ text
+
+
+% -----------------------------------------------------
+% For code snippets 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+% \begin{lstlisting}[language=sh, escapechar=@, caption={Descriptive Caption Text}, label=DescriptiveLabel]
+%     @Out of listing scope@ Code
+% \end{lstlisting}
+
+
+% Available languages: C++, Matlab, Python, Java, Octave, sh
+% -----------------------------------------------------
+
+
+% One different way for chapter styling
+% --------------------------------------------------
+% \usepackage{titlesec, blindtext, color}
+% \definecolor{gray75}{gray}{0.75}
+% \newcommand{\hsp}{\hspace{20pt}}
+% \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+% --------------------------------------------------
+
+% Second different chapter styling
+% --------------------------------------------------
+% \usepackage[explicit]{titlesec}
+% \usepackage{lmodern}
+% \newlength\chapnumb
+% \setlength\chapnumb{4cm}
+% \titleformat{\chapter}[block]
+% 	{\normalfont\sffamily}{}{0pt}
+% 	{\parbox[b]{\chapnumb}{\fontsize{40}{40}\selectfont\thechapter}
+%   	\parbox[b]{\dimexpr\textwidth-\chapnumb\relax}{
+% 		\raggedleft\hfill{\LARGE#1}\\
+% 		\rule{\dimexpr\textwidth-\chapnumb\relax}{0.4pt}}}
+
+% \titleformat{name=\chapter,numberless}[block]
+% 	{\normalfont\sffamily}{}{0pt}
+% 	{\parbox[b]{\chapnumb}{\mbox{}}
+%   	\parbox[b]{\dimexpr\textwidth-\chapnumb\relax}{%
+%     	\raggedleft\hfill{\LARGE#1}\\
+% 		\rule{\dimexpr\textwidth-\chapnumb\relax}{0.4pt}}}
+% --------------------------------------------------
+
+% Maybe remove, that solves a warning
+\pgfplotsset{compat=1.15}
+
+\makeatletter
+\makeatother
+\def\infinity{\rotatebox{90}{8}}
+\addtocontents{loa}{\def\string\figurename{Algorithm}}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY FILES
+%----------------------------------------------------------------------------------------
+
+% \addbibresource{example.bib} % The filename of the bibliography
+\addbibresource{References/References.bib}
+\addbibresource{References/Introduction.bib}
+\addbibresource{References/Theoretical-Background.bib}
+\addbibresource{References/Related-Work.bib}
+\addbibresource{References/Design-Implementation.bib}
+
+%----------------------------------------------------------------------------------------
+%	MARGIN SETTINGS
+%----------------------------------------------------------------------------------------
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=2.8cm, % Outer margin
+	bindingoffset=1cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	THESIS INFORMATION
+%----------------------------------------------------------------------------------------
+
+% TODO : fill info below
+\thesistitle{Design and Implementation of a Low Cost Embedded System for Localization of Drones Flying in Swarms} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitlelang{Σχεδίαση και Υλοποίηση Ενσωματωμένου Συστήματος Χαμηλού Κόστους για Εύρεση Θέσης μη Επανδρωμένων Αεροσκαφών που Πετούν σε Σχηματισμό} 
+\author{Christos \textsc{Spyridakis}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
+\abstractnamelang{Περίληψη}
+\bynamelang{από τον }
+\authorex{Χρήστο \textsc{Σπυριδάκη}}
+\supervisor{Prof. Apostolos \textsc{Dollas}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
+\degree{Electrical and Computer Engineer} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\degreeex{Ηλεκτρολόγος Μηχανικός και Μηχανικός Υπολογιστών}
+\subject{Electrical and Computer Engineering} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
+\keywords{Drones, Swarm, Swarm of Drones, 
+	WSN, Wireless Sensor Networks, Fleet of Drones, Angle of Arrival, 
+	AOA, Direction of Arrival, DOA, Multilateration, Trilateration, Triangulation, 
+	Bounding Box, Received Signal Strength Indicator, RSSI, Time Difference of Arrival, 
+	TDOA, Time of Arrival, TOA, Unmanned Aircraft System, UAS, Unmanned Aerial Vehicle, UAV} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
+\university{\href{https://www.tuc.gr/}{Technical University of Crete}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
+\universityex{\href{https://www.tuc.gr/}{Πολυτεχνείο Κρήτης}}
+\department{\href{https://www.ece.tuc.gr/}{School of Electrical and Computer Engineering}} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\departmentex{\href{https://www.ece.tuc.gr/}{Σχολή Ηλεκτρολόγων Μηχανικών και Μηχανικών Υπολογιστών}}
+\group{\href{https://www.mhl.tuc.gr/}{Microprocessor and Hardware Laboratory}} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
+\faculty{
+		% \href{http://faculty.university.com}{Faculty Name}
+} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
+
+\AtBeginDocument{
+	\hypersetup{pdftitle=\ttitle} % Set the PDF's title to your title
+	\hypersetup{pdfauthor=\authorname} % Set the PDF's author to your name
+	\hypersetup{pdfkeywords=\keywordnames} % Set the PDF's keywords to your keywords
+	\hypersetup{pdfsubject={Embedded Systems}} % Set the PDF's subject to your subject
+	% \hypersetup{baseurl={https://TODO.com}} % Need to validate if works
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+\begin{titlepage}
+	\begin{center}
+
+		\vspace*{.01\textheight}
+		{\scshape\LARGE \univname\par}\vspace{0.2cm} % University name
+		\textsc{\Large Diploma Thesis}\\[0.15cm] % Thesis type
+
+		\HRule \\[0.3cm] % Horizontal line
+		{\huge \bfseries \ttitle\par}\vspace{0.3cm} % Thesis title
+		\HRule \\[0.05cm] % Horizontal line
+
+		\begin{minipage}[t]{0.32\textwidth}
+			\begin{flushleft} \large
+				\emph{Author:}\\
+				% TODO : fill correct link
+				\href{https://www.linkedin.com/in/cspyridakis}{\authorname} % Author name - remove the \href bracket to remove the link
+			\end{flushleft}
+		\end{minipage}
+		\begin{minipage}[t]{0.62\textwidth}
+			\begin{flushright} \large
+				\emph{Thesis Committee:} \\
+				% TODO : fill correct link
+				\href{https://www.ece.tuc.gr/index.php?id=4531&tx_tuclabspersonnel_list%5Bperson%5D=289&tx_tuclabspersonnel_list%5Baction%5D=person&tx_tuclabspersonnel_list%5Bcontroller%5D=List}{\supname \hspace{.1cm}(Supervisor)}\\ % Supervisor name - remove the \href bracket to remove the link
+				% TODO : fill correct link, full name
+				\href{https://www.ece.tuc.gr/index.php?id=4531&tx_tuclabspersonnel_list%5Bperson%5D=79&tx_tuclabspersonnel_list%5Baction%5D=person&tx_tuclabspersonnel_list%5Bcontroller%5D=List}{Assoc. Prof. Eftychios \textsc{Koutroulis}}\\
+				% TODO : fill correct link, full name
+				\href{https://www.tuc.gr/index.php?id=5643&tx_tuclabspersonnel_pi3%5Bpersonid%5D=347}{Assoc. Prof. Panagiotis \textsc{Partsinevelos}}
+			\end{flushright}
+		\end{minipage}\\[0.42cm]
+
+		\includegraphics[scale=0.21]{Images/TUC_logo.png} % University/department logo - uncomment to place it
+		\\[0.5cm]
+
+		\vfill
+
+		\large \textit{A thesis submitted in fulfillment of the requirements\\ for the diploma of \degreename}\\[0.1cm] % University requirement text
+		\textit{in the}\\[0.1cm]
+		\deptname\\\groupname\\[0.4cm] % Research group name and department name
+
+		\vfill
+
+		{\large \today}\\[2cm] % Date
+		%\includegraphics{Logo} % University/department logo - uncomment to place it
+
+		\vfill
+	\end{center}
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE - ENGLISH
+%----------------------------------------------------------------------------------------
+\include{Misc/Abstract-en}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE - GREEK
+%----------------------------------------------------------------------------------------
+\include{Misc/Abstract-gr}
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+\include{Misc/Acknowledgments}
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Prints the main table of contents
+\listoffigures % Prints the list of figures
+\listoftables % Prints the list of tables
+\listofalgorithms % Prints the list of algorithms
+\addcontentsline{toc}{chapter}{List of Algorithms}
+
+
+%----------------------------------------------------------------------------------------
+%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+%----------------------------------------------------------------------------------------
+%TODO:
+\begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
+	% Constant Name & $Symbol$ & $Constant Value$ with units\\
+	% The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
+	Speed of Light in vacuum & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
+	Pi, Archimedes' constant & \pi & 3.14159 26535 (approximation)
+\end{constants}
+
+%----------------------------------------------------------------------------------------
+%	SYMBOLS
+%----------------------------------------------------------------------------------------
+%TODO:
+\begin{symbols}{lll} % Include a list of Symbols (a three column table)
+	%Symbol & Name & Unit \\
+	%E.g. $P$ & power & \si{\watt} (\si{\joule\per\second}) \\
+
+	$A$ & amplitude &  \\
+	$d$ & distance & \si{\meter} \\
+	$f$ & frequency & \si{\hertz} \\
+	$P$ & power & \si{\watt} (\si{\joule\per\second}) \\
+	$r$ & radius & \si{\meter} \\
+	$s$ & speed & \si{\meter\per\second} \\
+	$t$ & time & \si{\second} \\
+	$V$ & velocity & \si{\meter\per\second} \\
+
+	% Gap to separate the Roman symbols from the Greek
+	\addlinespace 
+
+	$\theta$ & angle & \si{\degree}\\
+	$\lambda$ & wavelength & \si{\meter} \\
+	$\phi$ & phase & \si{\degree} \\
+	$\omega$ & angular frequency & \si{\radian} \\
+\end{symbols}
+
+	
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+\include{Misc/Abbreviations} % TODO: edit to your requirements
+
+% --------------------------------------------------------------------------------
+% 		Basically a file containing the lines below to create your abbreviations list
+% --------------------------------------------------------------------------------
+
+% \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)]
+% 	\CreateAbbr{2D}			{\textbf{2} \textbf{D}imensional}
+% \end{abbreviations}
+
+% Small tip: just run $make fixAbbr, so this file will be automatically sort in alphabetical 
+% order!
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+\dedicatory{Dedicated to those people who have helped me be the person I am today\ldots}
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+\pagestyle{thesis} % Return the page headers back to the "thesis" style
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\include{Chapters/Chapter1}   % Introduction
+\include{Chapters/Chapter2}   % Theoretical Background (from WSN)
+\include{Chapters/Chapter3}   % Related Work
+\include{Chapters/Chapter4}   % Design Features and Implementation
+% \include{Chapters/Chapter5}   % Applications and Usage Examples
+\include{Chapters/Chapter6}   % Design Verification and Performance Results
+\include{Chapters/Chapter7}   % Future work
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
+
+\appendix % Cue to tell LaTeX that the following "chapters" are Appendices
+
+% Include the appendices of the thesis as separate files from the Appendices folder
+% Uncomment the lines as you write the Appendices
+
+% Todo: comment out if not needed	
+% \include{Appendices/AppendixA}
+% \include{Appendices/AppendixB}
+% \include{Appendices/AppendixC}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{References}
+\printbibliography[keyword={References}, title={References}]
+\printbibliography[keyword={Link}, title={External Links}]
+
+% Personal last page
+\cleardoublepage
+\thispagestyle{plain}
+\thispagestyle{empty} 
+\null\vfil
+\begin{center}{\Large\slshape Last Page}\end{center}
+\vfil\null
+%----------------------------------------------------------------------------------------
+
+\end{document}

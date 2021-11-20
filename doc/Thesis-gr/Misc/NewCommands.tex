@@ -1,0 +1,83 @@
+% Euclidean Norm symbol
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+% To use upper dot in Greek (equivalent of English semicolon)
+\newcommand{\udot}{$^{\mbox{\textbf{.}}}$ }
+ 
+\newcommand{\Fig}[1]{\emph{Fi\-gu\-re} \getLabel{fig:#1}}       % E.g.  \Fig{drones}
+\newcommand{\Tabl}[1]{\emph{Ta\-ble} \getLabel{tab:#1}}         % E.g.  \Tabl{comparison}
+\newcommand{\Equa}[1]{\emph{E\-qua\-tion} (\getLabel{eq:#1})}     % E.g.  \Equa{linear}
+\newcommand{\EqNum}[1]{(\getLabel{eq:#1})}                      % E.g.  \EqNum{linear}
+\newcommand{\Chap}[1]{\emph{Cha\-pter} \getLabel{chap:#1}}      % E.g.  \Chap{second}
+\newcommand{\Sect}[1]{\emph{Se\-ction} \getLabel{sec:#1}}       % E.g.  \Sect{first}
+\newcommand{\URI}[1]{(\href{#1}{URL})}                          % E.g.  \URI{www.google.com}  -> clickable (URL) text
+\newcommand{\Algo}[1]{\emph{A\-lgo\-ri\-thm} \getLabel{alg:#1}} % E.g.  \Algo{pseudocode}
+\newcommand{\List}[1]{\emph{Li\-sting} \getLabel{list:#1}}      % E.g.  \List{code}
+\newcommand{\TODO}[1]{\colorbox{orange}{#1}}                    % E.g.  \TODO{Testing}
+
+\newcommand{\getLabel}[1]{%
+    \ifcsundef{r@#1}{%
+        \colorbox{red}{\textbf{There is any label: #1}}%
+    }{%
+        \ref{#1}%
+    }%
+}
+
+% HLineWithSpaces<upperSpace>[lineLength]<downSpace>
+\NewDocumentCommand\HLineWithSpaces{D<>{1} O{300} D<>{1}}{
+    \vspace{#1\baselineskip}
+        \begin{center}
+            \line(1,0){#2}
+        \end{center}
+    \vspace{#3\baselineskip}
+}
+
+% Create new Abbreviation (Use it on Abbreviation List ONLY! - before use actual abbreviation)
+\NewDocumentCommand\CreateAbbr{m o m}{%
+\textbf{#1} & #3\IfValueTF{#2}{\label{abbr:#2}}{\label{abbr:#1}}\\}  %E.g.  \Abbr{UAV}{Unmanned Aerial Vehicle}
+
+% Use it whenever you want to call an abbreviation
+\NewDocumentCommand\Abbr{m d() D<>{}}{%
+    \ifcsundef{r@abbr:#1}{%
+        \colorbox{red}{\textbf{Add #1 to your Abbr list}}%
+    }{%
+        % \ifcsundef{r@abbrUsed:#1}{%
+        %     \begingroup%
+        %     \let\textbf\relax%
+        %     % TODO: Add here Long version of abbreviation for first execution
+        %     (\hyperref[abbr:#1]{#1\IfValueT{#2}{#2}})%
+        %     \endgroup%
+        %     % 
+        % }{%
+            \hyperref[abbr:#1]{\IfValueTF{#2}{#2}{#1}#3}%
+        % }%
+    }%
+}  %E.g.  \Abbr{UAV}[s]
+
+% \ifcsname r@abbr:#1 \endcsname
+% \hyperref[abbr:#1]{#1\IfValueT{#2}{#2}}%
+% \else
+% \colorbox{red}{\textbf{Add #1 to your Abbr list}}%
+% \fi
+
+% E.g. \CaptionBasedwithURL{caption}[based](URL) 
+\NewDocumentCommand\CaptionBasedwithURL{m o d()}{
+    \caption[\relax{#1}]{#1\IfValueT{#2}{ based on \cite{#2}}\IfValueT{#3}{ \URI{#3}}}
+}
+
+% E.g. \FigCaptBasedURL{image}{caption}{label}<imageWidth>[based](URL)
+\NewDocumentCommand\FigCaptLabelBasedURL{+m +m +m +D<>{0.5} +o +d()}{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#4\linewidth]{#1}
+        \decoRule
+        \CaptionBasedwithURL{#2}[#5](#6)
+        \label{fig:#3}
+    \end{figure}
+}
+
+
+% \let\oldcite\cite
+% \renewcommand{\cite}[1]{%
+%     \oldcite{#1}
+% }
