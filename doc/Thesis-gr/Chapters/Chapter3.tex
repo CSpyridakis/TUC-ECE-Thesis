@@ -51,7 +51,7 @@ nodes των οποίων η θέση είναι γνωστή ή άμεσα υπ
 
 % IMAGE
 \FigCaptLabelBasedURL{Images/Theoretical-Background/localization-systems-components.png}%
-{Localization System components}%
+{Στοιχεία των Localization Systems}%
 {Localization-Systems-components}%
 <0.55>%
 [wsn-Localization-systems]%
@@ -66,8 +66,8 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 Ενώ τέλος είναι το κύριο μέρος του συστήματος, με όνομα \textbf{Localization Algorithm} και ουσιαστικά είναι
 ο προκαθορισμένος τρόπος που θα ακολουθηθεί για να υπολογιστεί η θέση των unknown nodes με βάση όλες τις 
 πληροφορίες που έχουμε.
-Στο \Fig{Localization-Systems-components} δίνεται η απεικόνιση που έδωσαν οι συγγραφείς του 
-\cite{wsn-Localization-systems} για να εξηγήσουν το παραπάνω. Ενώ στο \Fig{Localization-system}
+Στην \Fig{Localization-Systems-components} δίνεται η απεικόνιση που έδωσαν οι συγγραφείς του 
+\cite{wsn-Localization-systems} για να εξηγήσουν το παραπάνω. Ενώ στην \Fig{Localization-system}
 έχει γίνει μία προσπάθεια να κατηγοριοποιηθούν τα κομμάτια καθώς και τεχνικές των Localization Systems,
 με βάση τα \cite{farooqiazam2016location} \cite{wsn-Localization-systems} \cite{wsn-Localization-techniques}
 και αναλύονται στην συνέχεια του κεφαλαίου.
@@ -134,7 +134,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 		\end{tikzpicture}
 	}
 	\decoRule
-	\caption[Localization System overview (RF-based approach)]{Localization System overview (\Abbr{RF}-based approach)}
+	\caption[Επισκόπηση των Localization System (RF-based approach)]{Επισκόπηση των Localization System (\Abbr{RF}-based approach)}
 	\label{fig:Localization-system}
 \end{figure}
 
@@ -148,9 +148,9 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-\section{Energy-based Localization} \label{sec:Energy-based} 
+\section{Εντοπισμός θέσης με βάση την ενέργεια} \label{sec:Energy-based} 
 
-\subsection{Distance/Angle Estimation}\label{sec:Distance-Angle-Estimation}
+\subsection{Εκτίμηση Απόστασης/Γωνίας}\label{sec:Distance-Angle-Estimation}
 
 Θα ξεκινήσουμε με μία σύντομη ανάλυση των τεχνικών εκτίμησης της απόστασης - μεταξύ δύο nodes -
 που χρησιμοποιούνται ήδη, στις προσεγγίσεις \Abbr{RF} \& sound. 
@@ -198,7 +198,7 @@ equations, από το ένα στο άλλο \cite{rssi-wlan} \cite{wikipedia-d
 	\right.
 \end{align}
 
-Ενώ το \Fig{Ideal-RSSI-over-distance} περιγράφει σχηματικά το ιδανικό μοντέλο της εξάρτηση της ισχύς με την αύξηση
+Ενώ η \Fig{Ideal-RSSI-over-distance} περιγράφει σχηματικά το ιδανικό μοντέλο της εξάρτηση της ισχύς με την αύξηση
 της απόστασης όταν χρησιμοποιούμε στον δέκτη μέτρηση σε dΒm. 
 
 %-------------------------------------------
@@ -240,7 +240,7 @@ Difference of Arrival (\Abbr{TDoA}) \cite{wsn-Localization-systems}.
 
 Αξιοποιώντας την \EqNum{speed} ως αρχή, μπορούμε να καταλήξουμε στην \EqNum{tod-distance} για να εκτιμήσουμε
 την απόσταση \emph{d} που βρίσκονται δύο nodes μεταξύ τους, αν ένα κύμα κινείται με ταχύτητα \emph{s} και χρειάστηκε 
-χρόνο \emph{t} για να μεταδοθεί από το ένα node στο άλλο. Στο \Fig{Time-of-Arrival-cases} (a) απεικονίζεται
+χρόνο \emph{t} για να μεταδοθεί από το ένα node στο άλλο. Στην \Fig{Time-of-Arrival-cases} (a) απεικονίζεται
 σχηματικά αυτό, όπου $t=t_b-t_a$ με $t_b$ η χρονική στιγμή που φτάνει το κύμα στο receiver και $t_a$
 η χρονική στιγμή η οποία ξεκινάει από τον transmitter. Σε περίπτωση που μιλάμε για  
 \Abbr{RF} η ταχύτητα μετάδοσης του κύματος είναι ίση με την ταχύτητα μετάδοσης του φωτός $c_o$, το οποίο 
@@ -318,11 +318,11 @@ Difference of Arrival (\Abbr{TDoA}) \cite{wsn-Localization-systems}.
 που έφτασε σε καθένα από τα beacons το σήμα που έστειλε το free node, για την εκτίμηση της θέσης του free node από
 το καθένα από αυτά. Σημαντικό σε αυτήν την περίπτωση είναι και εδώ, να είναι απόλυτα συγχρονισμένα τα beacons. 
 Βασίζεται στις ιδιότητες των υπερβολικών καμπύλων και στο ότι με δεδομένη μία συγκεκριμένη χρονική διαφορά του σήματος, 
-το free node θα πρέπει να βρίσκεται κάπου πάνω σε μία υπερβολική καμπύλη όπως παρουσιάζεται από το \Fig{TDoA-hyberbolas}
+το free node θα πρέπει να βρίσκεται κάπου πάνω σε μία υπερβολική καμπύλη όπως παρουσιάζεται από την \Fig{TDoA-hyberbolas}
 \cite{youtube-angle-of-arrival-tdoa-hyberbolas}. 
 
 Μόνο από αυτόν τον υπολογισμό δεν δύναται να κάνουμε ακριβή εκτίμηση από\-στασης, 
-μπορούμε να συμπεράνουμε όμως τον γεωμετρικό τόπο στον οποίο βρίσκεται το free node. Στο \Sect{Multilateration} - και σε επέκταση αυτού -
+μπορούμε να συμπεράνουμε όμως τον γεωμετρικό τόπο στον οποίο βρίσκεται το free node. Στη \Sect{Multilateration} - και σε επέκταση αυτού -
 παρουσιάζεται όμως, ο τρόπος με τον οποίο μπορούμε να συνδυάσουμε τέτοια πληροφορία από πολλαπλά beacon για να εκτιμήσουμε την ακριβή θέση του free node.
 
 \begin{figure} [H]
@@ -354,7 +354,7 @@ Difference of Arrival (\Abbr{TDoA}) \cite{wsn-Localization-systems}.
 
 Η δεύτερη εκδοχή της χρήσης \Abbr{TDoA} - η οποία είναι πιο συχνή στα \Abbr{WSN} και 
 μας ε\-νδια\-φέ\-ρει περισσότερο, 
-χρησιμοποιεί multiple signals με single receiver και παρουσιάζεται στο \Fig{Time-Difference-of-Arrival-cases} (b). 
+χρησιμοποιεί multiple signals με single receiver και παρουσιάζεται στην \Fig{Time-Difference-of-Arrival-cases} (b). 
 Αρχή λειτουργίας έχει ότι ο transmitter θα στείλει πολλαπλά - διαφορετικού είδους - σήματα και ο δέκτης θα μετρήσει την χρονική διαφορά 
 που τα έλαβε. Ως παράδειγμα μπορεί το ένα σήμα να είναι σε \Abbr{RF} και να κινείται με ταχύτητα $s_r=c_o$ και το άλλο 
 ηχητικό με ταχύτητα $s_s \approx 343m/s$ \footnote{Για μετάδοση σε ξηρό αέρα υπό θερμοκρασία \SI{20}{\celsius} \cite{wikipedia-speed-of-sound}}. 
@@ -396,7 +396,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Ο όρος \emph{Beamforming} \cite{wikipedia-beamforming} χρησιμοποιείται για να περιγράψει το pattern 
 της ευαισθησίας του σήματος που στέλνει/λαμβάνει μία \emph{directional antenna} \cite{wikipedia-directionl-antenna}. 
 % ή γενικά στην χρήση του μοντέλου της \emph{anisotropy antenna}. 
-Το pattern αυτού του τύπου κε\-ραί\-ας, παρουσιάζεται στο \Fig{Typical-anisotropic-antenna-pattern}
+Το pattern αυτού του τύπου κε\-ραί\-ας, παρουσιάζεται στην \Fig{Typical-anisotropic-antenna-pattern}
 \cite{wsn-Localization-techniques} και μπορούμε να χρησιμοποιήσουμε αυτό το χαρακτηριστικό για τον υπολογισμό της \Abbr{AoA}. 
 Εάν χρησιμοποιούμε \emph{directional ante\-nna} στον receiver και μπορούμε είτε με μηχανικό είτε με ηλεκτρονικό τρόπο να στρέψουμε
 την κεραία σε διάφορες κατευθύνσεις, τότε μπορούμε μετρώντας το πλάτος του σήματος που λαμβάνουμε, να εκτιμήσουμε και την κατεύθυνση του - όπου ιδανικά
@@ -427,7 +427,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 
 Συνεπώς, αν σχεδιάσουμε ένα antenna array, όπου η κάθε κεραία απέχει από την γειτονική της σε συγκεκριμένη απόσταση \emph{d} και μετρώντας 
 το phase difference του σήματος που λαμβάνουμε μεταξύ τους, τότε μπορούμε να υπολογίσουμε την γωνία πρόσληψης της ακτινοβολίας μέσω της 
-σχέσης \EqNum{aoa-equation} \cite{wsn-Localization-techniques} \cite{youtube-phase-difference-equation}. Παράδειγμα αυτού\udot βρίσκεται στο \Fig{Antenna-Arrays} (a).
+σχέσης \EqNum{aoa-equation} \cite{wsn-Localization-techniques} \cite{youtube-phase-difference-equation}. Παράδειγμα αυτού\udot βρίσκεται στην \Fig{Antenna-Arrays} (a).
 Σε αυτήν την περίπτωση χρησιμοποιούμε \emph{omnidirectional} κεραίες και o υπολογισμός της διαφοράς φάσης μπορεί να γίνει
 μέσω μετρήσεων \Abbr{TDoA}.
 
@@ -437,7 +437,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \end{gather}
 
 Δεν υπάρχουν όμως μόνο τα linear antenna arrays, μπορούμε να τα σχεδιάσουμε σε διάφορες διατάξεις, 
-παράδειγμα μίας εξ' αυτών βρίσκεται στο \Fig{Antenna-Arrays} (b).
+παράδειγμα μίας εξ' αυτών βρίσκεται στην \Fig{Antenna-Arrays} (b).
 
 \begin{figure} [H]
 	\centering
@@ -517,7 +517,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 τότε μπορούμε να συμπεράνουμε ότι το free node είναι κάπου πάνω στην περιφέρεια ενός 
 κύκλου, με κέντρο το beacon και ακτίνα την απόσταση μεταξύ του beacon και του free node. 
 Επαναλαμβάνοντας αυτό για ακόμα δύο beacons, τελικά το free node στο δισδιάστατο επίπεδο $(\mathfrak{R}^2)$ θα πρέπει να βρίσκεται στην τομή των τριών κύκλων, πράγμα που γραφικά 
-απεικονίζεται στο \Fig{Trilateration-examples} (a) \cite{RSSI-trilateration-Range_based}.
+απεικονίζεται στην \Fig{Trilateration-examples} (a) \cite{RSSI-trilateration-Range_based}.
 
 \begin{align}
 	x^2-2 x_1 x + x_1^2 + y^2-2 y_1 y + y_1^2 &= r_1^2 \label{eq:trilateration-b1} \\ 
@@ -554,7 +554,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Όπως αναφέρθηκε και στις προηγούμενες ενότητες, ο υπολογισμός της απόστασης πολύ πιθανόν να περιλαμβάνει μια μικρή απόκλιση $\widehat{r_i} = r_i - ε$, 
 με το ε συχνά να θεωρείται μία ανεξάρτητη κανονική τυχαία μεταβλητή με μηδενικό μέσο. Αυτό σημαίνει ότι
 τότε οι κύκλοι δεν έχουν ένα κοινό σημείο τομής, αλλά το free node βρίσκεται κάπου μέσα στο χωρίο επικάλυψης
-των τριών κύκλων, σχηματικά αυτό παρουσιάζεται στο \Fig{Trilateration-examples} (b) και σε αυτήν την περίπτωση καταλήγουμε σε ένα
+των τριών κύκλων, σχηματικά αυτό παρουσιάζεται στην \Fig{Trilateration-examples} (b) και σε αυτήν την περίπτωση καταλήγουμε σε ένα
 μη πεπερασμένο πλήθος λύσεων, με τη συνάρτηση του κάθε κύκλου να περιγράφεται από την εξίσωση
 \EqNum{trilateration-circles-error} \cite{wsn-Localization-systems}.
 
@@ -582,7 +582,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 τετράγωνα μήκος πλευράς $2d_i$ με κέντρο το κέντρο του beacon και συντεταγμένες $(x_i - d_i, y_i - d_i)$ \& $(x_i + d_i, y_i + d_i)$. 
 Θετικό πλέον είναι ότι δεν χρειάζεται να κάνουμε floating point operations για τον υπολογισμό του χωρίου τομής - αλλά μπορούμε να το υπολογίσουμε
 με απλή γεωμετρία. Αφού έχουμε υπολογίσει το χωρίο τομής των τετραγώνων μπορούμε να θεωρήσουμε ότι στο κέντρο του βρίσκεται το free node.
-Παράδειγμα αυτής της μεθόδου βρίσκεται στο \Fig{Bounding-Box-example}.
+Παράδειγμα αυτής της μεθόδου βρίσκεται στην \Fig{Bounding-Box-example}.
 Η συγκεκριμένη μέθοδος μπορεί να είναι ευκολότερη υπολογιστικά και να απαιτεί λιγότερα processor resources από το Trilateration, όμως ταυτόχρονα 
 προκύπτει και μεγαλύτερο σφάλμα απόκλισης \cite{wsn-Localization-systems}.   
 
@@ -590,7 +590,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 %----------------------------------------------------------------------
 \subsubsection{Triangulation}
 Σε αντίθεση με τις παραπάνω μεθόδους, η τεχνική Triangulation εκτιμάει την θέση του node που μας ενδιαφέρει, χρησιμοποιώντας   
-γνώση που έχουμε για γωνίες και όχι εκτίμηση της απόστασης. Ένα απλούστερο παράδειγμα παρουσιάζεται στο \Fig{Principles-of-Triangulation}, όπου σε αυτό το παράδειγμα από την τριγωνομετρία,
+γνώση που έχουμε για γωνίες και όχι εκτίμηση της απόστασης. Ένα απλούστερο παράδειγμα παρουσιάζεται στην \Fig{Principles-of-Triangulation}, όπου σε αυτό το παράδειγμα από την τριγωνομετρία,
 μπορούμε εύκολα να συμπεράνουμε ότι για τις γωνίες $\theta_1$ και $\theta_2$ ισχύουν οι σχέσεις \EqNum{angle-equations-triangulation}.
 
 % IMAGE
@@ -644,7 +644,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 Αυτή η τεχνική εκτίμησης της θέσης του node, μπορεί να γίνει είτε από τοπικές μετρήσεις του ίδιου του node -
 \Fig{Triangulation-examples} (a) - είτε από μετρήσεις γωνιών που κάνουν τα anchors - \Fig{Triangulation-examples} (b)
 \cite{wsn-Localization-systems}. Φυσικά σε μία πραγματική εφαρμογή, όπως έχει αναφερθεί παραπάνω, οι μετρήσεις παρουσιάζουν αποκλίσεις 
-από τα ιδανικά μοντέλα. Συνεπώς το \Fig{Triangulation-examples} (c) παρουσιάζει σε πιο ρεαλιστικά επίπεδα - συνυπολογίζοντας την ύπαρξη 
+από τα ιδανικά μοντέλα. Συνεπώς την \Fig{Triangulation-examples} (c) παρουσιάζει σε πιο ρεαλιστικά επίπεδα - συνυπολογίζοντας την ύπαρξη 
 των αποκλίσεων - 
 το χωρίο στο οποίο με μεγαλύτερη πιθανότητα βρίσκεται το node.
 
@@ -652,7 +652,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \subsubsection{Multilateration} \label{sec:Multilateration}
 Η μέθοδος του Multilateration\footnote{Κάποιες φορές ο όρος αυτός χρησιμοποιείται επίσης σε αναφορά της χρήσης του Trilateration ή του Triangulation με πάνω από 3 beacons \cite{wsn-Localization-systems} \cite{triangulation-simple-equation}.} (\Abbr{MLAT}), 
 έχει ως βάση την γεωμετρία των υπερβολικών καμπύλων και συχνά μπορεί να βρεθεί επίσης και ως hyperbolic positioning 
-στην βιβλιογραφία \cite{multilateration-def} \cite{triangulation-trilateration-multilateration} \cite{wikipedia-multilateration}. Στο \Sect{Distance-Angle-Estimation} 
+στην βιβλιογραφία \cite{multilateration-def} \cite{triangulation-trilateration-multilateration} \cite{wikipedia-multilateration}. στη \Sect{Distance-Angle-Estimation} 
 έγινε αναφορά ότι η χρήση του \Abbr{TDoA} βασίζεται στις υπερβολικές καμπύλες, συνεπώς μπορούμε εύκολα να χρησιμοποιήσουμε
 της μετρήσεις αυτές για τον υπολογισμό της θέσης του free node.
 
@@ -666,7 +666,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 \end{align}
 
 Αυτό που αναπαριστά ουσιαστικά η σχέση \EqNum{tdoa-multiple} δεν είναι τίποτα άλλο από την προσπάθεια εύρεσης του σημείου τομής των καμπύλων.
-Παράδειγμα αυτής της μεθόδου βρίσκεται στο \Fig{Multilateration}.
+Παράδειγμα αυτής της μεθόδου βρίσκεται στην \Fig{Multilateration}.
 
 % IMAGE
 \FigCaptLabelBasedURL{../Photos/multilateration.png}%
@@ -734,7 +734,7 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 \emph{v} μπορεί να επικοινωνήσει πίσω στο \emph{u}, τα οποία είναι δια\-σκο\-ρπι\-σμένα σε ένα δισδιάστατο τετραγωνικό
 πεδίο - και εδώ γίνεται η θεώρηση για $\mathfrak{R}^2$ ανάλυση - \emph{$Q=[0,s]\times[0,s]$}. 
 
-Τότε μπορούμε να μοντελοποιήσουμε το δίκτυο από nodes, ως ένα μη κατευθυνόμενο γράφο $\mathcal{G} = (V, E)$ - παράδειγμα του οποίου υπάρχει στο \Fig{Graph-example} - με τα 
+Τότε μπορούμε να μοντελοποιήσουμε το δίκτυο από nodes, ως ένα μη κατευθυνόμενο γράφο $\mathcal{G} = (V, E)$ - παράδειγμα του οποίου υπάρχει στην \Fig{Graph-example} - με τα 
 παρακάτω χαρακτηριστικά \cite{wsn-Localization-systems}.  
 
 \begin{itemize}
@@ -838,7 +838,7 @@ Semi Definite Programming (\Abbr{SDP}) και Localization Based on Simulated An
 
 %----------------------------------------------------------------------
 \subsubsection{Range-based vs Range-free}
-Στο \Sect{Energy-based} αναλύθηκαν τεχνικές εκτίμησης απόστασης ή γωνίας μεταξύ των nodes - συγκεκριμένα οι
+στη \Sect{Energy-based} αναλύθηκαν τεχνικές εκτίμησης απόστασης ή γωνίας μεταξύ των nodes - συγκεκριμένα οι
 \Abbr{RSSI}, \Abbr{ToA}, \Abbr{TDoA} και \Abbr{AoA}.
 Σε αυτήν την περίπτωση, όταν χρησιμοποιούμε δηλαδή έξτρα hardware ή γενικά\udot εκτεταμένες ranging τεχνικές 
 για να καταλήξουμε στις θέσεις των free nodes στον χώρο, αναφερόμαστε σε \textbf{Range-based} μεθόδους.
@@ -941,7 +941,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 
 %----------------------------------------------------------------------
 \subsection{Structure from Reference} \label{sec:theo-structure-from-reference}
-Τυπικά, κατά τη μεταφορά των σημείων του πραγματικού κόσμου \Abbr{3D} σε pixel μίας εικόνας \Abbr{2D} χάνουμε την διάσταση του βάθους, πράγμα που μπορεί να δημιουργήσει πλάνες/αυταπάτες - παράδειγμα αυτού στο \Fig{depth-ambiguity-optical-illusion}. Ένας τρόπος για την επανάκτηση της πληροφορίας του depth - προκειμένου να εκτιμήσουμε μέσω εικόνας την θέση των αντικειμένων - είναι με το να υπάρχουν στο scene αντικείμενα γνωστών διαστάσεων, τα οποία θα χρησιμοποιηθούν ως reference objects.
+Τυπικά, κατά τη μεταφορά των σημείων του πραγματικού κόσμου \Abbr{3D} σε pixel μίας εικόνας \Abbr{2D} χάνουμε την διάσταση του βάθους, πράγμα που μπορεί να δημιουργήσει πλάνες/αυταπάτες - παράδειγμα αυτού στην \Fig{depth-ambiguity-optical-illusion}. Ένας τρόπος για την επανάκτηση της πληροφορίας του depth - προκειμένου να εκτιμήσουμε μέσω εικόνας την θέση των αντικειμένων - είναι με το να υπάρχουν στο scene αντικείμενα γνωστών διαστάσεων, τα οποία θα χρησιμοποιηθούν ως reference objects.
 
 \begin{figure} [H]
 	\centering
@@ -968,7 +968,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
     % \hfill \break
 \end{figure}
 
-Στο \Fig{optical-axis-from-object-to-camera-sensor} παρουσιάζονται οι νοητές ευθείες πορείας του φωτός στο thin lens model, από τα σημεία του τρισδιάστατου κόσμου, προς τον αισθητήρα της κάμερας. Όπου $S_1$ η απόσταση του αντικειμένου από την κάμερα σε $m$, $S_2$ η απόσταση του image plane για το pinhole model (περισσότερες πληροφορίες στο \Sect{design-implementation-camera}) σε $mm$, $F$ το focal length σε $mm$, $d$ το μέγεθος του αντικειμένου στην εικόνα σε $mm$ και $H$ το μέγεθος του αντικειμένου στον πραγματικό κόσμο σε $m$. Επίσης, θεωρούμε ότι το αντικείμενο είναι σε focus, συνεπώς $F=S_2$. Τότε, με χρήση τριγωνομετρίας και όμοιων τριγώνων τόσο από την μεριά του αισθητήρα, όσο και του αντικειμένου, καταλήγουμε στην σχέση \EqNum{distance-from-object-dim-triangles} \cite{calculate-distance-or-size-of-an-objectin-a-photo-image} \cite{calculate-distance-opencv} \cite{calculate-distance-stackexchange}.
+Στην \Fig{optical-axis-from-object-to-camera-sensor} παρουσιάζονται οι νοητές ευθείες πορείας του φωτός στο thin lens model, από τα σημεία του τρισδιάστατου κόσμου, προς τον αισθητήρα της κάμερας. Όπου $S_1$ η απόσταση του αντικειμένου από την κάμερα σε $m$, $S_2$ η απόσταση του image plane για το pinhole model (περισσότερες πληροφορίες στη \Sect{design-implementation-camera}) σε $mm$, $F$ το focal length σε $mm$, $d$ το μέγεθος του αντικειμένου στην εικόνα σε $mm$ και $H$ το μέγεθος του αντικειμένου στον πραγματικό κόσμο σε $m$. Επίσης, θεωρούμε ότι το αντικείμενο είναι σε focus, συνεπώς $F=S_2$. Τότε, με χρήση τριγωνομετρίας και όμοιων τριγώνων τόσο από την μεριά του αισθητήρα, όσο και του αντικειμένου, καταλήγουμε στην σχέση \EqNum{distance-from-object-dim-triangles} \cite{calculate-distance-or-size-of-an-objectin-a-photo-image} \cite{calculate-distance-opencv} \cite{calculate-distance-stackexchange}.
 
 \begin{align}
 	\frac{d}{F} &= \frac{H}{S_1} \label{eq:distance-from-object-dim-triangles}
@@ -990,7 +990,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 
 %----------------------------------------------------------------------
 \subsection{Stereo Vision} \label{sec:theo-stereo}
-Για τον υπολογισμό του depth με χρήση stereo vision, λαμβάνουμε από δύο κάμερες views ενός scene. Σε γενίκευση τα image planes μπορεί να έχουν οποιαδήποτε προσανατολισμό, ειδική περίπτωση - και συχνά πιο χρησιμοποιούμενη - είναι αυτή που υπάρχει στο \Fig{stereo-vision} (a) στην οποία είναι παράλληλα. Προκειμένου να εκτιμηθεί το depth με χρήση stereo γίνονται υπολογισμοί βασισμένοι στο Epipolar Geometry \cite{wiki-epipolar-geometry}.
+Για τον υπολογισμό του depth με χρήση stereo vision, λαμβάνουμε από δύο κάμερες views ενός scene. Σε γενίκευση τα image planes μπορεί να έχουν οποιαδήποτε προσανατολισμό, ειδική περίπτωση - και συχνά πιο χρησιμοποιούμενη - είναι αυτή που υπάρχει στην \Fig{stereo-vision} (a) στην οποία είναι παράλληλα. Προκειμένου να εκτιμηθεί το depth με χρήση stereo γίνονται υπολογισμοί βασισμένοι στο Epipolar Geometry \cite{wiki-epipolar-geometry}.
 
 \begin{figure} [H]
 	\centering
@@ -1014,7 +1014,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 	\label{fig:stereo-vision}
 \end{figure}
 
-Το \Fig{stereo-vision} (b) παρουσιάζει την γεωμετρία στην περίπτωση των parallel optical axis. Μέσω σχέσεων των όμοιων τριγώνων $(p_l, P, p_r)$ και $(COP_L, P, COP_R)$ μπορούμε να δημιουργήσουμε την σχέση \EqNum{stereo-basic-eq}, από την οποία τελικά καταλήγουμε στο \Equa{stereo-depth-est} για τον υπολογισμό του depth ενός Point \cite{introduction-to-computer-vision}. 
+Η \Fig{stereo-vision} (b) παρουσιάζει την γεωμετρία στην περίπτωση των parallel optical axis. Μέσω σχέσεων των όμοιων τριγώνων $(p_l, P, p_r)$ και $(COP_L, P, COP_R)$ μπορούμε να δημιουργήσουμε την σχέση \EqNum{stereo-basic-eq}, από την οποία τελικά καταλήγουμε στο \Equa{stereo-depth-est} για τον υπολογισμό του depth ενός Point \cite{introduction-to-computer-vision}. 
 
 \begin{gather}
 	\frac{B-x_l+x_r}{Z-F} = \frac{B}{Z} \Rightarrow \label{eq:stereo-basic-eq} \\
@@ -1030,7 +1030,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 Φυσικοί περιορισμοί, προκύπτουν από τις δυνατότητες του διαθέσιμου εξοπλισμού που υπάρχουν στο \href{https://www.tuc.gr/}{Πολυτεχνείο Κρήτης}, βάση των οποίων θα γίνει και ο σχεδιασμός του συστήματος. Πράγμα που καθιστά το σύστημα να ακολουθεί ρεα\-λι\-στι\-κά requirements, τον σχεδιασμό με γνώμονα την επίλυση ενός πραγματικού προ\-βλή\-ματος, όπως επίσης και την δυνατότητα - με αυτόν τον τρόπο - να υπάρχουν δυνατότητες δοκιμών από αυτά, σε περίπτωση που χρειαστεί. 
 
 Ακολουθώντας την λογική των \Abbr{MoCap} system (βλ. \Sect{related-motion-capturing-systems}). Στην συγκεκριμένη διπλωματική εργασία γίνεται μία πρώτη προσπάθεια επίλυσης του προ\-βλή\-μα\-τος υπολογισμού της θέσης ενός μεμονωμένου - γνωστών διαστάσεων - α\-ντι\-κει\-μένου με
-χρήση drones swarm που πραγματοποιεί close formation flight, όπως παρουσιάζεται στο \Fig{thesis-system-overview} με σκοπό μελλοντικά να
+χρήση drones swarm που πραγματοποιεί close formation flight, όπως παρουσιάζεται στην \Fig{thesis-system-overview} με σκοπό μελλοντικά να
 χρησιμοποιηθούν ως feature points και να είμαστε πιο κοντά σε ένα Cooperative Localization (\Abbr{CL}) Real Time Location System (\Abbr{RTLS}) για εντοπισμό και ανίχνευση της θέσης αντικειμένων σε εξωτερικούς χώρους και δυναμικά περιβάλλοντα.
 
 % IMAGE
