@@ -549,11 +549,36 @@
 	\textrm{Distance (m)} &= \frac{\textrm{$f$ (mm)}\; x\;\textrm{Object's real size(m)}\; x\; \textrm{Image size(pixels)}}{\textrm{Object's size on sensor (pixels)}\; x\; \textrm{Sensor's size(mm)}} \label{eq:distance-from-object-pixels}
 \end{align}
 
+\subsection{Εκτίμηση γωνίας}
+
+\FigCaptLabelBasedURL{Images/Design-Implementation/fov-focal-length.png} %
+{Συσχέτιση AFOV με focal length} %
+{focal-length-fov} %
+<0.7>
+(https://www.princetoninstruments.com/learn/camera-fundamentals/field-of-view-and-angular-field-of-view)
+
+\begin{align}
+	\textrm{AFOV(\si{\radian})} &= 2\tan^{-1}{\frac{\textrm{image length(mm)}}{2\; x\;\textrm{focal length(mm)}}} \label{eq:afov-focal-length}
+\end{align}
+
+\begin{align}
+	\textrm{FOV(\si{\degree})} &= \frac{\textrm{AFOV(\si{\radian})}\; x\;\textrm{180}}{\pi} \label{eq:afov-to-fov}
+\end{align}
+
+\begin{align}
+	\textrm{Angle (\si{\degree})} &= \frac{\textrm{FOV(\si{\degree})}\; x\;\textrm{distance from origin (pixel)}}{\textrm{image length(pixel)}} \label{eq:angle-from-object-center-pixels}
+\end{align}
+
 %----------------------------------------------------------------------
-\section{Message Passing}
+\section{Διαμοιρασμός μηνυμάτων}
 \TODO{TODO}
 
-\section{3D Representation}
+%----------------------------------------------------------------------
+\section{Εντοπισμός θέσης αντικειμένου}
+\TODO{TODO}
+
+%----------------------------------------------------------------------
+\section{Τρισδιάστατη απεικόνιση}
 \TODO{TODO}
 
 %----------------------------------------------------------------------
