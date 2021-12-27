@@ -24,13 +24,13 @@
 	% -----------------
     \begin{minipage}{.5\textwidth}
       \centering
-      \includegraphics[width=\linewidth]{Images/Design-Implementation/raspberry-pi-4.png}\\
+      \includegraphics[width=\linewidth]{../Images/Design-Implementation/raspberry-pi-4.png}\\
       {(a) Raspberry Pi 4 \URI{https://www.hellasdigital.gr/go-create/raspberry-and-accessories-el/raspberry-pi/raspberry-pi-4-4gb-ram/}}
     \end{minipage}%
     % -----------------
     \begin{minipage}{.5\textwidth}
       \centering
-      \includegraphics[width=.9\linewidth]{Images/Design-Implementation/jetson-nano.jpeg}\\
+      \includegraphics[width=.9\linewidth]{../Images/Design-Implementation/jetson-nano.jpeg}\\
       {(b) Jetson Nano \URI{https://www.hellasdigital.gr/computers/accessories/nvidia-jetson-nano-developer-kit/}}
 	\end{minipage}
 	% -----------------
@@ -114,7 +114,7 @@
 Σχετικά με την κάμερα, ήταν ανάγκη - όντας πρώτη γενιά του συστήματος -  να επιλεχθεί μία low-cost 1080p camera η οποία θα παρέχει δυνατότητα επιλογής χαμηλότερου resolution για λόγους δοκιμών. Στο πρωτότυπο σύστημα τελικά γίνεται χρήση μία 1080p web cameras της Creative \cite{creative-camera} - \Fig{creative-camera} - με δυνατότητες λήξης βίντεο στα 30fps, η οποία συνδέεται μέσω USB στο Raspberry Pi.
 
 % Image
-\FigCaptLabelBasedURL{Images/Design-Implementation/creative-web-cam.jpeg}%
+\FigCaptLabelBasedURL{../Images/Design-Implementation/creative-web-cam.jpeg}%
 {Camera used for ball detection and tracking}%
 {creative-camera}%
 <0.35>%
@@ -129,7 +129,7 @@
 
 Το συγκεκριμένο \Abbr{GPS} συνδέεται με το Raspberry Pi μέσω Universal Asynchronous Receiver-Transmitter (\Abbr{UART}) \cite{uart-protocol} σύνδεσης και χρησιμοποιεί NMEA-0183 \cite{NMEA-0183-packets} πακέτα για την επικοινωνία. 
 
-\FigCaptLabelBasedURL{Images/Design-Implementation/bn220.png}%
+\FigCaptLabelBasedURL{../Images/Design-Implementation/bn220.png}%
 {GPS module used to estimate position}%
 {bn-220-gps}%
 <0.28>%
@@ -142,7 +142,7 @@
 Θετικό του συγκεκριμένου module είναι ότι όλοι οι παραπάνω αισθητήρες είναι συ\-νδε\-δε\-μέ\-νοι σε ένα κοινό Inter-Integrated Circuit (\Abbr{I2C}) \cite{I2C-protocol} bus, μέσω του οποίου μπορεί πολύ εύκολα να γίνει η διασύνδεση με την επεξεργαστική μονάδα που επιθυμούμε και να πραγματοποιηθεί επικοινωνία. 
 
 % Image
-\FigCaptLabelBasedURL{Images/Design-Implementation/10DoF-Adafruit-IMU.jpeg}%
+\FigCaptLabelBasedURL{../Images/Design-Implementation/10DoF-Adafruit-IMU.jpeg}%
 {Adafruit 10 DoF IMU}%
 {adafruit-10DoF-imu}%
 <0.28>%
@@ -153,7 +153,7 @@
 Για να λειτουργήσουν τα παραπάνω υποσυστήματα, χρειαζόταν να πραγματοποιηθούν οι κατάλληλες φυσικές διασυνδέσεις. Η απλούστερη εκδοχή θα ήταν να γίνει αυτό με χρήση breadboard, πράγμα όμως που θα πρόσθετε όγκο και βάρος στο τελικό σύστημα, οι οποίοι σε περίπτωση δοκιμών πάνω σε πραγματικά drone να είναι απαγορευτικοί παράγοντες. Συνεπώς, προκειμένου να μπορεί με ευκολία να γίνει η ανάπτυξη του συστήματος, σχεδιάστηκε (στο cad εργαλείο KiCad \cite{KiCad}) και κατασκευάστηκε ένα custom breakout board - το οποίο είναι διαθέσιμο ως open hardware project στο \cite{raspberry-pi-fan-breadkout} - όπως φαίνεται στο \Fig{raspberry-pi-breakout}. Αυτό παρέχει εύκολη πρόσβαση στα GPIO του Raspberry, έξτρα pins για τροφοδοσία στα 5 και 3.3 Volt, pins για τοποθέτηση αισθητήρων - όπως του \Abbr{IMU} - καθώς και mounting holes στα οποία μπορεί να τοποθετηθεί 40x40mm fan για την ψύξη του συστήματος. 
 
 % Image
-\FigCaptLabelBasedURL{Images/Design-Implementation/Rpi-breakout.png}%
+\FigCaptLabelBasedURL{../Images/Design-Implementation/Rpi-breakout.png}%
 {Raspberry Pi breakout}%
 {raspberry-pi-breakout}%
 <0.4>
@@ -164,7 +164,7 @@
 Η ολοκληρωμένη μορφή του πρωτότυπου συστήματος παρουσιάζεται στο \Fig{thesis-system}, ενώ στο \Tabl{thesis-system-bom} μπορούν να βρεθούν συνολικά τα εξαρτήματα που χρησιμοποιήθηκαν μαζί με την κοστολόγηση τους. 
 
 % Image
-\FigCaptLabelBasedURL{Images/Design-Implementation/thesis-system.jpg}
+\FigCaptLabelBasedURL{../Images/Design-Implementation/thesis-system.jpg}
 {System designed}%
 {thesis-system}%
 <0.65>
@@ -404,7 +404,7 @@
 Στο \Sect{design-implementation-camera} έγινε αναφορά του πίνακα μετασχηματισμού $M$. Επίσης, τα lens μίας κάμερας δεν είναι ιδανικά, κάνοντας τις λήψεις να φέρουν παραμορφώσεις (βλ. \Fig{distortion-types}). Η συνολική παραμόρφωση ενός lens μπορεί να περιγραφεί μέσω των Distortion coefficients. Η διαδικασία υπολογισμού όλων των παραμέτρων της κάμερας - προκειμένου αξιόπιστα να μπορούμε να κάνουμε υπολογισμούς με βάση τις λήψεις της σε μία \Abbr{CV} εφαρμογή - ονομάζεται camera calibration. 
 
 % Image
-\FigCaptLabelBasedURL{Images/Design-Implementation/distortion-types.png}%
+\FigCaptLabelBasedURL{../Images/Design-Implementation/distortion-types.png}%
 {Most common distortion types}%
 {distortion-types}%
 <0.65>%
@@ -465,13 +465,13 @@
 	% -----------------
     \begin{minipage}{.5\textwidth}
       \centering
-      \includegraphics[width=0.5\linewidth]{Images/Design-Implementation/rgb.png}\\
+      \includegraphics[width=0.5\linewidth]{../Images/Design-Implementation/rgb.png}\\
       {(a) RGB \URI{https://www.google.com/imgres?imgurl=https\%3A\%2F\%2Fqph.fs.quoracdn.net\%2Fmain-qimg-d33e22b88db273d09513f652bcb79736&imgrefurl=https\%3A\%2F\%2Fwww.quora.com\%2FWhat-are-the-differences-between-RGB-HSV-and-CIE-Lab&tbnid=XWOdefD1z2_-gM&vet=12ahUKEwjE5Iacxo_zAhW95LsIHeBlCGYQMygKegUIARCzAQ..i&docid=8mJRsf1Rk3zM_M&w=1600&h=1200&q=rgb\%20vs\%20hsv&hl=el&client=ubuntu&ved=2ahUKEwjE5Iacxo_zAhW95LsIHeBlCGYQMygKegUIARCzAQ}}
     \end{minipage}%
     % -----------------
     \begin{minipage}{.5\textwidth}
       \centering
-      \includegraphics[width=.6\linewidth]{Images/Design-Implementation/hsv.png}\\
+      \includegraphics[width=.6\linewidth]{../Images/Design-Implementation/hsv.png}\\
       {(b) HSV \URI{https://www.google.com/imgres?imgurl=https\%3A\%2F\%2Fqph.fs.quoracdn.net\%2Fmain-qimg-7c6685f64cf5ea346a9c33be0d256a95&imgrefurl=https\%3A\%2F\%2Fwww.quora.com\%2FWhat-are-the-differences-between-RGB-HSV-and-CIE-Lab&tbnid=BwsDxAXpjI2MqM&vet=12ahUKEwjE5Iacxo_zAhW95LsIHeBlCGYQMygBegUIARCdAQ..i&docid=8mJRsf1Rk3zM_M&w=1600&h=1200&q=rgb\%20vs\%20hsv&hl=el&client=ubuntu&ved=2ahUKEwjE5Iacxo_zAhW95LsIHeBlCGYQMygBegUIARCdAQ}}
 	\end{minipage}
 	% -----------------
@@ -507,7 +507,7 @@
 	O[i,j] = k * I = \sum_{u=-k}^{k} \sum_{v=-k}^{k} k[u,v]I[i-u,j-v] \label{eq:cross-correlation}
 \end{gather}
 
-\FigCaptLabelBasedURL{Images/Design-Implementation/cross-correlation.png}%
+\FigCaptLabelBasedURL{../Images/Design-Implementation/cross-correlation.png}%
 {Convolution Example}%
 {convolution-example}%
 <0.5>%
