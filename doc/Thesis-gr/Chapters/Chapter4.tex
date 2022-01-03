@@ -1,4 +1,4 @@
-\chapter{Διασικασία Σχεδίασης και Υλοποίησης} % Main chapter title
+\chapter{Διαδικασία Σχεδίασης και Υλοποίησης} % Main chapter title
 \label{chap:Chapter4}  % For referencing the chapter elsewhere, use \ref{Chapter4}
 
 \epigraph{”Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success." }{\textit{Pablo Picasso}}
@@ -462,7 +462,7 @@
 Το αντικείμενο του οποίου η θέση επιλέχθηκε να προσδιοριστεί, είναι μία μπάλα - καθώς μπορεί να προσφέρει ανεξαρτήτου γωνία λήψης ίδια πληροφορία για τις διαστάσεις της - μεγέθους ανάλογη με τις μπάλες ping-pong. 
 Συνεπώς δεν μας ενδιαφέρει το orientation του αντικειμένου, παρά μόνο το location.
 
-\subsubsection{Με βάση το χρώμα}
+\subsubsection{Με βάση το χρώμα} \label{sec:hsv-detection-sec}
 
 Πρώτη προσπάθεια εκτίμησης της θέσης, ήταν χρησιμοποιώντας ως σημείο αναφοράς το χρώμα της. Έχοντας επιλέξει το χρώμα της μπάλας να είναι διαφορετικό από τα περισσότερα στοιχεία της σκηνής στην οποία την καταγράφουμε, μπορούμε εύκολα να προσδιορίσουμε και την θέση του αντικειμένου στο image plane.
 
@@ -525,7 +525,7 @@
 
 \subsubsection{Με βάση το σχήμα}
 
-Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο ο \Algo{hough-detect} παρουσιάζει σε ψευδοκώδικα την διαδικασία, ενώ την \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
+Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο ο \Algo{hough-detect} παρουσιάζει σε ψευδοκώδικα την διαδικασία, ενώ στην \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
 
 % ALGORITHM
 \begin{algorithm}[H]
@@ -545,25 +545,53 @@
 <0.8>
 
 Για τον εντοπισμό του κυκλικού σχήματος της μπάλας χρησιμοποιήθηκε o Hough Transform for circles detection.
+Ο τρόπος με τον οποίο λειτουργεί ο Hough Transform είναι να μετασχηματίζει το circle localization πρόβλημα σε ένα voting πρόβλημα.
+Είσοδος στον αλγόριθμο Hough είναι τα edges ενός image, και έξοδος είναι η θέσεις των κύκλων.
 
-\TODO{TODO}
+Η απλούστερη περίπτωση του Hough Transform είναι σε μία εικόνα να κάνουμε localize έναν κύκλο με γνωστό radius r, όπως παρουσιάζεται στο \Fig{hough-tranform-examples} (a). Σε αυτήν την περίπτωση για κάθε στοιχειώδες σημείο (x,y) των edges δημιουργούμε στο Hough space έναν κύκλο ακτίνας r με κέντρο (x,y). Αφού γίνει αυτή η διαδικασία για κάθε σημείο των edges, το σημείο στο hough space (εναλλακτικό όνομα accumulator) με τα περισσότερα votes - σημείο χρώματος πράσινο στην \Fig{hough-tranform-examples} (a) - είναι τελικά και το κέντρο του κύκλου.
+
+\begin{figure} [H]
+	\centering
+	% -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{../Images/Design-Implementation/circle-hough-2d.png}\\
+      {(a) Hough space for known radius \URI{https://www.researchgate.net/figure/The-circular-Hough-transform_fig1_242103081}}
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{../Images/Design-Implementation/circle-hough-3d.jpg}\\
+      {(b) Hough space for unknown radius \URI{https://www.sciencedirect.com/science/article/abs/pii/S0030402616316175}}
+	\end{minipage}
+	% -----------------
+    \hfill \break
+    \decoRule
+    \CaptionBasedwithURL{Circle Hough Transform} 
+    \label{fig:hough-tranform-examples}
+\end{figure}
+
+Η πιο σύνθετη περίπτωση - \Fig{hough-tranform-examples} (b) - είναι όταν δεν γνωρίζουμε την ακτίνα του κύκλου που αναζητούμε στην σκηνή, σε αυτήν την περίπτωση επαναλαμβάνουμε την παραπάνω διαδικασία για διαφορετικές τιμές ακτίνων, με αποτέλεσμα στο Hough space να δημιουργήσουμε κώνους αντί για κύκλους. Ενώ, οι συντεταγμένες του σημείου με τα περισσότερα votes στον accumulator, σε αυτήν την περίπτωση μας προσδιορίζουν τις συντεταγμένες του κέντρου του κύκλου μαζί με την ακτίνα του.
 
 % ------------------
 
 \subsection{Εκτίμηση απόστασης}
+Αφού είχε εντοπιστεί η θέση του αντικείμενο στην εικόνα καθώς και η ακτίνα του σε pixel μπορούσε να υπολογιστεί και η απόσταση του. 
 Στον υπολογισμό της απόστασης της μπάλας από την κάμερα, χρησιμοποιείται ως κύρια αρχή ο φορμαλισμός που περιγράφηκε στη \Sect{theo-structure-from-reference} - \Equa{distance-from-object} - η οποία χρειάζεται να μετασχηματιστεί ώστε σαν είσοδο να χρησιμοποιεί πλήθος pixel και όχι mm, συνεπώς μέσω της εξίσωσης \EqNum{distance-from-object-pixels} μπορούμε να υπολογίσουμε την απόσταση της μπάλας από την κάμερα υπολογίζοντας μόνο το πλήθος των pixel που καταλαμβάνει στην εικόνα \cite{calculate-distance-stackexchange} \cite{calculate-distance-or-size-of-an-objectin-a-photo-image}.
 
 \begin{align}
 	\textrm{Distance (m)} &= \frac{\textrm{$f$ (mm)}\; x\;\textrm{Object's real size(m)}\; x\; \textrm{Image size(pixels)}}{\textrm{Object's size on sensor (pixels)}\; x\; \textrm{Sensor's size(mm)}} \label{eq:distance-from-object-pixels}
 \end{align}
 
-\subsection{Εκτίμηση γωνίας}
+% ------------------
 
-\FigCaptLabelBasedURL{../Images/Design-Implementation/fov-focal-length.png} %
-{Συσχέτιση AFOV με focal length} %
-{focal-length-fov} %
-<0.7>
-(https://www.princetoninstruments.com/learn/camera-fundamentals/field-of-view-and-angular-field-of-view)
+\subsection{Εκτίμηση γωνίας}
+Για την εκτίμηση γωνίας ως προς τον x και y άξονα σε μία calibrated κάμερα μπορεί να χρησιμοποιηθεί η \Equa{angle-from-object-center-pixels}, η οποία είναι στην πραγματικότητα υλοποίηση απλής μέθοδος των τριών με βάση το Field of View (\Abbr{FOV}) μίας κάμερας. Σε περίπτωση που δεν γνωρίζουμε το \Abbr{FOV} μπορεί να υπολογιστεί με βάση την συσχέτιση του Angular Field of View (\Abbr{AFOV}) με το Focal length
+της κάμερας, αυτή η εξάρτηση παρουσιάζεται οπτικά στην \Fig{focal-length-fov} και μαθηματικά στην \Equa{afov-focal-length} \cite{afov-focal-length-rela} και στην συνέχεια μέσω της σχέσης \EqNum{afov-to-fov} μπορούμε να μεταβούμε από το ένα στο άλλο. 
+
+\begin{align}
+	\textrm{Angle (\si{\degree})} &= \frac{\textrm{FOV(\si{\degree})}\; x\;\textrm{distance from origin (pixel)}}{\textrm{image length(pixel)}} \label{eq:angle-from-object-center-pixels}
+\end{align}
 
 \begin{align}
 	\textrm{AFOV(\si{\radian})} &= 2\tan^{-1}{\frac{\textrm{image length(mm)}}{2\; x\;\textrm{focal length(mm)}}} \label{eq:afov-focal-length}
@@ -573,13 +601,48 @@
 	\textrm{FOV(\si{\degree})} &= \frac{\textrm{AFOV(\si{\radian})}\; x\;\textrm{180}}{\pi} \label{eq:afov-to-fov}
 \end{align}
 
-\begin{align}
-	\textrm{Angle (\si{\degree})} &= \frac{\textrm{FOV(\si{\degree})}\; x\;\textrm{distance from origin (pixel)}}{\textrm{image length(pixel)}} \label{eq:angle-from-object-center-pixels}
-\end{align}
+\FigCaptLabelBasedURL{../Images/Design-Implementation/fov-focal-length.png} %
+{Συσχέτιση AFOV με focal length} %
+{focal-length-fov} %
+<0.7>
+(https://www.princetoninstruments.com/learn/camera-fundamentals/field-of-view-and-angular-field-of-view)
 
 %----------------------------------------------------------------------
 \section{Διαμοιρασμός μηνυμάτων}
-\TODO{TODO}
+Προκειμένου να περαστεί πληροφορία μέσα στο δίκτυο με node, χρειάστηκε να δημιουργηθούν proprietary πακέτα, στα οποία θα αποθηκεύονταν χρήσιμη πληροφορία. Συγκεκριμένα κάθε node αφού πραγματοποιήσει όλη την επεξεργασία, αποστέλλει mocap\_worker\_data πακέτα, αυτά ακολουθούν την δομή που εμφανίζονται στην \Fig{proprietary-msg}, η οποία δημιουργήθηκε για τις ανάγκες του συστήματός και μέσα σε αυτή περιλαμβάνουν πληροφορίες, σχετικά με τον σειριακό αριθμό του node, την θέση του, τα χαρακτηριστικά της κάμερας του καθώς και πληροφορία για κάθε ανιχνευμένο αντικείμενο. 
+
+% mocap_worker_data
+% ├── timestamp
+% ├── nodeID
+% ├── obj_pose
+% │   ├── x
+% │   ├── y
+% │   ├── z
+% │   ├── roll
+% │   ├── pitch
+% │   ├── yaw
+% ├── camera_params
+% │   ├── objectsRealSizeInMeter
+% │   ├── imageHeightInPixels
+% │   ├── imageWidthInPixels
+% │   ├── XFieldOfViewInAngles
+% │   ├── YFieldOfViewInAngles                    
+% │   ├── XfocalLengthInMillimeters
+% │   ├── YfocalLengthInMillimeters
+% │   ├── XsensorSizeInMillimeters
+% │   └── YsensorSizeInMillimeters
+% └── detected_ball_data[]
+%     ├── color
+%     ├── distance_from_camera
+%     ├── image_plane_r
+%     ├── image_plane_x
+%     ├── image_plane_y
+%     ├── xangle
+%     └── ynagle
+\FigCaptLabelBasedURL{../Images/Design-Implementation/ros-msgs-hier.png} %
+{Proprietaty message send structure} %
+{proprietary-msg} %
+<0.4>
 
 %----------------------------------------------------------------------
 \section{Εντοπισμός θέσης αντικειμένου}
@@ -595,7 +658,7 @@
 
 %----------------------------------------------------------------------
 \section{Τρισδιάστατη απεικόνιση}
-\TODO{TODO}
+Για την τρισδιάστατη απεικόνιση των δεδομένων που συλλέχθηκαν κατά την διάρκεια των πειραμάτων - που περιγράφονται στο επόμενο κεφάλαιο - χρησιμοποιήθηκε το εργαλείο MATLAB, μέσω του οποίου έγιναν οι περισσότερες γραφικές. Σημαντική όμως είναι και η βοήθεια του πακέτου RViz του ROS, το οποίο σε real time χρόνο μπορεί να οπτικοποιήσει δεδομένα.
 
 %----------------------------------------------------------------------
 
