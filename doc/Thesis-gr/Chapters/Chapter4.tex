@@ -1,7 +1,8 @@
 \chapter{Διαδικασία Σχεδίασης και Υλοποίησης} % Main chapter title
 \label{chap:Chapter4}  % For referencing the chapter elsewhere, use \ref{Chapter4}
 
-\epigraph{”Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success." }{\textit{Pablo Picasso}}
+% \epigraph{”Our goals can only be reached through a vehicle of a plan, in which we must fervently believe, and upon which we must vigorously act. There is no other route to success." }{\textit{Pablo Picasso}}
+\epigraph{”Οι στόχοι μας μπορούν μόνο να έρθουν εις πέρας με την σχεδιάση ενός καλά οργανωμένου πλάνου, στο οποίο πρέπει επίμονα να πιστεύουμε, και το οποίο με σθένος πρέπει να πράτουμε. Δεν υπάρχει άλλος δρόμος για την επιτυχία." }{\textit{Pablo Picasso}}
 
 Στο παρόν κεφάλαιο περιγράφεται η διαδικασία σχεδιασμού και υλοποίησης του \Abbr{MoCap} με χρήση drone swarm συστήματος, που συσχετίζεται η παρούσα διπλωματική. 
 
@@ -11,18 +12,19 @@
 του drone. Τέλος, ο συνδυασμός των δύο παραπάνω μερών και η χρήση κατάλληλης localization τεχνικής για να βρεθεί η θέση του αντικειμένου
 στο \Abbr{3D} χώρο.
 
+Πριν γίνει αναφορά καθενός από τα υποστήματα που σχεδιάστηκαν, στην \Fig{high-level-system-block-diagram} παρουσιάζεται ένα block diagram του γενικού συστήματος, το οποίο αποτελείται από τα nodes - δουλειά των οποίων είναι η ανίχνευση του αντικειμένου και εκτίμηση της απόστασης του από αυτά - τα οποία αποστέλλουν στον master του συστήματος όλες τις πληροφορίες που έχουν συλλέξει και είναι αυτός που αναλαμβάνει τον προσδιορισμό της θέσης τελικά του object.
+
+% Image
+\FigCaptLabelBasedURL{../Photos/High-level-top-diagram.drawio.png}%
+{High level system's block diagram}%{}
+{high-level-system-block-diagram}%
+<1>%
+(https://en.creative.com/p/peripherals/creative-live-cam-sync-1080p)
+
 %----------------------------------------------------------------------
 \section{Τεχνολογίες και εργαλεία} \label{sec:design-tools}
 Αρχικά θα αναφερθούν συνοπτικά η αρχιτεκτονική στην οποία έγινε επιλογή να επιλυθεί το πρόβλημα,
 όπως επίσης και τα εξαρτήματα/αισθητήρια όργανα καθώς και τα λογισμικά τα οποία χρησιμοποιήθηκαν. 
-
-
-% Image
-\FigCaptLabelBasedURL{../Photos/High-level-top-diagram.drawio.png}%
-{Camera used for ball detection and tracking}%
-{creative-camera}%
-<1>%
-(https://en.creative.com/p/peripherals/creative-live-cam-sync-1080p)
 
 \subsection{Embedded Linux System}
 Δύο πολύ δημοφιλείς επιλογές στον χώρο των ενσωματωμένων συστημάτων - ως κεντρικές μονάδες επεξεργασίας - είναι οι πλακέτες Raspberry Pi που κατασκευάζονται από την Raspberry Pi Foundation σε συνεργασία με την Broadcom, καθώς και οι πλακέτες Jetson της Nvidia. Στην \Fig{embedded-linux-systems} ως παράδειγμα παρουσιάζονται ενδεικτικά μία εκδοχή από την κάθε οικογένεια, ενώ στα \Tabl{raspberry-pi-specs} και \Tabl{jetson-nano-specs} τα τεχνικά χαρακτηριστικά της εκάστοτε πλακέτας ως αρχικό σημείο αναφοράς. 
@@ -44,7 +46,7 @@
 	% -----------------
     \hfill \break
     \decoRule
-    \CaptionBasedwithURL{Possible Embedded Linux Systems} 
+    \CaptionBasedwithURL{Υποψήφια Embedded Linux Systems για την υλοποίηση} %\CaptionBasedwithURL{Possible Embedded Linux Systems} 
     \label{fig:embedded-linux-systems}
 \end{figure}
 
@@ -123,7 +125,7 @@
 
 % Image
 \FigCaptLabelBasedURL{../Images/Design-Implementation/creative-web-cam.jpeg}%
-{Camera used for ball detection and tracking}%
+{Η κάμερα που χρησιμοποιήθηκε για τον εντοπισμό και ανίχνευση του αντικειμένου}%{Camera used for ball detection and tracking}
 {creative-camera}%
 <0.35>%
 (https://en.creative.com/p/peripherals/creative-live-cam-sync-1080p)
@@ -138,7 +140,7 @@
 Το συγκεκριμένο \Abbr{GPS} συνδέεται με το Raspberry Pi μέσω Universal Asynchronous Receiver-Transmitter (\Abbr{UART}) \cite{uart-protocol} σύνδεσης και χρησιμοποιεί NMEA-0183 \cite{NMEA-0183-packets} πακέτα για την επικοινωνία. 
 
 \FigCaptLabelBasedURL{../Images/Design-Implementation/bn220.png}%
-{GPS module used to estimate position}%
+{Το GPS που χρησιμοποιήθηκε}%{GPS module used to estimate position}%
 {bn-220-gps}%
 <0.28>%
 (https://www.google.com/imgres?imgurl=https\%3A\%2F\%2Fimages.jdmagicbox.com\%2Fquickquotes\%2Fimages_main\%2Fb07wwx5jvp-electroprime-bn-220-3-0v-5-0v-ttl-level-gnss-module-gps-glonass-dual-gps-module-antenna-v4b2-181504802-qn443.jpg&imgrefurl=https\%3A\%2F\%2Fwww.justdial.com\%2FELECTROPRIME-BN-220-3-0V-5-0V-TTL-Level-Gnss-Module-GPS-Glonass-Dual-GPS-Module-Antenna-V4B2\%2Fpid-181504802&tbnid=YJcAk2WsHSEZiM&vet=10CF8QMyiOAWoXChMI2M3PyrCA8wIVAAAAAB0AAAAAEAk..i&docid=xDxMDFHprlF2iM&w=500&h=500&itg=1&q=bn-220\%20image&hl=el&client=ubuntu&ved=0CF8QMyiOAWoXChMI2M3PyrCA8wIVAAAAAB0AAAAAEAk)
@@ -173,7 +175,7 @@
 
 % Image
 \FigCaptLabelBasedURL{../Images/Design-Implementation/thesis-system.jpg}
-{System designed}%
+{Το πρώτυπο σύστημα που σχεδιάστηκε στα πλαίσια της διπλωματικής}%{System designed}%
 {thesis-system}%
 <0.65>
 
@@ -277,7 +279,7 @@
 %---------------------------
 \subsubsection{Επικοινωνία I2C}
 Σε αντίθεση με την σειριακή επικοινωνία, το \Abbr{IMU} module χρησιμοποιεί το \Abbr{I2C} πρωτόκολλο (βλ. \Sect{imu}).
-Για να μπορέσουμε να χρησιμοποιήσουμε το \Abbr{I2C} στο Raspberry, χρειάστηκε να εκτελεστούν οι εντολές που υπάρχουν στο \List{fix-I2C-communication}.
+Για να μπορέσουμε να χρησιμοποιήσουμε το \Abbr{I2C} στο Raspberry, χρειάστηκε να εκτελεστούν οι εντολές που υπάρχουν στη \List{fix-I2C-communication}.
 
 \begin{lstlisting}[language=bash, escapechar=@, caption={Fix I2C communication},label=list:fix-I2C-communication]
     # 1. Install needed library
@@ -288,7 +290,7 @@
     sudo chmod g+r /dev/i2c-1
 \end{lstlisting}
 
-Στην συνέχεια μπορούν να γίνουν οι κατάλληλες συνδέσεις και εκτελώντας την ε\-ντο\-λή `\textbf{i2cdetect -y 1}' έχουμε πρόσβαση στις διευθύνσεις όλων των αισθητήρων που είναι συνδεδεμένες στο \Abbr{I2C} bus, παράδειγμα του output από την εντολή υπάρχει στο \List{I2C-output}\footnote{Το συγκεκριμένο module έχει δοθεί από την Adafruit ως open hardware project, σε περίπτωση που χρησιμοποιηθεί κάποιο replica του, πιθανόν κάποιο address να είναι διαφορετικό}.
+Στην συνέχεια μπορούν να γίνουν οι κατάλληλες συνδέσεις και εκτελώντας την ε\-ντο\-λή `\textbf{i2cdetect -y 1}' έχουμε πρόσβαση στις διευθύνσεις όλων των αισθητήρων που είναι συνδεδεμένες στο \Abbr{I2C} bus, παράδειγμα του output από την εντολή υπάρχει στη \List{I2C-output}\footnote{Το συγκεκριμένο module έχει δοθεί από την Adafruit ως open hardware project, σε περίπτωση που χρησιμοποιηθεί κάποιο replica του, πιθανόν κάποιο address να είναι διαφορετικό}.
 
 \begin{lstlisting}[language=bash, escapechar=@, caption={I2C addressed output example},label=list:I2C-output]
     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
@@ -329,7 +331,7 @@
 
 % Image
 \FigCaptLabelBasedURL{../Photos/pinhole-model.png}%
-{Ideal pinhole model}%
+{Ιδανικό μοντέλο του pinhole}%{Ideal pinhole model}%
 {ideal-pinhole-model}%
 <0.8>
 
@@ -409,11 +411,11 @@
 
 % ------------------
 \subsection{Camera Calibration} \label{sec:camera-calibration}
-στη \Sect{design-implementation-camera} έγινε αναφορά του πίνακα μετασχηματισμού $M$. Επίσης, τα lens μίας κάμερας δεν είναι ιδανικά, κάνοντας τις λήψεις να φέρουν παραμορφώσεις (βλ. \Fig{distortion-types}). Η συνολική παραμόρφωση ενός lens μπορεί να περιγραφεί μέσω των Distortion coefficients. Η διαδικασία υπολογισμού όλων των παραμέτρων της κάμερας - προκειμένου αξιόπιστα να μπορούμε να κάνουμε υπολογισμούς με βάση τις λήψεις της σε μία \Abbr{CV} εφαρμογή - ονομάζεται camera calibration. 
+Στη \Sect{design-implementation-camera} έγινε αναφορά του πίνακα μετασχηματισμού $M$. Επίσης, τα lens μίας κάμερας δεν είναι ιδανικά, κάνοντας τις λήψεις να φέρουν παραμορφώσεις (βλ. \Fig{distortion-types}). Η συνολική παραμόρφωση ενός lens μπορεί να περιγραφεί μέσω των Distortion coefficients. Η διαδικασία υπολογισμού όλων των παραμέτρων της κάμερας - προκειμένου αξιόπιστα να μπορούμε να κάνουμε υπολογισμούς με βάση τις λήψεις της σε μία \Abbr{CV} εφαρμογή - ονομάζεται camera calibration. 
 
 % Image
 \FigCaptLabelBasedURL{../Images/Design-Implementation/distortion-types.png}%
-{Most common distortion types}%
+{Οι πιο συνηθισμένοι τύποι distortion των φακών}%{Most common distortion types}%
 {distortion-types}%
 <0.65>%
 (https://learnopencv.com/understanding-lens-distortion/)
@@ -451,7 +453,7 @@
 Το \textit{/usb\_cam\_node} κάνει publish στο topic \textit{/usb\_cam/image\_raw} τα περιεχόμενα της κάμερας. Η επεξεργασία του stream της κάμερας γίνεται από το node με όνομα \textit{/worker\_node} που δημιουργήθηκε, το οποίο κάνει subscribe στο topic της κάμερας, μετασχηματίζει από πακέτα \Abbr{ROS} σε Mat στοιχεία - που χρησιμοποιεί το \Abbr{OpenCV},  μέσω του \textit{cv\_bridge} - και αναλαμβάνει το κομμάτι της \Abbr{CV} επεξεργασίας για της ανάγκες της εφαρμογής. 
 
 \FigCaptLabelBasedURL{../Photos/camera-usage-ros.png}%
-{ROS - camera related nodes/topics setup}%
+{ROS - camera related nodes/topics setup}%{ROS - camera related nodes/topics setup}%
 {thesis-camera-nodes-topics-setup}%
 <0.7>
 
@@ -459,7 +461,7 @@
 
 % ------------------
 \subsection{Εντοπισμός Αντικειμένου}
-Το αντικείμενο του οποίου η θέση επιλέχθηκε να προσδιοριστεί, είναι μία μπάλα - καθώς μπορεί να προσφέρει ανεξαρτήτου γωνία λήψης ίδια πληροφορία για τις διαστάσεις της - μεγέθους ανάλογη με τις μπάλες ping-pong. 
+Το αντικείμενο του οποίου η θέση επιλέχθηκε να προσδιοριστεί, είναι μία μπάλα - καθώς μπορεί να προσφέρει ανεξαρτήτου γωνία λήψης ίδια πληροφορία για τις διαστάσεις της - μεγέθους ανάλογη με τις μπάλες ποδοσφαίρου. 
 Συνεπώς δεν μας ενδιαφέρει το orientation του αντικειμένου, παρά μόνο το location.
 
 \subsubsection{Με βάση το χρώμα} \label{sec:hsv-detection-sec}
@@ -489,7 +491,7 @@
     \label{fig:color-space}
 \end{figure}
 
-Ο \Algo{hsv-detect} παρουσιάζει την διαδικασία που ακολουθήθηκε προκειμένου να ε\-ντο\-πι\-στεί η μπάλα στην σκηνή με βάση το χρώμα της, ενώ στην \Fig{balls-detection-color} εμφανίζονται τα αποτελέσματα από το κάθε επίπεδο επεξεργασίας.
+Στον \Algo{hsv-detect} παρουσιάζεται η διαδικασία που ακολουθήθηκε προκειμένου να ε\-ντο\-πι\-στεί η μπάλα στην σκηνή με βάση το χρώμα της, ενώ στην \Fig{balls-detection-color} εμφανίζονται τα αποτελέσματα από το κάθε επίπεδο επεξεργασίας.
 
 % ALGORITHM
 \begin{algorithm}[H]
@@ -505,7 +507,7 @@
 \end{algorithm}
 
 \FigCaptLabelBasedURL{../Photos/thesis-hsv.png}%
-{Detect balls based on their color}%
+{Ανίχνευση μπάλας με βάση το χρώμα}%{Detect balls based on their color}%
 {balls-detection-color}%
 <0.9>
 
@@ -516,7 +518,7 @@
 \end{gather}
 
 \FigCaptLabelBasedURL{../Images/Design-Implementation/cross-correlation.png}%
-{Convolution Example}%
+{Convolution παράδειγμα}%{Convolution Example}%
 {convolution-example}%
 <0.5>%
 (http://intellabs.github.io/RiverTrail/tutorial/)
@@ -525,7 +527,7 @@
 
 \subsubsection{Με βάση το σχήμα}
 
-Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο ο \Algo{hough-detect} παρουσιάζει σε ψευδοκώδικα την διαδικασία, ενώ στην \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
+Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο στον \Algo{hough-detect} παρουσιάζεται σε ψευδοκώδικα η διαδικασία, ενώ στην \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
 
 % ALGORITHM
 \begin{algorithm}[H]
@@ -540,7 +542,7 @@
 \end{algorithm}
 
 \FigCaptLabelBasedURL{../Photos/thesis-hough.png}%
-{Detect balls based on their shape}%
+{Ανίχνευση μπάλας με βάση το σχήμα}%{Detect balls based on their shape}%
 {balls-detection-shape}%
 <0.8>
 
@@ -640,7 +642,7 @@
 %     ├── xangle
 %     └── ynagle
 \FigCaptLabelBasedURL{../Images/Design-Implementation/ros-msgs-hier.png} %
-{Proprietaty message send structure} %
+{Η δομή του μηνύματος που αποστέλει κάθε node} %{Proprietary message send structure} %
 {proprietary-msg} %
 <0.4>
 

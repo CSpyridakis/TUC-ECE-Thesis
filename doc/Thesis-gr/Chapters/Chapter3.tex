@@ -1,6 +1,7 @@
 \chapter{Θεωρητικό Υπόβαθρο} % Main chapter title
 \label{chap:Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter1} 
-\epigraph{''Let no one ignorant of geometry enter” }{\textit{Plato}}
+% \epigraph{''Let no one ignorant of geometry enter” }{\textit{Plato}}
+\epigraph{''Μηδείς ἀγεωμέτρητος εἰσίτω μου τὴν στέγην” }{\textit{Πλάτωνας}}
 
 O χώρος των \Abbr{WSN} έχει και αυτός τα τελευταία χρόνια υψηλό ερευνητικό ενδιαφέρον.
 Θα μπορούσε να πει κανείς - λόγο το ότι αποτελεί ένα πιο γενικό κλάδο - περισσότερο από ότι αυτό των 
@@ -134,7 +135,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 		\end{tikzpicture}
 	}
 	\decoRule
-	\caption[Επισκόπηση των Localization System (RF-based approach)]{Επισκόπηση των Localization System (\Abbr{RF}-based approach)}
+	\caption[Επισκόπηση των Localization Systems (RF-based approach)]{Επισκόπηση των Localization Systems (\Abbr{RF}-based approach)}
 	\label{fig:Localization-system}
 \end{figure}
 
@@ -158,7 +159,7 @@ node με βάση την γνώση που έχουμε για τα beacons κ�
 %----------------------------------------------------------------------
 \subsubsection{Received Signal Strength}
 Η πρώτη τεχνική η οποία έχει χρησιμοποιηθεί για τον υπολογισμό απόστασης στα 
-\Abbr{WSN} (χρήση \Abbr{RF}), είναι αυτή με όνομα Received Signal Strength Indicator
+\Abbr{WSN} με χρήση \Abbr{RF}, είναι αυτή με όνομα Received Signal Strength Indicator
 (\Abbr{RSSI}) και έχει ως αρχή την χρήση της έντασης της ισχύς ενός 
 σήματος που λαμβάνουμε στον δέκτη, ως τρόπο υπολογισμού της απόστασης
 του πομπό από αυτόν. Path loss ή path attenuation \cite{wikipedia-Path_loss} ονομάζεται η μείωση της ισχύς
@@ -204,7 +205,7 @@ equations, από το ένα στο άλλο \cite{rssi-wlan} \cite{wikipedia-d
 %-------------------------------------------
 
 \FigCaptLabelBasedURL{../Images/Theoretical-Background/Ideal-RSSI-over-distance.png}%
-{Ideal RSSI over distance}%
+{Ιδανική εξάρτηση του RSSI με βάση την απόσταση}% {Ideal RSSI over distance}%
 {Ideal-RSSI-over-distance}%
 <0.35>%
 [ideal-rssi-model]%
@@ -223,7 +224,7 @@ equations, από το ένα στο άλλο \cite{rssi-wlan} \cite{wikipedia-d
 απόσταση μεταξύ τους ή μας ενδιαφέρει να έχουμε μεγάλη ακρίβεια προσέγγισης της απόστασης \cite{ideal-rssi-model}.
 
 %----------------------------------------------------------------------
-\subsubsection{Propagation Time}
+\subsubsection{Χρόνος μετάδοσης σήματος} %\subsubsection{Propagation Time}
 Σε αυτήν την κατηγορία εκτίμησης απόστασης μεταξύ nodes - η οποία βασίζεται σε χρονικές μετρήσεις της διάδοσης του σήματος,
  Time of Flight (\Abbr{ToF})
 - κατά κύριο λόγο χρησιμοποιούνται δύο βασικές τεχνικές, η Time of Arrival (\Abbr{ToA}) και η Time 
@@ -266,7 +267,7 @@ Difference of Arrival (\Abbr{TDoA}) \cite{wsn-Localization-systems}.
     \end{minipage}
     \hfill \break
     \decoRule
-    \caption[Time of Arrival cases]{Time of Arrival cases}
+    \caption[Περιπτώσεις Time of Arrival]{Περιπτώσεις Time of Arrival} %\caption[Time of Arrival cases]{Time of Arrival cases}
     \label{fig:Time-of-Arrival-cases}
 \end{figure}
 
@@ -306,7 +307,7 @@ Difference of Arrival (\Abbr{TDoA}) \cite{wsn-Localization-systems}.
     \end{minipage}
     \hfill \break
     \decoRule
-    \caption[Time Difference of Arrival cases]{Time Difference of Arrival cases}
+    \caption[Περιπτώσεις Time Difference of Arrival]{Περιπτώσεις Time Difference of Arrival} %\caption[Time Difference of Arrival cases]{Time Difference of Arrival cases}
     \label{fig:Time-Difference-of-Arrival-cases}
 \end{figure}
 
@@ -342,7 +343,7 @@ Difference of Arrival (\Abbr{TDoA}) \cite{wsn-Localization-systems}.
 	% -----------------
     \hfill \break
     \decoRule
-    \caption[TDoA hyberbolas based on $\Delta t$]{TDoA hyberbolas based on $\Delta t$}
+    \caption[TDoA υπερβολές βασισμένες στο $\Delta t$]{TDoA υπερβολές βασισμένες στο $\Delta t$} %\caption[TDoA hyberbolas based on $\Delta t$]{TDoA hyberbolas based on $\Delta t$}
     \label{fig:TDoA-hyberbolas}
 \end{figure}
 \begin{align}
@@ -376,7 +377,7 @@ Difference of Arrival (\Abbr{TDoA}) \cite{wsn-Localization-systems}.
 την απόσταση μίας αστραπής από εμάς, μετρώντας το χρονικό διάστημα μέχρι να ακούσουμε την βροντή.} 
 
 %----------------------------------------------------------------------
-\subsubsection{Angle}\label{sec:Chapter3-1-2}
+\subsubsection{Εκτίμηση γωνίας}\label{sec:Chapter3-1-2} %\subsubsection{Angle}\label{sec:Chapter3-1-2}
 
 Άλλη μία χρήσιμη μέτρηση η οποία μας ενδιαφέρει, είναι η εκτίμηση της γωνίας από την οποία λαμβάνουμε το σήμα ενός γειτονικού
 node σε σχέση με έναν άξονας αναφοράς. Ο άξονας αυτός μπορεί να είναι είτε κοινώς για όλα τα nodes (π.χ. ως προς το βόρειο γεωγραφικό πόλο),
@@ -408,7 +409,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 
 % IMAGE
 \FigCaptLabelBasedURL{../Images/Theoretical-Background/A-typical-radiation-pattern-of-the-directive-antenna.jpeg}%	Image Path
-{Typical anisotropic antenna pattern}%	Caption Text
+{Pattern ευαισθησίας της anisotropic κεραίας}%	Caption Text {Typical anisotropic antenna pattern}%
 {Typical-anisotropic-antenna-pattern}%	Label used
 <0.3>% Scale of image
 [wsn-Localization-techniques]%	Based on specific paper 
@@ -456,7 +457,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 	% -----------------
     \hfill \break
     \decoRule
-    \caption[Antenna Arrays examples]{Antenna Arrays examples}
+    \caption[Παραδείγματα Antenna Arrays]{Παραδείγματα Antenna Arrays} %\caption[Antenna Arrays examples]{Antenna Arrays examples}
     \label{fig:Antenna-Arrays}
 \end{figure}
 
@@ -469,7 +470,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
-\subsection{Position Computation} \label{sec:Chapter3-2} 
+\subsection{Υπολογισμός θέσης} \label{sec:Chapter3-2} %\subsection{Position Computation} \label{sec:Chapter3-2} 
 Αν έχουμε δύο nodes, οι μετρήσεις που λάβαμε από το \Sect{Distance-Angle-Estimation} είναι αρκετές για να γνωρίζουμε την θέση του καθενός,
 συνεπώς ενδιαφέρον βρίσκεται στην ύπαρξη τριών ή παραπάνω nodes σε ένα σύστημα. Με βάση τις πληροφορίες που έχουμε συλλέξει - μέσω των τεχνικών που 
 περιγράφτηκαν στο προηγούμενο κεφάλαιο - θα προσπαθήσουμε πλέον να εκτιμήσουμε την θέση ενός node. Στην συνέχεια αυτού του section, περιγράφονται μέθοδοι οι οποίοι μπορούν να χρησιμοποιηθούν για να το επιτύχουν
@@ -509,7 +510,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 	% -----------------
     \hfill \break
     \decoRule
-    \caption[Trilateration examples]{Trilateration examples}
+    \caption[Παραδείγματα του Trilateration]{Παράδείγματα του Trilateration} %\caption[Trilateration examples]{Trilateration examples}
     \label{fig:Trilateration-examples}
 \end{figure}
 
@@ -574,7 +575,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 
 % IMAGE
 \FigCaptLabelBasedURL{../Photos/Bounding-box.png}%
-{Bounding Box example}%
+{Bounding Box παράδειγμα}%{Bounding Box example}%
 {Bounding-Box-example}%
 <0.4>
 
@@ -637,7 +638,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 	\end{minipage}
 	\hfill \break \\
 	\decoRule
-	\caption[Triangulation examples]{Triangulation examples}
+	\caption[Triangulation παραδείγματα]{Triangulation παραδείγματα} %\caption[Triangulation examples]{Triangulation examples}
 	\label{fig:Triangulation-examples}
 \end{figure}
 
@@ -670,18 +671,18 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 
 % IMAGE
 \FigCaptLabelBasedURL{../Photos/multilateration.png}%
-{Multilateration example}%
+{Multilateration παραδείγματα}%{Multilateration example}%
 {Multilateration}%
 <0.4>
 
 %----------------------------------------------------------------------
-\subsubsection{Probabilistic approaches}
+\subsubsection{Πιθανοκρατικοί μέθοδοι}%\subsubsection{Probabilistic approaches}
 Το γεγονός ότι οι μετρήσεις απόστασης και γωνίας σε πραγματικές συνθήκες εμπε\-ριέ\-χουν σφάλματα, έχει ωθήσει στην έρευνα 
 probabilistic μεθόδων εκτίμησης τοποθεσίας των free nodes. Αυτού του τύπου οι προσεγγίσεις λαμβάνουν υπόψιν τα μετρικά σφάλματα και συχνά τα μοντελοποιούν ως κανονικές
 τυχαίες μεταβλητές. Το μεγάλο μειονέκτημα σε αυτήν την μέθοδο είναι τα μεγάλα υπολογιστικά και χωρικά - για την αποθήκευση των δεδομένων - κόστη \cite{wsn-Localization-systems}. 
 
 \begin{table}[H]
-    \caption[Distance/angle estimation techniques and position Computation summary]{Distance/angle estimation techniques and position Computation summary \cite{advantages-disadvantages-toa-tdoa-aoa}}
+    \caption[Σύνοψη τεχνικών εκτίμησης απόστασης/γωνίας και υπολογισμού θέσης]{Σύνοψη τεχνικών εκτίμησης απόστασης/γωνίας και υπολογισμού θέσης \cite{advantages-disadvantages-toa-tdoa-aoa}} %\caption[Distance/angle estimation techniques and position Computation summary]{Distance/angle estimation techniques and position Computation summary \cite{advantages-disadvantages-toa-tdoa-aoa}}
     \label{tab:Distance/angle-estimation-techniques-and-position-Computation-summary}
 	\centering
 	\resizebox{1\textwidth}{!}{
@@ -720,7 +721,7 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
-\subsection{Localization Algorithm} \label{sec:Chapter3-3} 
+\subsection{Localization Αλγόριθμοι} \label{sec:Chapter3-3} %\subsection{Localization Algorithm} \label{sec:Chapter3-3} 
 Στις προηγούμενες ενότητες αναφέρθηκαν κάποιες από τις βασικές τεχνικές που χρησιμοποιούνται, 
 προκειμένου να εκτιμηθεί η θέση ενός node στον χώρο. Σε ένα πραγματικό σύστημα όμως, πρέπει να συνυπολογιστούν 
 και άλλοι παράγοντες πέρα από - απλά - τον υπολογισμό απόστασης/γωνίας για να καταλήξουμε να αποκτήσουμε location information. 
@@ -748,7 +749,7 @@ probabilistic μεθόδων εκτίμησης τοποθεσίας των free
 
 % IMAGE
 \FigCaptLabelBasedURL{../Photos/localization-graph.png}
-{Graph example}%
+{Παράδειγμα γράφου}%{Graph example}%
 {Graph-example}%
 <0.4>
 
@@ -810,7 +811,7 @@ Semi Definite Programming (\Abbr{SDP}) και Localization Based on Simulated An
 \end{algorithm}
 
 \begin{table}[H]
-    \caption[Comparison of Centralized vs Distributed]{Comparison of Centralized vs Distributed \cite{localization-algorithms-comparizon-tables}}
+    \caption[Σύγκριση μεταξύ Centralized και Distributed]{Σύγκριση μεταξύ Centralized και Distributed \cite{localization-algorithms-comparizon-tables}} %caption[Comparison of Centralized vs Distributed]{Comparison of Centralized vs Distributed \cite{localization-algorithms-comparizon-tables}}
 	\label{tab:Comparison-of-Centralized-vs-Distributed}
 	\centering
 	\resizebox{0.7\textwidth}{!}{
@@ -907,7 +908,7 @@ Distance Vector-Hop (\Abbr{DV-Hop}), Centroid και Gradient \cite{range-distri
 
 % TABLE
 \begin{table}[H]
-    \caption[Comparison of Range-based vs Range-free]{Comparison of Range-based vs Range-free \cite{localization-algorithms-comparizon-tables}}
+    \caption[Σύγκριση μεταξύ Range-based και Range-free]{Σύγκριση μεταξύ Range-based και Range-free \cite{localization-algorithms-comparizon-tables}} %\caption[Comparison of Range-based vs Range-free]{Comparison of Range-based vs Range-free \cite{localization-algorithms-comparizon-tables}}
 	\label{tab:Comparison-of-Range-based-vs-Range-free}
 	\centering
 	\resizebox{0.7\textwidth}{!}{
@@ -935,7 +936,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 με βάση αυτές τις αρχές\udot θα γίνει η μοντελοποίηση του συστήματος που συσχετίζεται αυτή η διπλωματική. 
 
 % ----------------------------------------------------------------------------------------------------------------------------------------------------------
-\section{Image-based Position Estimation} \label{chap:Image-based}
+\section{Εκτίμηση Θέσης με οπτικούς τρόπους} \label{chap:Image-based} %\section{Image-based Position Estimation} \label{chap:Image-based}
 Άλλος ένας τρόπος για να καταλήξουμε να εκτιμήσουμε την θέση ενός αντικειμένου στον χώρο\udot είναι με την βοήθεια καμερών και οπτικών τεχνολογιών. Κύριος πε\-ριο\-ρι\-στι\-κός παράγοντας σε αυτές τις προσεγγίσεις, είναι η ανάγκη για οπτική επαφή με το αντικείμενο ενδιαφέροντος. Ενώ, καταλήγει να είναι και ο τρόπος με τις μεγαλύτερες ανάγκες επεξεργασίας. Βασικοί τρόποι απόκτησης \Abbr{3D} πληροφορίας - με χρήση \Abbr{2D}, που προσφέρει τυπικά μία κάμερα\footnote{Σε αντίθεση με τις RGB-D, οι οποίες εκτός από color information, παρέχουν και depth information για κάθε pixel τους} - είναι μέσω τεχνικών με όνομα structure from reference, structure from motion και με χρήση stereo \cite{location-from-image} οι οποίες συνοπτικά αναλύονται στην συνέχεια.
 
 %----------------------------------------------------------------------
@@ -950,7 +951,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 			\captionsetup{width=.9\linewidth}
 			\includegraphics[width=0.8\linewidth]{../Images/Theoretical-Background/Two-well-known-optical-illusions-where-the-actual-depth-order-of-the-scene-objects-is.jpg}\\
 			\decoRule
-			\CaptionBasedwithURL{Optical illusion due to depth ambiguity of scene objects}%
+			\CaptionBasedwithURL{Optical illusion που δημιουργείται λόγο του depth ambiguity}%\CaptionBasedwithURL{Optical illusion due to depth ambiguity of scene objects}
 			(https://www.researchgate.net/figure/Two-well-known-optical-illusions-where-the-actual-depth-order-of-the-scene-objects-is_fig4_285270806)
 			\label{fig:depth-ambiguity-optical-illusion}
 		\end{minipage}%
@@ -959,7 +960,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 			\centering
 			\includegraphics[width=\linewidth]{../Images/Theoretical-Background/Lens_angle_of_view.png}\\
 			\decoRule
-			\CaptionBasedwithURL{Optical axis from object to camera sensor}%
+			\CaptionBasedwithURL{Optical axis του αντικειμένου - κάμερας}%\CaptionBasedwithURL{Optical axis from object to camera sensor}%
 			(https://en.wikipedia.org/wiki/Angle\_of\_view) 
 			\label{fig:optical-axis-from-object-to-camera-sensor}
 		\end{minipage}
@@ -1019,7 +1020,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 	\label{fig:stereo-vision}
 \end{figure}
 
-Η \Fig{stereo-vision} (b) παρουσιάζει την γεωμετρία στην περίπτωση των parallel optical axis. Μέσω σχέσεων των όμοιων τριγώνων $(p_l, P, p_r)$ και $(COP_L, P, COP_R)$ μπορούμε να δημιουργήσουμε την σχέση \EqNum{stereo-basic-eq}, από την οποία τελικά καταλήγουμε στο \Equa{stereo-depth-est} για τον υπολογισμό του depth ενός Point \cite{introduction-to-computer-vision}. 
+Η \Fig{stereo-vision} (b) παρουσιάζει την γεωμετρία στην περίπτωση των parallel optical axis. Μέσω σχέσεων των όμοιων τριγώνων $(p_l, P, p_r)$ και $(COP_L, P, COP_R)$ μπορούμε να δημιουργήσουμε την σχέση \EqNum{stereo-basic-eq}, από την οποία τελικά καταλήγουμε στην \Equa{stereo-depth-est} για τον υπολογισμό του depth ενός Point \cite{introduction-to-computer-vision}. 
 
 \begin{gather}
 	\frac{B-x_l+x_r}{Z-F} = \frac{B}{Z} \Rightarrow \label{eq:stereo-basic-eq} \\
@@ -1029,7 +1030,7 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 Η ποσότητα $x_l - x_r$ ονομάζεται Disparity, και ουσιαστικά μετρώντας την διαφορά της θέσης που εμφανίζεται στο κάθε plane το point, υπολογίζουμε την απόσταση του σημείου από το baseline των καμερών \cite{introduction-to-computer-vision}.
 
 % This should be the last section
-\section{Thesis Approach} \label{chap:thesis-approach}
+\section{Σκοποί Διπλωματικής} \label{chap:thesis-approach} %\section{Thesis Approach} \label{chap:thesis-approach}
 Σκοπός της παραπάνω βιβλιογραφικής αναζήτησης\udot ήταν η απόκτηση μίας σφαιρικής γνώσης σχετικά με τους δυνατούς τρόπους επίλυσης του προβλήματος εντοπισμού της θέσης αντικειμένων, ώστε να πραγματοποιηθεί μία αρχική εκτίμηση της πολυπλοκότητας και του κόστους hardware που απαιτεί η κάθε μία, προκειμένου τελικά να γίνει η επιλογή της μεθοδολογίας με την οποία θα υλοποιηθεί στην συγκεκριμένη εργασία\udot η επίλυση του προβλήματος ενδιαφέροντος.
 
 Φυσικοί περιορισμοί, προκύπτουν από τις δυνατότητες του διαθέσιμου εξοπλισμού που υπάρχουν στο \href{https://www.tuc.gr/}{Πολυτεχνείο Κρήτης}, βάση των οποίων θα γίνει και ο σχεδιασμός του συστήματος. Πράγμα που καθιστά το σύστημα να ακολουθεί ρεα\-λι\-στι\-κά requirements, τον σχεδιασμό με γνώμονα την επίλυση ενός πραγματικού προ\-βλή\-ματος, όπως επίσης και την δυνατότητα - με αυτόν τον τρόπο - να υπάρχουν δυνατότητες δοκιμών από αυτά, σε περίπτωση που χρειαστεί. 
