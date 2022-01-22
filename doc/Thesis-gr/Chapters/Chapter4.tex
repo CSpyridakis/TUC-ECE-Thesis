@@ -616,13 +616,17 @@
 % mocap_worker_data
 % ├── timestamp
 % ├── nodeID
+% ├── master_time
+% │   ├── ros_time
+% │   ├── internal_time
+% │   └── packet_id
 % ├── obj_pose
 % │   ├── x
 % │   ├── y
 % │   ├── z
 % │   ├── roll
 % │   ├── pitch
-% │   ├── yaw
+% │   └── yaw
 % ├── camera_params
 % │   ├── objectsRealSizeInMeter
 % │   ├── imageHeightInPixels
@@ -634,6 +638,7 @@
 % │   ├── XsensorSizeInMillimeters
 % │   └── YsensorSizeInMillimeters
 % └── detected_ball_data[]
+%     ├── id
 %     ├── color
 %     ├── distance_from_camera
 %     ├── image_plane_r
@@ -652,24 +657,24 @@
 
 
 \begin{align}
-	(x-x_1)^2 + (y-y_1)^2 + (z-z_1)^2 &= r_1^2 - e_1 \label{eq:multilateration-pha1} \\ 
-	(x-x_2)^2 + (y-y_2)^2 + (z-z_2)^2 &= r_2^2 - e_2 \nonumber \\
-	(x-x_3)^2 + (y-y_3)^2 + (z-z_3)^2 &= r_3^2 - e_3 \nonumber \\
-	(x-x_4)^2 + (y-y_4)^2 + (z-z_4)^2 &= r_4^2 - e_4 \nonumber 
+	(x-x_1)^2 + (y-y_1)^2 + (z-z_1)^2 &= r_1^2 \label{eq:multilateration-pha1} \\ 
+	(x-x_2)^2 + (y-y_2)^2 + (z-z_2)^2 &= r_2^2 \nonumber \\
+	(x-x_3)^2 + (y-y_3)^2 + (z-z_3)^2 &= r_3^2 \nonumber \\
+	(x-x_4)^2 + (y-y_4)^2 + (z-z_4)^2 &= r_4^2 \nonumber 
 \end{align}
 
 \begin{align}
-	(x^2+y^2+z^2) - 2x_1x - 2y_1y - 2z_1z &= r_1^2 - x_1^2 - y_1^2 - z_1^2- e_1 \label{eq:multilateration-pha2} \\ 
-	(x^2+y^2+z^2) - 2x_2x - 2y_2y - 2z_2z &= r_2^2 - x_2^2 - y_2^2 - z_2^2- e_2 \nonumber \\
-	(x^2+y^2+z^2) - 2x_3x - 2y_3y - 2z_3z &= r_3^2 - x_3^2 - y_3^2 - z_3^2- e_3 \nonumber \\
-	(x^2+y^2+z^2) - 2x_4x - 2y_4y - 2z_4z &= r_4^2 - x_4^2 - y_4^2 - z_4^2- e_4 \nonumber
+	(x^2+y^2+z^2) - 2x_1x - 2y_1y - 2z_1z &= r_1^2 - x_1^2 - y_1^2 - z_1^2 \label{eq:multilateration-pha2} \\ 
+	(x^2+y^2+z^2) - 2x_2x - 2y_2y - 2z_2z &= r_2^2 - x_2^2 - y_2^2 - z_2^2 \nonumber \\
+	(x^2+y^2+z^2) - 2x_3x - 2y_3y - 2z_3z &= r_3^2 - x_3^2 - y_3^2 - z_3^2 \nonumber \\
+	(x^2+y^2+z^2) - 2x_4x - 2y_4y - 2z_4z &= r_4^2 - x_4^2 - y_4^2 - z_4^2 \nonumber
 \end{align}
 
 
 \begin{align}
 	A = \begin{bmatrix} 1 && -2x_1 && -2y_1 && -2z_1 \\ 1 && -2x_2 && -2y_2 && -2z_2 \\ 1 && -2x_3 && -2y_3 && -2z_3 \\ 1 && -2x_4 && -2y_4 && -2z_4 \\\end{bmatrix} \nonumber \quad
 	X = \begin{bmatrix} x^2+y^2+z^2 \\x \\ y \\ z \end{bmatrix} \nonumber \quad
-	B = \begin{bmatrix} r_1^2 - x_1^2 - y_1^2 - z_1^2- e_1 \\ r_2^2 - x_2^2 - y_2^2 - z_2^2- e_2 \\ r_3^2 - x_3^2 - y_3^2 - z_3^2- e_3 \\ r_4^2 - x_4^2 - y_4^2 - z_4^2- e_4 \end{bmatrix} \nonumber
+	B = \begin{bmatrix} r_1^2 - x_1^2 - y_1^2 - z_1^2 \\ r_2^2 - x_2^2 - y_2^2 - z_2^2 \\ r_3^2 - x_3^2 - y_3^2 - z_3^2 \\ r_4^2 - x_4^2 - y_4^2 - z_4^2 \end{bmatrix} \nonumber
 \end{align}
 
 \begin{align}

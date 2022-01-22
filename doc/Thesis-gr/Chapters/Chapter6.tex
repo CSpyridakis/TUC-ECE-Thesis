@@ -163,7 +163,7 @@
 <1>
 
 \section{Δεδομένα πολλαπλών κόμβων}
-
+\subsection{Διαδικασία λήψης δεδομένων}
 Στην συνέχεια πραγματοποιήθηκαν μετρήσεις από πολλαπλά σημεία (κόκκινα τετράγωνα στο διάγραμμα) για το ίδιο αντικείμενο όπως παρουσιάζεται στην \Fig{multiple-nodes-positions}.
 Με αυτόν τον τρόπο, για την ίδια θέση της μπάλας (με μαύρο χρώμα στο διάγραμμα) θα μπορούσε να προσομοιωθούν - σε ένα πρώιμο τουλάχιστον στάδιο - τα δεδομένα που δημιουργούνται από πολλαπλούς κόμβους σε ένα σμήνος από drone. 
 
@@ -205,7 +205,6 @@
 }
 \end{table}
 
-
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\linewidth]{../Images/Experiments-Results/nodes-estimations.png}
@@ -221,4 +220,35 @@
 {multiple-nodes-perception}%
 <1>
 
-\TODO{TODO!}
+\subsection{Εκτίμηση θέσης και απεικόνιση}
+
+\begin{figure} [H]
+	\centering
+	% -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=0.9\linewidth]{../Images/Experiments-Results/nodes-pos-with-est-up.png}\\
+      {(a) Top View}
+    \end{minipage}%
+    % -----------------
+    \begin{minipage}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{../Images/Experiments-Results/nodes-pos-with-est-side.png}\\
+      {(b) Side View}
+	  \end{minipage}
+	% -----------------
+  \begin{minipage}{\textwidth}
+    \centering
+    \includegraphics[width=.8\linewidth]{../Images/Experiments-Results/nodes-pos-with-est-angle.png}\\
+    {(C) Angled View}
+  \end{minipage}
+% -----------------
+    \hfill \break
+    \decoRule
+    \caption[Εκτίμηση θέσης του αντικειμένου.]{Εκτίμηση θέσης του αντικειμένου. Με \textcolor{black}{\LARGE$\circ$} είναι οι θέσεις στις οποίες τοποθετήθηκε το αντικείμενο ενώ με \textcolor{green}{\LARGE$\circ$} είναι οι θέσεις που έγινε εκτίμηση ότι βρίσκεται} %\CaptionBasedwithURL{Possible Embedded Linux Systems} 
+    \label{fig:multi-exp-pos-estimations}
+\end{figure}
+
+Με μέσο όρο σφάλματος κατά το πείραμα να είναι τα 0,1159m
+
+
