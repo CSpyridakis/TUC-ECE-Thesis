@@ -499,10 +499,13 @@
 	\begin{algorithmic}[1]
 		\Statex{{\bf procedure} detectBall}{}
             \State Define preferable color's limit HSV values
-            \State Get one frame of the video
-            \State Remove high frequencies from the frame
-            \State Convert frame from RGB to HSV color space
-            \State Choose only pixels that are in between preferable color's limit values 
+            \For{\texttt{Each frame of the video/stream}}
+                \State Get frame
+                \State Remove high frequencies from it
+                \State Convert frame from RGB to HSV color space
+                \State Choose only pixels that are in between preferable color's limit values 
+                \State Find bounding box of mask (threshold image)
+            \EndFor
 	\end{algorithmic}
 \end{algorithm}
 
@@ -534,10 +537,12 @@
 	\caption[Hough circle (shape based) ball detection]{Hough circle (shape based) ball detection}\label{alg:hough-detect}
 	\begin{algorithmic}[1]
 		\Statex{{\bf procedure} HoughdetectBall}{}
-            \State Get one frame of the video
-            \State Convert frame from RGB to Gray scale
-            \State Remove high frequencies from the frame
-            \State Use Hough Transform principle to detect circles in image 
+            \For{\texttt{Each frame of the video/stream}}
+                \State Get frame
+                \State Convert frame from RGB to Gray scale
+                \State Remove high frequencies from the frame
+                \State Use Hough Transform principle to detect circles in image 
+            \EndFor
 	\end{algorithmic}
 \end{algorithm}
 

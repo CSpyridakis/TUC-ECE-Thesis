@@ -1,1 +1,1 @@
-# TUC-ECE-Thesis
+# TUC-ECE-Thesis ![GitHub](https://img.shields.io/github/license/CSpyridakis/TUC-ECE-Thesis) ![GitHub repo size](https://img.shields.io/github/repo-size/CSpyridakis/TUC-ECE-Thesis) [![wakatime](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1.svg)](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1)
