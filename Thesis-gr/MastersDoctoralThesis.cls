@@ -395,18 +395,18 @@ KOMA-script documentation for details.}]{fancyhdr}
 		\thispagestyle{plain}
 		\begin{center}
 			{\normalsize \MakeUppercase{\univname} \par}% University name in capitals
-			\bigskip
+			% \bigskip
 			{\huge\textit{Περίληψη} \par}
-			\bigskip
+			% \bigskip
 			{\normalsize \facname \par}% Faculty name
 			{\normalsize \deptname \par}% Department name
-			\bigskip
-			{\normalsize \degreename\par}% Degree name
-			\bigskip
+			% \bigskip
+			% {\normalsize \degreename\par}% Degree name
+			% \bigskip
 			{\normalsize\bfseries \@title \par}% Thesis title
-			\medskip
-			{\normalsize από τον Χρήστο Σπυριδάκη \par}% Author name
-			\bigskip
+			% \medskip
+			% {\normalsize από τον Χρήστο Σπυριδάκη \par}% Author name
+			% \bigskip
 		\end{center}
 	}
 	{
@@ -450,18 +450,18 @@ KOMA-script documentation for details.}]{fancyhdr}
 	\thispagestyle{empty}
 	\begin{center}
 		{\normalsize \MakeUppercase{\univnameex} \par}% University name in capitals
-		\bigskip
+		% \bigskip
 		{\huge\textit{\abstractnameex} \par}
-		\bigskip
+		% \bigskip
 		{\normalsize \facname \par}% Faculty name
 		{\normalsize \deptnameex \par}% Department name
-		\bigskip
-		{\normalsize \degreenameex\par}% Degree name
-		\bigskip
+		% \bigskip
+		% {\normalsize \degreenameex\par}% Degree name
+		% \bigskip
 		{\normalsize\bfseries \thesistitleex \par}% Thesis title
-		\medskip
-		{\normalsize \bynameex \authornameex \par}% Author name
-		\bigskip
+		% \medskip
+		% {\normalsize \bynameex \authornameex \par}% Author name
+		% \bigskip
 	\end{center}
 }
 {
