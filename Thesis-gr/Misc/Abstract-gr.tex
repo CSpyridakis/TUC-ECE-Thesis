@@ -1,5 +1,12 @@
 \begin{extraAbstract}
 	\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
 	
-	\TODO{TODO!}
+	Human's desire for objects' localization has existed for thousands of years, over the past 70 of them taking advantage of digital ways to achieve this as well.
+	Ηereunto thesis attempts to combine the above idea with the most advanced technology of UAVs and implement the first generation of a low-cost system for estimating the position of an object with the help of a swarm of drones.
+	The prosecution of researching prior art has distinguished the number of different methods already used in the literature to solve similar problems.
+	There are cases where researchers use radio frequencies, such as GPS, WiFi, UWB, cellular, and Lora networks. Sometimes they choose sound waves, and other optics, by operating cameras or LiDAR.
+	It was important to understand the mathematical background behind all these approaches and determine their complexities, since the selection of the hardware of the embedded system often relies on their operating principles and the resources that each one of them needs.
+	These relate to how intermediate information is calculated - such as distance and angle estimation - using RSSI, TDoA, AoA, or even Stereo Vision techniques. Information that we utilize in algorithms as Trilateration, Triangulation, or Hyperbolic Positioning for localization.
+	By knowing each approach necessity, a two-tier system was designed, where through monocular vision and reference from structure, the distance from the object of interest to the camera was conducted by worker nodes, then through the principle of Multilateration, we finally achieved to estimate its position from system’s orchestrator node, called master.
+	We performed experiments in both indoor and outdoor scenarios from a worker node. Last but not least, the operation of the entire proposed system was simulated using actual hardware and real data. For the sake of completeness, we also introduce a mechanism to estimate the detected object's ID through frequency analysis of flashing led.
 \end{extraAbstract}
