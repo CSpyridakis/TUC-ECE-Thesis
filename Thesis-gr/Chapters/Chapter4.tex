@@ -12,14 +12,13 @@
 του drone. Τέλος, ο συνδυασμός των δύο παραπάνω μερών και η χρήση κατάλληλης localization τεχνικής για να βρεθεί η θέση του αντικειμένου
 στο \Abbr{3D} χώρο.
 
-Πριν γίνει αναφορά καθενός από τα υποσυστήματα που σχεδιάστηκαν, στην \Fig{high-level-system-block-diagram} παρουσιάζεται ένα block diagram του γενικού συστήματος, το οποίο αποτελείται από τα nodes - δουλειά των οποίων είναι η ανίχνευση του αντικειμένου και εκτίμηση της απόστασης του από αυτά - τα οποία αποστέλλουν στον master του συστήματος όλες τις πληροφορίες που έχουν συλλέξει και είναι αυτός που αναλαμβάνει τον προσδιορισμό της θέσης τελικά του object.
+Πριν γίνει αναφορά καθενός από τα υποσυστήματα που σχεδιάστηκαν, στην \Fig{high-level-system-block-diagram} παρουσιάζεται ένα block diagram του γενικού συστήματος, το οποίο αποτελείται από τα worker nodes - δουλειά των οποίων είναι η ανίχνευση του αντικειμένου και εκτίμηση της απόστασης του από αυτά - τα οποία αποστέλλουν στον master του συστήματος όλες τις πληροφορίες που έχουν συλλέξει και είναι αυτός που α\-να\-λα\-μβά\-νει τον προσδιορισμό της θέσης τελικά του object.
 
 % Image
 \FigCaptLabelBasedURL{../Photos/High-level-top-diagram.drawio.png}%
-{High level system's block diagram}%{}
+{High level system block diagram}%{}
 {high-level-system-block-diagram}%
-<1>%
-(https://en.creative.com/p/peripherals/creative-live-cam-sync-1080p)
+<1>
 
 %----------------------------------------------------------------------
 
@@ -128,7 +127,7 @@
 %----------------------------------------------------------------------
 
 \subsection{Κάμερα}
-Σχετικά με την κάμερα, ήταν ανάγκη - όντας πρώτη γενιά του συστήματος -  να επιλεχθεί μία low-cost 1080p camera η οποία θα παρέχει δυνατότητα επιλογής χαμηλότερου resolution για λόγους δοκιμών. Στο πρωτότυπο σύστημα τελικά γίνεται χρήση μία 1080p web cameras της Creative \cite{creative-camera} - \Fig{creative-camera} - με δυνατότητες λήξης βίντεο στα 30fps, η οποία συνδέεται μέσω USB στο Raspberry Pi.
+Σχετικά με την κάμερα, ήταν ανάγκη - όντας πρώτη γενιά του συστήματος -  να επιλεχθεί μία low-cost 1080p camera η οποία θα παρέχει δυνατότητα επιλογής χαμηλότερου resolution για λόγους δοκιμών. Στο πρωτότυπο σύστημα τελικά γίνεται χρήση μία 1080p web cameras της Creative \cite{creative-camera} - \Fig{creative-camera} - με δυνατότητες λήψης βίντεο στα 30fps, η οποία συνδέεται μέσω USB στο Raspberry Pi.
 
 % Image
 \FigCaptLabelBasedURL{../Images/Design-Implementation/creative-web-cam.jpeg}%
@@ -143,7 +142,7 @@
 \subsection{GPS} \label{sec:GPS}
 Παρόλο που - όπως αναφέρθηκε στο \Chap{thesis-approach} - στο συγκεκριμένο σύστημα μας ενδιαφέρει το relative positioning και όχι το absolute, σκεπτόμενοι ότι στην πραγματικότητα το σύστημα σχεδιάζεται με γνώμονα το να λειτουργεί σε outdoor scenarios\udot ένας άμεσος τρόπος προσδιορισμού της θέσης του κάθε drone είναι με χρήση κάποιου εμπορικού αισθητήρα \Abbr{GPS}. Στην συνέχεια και αφού έχει αποκτηθεί πληροφορία απόλυτης θέσης για το κάθε drone μπορεί - θεωρώντας ένα από αυτά ως αρχή των αξόνων - να γίνει translate των απόλυτων συντεταγμένων ώστε να κρατηθεί μόνο πληροφορία σχετικά με την χωρική τοπολογία του δικτύου.
 
-Συγκεκριμένα, χρησιμοποιείται το \Abbr{GPS} για commercial χρήση ΒΝ-220 \cite{bn-220-gps} - \Fig{bn-220-gps} - το οποίο υπόσχεται εμβέλειας ακρίβειας της τάξης των δύο μέτρων. Πρακτικά, παρόλο που για ένα \Abbr{MoCap} σύστημα αυτή η τιμή είναι απαγορευτική, χρησιμοποιείται στα πρώτα versions, καθαρά αναφορικά με την εξικοίωση του τρόπου επικοινωνίας \Abbr{ROS} - \Abbr{GPS}. Σε επόμενα revisions σκοπός είναι η αντικατάσταση του με \Abbr{RTK}-\Abbr{GPS} που συχνά μπορεί να φέρουν drone για αυτήν την χρήση ώστε να φτάσει η συνολική ακρίβεια εκτίμησης της απόλυτης θέσης στα μερικά εκατοστά. 
+Συγκεκριμένα, χρησιμοποιείται το \Abbr{GPS} για commercial χρήση ΒΝ-220 \cite{bn-220-gps} - \Fig{bn-220-gps} - το οποίο υπόσχεται εμβέλειας ακρίβειας της τάξης των δύο μέτρων. Πρακτικά, παρόλο που για ένα \Abbr{MoCap} σύστημα αυτή η τιμή είναι απαγορευτική, χρησιμοποιείται στα πρώτα versions, καθαρά αναφορικά με την εξοικείωση του τρόπου επικοινωνίας \Abbr{ROS} - \Abbr{GPS}. Σε επόμενα revisions σκοπός είναι η αντικατάσταση του με \Abbr{RTK}-\Abbr{GPS} που συχνά μπορεί να φέρουν drone για αυτήν την χρήση ώστε να φτάσει η συνολική ακρίβεια εκτίμησης της απόλυτης θέσης στα μερικά εκατοστά. 
 
 Το συγκεκριμένο \Abbr{GPS} συνδέεται με το Raspberry Pi μέσω Universal Asynchronous Receiver-Transmitter (\Abbr{UART}) \cite{uart-protocol} σύνδεσης και χρησιμοποιεί NMEA-0183 \cite{NMEA-0183-packets} πακέτα για την επικοινωνία. 
 
@@ -513,23 +512,28 @@
     \label{fig:color-space}
 \end{figure}
 
-Στον \Algo{hsv-detect} παρουσιάζεται η διαδικασία που ακολουθήθηκε προκειμένου να ε\-ντο\-πι\-στεί η μπάλα στην σκηνή με βάση το χρώμα της, ενώ στην \Fig{balls-detection-color} ε\-μφα\-νί\-ζο\-νται τα αποτελέσματα από το κάθε επίπεδο επεξεργασίας.
+Στον \Algo{hsv-detect} παρουσιάζεται η διαδικασία που ακολουθήθηκε προκειμένου να ε\-ντο\-πι\-στεί η μπάλα στην σκηνή με βάση το χρώμα της, στην \Fig{hsv-procedure} όμοια η επεξεργασία, ενώ στην \Fig{balls-detection-color} ε\-μφα\-νί\-ζο\-νται τα αποτελέσματα από το κάθε επίπεδο επεξεργασίας.
 
 % ALGORITHM
 \begin{algorithm}[H]
 	\caption[HSV (color based) ball detection]{HSV (color based) ball detection}\label{alg:hsv-detect}
 	\begin{algorithmic}[1]
 		\Statex{{\bf procedure} detectBall}{}
-            \State Define preferable color's limit HSV values
+            \State Define preferable color limit HSV values
             \For{\texttt{Each frame of the video/stream}}
                 \State Get frame
                 \State Remove high frequencies from it
                 \State Convert frame from RGB to HSV color space
-                \State Choose only pixels that are in between preferable color's limit values 
+                \State Choose only pixels that are in between preferable color limit values 
                 \State Find bounding box of mask (threshold image)
             \EndFor
 	\end{algorithmic}
 \end{algorithm}
+
+\FigCaptLabelBasedURL{../Photos/HSV-Procedure.png}%
+{Επεξεργασία για ανίχνευση με βάση το χρώμα}%{Detect balls based on their shape}%
+{hsv-procedure}%
+<0.8>
 
 \FigCaptLabelBasedURL{../Photos/thesis-hsv.png}%
 {Ανίχνευση μπάλας με βάση το χρώμα}%{Detect balls based on their color}%
@@ -554,7 +558,7 @@
 
 \subsubsection{Με βάση το σχήμα}
 
-Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο στον \Algo{hough-detect} παρουσιάζεται σε ψευδοκώδικα η διαδικασία, ενώ στην \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
+Στη δεύτερη προσπάθεια εντοπισμού της μπάλας, χρησιμοποιήθηκε η πληροφορία του σχήματος της, καθώς η προβολή που καταγράφει η κάμερα για αυτή, δεν είναι παρά ένας κύκλος. Με όμοιο τρόπο στον \Algo{hough-detect} παρουσιάζεται σε ψευδοκώδικα η διαδικασία, στην \Fig{hsv-procedure} όμοια η επεξεργασία, ενώ στην \Fig{balls-detection-shape} τα αποτελέσματα στο κάθε phase.
 
 % ALGORITHM
 \begin{algorithm}[H]
@@ -569,6 +573,11 @@
             \EndFor
 	\end{algorithmic}
 \end{algorithm}
+
+\FigCaptLabelBasedURL{../Photos/Hough-Procedure.png}%
+{Επεξεργασία για ανίχνευση με βάση το σχήμα}%{Detect balls based on their shape}%
+{hough-procedure}%
+<0.8>
 
 \FigCaptLabelBasedURL{../Photos/thesis-hough.png}%
 {Ανίχνευση μπάλας με βάση το σχήμα}%{Detect balls based on their shape}%
@@ -623,7 +632,7 @@
 Για τον υπολογισμό της απόστασης της μπάλας, χρησιμοποιείται ως κύρια αρχή ο φο\-ρμα\-λι\-σμός που περιγράφηκε στη \Sect{theo-structure-from-reference} - \Equa{distance-from-object} - η οποία χρειάζεται να μετασχηματιστεί ώστε σαν είσοδο να χρησιμοποιεί πλήθος pixel και όχι mm, συνεπώς μέσω της εξίσωσης \EqNum{distance-from-object-pixels} μπορούμε να υπολογίσουμε την απόσταση που μας ενδιαφέρει, υπολογίζοντας μόνο το πλήθος των pixel που καταλαμβάνει στην εικόνα το αντικείμενο \cite{calculate-distance-stackexchange} \cite{calculate-distance-or-size-of-an-objectin-a-photo-image}.
 
 \begin{align}
-	\textrm{Distance (m)} &= \frac{\textrm{$f$ (mm)}\; x\;\textrm{Object's real size(m)}\; x\; \textrm{Image size(pixels)}}{\textrm{Object's size on sensor (pixels)}\; x\; \textrm{Sensor's size(mm)}} \label{eq:distance-from-object-pixels}
+	\textrm{Distance (m)} &= \frac{\textrm{$f$ (mm)}\; x\;\textrm{Object real size(m)}\; x\; \textrm{Image size(pixels)}}{\textrm{Object size on sensor (pixels)}\; x\; \textrm{Sensor size(mm)}} \label{eq:distance-from-object-pixels}
 \end{align}
 
 %----------------------------------------------------------------------
@@ -694,7 +703,7 @@
 \FigCaptLabelBasedURL{../Images/Design-Implementation/ros-msgs-hier.png} %
 {Η δομή του μηνύματος που αποστέλλει κάθε node} %{Proprietary message send structure} %
 {proprietary-msg} %
-<0.4>
+<0.38>
 
 %----------------------------------------------------------------------
 

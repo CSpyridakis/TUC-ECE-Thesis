@@ -526,8 +526,7 @@ node σε σχέση με έναν άξονας αναφοράς. Ο άξονα�
 	x^2-2 x_3 x + x_3^2 + y^2-2 y_3 y + y_3^2 &= r_3^2 \label{eq:trilateration-b3} 
 \end{align}
 
-Οι εξισώσεις \EqNum{trilateration-b1}, \EqNum{trilateration-b2} και \EqNum{trilateration-b3} περιγράφουν πλήρως τους κύκλους του κάθε node από το παράδειγμα 
-του \Fig{Trilateration-examples} (a),
+Οι εξισώσεις \EqNum{trilateration-b1}, \EqNum{trilateration-b2} και \EqNum{trilateration-b3} περιγράφουν πλήρως τους κύκλους του κάθε node από το παράδειγμα που έχουμε στην \Fig{Trilateration-examples} (a),
 όπου $(x_i,y_i)$ το κέντρο του κύκλου, $r_i$ η ακτίνα του - για κάθε beacon $i=1,2,3$ και τελικά $(x,y)$ οι συντεταγμένες του free nodes τις οποίες και ψάχνουμε. 
 Ένας τρόπος να υπολογίσουμε τις συντεταγμένες αυτές είναι να αφαιρέσουμε από την \EqNum{trilateration-b2} την \EqNum{trilateration-b1} και όμοια από την 
 \EqNum{trilateration-b3} την \EqNum{trilateration-b2} ώστε να καταλήξουμε στις παρακάτω δύο εξισώσεις \cite{trilateration-equations} \cite{localization-algorithms-for-wsn}.
@@ -974,10 +973,10 @@ nodes σε ένα \Abbr{WSN}. Παρόλα αυτά, σε αυτό το σημε
 	\frac{d}{F} &= \frac{H}{S_1} \label{eq:distance-from-object-dim-triangles}
 \end{align}
 
-Από την οποία καταλήγουμε στο \Equa{distance-from-object}. Όπου στο μέγεθος του α\-ντι\-κει\-μέ\-νου μπορούμε να χρησιμοποιήσουμε οποιαδήποτε διάσταση επιθυμούμε, όπως το ύψος, το πλάτος ή ακόμα και κάποια διαγώνιο του.
+Από την οποία καταλήγουμε στην \Equa{distance-from-object}. Όπου στο μέγεθος του α\-ντι\-κει\-μέ\-νου μπορούμε να χρησιμοποιήσουμε οποιαδήποτε διάσταση επιθυμούμε, όπως το ύψος, το πλάτος ή ακόμα και κάποια διαγώνιο του.
 
 \begin{align}
-	\textrm{Distance to object $S_1$ (m)} &= \textrm{Focal length $F$ (mm)}\frac{\textrm{Object's real size $H$ (m)}}{\textrm{Object's size on sensor $d$ (mm)}} \label{eq:distance-from-object}
+	\textrm{Distance to object $S_1$ (m)} &= \textrm{Focal length $F$ (mm)}\frac{\textrm{Object real size $H$ (m)}}{\textrm{Object size on sensor $d$ (mm)}} \label{eq:distance-from-object}
 \end{align}
 
 Σε γενικές γραμμές η αναδόμηση της τρίτης διάστασης από single view ακόμα και με ύπαρξη γνωστών αντικειμένων στο scene, μπορεί να καταλήξει να είναι μία ε\-ξαι\-ρε\-τι\-κά ασαφής διαδικασία. Για αυτό τον λόγο προσπαθούμε είτε μέσω monocular vision να πάρουμε πολλαπλά views ενός κινούμενου αντικειμένου και να χρησιμοποιήσουμε τεχνικές με όνομα Structure from Motion (βλ. \Sect{theo-structure-from-motion}), είτε από πολλαπλές κάμερες - stereo vision (βλ. \Sect{theo-stereo}) - να λάβουμε πολλαπλά views στατικού αντικειμένου για την εκτίμηση τελικά του depth. 
