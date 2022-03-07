@@ -567,7 +567,7 @@
 		\Statex{{\bf procedure} HoughdetectBall}{}
             \For{\texttt{Each frame of the video/stream}}
                 \State Get frame
-                \State Convert frame from RGB to Gray scale
+                \State Convert frame from RGB to Grayscale
                 \State Remove high frequencies from the frame
                 \State Use Hough Transform principle to detect circles in image 
             \EndFor
@@ -718,7 +718,7 @@
 %----------------------------------------------------------------------
 
 \section{Εντοπισμός θέσης αντικειμένου}\label{sec:implementation-obj-mult}
-Για να εντοπιστεί τελικά στον τρισδιάστατο χώρο το αντικείμενο, χρησιμοποιείται η αρχή λειτουργίας του trilateration αλγορίθμου, που αναφέρθηκε στη \Sect{trilateration}. Που όμως επειδή είναι στον \Abbr{3D} χώρο, στον οποίο χρειαζόμαστε τουλάχιστον 4 κόμβους για τον καθορισμό της θέσης, ονομάζεται multilateration \ref{sec:Multilateration}. Όπως αναφέρθηκε και στη \Sect{trilateration}, πρακτικά προσπαθούμε για τις εξισώσεις \EqNum{multilateration-pha1} με γνωστά τα $(x_i, y_i, z_i)$ και $r_i$ να βρούμε τα $(x,y,z)$. 
+Για να εντοπιστεί τελικά στον τρισδιάστατο χώρο το αντικείμενο, χρησιμοποιείται η αρχή λειτουργίας του Trilateration αλγορίθμου, που αναφέρθηκε στη \Sect{trilateration}. Που όμως επειδή είναι στον \Abbr{3D} χώρο, στον οποίο χρειαζόμαστε τουλάχιστον 4 κόμβους για τον καθορισμό της θέσης, ονομάζεται Multilateration \ref{sec:Multilateration}. Όπως αναφέρθηκε και στη \Sect{trilateration}, πρακτικά προσπαθούμε για τις εξισώσεις \EqNum{multilateration-pha1} με γνωστά τα $(x_i, y_i, z_i)$ και $r_i$ να βρούμε τα $(x,y,z)$. 
  
 \begin{align}
 	(x-x_1)^2 + (y-y_1)^2 + (z-z_1)^2 &= r_1^2 \label{eq:multilateration-pha1} \\ 
@@ -728,7 +728,7 @@
 \end{align}
 
 Ένας τρόπος προσέγγισης, για επίλυση των εξισώσεων \EqNum{multilateration-pha1} είναι να τις αναλύσουμε στις \EqNum{multilateration-pha2} 
-και από εκεί να έχουμε να λύσουμε το γραμμικό σύστημα πινάκων που περιγράφεται στην \EqNum{multilateration-linear-system}.
+και από εκεί να έχουμε να λύσουμε το γραμμικό σύστημα πινάκων που περιγράφεται στην \EqNum{multilateration-linear-system} \cite{Multilateration-Solution}.
 
 \begin{align}
 	(x^2+y^2+z^2) - 2x_1x - 2y_1y - 2z_1z &= r_1^2 - x_1^2 - y_1^2 - z_1^2 \label{eq:multilateration-pha2} \\ 
