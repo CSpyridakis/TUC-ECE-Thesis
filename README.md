@@ -1,4 +1,4 @@
-# TUC-ECE-Thesis ![GitHub repo size](https://img.shields.io/github/repo-size/CSpyridakis/TUC-ECE-Thesis) [![wakatime](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1.svg)](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1)
+# TUC-ECE-Thesis [![CC BY-NC 4.0][cc-by-nc-shield]][cc-by-nc] ![GitHub repo size](https://img.shields.io/github/repo-size/CSpyridakis/TUC-ECE-Thesis) [![wakatime](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1.svg)](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1)
 
 ## Abstract
 The requirement for object localization has existed for thousands of years, and over the past 70 years, we have even taken advantage of digital methods to achieve it.
@@ -25,3 +25,11 @@ We first performed experiments in both indoor and outdoor scenarios from single 
 
 ## Bibliographic Citation
 Christos Spyridakis, "Design and implementation of a low cost embedded system for localization of drones flying in swarms", Diploma Work, School of Electrical and Computer Engineering, Technical University of Crete, Chania, Greece, 2022 https://doi.org/10.26233/heallink.tuc.91531
+
+
+## License
+[![CC BY-NC-SA 4.0][cc-by-nc-image]][cc-by-nc]
+
+[cc-by-nc]: http://creativecommons.org/licenses/by-nc/4.0/
+[cc-by-nc-image]: https://licensebuttons.net/l/by-nc/4.0/88x31.png
+[cc-by-nc-shield]: https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg
