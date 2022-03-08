@@ -1,5 +1,4 @@
-# TUC-ECE-Thesis ![GitHub](https://img.shields.io/github/license/CSpyridakis/TUC-ECE-Thesis) ![GitHub repo size](https://img.shields.io/github/repo-size/CSpyridakis/TUC-ECE-Thesis) [![wakatime](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1.svg)](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1)
-
+# TUC-ECE-Thesis ![GitHub repo size](https://img.shields.io/github/repo-size/CSpyridakis/TUC-ECE-Thesis) [![wakatime](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1.svg)](https://wakatime.com/badge/user/1d822293-dbdb-48db-9b57-0fc9df520d2c/project/1d62f158-1b82-4fa4-8a62-7bbf2c6b27d1)
 
 ## Abstract
 The requirement for object localization has existed for thousands of years, and over the past 70 years, we have even taken advantage of digital methods to achieve it.
@@ -20,5 +19,9 @@ We first performed experiments in both indoor and outdoor scenarios from single 
 ## Documents
 * Thesis proposal is available [here](doc/Thesis%20Proposal%20-%20Design%20and%20Implementation%20of%20a%20Low%20Cost%20Embedded%20System%20for%20Localization%20of%20Drones%20Flying%20in%20Swarms.pdf).
 * Init version of technical specification document is available [here](doc/drone-mocap-technical-specs.pdf).
-* Complete Thesis document is available [here](doc/Design%20and%20Implementation%20of%20a%20Low%20Cost%20Embedded%20System%20for%20Localization%20of%20Drones%20Flying%20in%20Swarms.pdf).
-* Code for this thesis implementation is available [here](https://github.com/CSpyridakis/ros_drone_swarm_mocap)
+* Complete Thesis document is available [here](https://doi.org/10.26233/heallink.tuc.91531) and [here](doc/Design%20and%20Implementation%20of%20a%20Low%20Cost%20Embedded%20System%20for%20Localization%20of%20Drones%20Flying%20in%20Swarms.pdf).
+* Code for this thesis implementation is available [here](https://github.com/CSpyridakis/ros_drone_swarm_mocap).
+* Video from the presentation is available [here](https://youtu.be/7qfMd4-FWC4).
+
+## Bibliographic Citation
+Christos Spyridakis, "Design and implementation of a low cost embedded system for localization of drones flying in swarms", Diploma Work, School of Electrical and Computer Engineering, Technical University of Crete, Chania, Greece, 2022 https://doi.org/10.26233/heallink.tuc.91531
